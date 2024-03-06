@@ -1,0 +1,80 @@
+body { font-family: 'Roboto', 'Arial', sans-serif; line-height: 1.6; color: #333; } input[type="text"], input[type="url"], input[type="number"], select, textarea { width: 100%; padding: 8px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; } button { width: 100%; background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer; } button:hover { background-color: #45a049; } .form-container { margin: 20px 0; } .form-group { margin-bottom: 1rem; } .label { display: block; margin-bottom: .5rem; } @media screen and (max-width: 600px) { .form-container { padding: 0 2%; } } /* Ensure table text readability */
+.table th, .table td {
+  font-size: 16px; /* Adjust font size for better readability */
+  color: #333; /* Dark color for contrast */
+  text-align: left;
+  padding: 15px; /* Increase padding for more space around text */
+}
+
+/* Implement zebra-striping for table rows for better visual separation */
+.table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+.table tr:nth-child(odd) {
+  background-color: #ffffff; /* Keep odd rows white for contrast */
+}
+
+/* Add hover effect to table rows */
+.table tr:hover {
+  background-color: #ddd; /* Slightly darker color on hover */
+  cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+}
+.table { width: 100%; border-collapse: collapse; } .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: left; } .table th { background-color: #4CAF50; color: white; } .table tr:nth-child(even){background-color: #f2f2f2;} .table tr:hover {background-color: #ddd;}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .form-container, .table-responsive {
+    padding: 0 15%;
+  }
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  .form-group label, .form-group input, .form-group select, .form-group textarea {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 45%;
+  }
+  .form-group input[type="checkbox"], .form-group input[type="radio"] {
+    flex: 0;
+    margin-right: 5px;
+  }
+  .form-group button {
+    max-width: 200px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .form-container, .table-responsive {
+    padding: 0 10%;
+  }
+}
+
+/* Small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+  .form-container {
+    padding: 0 5%;
+  }
+  .form-group label, .form-group input, .form-group select, .form-group textarea, .form-group button {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .table-responsive {
+    overflow-x: scroll;
+  }
+}
+
+/* Additional styling for better readability and interaction on all devices */
+.form-group input[type="checkbox"], .form-group input[type="radio"] {
+  margin-top: 0;
+}
+
+/* Styling for form validation error messages */
+.validation-error {
+  color: var(--error-color); /* Use the --error-color variable defined in styles.css */
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+  font-weight: bold;
+}

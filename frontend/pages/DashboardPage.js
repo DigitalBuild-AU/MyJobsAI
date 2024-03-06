@@ -1,0 +1,71 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const DashboardPage = () => {
+    const [summary, setSummary] = useState({
+        applicationsSent: 0,
+        interviewsScheduled: 0,
+        offersReceived: 0,
+    });
+    const [quote, setQuote] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchSummary = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/dashboard/summary');
+                console.log('Fetching summary data from /api/dashboard/summary'); // gpt_pilot_debugging_log
+                setSummary(response.data);
+            } catch (err) {
+                console.error(`Error fetching summary data: ${err}`, err.stack); // gpt_pilot_debugging_log
+                setError('Failed to fetch dashboard summary. Please try again later.');
+            }
+        };
+        
+        const fetchQuote = () => {
+            axios.get('/quotes.json')
+                .then(res => {
+                    const quotes = res.data.quotes;
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)].text;
+                    setQuote(randomQuote);
+                    console.log('Quote of the day fetched successfully.'); // gpt_pilot_debugging_log
+                })
+                .catch(error => {
+                    console.error('Error fetching quote of the day:', error, error.stack); // gpt_pilot_debugging_log
+                    setError('Failed to fetch quote of the day. Please try again later.');
+                });
+        };
+        
+        fetchSummary();
+        fetchQuote();
+    }, []);
+
+    return (
+        <div>
+            <h1>Dashboard Overview</h1>
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <div>
+                    <div>
+                        <h2>Job Application Summary</h2>
+                        <ul>
+                            <li>Applications Sent: {summary.applicationsSent}</li>
+                            <li>Interviews Scheduled: {summary.interviewsScheduled}</li>
+                            <li>Offers Received: {summary.offersReceived}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Quote of the Day</h3>
+                        <blockquote>{quote}</blockquote>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default DashboardPage;

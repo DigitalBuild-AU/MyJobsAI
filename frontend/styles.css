@@ -1,0 +1,204 @@
+/* New color scheme */
+:root {
+  --primary-color: #0056b3; /* Deep blue for primary actions */
+  --secondary-color: #6c757d; /* Gray for secondary elements */
+  --background-color: #f8f9fa; /* Light gray background for better readability */
+  --button-color: #007bff; /* Bright blue for buttons */
+  --button-hover-color: #0056b3; /* Slightly darker blue for button hover state */
+  --text-color: #212529; /* Dark gray for primary text for better visibility */
+  --secondary-text-color: #495057; /* Medium gray for secondary text */
+  --error-color: #dc3545; /* Red for error messages or critical elements */
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.navbar-light .navbar-brand {
+  color: var(--primary-color);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--secondary-color);
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+  color: var(--primary-color);
+}
+
+.btn-primary {
+  background-color: var(--button-color);
+  border-color: var(--button-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--button-hover-color);
+  border-color: var(--button-hover-color);
+}
+
+.form-control {
+  border: 1px solid var(--secondary-color);
+}
+
+.table thead th {
+  background-color: var(--background-color);
+}
+
+.table tr:hover {
+  background-color: var(--background-color);
+}
+
+.alert-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.alert-danger {
+  background-color: var(--error-color);
+  color: white;
+}
+
+/* Enhancements for aesthetic appeal */
+.table, #addJobListingForm, .navbar, .btn, .form-control {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.table:hover, #addJobListingForm:hover, .btn:hover, .form-control:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.1rem);
+}
+
+/* Responsiveness adjustments for smaller screens */
+@media (max-width: 768px) {
+  .table-responsive {
+    border: 0;
+    box-shadow: none;
+  }
+}
+
+/* Styling for the job listings form */
+#addJobListingForm > .form-group {
+  margin-bottom: 1rem;
+}
+
+#addJobListingForm label {
+  font-weight: bold;
+}
+
+#addJobListingForm .form-control {
+  max-width: 300px;
+}
+
+#addJobListingForm .form-check-input {
+  margin-top: 0.3rem;
+}
+
+#addJobListingForm .form-check-label {
+  margin-left: 0.5rem;
+}
+
+/* Horizontal alignment for radio buttons and the '+ super' label */
+.form-check-inline {
+  margin-right: 1rem;
+}
+
+/* Enhance overall form appearance for jobType and salary inputs */
+#jobType, #salaryAmount, input[name="salaryPeriod"], #includesSuper {
+  border-radius: 0.25rem;
+}
+
+/* Adjust alignment */
+#addJobListingForm > .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+#addJobListingForm .form-check {
+  align-self: center;
+}
+
+/* General form control enhancements */
+#addJobListingForm input[type="text"],
+#addJobListingForm input[type="url"],
+#addJobListingForm select,
+#addJobListingForm textarea {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+
+/* Button enhancements */
+#addJobListingForm button, 
+#fetchJobInfo {
+  background-color: var(--button-color);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#addJobListingForm button:hover,
+#fetchJobInfo:hover {
+  background-color: var(--button-hover-color);
+}
+
+/* Heading adjustments to match theme */
+h1, h2 {
+  color: var(--primary-color);
+}
+
+/* Table row hover effects */
+.table tr:hover {
+  background-color: var(--background-color);
+}
+
+/* Align form controls horizontally for job type, status, and salary */
+#addJobListingForm .form-group {
+  display: flex;
+  align-items: center;
+}
+
+#addJobListingForm .form-group label {
+  margin-right: 10px;
+}
+
+/* Compact form layout for better usability and theme coherence */
+#addJobListingForm input[type="text"],
+#addJobListingForm input[type="url"],
+#addJobListingForm select,
+#addJobListingForm textarea {
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
+#addJobListingForm .form-group {
+  flex-wrap: wrap;
+}
+
+#addJobListingForm .form-check {
+  margin-left: 15px;
+}
+
+/* Enhance visibility of filter form and align with theme */
+#filterSidebar label {
+  display: block;
+  margin-top: 15px;
+}
+
+#filterSidebar input[type="text"],
+#filterSidebar select {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+
+#filterSidebar button {
+  margin-top: 20px;
+}

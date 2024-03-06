@@ -1,0 +1,167 @@
+document.addEventListener('DOMContentLoaded', function() {
+  fetchJobListings();
+
+  document.getElementById('addJobListingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const jobURL = document.getElementById('jobURL').value;
+    const jobTitle = document.getElementById('jobTitle').value;
+    const company = document.getElementById('company').value;
+    const location = document.getElementById('location').value;
+    const jobDescription = document.getElementById('jobDescription').value;
+    const jobType = document.getElementById('jobType').value;
+    const salaryAmount = document.getElementById('salaryAmount').value;
+    const salaryPeriod = document.querySelector('input[name="salaryPeriod"]:checked') ? document.querySelector('input[name="salaryPeriod"]:checked').value : '';
+    const includesSuper = document.getElementById('includesSuper').checked;
+    const status = document.getElementById('status').value;
+
+    // Validation Checks
+    if (!jobURL || !isValidURL(jobURL)) {
+      console.log('Invalid or missing job URL provided.'); // gpt_pilot_debugging_log
+      alert('Please provide a valid job URL.');
+      return;
+    }
+
+    if (!jobTitle || !company || !location || !jobType || !status) {
+      console.log('One or more required fields are empty.'); // gpt_pilot_debugging_log
+      alert('All fields are required.');
+      return;
+    }
+
+    if (salaryAmount && isNaN(parseFloat(salaryAmount))) {
+      console.log('Invalid salary amount.'); // gpt_pilot_debugging_log
+      alert('Please provide a valid salary amount.');
+      return;
+    }
+
+    axios.post('http://localhost:3000/api/joblistings', {
+      jobURL, 
+      jobTitle, 
+      company, 
+      location, 
+      jobDescription, 
+      jobType,
+      status,
+      salary: {
+        amount: salaryAmount,
+        period: salaryPeriod,
+        includesSuper
+      } 
+    })
+    .then(function(response) {
+      console.log('Job listing added successfully.'); // gpt_pilot_debugging_log
+      fetchJobListings();
+    })
+    .catch(function(error) {
+      console.error(`Error adding job listing: ${error}`, error.stack); // gpt_pilot_debugging_log
+      alert('Failed to add job listing. Please check the console for more details.');
+    });
+  });
+
+  function fetchJobListings() {
+    console.log('Fetching job listings...'); // gpt_pilot_debugging_log
+
+    axios.get('http://localhost:3000/api/joblistings')
+    .then(function(response) {
+      console.log('Job listings fetched successfully:', response.data); // gpt_pilot_debugging_log
+
+      const listings = response.data;
+      const listingsContainer = document.getElementById('listingsContainer');
+      listingsContainer.innerHTML = '';
+      listings.forEach(listing => {
+        console.log(`Rendering listing: ${listing.jobTitle}, ${listing.company}, ${listing.location}, ${listing.jobDescription}`); // gpt_pilot_debugging_log
+        const listingElement = document.createElement('tr');
+        listingElement.innerHTML = `
+          <td data-column="jobTitle">${listing.jobTitle}</td>
+          <td data-column="company">${listing.company}</td>
+          <td data-column="location">${listing.location}</td>
+          <td data-column="jobDescription">${listing.jobDescription}</td>
+        `;
+        listingsContainer.appendChild(listingElement);
+      });
+    })
+    .catch(function(error) {
+      console.error(`Error fetching job listings: ${error}`, error.stack); // gpt_pilot_debugging_log
+      alert('Failed to fetch job listings.');
+    });
+  }
+
+  function isValidURL(string) {
+    const urlPattern = new RegExp('^(https?:\\/\\/)?[\\w-]+(\\.[\\w-]+)+[\\w-.,@?^=%&:;\\/\\+#]*$', 'i'); // Adjusted for more inclusive URL validation
+    const isValid = !!urlPattern.test(string);
+    console.log(`URL being validated: ${string}, isValid: ${isValid}`); // gpt_pilot_debugging_log
+    return isValid;
+  }
+
+  function validateJobListingForm() {
+    let isValid = true;
+    const jobURL = document.getElementById('jobURL').value.trim();
+    const jobTitle = document.getElementById('jobTitle').value.trim();
+    const jobDescription = document.getElementById('jobDescription').value.trim();
+    const salaryAmount = document.getElementById('salaryAmount').value.trim();
+    const status = document.getElementById('status').value.trim();
+    const errorMessages = document.querySelectorAll('.validation-error');
+    errorMessages.forEach(msg => msg.remove());
+
+    if (jobURL.length > 0 && !isValidURL(jobURL)) {
+      displayErrorMessage('jobURL', 'Job URL must be in correct format (http://, https://).');
+      isValid = false;
+    }
+
+    if (!jobTitle) {
+      displayErrorMessage('jobTitle', 'Job Title is required.');
+      isValid = false;
+    }
+
+    if (!jobDescription) {
+      displayErrorMessage('jobDescription', 'Job Description is required.');
+      isValid = false;
+    }
+
+    if (salaryAmount && (!salaryAmount || isNaN(salaryAmount) || Number(salaryAmount) <= 0)) {
+      displayErrorMessage('salaryAmount', 'Salary amount must be a positive number when provided.');
+      isValid = false;
+    }
+
+    if (!status || status === '') {
+      displayErrorMessage('status', 'Status is required.');
+      isValid = false;
+    }
+
+    console.log(`Validating form data: ${isValid ? 'Valid' : 'Invalid'}`); // gpt_pilot_debugging_log
+
+    return isValid;
+  }
+
+  function displayErrorMessage(elementId, message) {
+    const inputElement = document.getElementById(elementId);
+    const errorMessage = document.createElement('div');
+    errorMessage.textContent = message;
+    errorMessage.className = 'validation-error';
+    errorMessage.style.color = 'red';
+    inputElement.insertAdjacentElement('afterend', errorMessage);
+  }
+
+  document.getElementById('fetchJobInfo').addEventListener('click', function() {
+    const jobURL = document.getElementById('jobURL').value.trim();
+
+    if (!jobURL || !isValidURL(jobURL)) {
+      console.log('Invalid job URL provided.'); // gpt_pilot_debugging_log
+      alert('Please provide a valid job URL.');
+      return;
+    }
+
+    axios.post('http://localhost:3000/api/fetch-job-info', { url: jobURL })
+      .then(function(response) {
+        const { jobTitle, company, location, jobDescription } = response.data;
+        document.getElementById('jobTitle').value = jobTitle;
+        document.getElementById('company').value = company;
+        document.getElementById('location').value = location;
+        document.getElementById('jobDescription').value = jobDescription;
+        console.log('Job details fetched successfully.'); // gpt_pilot_debugging_log
+      })
+      .catch(function(error) {
+        console.error(`Error fetching job details: ${error}`, error.stack); // gpt_pilot_debugging_log
+        alert('Failed to fetch job details. Please check the console for more details.');
+      });
+  });
+});
