@@ -1,13 +1,13 @@
 
-/**
- * JobListingsPage.test.js
- *
- * This file contains tests for the JobListingsPage component and its child components. It includes tests for rendering, functionality, pagination, and filter handling. The tests utilize React Testing Library to simulate user interaction and verify component behavior.
- *
- * Dependencies:
- * - React: Used for component testing.
- * - @testing-library/react: Provides testing utilities to interact with React components.
- */
+"""
+JobListingsPage.test.js
+
+This file serves as the test suite for the JobListingsPage component within the MyJobsAI application. It includes a series of tests aimed at ensuring the correct rendering and functionality of the JobListingsPage and its child components, such as JobListingCard and JobListingTable. The tests cover various aspects including component rendering, user interaction simulations, pagination, and filter functionality. Utilizing React and the React Testing Library, this test suite verifies the integrity and behavior of the JobListingsPage component, ensuring a seamless user experience.
+
+Dependencies:
+- React: A JavaScript library for building user interfaces, used here for component creation and testing.
+- @testing-library/react: Provides a set of tools to facilitate testing React components, enabling interaction simulation and component behavior verification.
+"""
 
 // frontend/pages/JobListingsPage.test.js
 
@@ -40,7 +40,14 @@ test('renders JobListingCard component correctly', () => {
 
   /**
 
-   /**
+  /**
+   * Mock function to simulate fetching job listings for testing pagination.
+   * This function is crucial for setting up the 'totalPages' and 'currentPage' values
+   * needed to test the pagination functionality of the JobListingsPage component.
+   * 
+   * @returns {Object} An object containing 'totalPages' and 'currentPage' values.
+   */
+  /**
 """
 JobListingsPage Test Suite
 
@@ -107,6 +114,10 @@ test('renders JobListingTable component correctly', () => {
  * Test Case: Updates filters state correctly.
  * Verifies that the updateFilters function correctly updates the filters state with the provided values.
  */
+  /**
+  * Test Case: Validates input and updates error state for invalid input.
+  * This test simulates user input for filters and verifies that the error state is updated appropriately for invalid inputs, ensuring the robustness of form validation within the component.
+  */
   test('input validation updates error state for invalid input', () => {
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
@@ -152,7 +163,9 @@ test('ResponsiveNavbar switches between Navbar and Hamburger Menu based on scree
   /**
   * Tests that the createPaginationButton function renders the correct number of buttons.
   */
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('createPaginationButton renders correct number of buttons', () => {
+
     const totalPages = 5;
     const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
@@ -187,6 +200,7 @@ test('Sidebar integration in JobListingsPage', () => {
     const currentPage = 0; // First page
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
     const buttons = queryAllByRole('button');
+
   test('updateFilters updates filters state with correct values', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
@@ -363,6 +377,7 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('handleWindowSizeChange updates view state based on window size', () => {
     global.innerWidth = 500; // Simulate small screen
     const { getByText } = render(<JobListingsPage />);
