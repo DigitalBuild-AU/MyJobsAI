@@ -15,17 +15,9 @@ const JobListingsPage = () => {
   const [filters, setFilters] = useState({status: '', company: ''});
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
-    fetchListings();
-    return () => {
-      // Cleanup function to reset error states
-      setFilters({status: '', company: ''});
-    };
-  }, [filters, page]);
-
-  const fetchListings = async () => {
-    // Responsive design adjustments
     const handleWindowSizeChange = () => {
       if (window.innerWidth < 768) {
         setView('card');
@@ -33,37 +25,42 @@ const JobListingsPage = () => {
         setView('table');
       }
     };
+    
     window.addEventListener('resize', handleWindowSizeChange);
     handleWindowSizeChange();
-    console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`); // gpt_pilot_debugging_log
+
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+      setFilters({status: '', company: ''}); // Cleanup
+    };
+  }, [filters, page]);
+
+  const fetchListings = async () => {
+    console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
       const response = await axios.get(`http://localhost:3000/api/joblistings/filter?page=${page}&status=${filters.status}&company=${filters.company}`);
       setListings(response.data.listings);
       setTotalPages(response.data.totalPages);
     } catch (err) {
-      console.error('Error fetching job listings', err, err.stack); // gpt_pilot_debugging_log
+      console.error('Error fetching job listings', err);
     }
   };
-
-  const handleViewChange = (viewType) => {
-    setView(viewType);
-  };
-
+  
   /**
    * Handles the change event for filters by updating the page and filters state.
    *
    * @param {Event} e - The change event object, containing the filter name and value.
    */
   // Extract the logic for handling filters into a separate function
+  
 const handleFilterChange = (e) => {
     const { name, value } = e.target;
     if (value.trim() === '') {
-      // Set error state for empty input
       setErrorState({ ...errorState, [name]: true });
     } else {
       setPage(0);
       setFilters({ ...filters, [name]: value });
-      setErrorState({ ...errorState, [name]: false }); // Reset error state
+      setErrorState({ ...errorState, [name]: false });
     }
   };
 
@@ -76,14 +73,20 @@ const renderPagination = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
-      pages.push(
-        <button key={i} disabled={i === page} onClick={() => setPage(i)}>
-          {i + 1}
-        </button>
-      );
+      pages.push(createPageButton(i));
     }
     return <div>{pages}</div>;
   };
+
+  const updateFilters = (filterName, filterValue) => {
+    setFilters({ ...filters, [filterName]: filterValue });
+  };
+
+  const createPageButton = (pageNumber) => (
+    <button key={pageNumber} disabled={pageNumber === page} onClick={() => setPage(pageNumber)}>
+      {pageNumber + 1}
+    </button>
+  );
 
   return (
     <div className="job-listings-page">
@@ -109,6 +112,11 @@ const renderPagination = () => {
 };
 
 export default JobListingsPage;
-};
+import { Link } from 'react-router-dom';
 
-export default JobListingsPage;
+      <div className="navigation-links">
+        <Link to="/employmentHistory">Employment History</Link>
+        <Link to="/skillsInventory">Skills Inventory</Link>
+        <Link to="/coverLetterGeneration">Cover Letter Generation</Link>
+        <Link to="/resumeCustomization">Resume Customization</Link>
+      </div>
