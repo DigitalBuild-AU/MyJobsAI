@@ -8,12 +8,13 @@ import './SkillsInventoryPage.css';
 const SkillsInventoryPage = () => {
   const [skills, setSkills] = useState([]);
   const [newSkill, setNewSkill] = useState('');
+  const [editSkillIndex, setEditSkillIndex] = useState(null);
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
         const response = await axios.get('/api/skills');
-        setSkills(response.data);
+        setSkills(response.data.map(skill => ({ name: skill, isEditing: false })));
       } catch (error) {
         console.error('Failed to fetch skills', error);
       }
@@ -23,9 +24,36 @@ const SkillsInventoryPage = () => {
 
   const addSkill = () => {
     if (newSkill.trim() !== '') {
-      setSkills([...skills, newSkill.trim()]);
+      setSkills([...skills, { name: newSkill.trim(), isEditing: false }]);
       setNewSkill('');
     }
+  };
+
+  const handleEdit = (index) => {
+    const updatedSkills = skills.map((skill, i) => {
+      if (i === index) {
+        return { ...skill, isEditing: true };
+      }
+      return skill;
+    });
+    setSkills(updatedSkills);
+    setEditSkillIndex(index);
+  };
+
+  const handleSaveEdit = (index, newName) => {
+    const updatedSkills = skills.map((skill, i) => {
+      if (i === index) {
+        return { ...skill, name: newName, isEditing: false };
+      }
+      return skill;
+    });
+    setSkills(updatedSkills);
+    setEditSkillIndex(null);
+  };
+
+  const handleDelete = (index) => {
+    const updatedSkills = skills.filter((_, i) => i !== index);
+    setSkills(updatedSkills);
   };
 
   const handleSubmit = async (e) => {
@@ -94,3 +122,25 @@ export default SkillsInventoryPage;
  * @throws {Error} When the submission fails.
  * @return {Promise<void>} A promise that resolves when the skills are successfully submitted.
  */
+        <ul className="skills-list">
+          {skills.map((skill, index) => (
+            <li key={index} className="skill-item">
+              {skill.isEditing ? (
+                <>
+                  <input
+                    type="text"
+                    defaultValue={skill.name}
+                    onBlur={(e) => handleSaveEdit(index, e.target.value)}
+                  />
+                  <button onClick={() => handleSaveEdit(index)}>Save</button>
+                </>
+              ) : (
+                <>
+                  <span>{skill.name}</span>
+                  <button onClick={() => handleEdit(index)}>Edit</button>
+                  <button onClick={() => handleDelete(index)}>Delete</button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
