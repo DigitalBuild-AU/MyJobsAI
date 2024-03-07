@@ -23,7 +23,7 @@ const ResumeCustomizationPage = () => {
   const customizeCV = async () => {
     const response = await axios.post('/api/cv_customization', {
       jobDescription: selectedJob.description,
-      userCV: 'User CV' // Placeholder, replace with actual user CV data
+      userCV: uploadedCV // Use the state variable for the uploaded CV
     });
     setCvAnalysisResults(response.data.analysisResults);
     setCustomizedCV(response.data.customizedCV);
@@ -38,6 +38,32 @@ const ResumeCustomizationPage = () => {
   };
 
   return (
+const [uploadedCV, setUploadedCV] = useState(null);
+
+  const handleCVUpload = (e) => {
+    setUploadedCV(e.target.files[0]);
+  };
+
+  const downloadFile = async (fileType) => {
+    const response = await axios.get(`/api/download_cv/${fileType}`, {
+      responseType: 'blob',
+    });
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `customized-cv.${fileType}`);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  };
+
+  const downloadAsPDF = () => {
+    downloadFile('pdf');
+  };
+
+  const downloadAsDOC = () => {
+    downloadFile('doc');
+  };
     <div className="resume-customization-page">
       <select onChange={handleJobSelection} value={selectedJob}>
         {jobListings.map(job => (
@@ -45,7 +71,13 @@ const ResumeCustomizationPage = () => {
         ))}
       </select>
       <button onClick={customizeCV}>Customize CV</button>
-      <div>{cvAnalysisResults}</div>
+      <div className="cv-analysis-results">
+        {cvAnalysisResults.map((result) => (
+          <div key={result.id} className={`feedback feedback-${result.type}`}>
+            {result.message}
+          </div>
+        ))}
+      </div>
       <div>{customizedCV}</div>
       <button onClick={downloadAsPDF}>Download as PDF</button>
       <button onClick={downloadAsDOC}>Download as DOC</button>
@@ -54,3 +86,4 @@ const ResumeCustomizationPage = () => {
 };
 
 export default ResumeCustomizationPage;
+<input type="file" onChange={handleCVUpload} />
