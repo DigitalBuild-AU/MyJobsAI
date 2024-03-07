@@ -143,3 +143,8 @@ test('renders JobListingTable component correctly', () => {
 /**
  * Test if renderPagination with only one page
  */
+  /**
+   * Test to verify that 'renderPagination' correctly renders the expected number of pagination buttons
+   * and disables the button corresponding to the current page.
+   * This test simulates rendering the JobListingsPage component and checks the pagination buttons.
+   */
