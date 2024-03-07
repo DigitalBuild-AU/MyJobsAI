@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import JobListingCard from '../components/JobListingCard';
+import JobListingTable from '../components/JobListingTable';
 
 const JobListingsPage = () => {
   const [listings, setListings] = useState([]);
@@ -54,36 +56,7 @@ const JobListingsPage = () => {
       <input name="status" placeholder="Filter by status" onChange={handleFilterChange} />
       <input name="company" placeholder="Filter by company" onChange={handleFilterChange} />
 
-      {view === 'table' ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Company</th>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listings.map((listing) => (
-              <tr key={listing._id}>
-                <td>{listing.jobTitle}</td>
-                <td>{listing.company}</td>
-                <td>{listing.location}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <div>
-          {listings.map((listing) => (
-            <div key={listing._id} className="card">
-              <h3>{listing.jobTitle}</h3>
-              <p>{listing.company}</p>
-              <p>{listing.location}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
 
       {renderPagination()}
     </div>
