@@ -36,10 +36,6 @@ test('renders JobListingCard component correctly', () => {
   /**
    * Test to ensure the JobListingTable component correctly renders multiple job listings.
    * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
-/**
- * Mock function to simulate fetching job listings for testing.
- * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
- */
    */
 test('renders JobListingTable component correctly', () => {
     const listings = [
@@ -117,6 +113,10 @@ test('renders JobListingTable component correctly', () => {
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech Inc', name: 'company' } });
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
     // This is a placeholder for actual state verification logic
+/**
+ * Mock function to simulate fetching job listings for testing.
+ * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
+ */
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
 
