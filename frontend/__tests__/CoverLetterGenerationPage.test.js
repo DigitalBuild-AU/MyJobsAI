@@ -51,7 +51,10 @@ test('clicking create cover letter displays generated letter', async () => {
   expect(getByText(mockCoverLetter)).toBeInTheDocument();
 });
 
-// Tests error handling when fetching job listings fails.
+/**
+ * Tests error handling when fetching job listings fails.
+ * It checks for the presence of an error message.
+ */
 test('handles error fetching job listings gracefully', async () => {
   axios.get.mockRejectedValue(new Error('Error fetching job listings'));
   const { getByText } = render(<CoverLetterGenerationPage />);
