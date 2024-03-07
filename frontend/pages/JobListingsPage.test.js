@@ -68,6 +68,10 @@ test('renders JobListingTable component correctly', () => {
     const { getByText } = render(<JobListingTable listings={listings} />);
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
+/**
+ * Test Case: Renders JobListingTable component correctly.
+ * Checks that the JobListingTable component correctly displays multiple job listings, including job titles, companies, and locations.
+ */
     expect(getByText('New York')).toBeInTheDocument();
     expect(getByText('Product Manager')).toBeInTheDocument();
     expect(getByText('XYZ Corp.')).toBeInTheDocument();
