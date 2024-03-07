@@ -1,7 +1,10 @@
 /**
+ * useEffect hook to fetch and set the user's employment history from the server.
+ * Fetches employment history on component mount and updates the employmentHistory state.
  * Page component for managing and submitting employment history.
  * Users can add, edit, and submit their employment history.
  */
+
 import React, { useState, useEffect } from 'react';
 import { postEmploymentHistory } from '../utils/apiHelpers';
 import './EmploymentHistoryPage.css';
@@ -71,8 +74,6 @@ export default EmploymentHistoryPage;
  * Adds a new role to the local employment history state.
  * @function addNewRole
  * @return {void}
- */
-/**
  * Submits the employment history to the server.
  * @async
  * @function handleSubmit
