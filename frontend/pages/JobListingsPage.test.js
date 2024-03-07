@@ -154,7 +154,11 @@ test('renders JobListingTable component correctly', () => {
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
   });
-
+/**
+ * Updates the filters state with the given filter name and value.
+ * @param {string} filterName - The name of the filter.
+ * @param {string} filterValue - The value of the filter.
+ */
   /**
   * Test if renderPagination renders correct number of buttons and disables current page button
   */
