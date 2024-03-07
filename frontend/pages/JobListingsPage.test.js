@@ -1,6 +1,9 @@
 // frontend/pages/JobListingsPage.test.js
 
 import React from 'react';
+import JobListingsPage from '../../pages/JobListingsPage';
+import JobListingCard from '../../components/JobListingCard';
+import JobListingTable from '../../components/JobListingTable';
 import { render } from '@testing-library/react';
 import JobListingsPage from './JobListingsPage';
 import JobListingCard from '../components/JobListingCard';
