@@ -1,3 +1,7 @@
+/**
+ * Renders the interviews page, displaying a list of scheduled interviews.
+ * Fetches and displays interviews from the backend.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InterviewForm from './components/InterviewForm';
