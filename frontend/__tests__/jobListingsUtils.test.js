@@ -36,6 +36,11 @@ describe('fetchListingsFromAPI tests', () => {
     expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/api/joblistings/filter?page=${mockPage}&status=undefined&company=undefined`);
   });
 /**
+ * Tests handling of non-200 responses from the API.
+ *
+ * Verifies that fetchListingsFromAPI correctly handles and throws errors for non-200 responses from the API.
+ */
+/**
  * Group of tests for the fetchListingsFromAPI function.
  *
  * These tests verify the functionality of fetchListingsFromAPI, ensuring it correctly interacts with the API and handles various input scenarios.
