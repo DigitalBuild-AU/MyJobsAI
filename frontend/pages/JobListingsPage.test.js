@@ -188,6 +188,14 @@ test('renders JobListingTable component correctly', () => {
   });
 
 
+  /**
+   * Test to verify the responsive design functionality of the JobListingsPage component by simulating window resize events.
+   * This test initially sets the window width to 500px, triggering a resize event, and checks if the component displays the 'Card View'.
+   * It then sets the window width to 1024px, triggers another resize event, and checks if the component displays the 'Table View'.
+   * Inputs: None
+   * Outputs: None
+   * Side effects: Modifies the global window.innerWidth property to simulate window resize events.
+   */
   test('responsive design changes view on window resize', () => {
 
     const { getByText } = render(<JobListingsPage />);
