@@ -9,7 +9,7 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 
 /**
  * Test suite for JobListingsPage component
