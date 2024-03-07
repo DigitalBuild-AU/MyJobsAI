@@ -21,13 +21,13 @@ const JobListingsPage = () => {
   }, [filters, page]);
 
   const fetchListings = async () => {
-    console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`); // gpt_pilot_debugging_log
+    console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
       const response = await axios.get(`http://localhost:3000/api/joblistings/filter?page=${page}&status=${filters.status}&company=${filters.company}`);
       setListings(response.data.listings);
       setTotalPages(response.data.totalPages);
     } catch (err) {
-      console.error('Error fetching job listings', err, err.stack); // gpt_pilot_debugging_log
+      console.error('Error fetching job listings', err);
     }
   };
 
@@ -43,7 +43,7 @@ const JobListingsPage = () => {
   // Extract the logic for handling filters into a separate function
 const handleFilterChange = (e) => {
     setPage(0);
-    setFilters({ ...filters, [e.target.name]: e.target.value });
+    updateFilters(e.target.name, e.target.value);
   };
 
   /**
@@ -54,14 +54,20 @@ const handleFilterChange = (e) => {
 const renderPagination = () => {
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
-      pages.push(
-        <button key={i} disabled={i === page} onClick={() => setPage(i)}>
-          {i + 1}
-        </button>
-      );
+      pages.push(createPageButton(i));
     }
     return <div>{pages}</div>;
   };
+
+  const updateFilters = (filterName, filterValue) => {
+    setFilters({ ...filters, [filterName]: filterValue });
+  };
+
+  const createPageButton = (pageNumber) => (
+    <button key={pageNumber} disabled={pageNumber === page} onClick={() => setPage(pageNumber)}>
+      {pageNumber + 1}
+    </button>
+  );
 
   return (
     <div className="job-listings-page">
@@ -78,9 +84,6 @@ const renderPagination = () => {
       {renderPagination()}
     </div>
   );
-};
-
-export default JobListingsPage;
 };
 
 export default JobListingsPage;

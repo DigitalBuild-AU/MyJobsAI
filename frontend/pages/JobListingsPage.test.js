@@ -101,12 +101,46 @@ test('renders JobListingTable component correctly', () => {
  * based on the total number of pages and disables the button for the current page.
  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
+    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
+    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
+    rerender(<JobListingsPage />);
+    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
+    expect(filters.status).toBe('active');
+    expect(page).toBe(0);
+  });
+  
+  test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
     const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} page={currentPage} />);
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
+=======
+  test('handleFilterChange updates filters state and resets page', () => {
+    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
+    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
+    rerender(<JobListingsPage />);
+  test('updateFilters updates filters state correctly', () => {
+    // Mock the setFilters function
+    const mockSetFilters = jest.fn();
+    // Replace the actual setFilters with the mock
+    JobListingsPage.__Rewire__('setFilters', mockSetFilters);
+    // Call updateFilters with a sample filter
+    updateFilters('status', 'active');
+    // Check if setFilters was called correctly
+    expect(mockSetFilters).toHaveBeenCalledWith({ status: 'active' });
+    // Restore setFilters
+    JobListingsPage.__ResetDependency__('setFilters');
+  });
+
+  test('createPageButton returns a button with correct properties', () => {
+    const pageNumber = 1;
+    const pageButton = createPageButton(pageNumber);
+    // Assuming createPageButton returns a React element
+    expect(pageButton.props.disabled).toBeFalsy();
+    expect(pageButton.props.children).toBe(pageNumber + 1);
+    expect(pageButton.type).toBe('button');
   });
   test('handleFilterChange updates filters state and resets page', async () => {
   * Test if handleFilterChange updates filters state and resets page
