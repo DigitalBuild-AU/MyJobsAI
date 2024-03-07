@@ -1,8 +1,11 @@
 /**
- * Test suite for the JobListingsPage component.
- * 
- * This file contains tests for the rendering and functionality of the JobListingsPage component,
- * including individual job listing cards, job listing table, pagination, and filter handling.
+ * JobListingsPage.test.js
+ *
+ * This file contains tests for the JobListingsPage component and its child components. It includes tests for rendering, functionality, pagination, and filter handling. The tests utilize React Testing Library to simulate user interaction and verify component behavior.
+ *
+ * Dependencies:
+ * - React: Used for component testing.
+ * - @testing-library/react: Provides testing utilities to interact with React components.
  */
 // frontend/pages/JobListingsPage.test.js
 
