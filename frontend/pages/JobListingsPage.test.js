@@ -238,6 +238,13 @@ test('Sidebar integration in JobListingsPage', () => {
  * Test Case: Responsive design renders correct components based on screen size.
  * Checks that the correct view (Card View or Table View) is rendered based on the window's inner width.
  */
+  /**
+   * Test: handleWindowSizeChange updates view state based on window size
+   * Purpose: This test verifies that the view state of the JobListingsPage component updates correctly when the window size changes. It simulates changing the window size to a small screen and then to a large screen, and checks if the component renders the appropriate view ('Card View' for small screens and 'Table View' for large screens).
+   * Inputs: None
+   * Outputs: None
+   * Side Effects: The document body will contain text 'Card View' or 'Table View' depending on the simulated window size.
+   */
   test('handleWindowSizeChange updates view state based on window size', () => {
     jest.spyOn(window, 'innerWidth', 'get').mockImplementation(() => 500); // Simulate small screen
     const { getByText } = render(<JobListingsPage />);
@@ -248,6 +255,13 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(getText('Table View')).toBeInTheDocument();
   });
 
+  test('sequential updates to filters result in combined state', () => {
+   * Test: sequential updates to filters result in combined state
+   * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
+   * Inputs: None
+   * Outputs: None
+   * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
+   */
   test('sequential updates to filters result in combined state', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
