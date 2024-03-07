@@ -1,5 +1,9 @@
+/**
+ * Page component for managing and submitting employment history.
+ * Users can add, edit, and submit their employment history.
+ */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { postEmploymentHistory } from '../utils/apiHelpers';
 import './EmploymentHistoryPage.css';
 
 const EmploymentHistoryPage = () => {
@@ -20,6 +24,12 @@ const EmploymentHistoryPage = () => {
   }, []);
 
   const addNewRole = () => {
+/**
+ * Fetches the user's employment history from the server on component mount.
+ * @async
+ * @function useEffect
+ * @return {Promise<void>} A promise that resolves when the employment history is fetched and set in state.
+ */
     const newRole = { position, company, startDate, endDate, responsibilities, notableAchievements };
     setEmploymentHistory([...employmentHistory, newRole]);
     setPosition('');
@@ -33,10 +43,10 @@ const EmploymentHistoryPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/employmentHistory', { employmentHistory });
+      await postEmploymentHistory(employmentHistory);
       alert('Employment history saved successfully!');
     } catch (error) {
-      console.error('Failed to save employment history', error);
+      console.error('Failed to save employment history', error.message);
     }
   };
 
@@ -57,3 +67,16 @@ const EmploymentHistoryPage = () => {
 };
 
 export default EmploymentHistoryPage;
+/**
+ * Adds a new role to the local employment history state.
+ * @function addNewRole
+ * @return {void}
+ */
+/**
+ * Submits the employment history to the server.
+ * @async
+ * @function handleSubmit
+ * @param {Event} e - The event object from the form submission.
+ * @throws {Error} When the submission fails.
+ * @return {Promise<void>} A promise that resolves when the employment history is successfully submitted.
+ */

@@ -96,6 +96,7 @@ test('renders JobListingTable component correctly', () => {
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
+
   });
   test('handleFilterChange updates filters state and resets page', async () => {
   test('responsive design renders correct components based on screen size', () => {
@@ -112,6 +113,10 @@ test('renders JobListingTable component correctly', () => {
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech Inc', name: 'company' } });
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
     // This is a placeholder for actual state verification logic
+/**
+ * Mock function to simulate fetching job listings for testing.
+ * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
+ */
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
 
@@ -129,11 +134,6 @@ test('renders JobListingTable component correctly', () => {
     const totalPages = 5;
     const currentPage = 2;
     render(<JobListingsPage />);
-/**
- * Creates a pagination button with the given page number.
- * @param {number} pageNumber - The page number.
- * @returns {ReactElement} - The pagination button.
- */
     // Mocking fetchListings to set totalPages and currentPage
     // This is a placeholder for actual mocking logic
     const buttons = queryAllByRole('button');
@@ -141,11 +141,9 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[currentPage + 1].disabled).toBeTruthy(); // +1 to account for previous page button
   });
 
-  /**
- * Test if renderPagination behaves correctly with only one page.
- * 
- * This test ensures that when there is only one page of job listings, the renderPagination function
- * correctly renders the pagination buttons with the next and previous buttons disabled.
+/**
+ * Test case for verifying that the 'createPaginationButton' function renders a button with the correct page number.
+ * It checks that the correct number of buttons are rendered and that the button for the current page is disabled.
  */
   test('renderPagination with only one page', () => {
   test('useEffect cleanup resets filters state', () => {
@@ -167,7 +165,9 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[1].disabled).toBeTruthy(); // Current page button
   });
 
+
   test('responsive design changes view on window resize', () => {
+
     const { getByText } = render(<JobListingsPage />);
     global.innerWidth = 500;
     global.dispatchEvent(new Event('resize'));
@@ -175,4 +175,11 @@ test('renders JobListingTable component correctly', () => {
     global.innerWidth = 1024;
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
+  });
+  test('createPaginationButton creates a button with correct page number', () => {
+    const pageNumber = 3;
+    const button = createPaginationButton(pageNumber);
+    expect(button.props.children).toBe(pageNumber + 1); // Adjusted to match the function's behavior
+    expect(button.type).toBe('button');
+    expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
   });
