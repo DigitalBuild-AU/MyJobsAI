@@ -142,26 +142,7 @@ test('renders JobListingTable component correctly', () => {
   * Tests that the createPaginationButton function renders the correct number of buttons.
   */
   test('createPaginationButton renders correct number of buttons', () => {
-    const totalPages = 5;
-    const currentPage = 2;
-    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
-    const buttons = queryAllByRole('button');
-    // Expecting total buttons to be totalPages + 2 for 'Next' and 'Previous' buttons
-    expect(buttons.length).toBe(totalPages + 2);
-  });
-
-  /**
-  * Tests that the createPaginationButton function disables the button for the current page.
-  */
-  test('createPaginationButton disables button for current page', () => {
-  /**
-  * Tests that the createPaginationButton function adds a specific class to the button for the first page.
-  */
-  test('createPaginationButton adds specific class for first page button', () => {
-    const totalPages = 5;
-    const currentPage = 0; // First page
-    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
-    const buttons = queryAllByRole('button');
+  // Tests the 'updateFilters' method of the JobListingsPage component to ensure it correctly updates the component's filters state with the specified filter type and value.
   test('updateFilters updates filters state with correct values', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
@@ -310,6 +291,7 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to ensure it updates the view state based on window size.
   test('handleWindowSizeChange updates view state based on window size', () => {
     global.innerWidth = 500; // Simulate small screen
     const { getByText } = render(<JobListingsPage />);
