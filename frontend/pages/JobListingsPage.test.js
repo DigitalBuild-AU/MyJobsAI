@@ -17,9 +17,9 @@ import { render, fireEvent, screen } from '@testing-library/react';
  */
 describe('JobListingsPage component', () => {
   /**
-   * Test to ensure the JobListingCard component renders its props correctly.
-   * This test verifies that the job title, company, and location are all displayed as expected.
-   */
+ * Tests that the JobListingCard component renders its props correctly.
+ * Verifies that job title, company, and location are displayed as expected.
+ */
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
@@ -34,9 +34,16 @@ test('renders JobListingCard component correctly', () => {
   });
 
   /**
-   * Test to ensure the JobListingTable component correctly renders multiple job listings.
-   * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
+
+   /**
+   * Tests that the JobListingTable component correctly renders multiple job listings.
+   * Checks that all provided job listings are displayed, including job titles, companies, and locations.
    */
+/**
+ * Mock function to simulate fetching job listings for testing.
+ * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
+ */
+
 test('renders JobListingTable component correctly', () => {
     const listings = [
       {
@@ -63,6 +70,10 @@ test('renders JobListingTable component correctly', () => {
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
 
+  /**
+  * Tests that the handleFilterChange function updates the filters state and resets the page.
+  * Simulates changing the filter by status and verifies the state update.
+  */
   test('handleFilterChange updates filters state and resets page', () => {
     const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
@@ -80,6 +91,10 @@ test('renders JobListingTable component correctly', () => {
     JobListingsPage.__ResetDependency__('setFilters');
   });
 
+  /**
+  * Tests that the renderPagination function renders the correct number of buttons.
+  * Verifies that the button for the current page is disabled.
+  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
   test('input validation updates error state for invalid input', () => {
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
