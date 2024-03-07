@@ -56,9 +56,9 @@ describe('validateInput tests', () => {
     expect(validateInput('valid input')).toBe(true);
   });
 /**
- * Tests successful API call with filters.
+ * Tests validation of empty, null, and undefined inputs.
  *
- * Verifies that axios is called with the correct URL when fetchListingsFromAPI is called with specific filters.
+ * Ensures that validateInput returns false for empty string, null, and undefined inputs.
  */
   it('should return false for empty string, null, and undefined inputs', () => {
     expect(validateInput('')).toBe(false);
