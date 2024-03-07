@@ -41,6 +41,9 @@ const EmploymentHistoryPage = () => {
     setNotableAchievements('');
     };
     
+    /**
+     * Submits the updated employment history to the server and alerts the user upon success or failure.
+     */
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
