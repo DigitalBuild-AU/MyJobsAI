@@ -50,7 +50,13 @@ const JobListingsPage = () => {
       }
     };
     
-    // Extracted window resize listener logic into a separate function
+    /**
+     * Adjusts the view state based on the window's inner width.
+     * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
+     * 
+     * @param none - This function does not take any parameters.
+     * @returns void - This function does not return a value.
+     */
     const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
     
 /**
@@ -101,6 +107,12 @@ const handleViewChangeBasedOnWindowSize = () => {
  * Encapsulates the cleanup logic to be called on component unmount.
  * Extracted from useEffect to improve readability and maintainability.
  */
+/**
+* Encapsulates the cleanup logic to be called on component unmount.
+* Specifically, it removes the 'resize' event listener from the window object, ensuring no memory leaks occur.
+* @param none - This function does not take any parameters.
+* @returns void - This function does not return a value.
+*/
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
   setFilters({status: '', company: ''}); // Reset filters on component unmount
