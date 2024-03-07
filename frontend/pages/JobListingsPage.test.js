@@ -149,6 +149,10 @@ test('renders JobListingTable component correctly', () => {
   test('createPaginationButton disables button for current page', () => {
     const totalPages = 5;
     const currentPage = 2;
+/**
+ * Test Case: Responsive design renders correct components based on screen size.
+ * Checks that the correct view (Card View or Table View) is rendered based on the window's inner width.
+ */
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
 /**
  * Test Case: Responsive design renders correct components based on screen size.
