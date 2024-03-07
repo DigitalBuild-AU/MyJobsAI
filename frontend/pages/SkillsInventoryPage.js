@@ -26,6 +26,15 @@ const SkillsInventoryPage = () => {
   };
 
   const handleSubmit = async (e) => {
+/**
+ * Adds a new skill to the local skills state if it is not empty.
+ * @function addSkill
+ * @return {void}
+ */
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('/api/skills', { skills });
@@ -46,6 +55,12 @@ const SkillsInventoryPage = () => {
         />
         <button type="button" onClick={addSkill}>Add Skill</button>
         <ul>
+/**
+ * Fetches the user's skills from the server on component mount and updates the state.
+ * @async
+ * @function useEffect
+ * @return {Promise<void>} A promise that resolves when the skills are fetched and set in state.
+ */
           {skills.map((skill, index) => (
             <li key={index}>{skill}</li>
           ))}
@@ -57,3 +72,11 @@ const SkillsInventoryPage = () => {
 };
 
 export default SkillsInventoryPage;
+/**
+ * Submits the updated skills to the server.
+ * @async
+ * @function handleSubmit
+ * @param {Event} e - The event object from the form submission.
+ * @throws {Error} When the submission fails.
+ * @return {Promise<void>} A promise that resolves when the skills are successfully submitted.
+ */
