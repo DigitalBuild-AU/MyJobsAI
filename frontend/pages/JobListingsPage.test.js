@@ -122,6 +122,17 @@ test('renders JobListingTable component correctly', () => {
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
     rerender(<JobListingsPage />);
+test('ResponsiveNavbar switches between Navbar and Hamburger Menu based on screen size', () => {
+  global.innerWidth = 1024; // Desktop view
+  const { queryByText } = render(<ResponsiveNavbar />);
+  expect(queryByText('Dashboard')).toBeInTheDocument();
+  expect(queryByText('&#9776;')).not.toBeInTheDocument(); // Hamburger menu should not be present
+
+  global.innerWidth = 500; // Mobile view
+  global.dispatchEvent(new Event('resize'));
+  expect(queryByText('Dashboard')).not.toBeInTheDocument(); // Links should be hidden
+  expect(queryByText('&#9776;')).toBeInTheDocument(); // Hamburger menu should be present
+});
     expect(getByText('Please enter a valid status.')).toBeInTheDocument();
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: '', name: 'company' } });
     rerender(<JobListingsPage />);
@@ -154,8 +165,44 @@ test('renders JobListingTable component correctly', () => {
   */
   // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('createPaginationButton renders correct number of buttons', () => {
-  // Tests the 'updateFilters' method of the JobListingsPage component to ensure it correctly updates the component's filters state with the specified filter type and value.
-  test('updateFilters updates filters state with correct values for multiple scenarios', () => {
+
+    const totalPages = 5;
+    const currentPage = 2;
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // Expecting total buttons to be totalPages + 2 for 'Next' and 'Previous' buttons
+    expect(buttons.length).toBe(totalPages + 2);
+  });
+
+  /**
+  * Tests that the createPaginationButton function disables the button for the current page.
+  */
+  test('createPaginationButton disables button for current page', () => {
+  /**
+  * Tests that the createPaginationButton function adds a specific class to the button for the first page.
+test('Sidebar component collapses and expands', () => {
+  const { getByText, queryByText } = render(<JobListingsPage />);
+  const toggleButton = getByText('Open'); // Assuming 'Open' is the text to open the sidebar
+  fireEvent.click(toggleButton);
+  expect(queryByText('Employment History')).toBeInTheDocument(); // Sidebar content should be visible
+
+  fireEvent.click(toggleButton); // Assuming same button toggles close
+  expect(queryByText('Employment History')).not.toBeInTheDocument(); // Sidebar content should be hidden
+});
+
+test('Sidebar integration in JobListingsPage', () => {
+  const { getByText } = render(<JobListingsPage />);
+  expect(getByText('Open')).toBeInTheDocument(); // Sidebar toggle button should be present
+});
+  */
+  test('createPaginationButton adds specific class for first page button', () => {
+    const totalPages = 5;
+    const currentPage = 0; // First page
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+
+  test('updateFilters updates filters state with correct values', () => {
+
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
 
@@ -270,6 +317,24 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons.length).toBe(totalPages + 2); // Including next and previous page buttons
     expect(buttons[currentPage + 1].disabled).toBeTruthy(); // +1 to account for previous page button
   });
+test('Breadcrumbs component renders correct navigational path', () => {
+  const pathElements = [
+    { label: 'Home', link: '/' },
+    { label: 'Job Listings', link: '/jobListings' }
+  ];
+  const { getByText } = render(<Breadcrumbs pathElements={pathElements} />);
+  expect(getByText('Home')).toBeInTheDocument();
+  expect(getByText('Job Listings')).toBeInTheDocument();
+});
+
+test('Breadcrumbs component accessibility features', () => {
+  const pathElements = [
+    { label: 'Home', link: '/' },
+    { label: 'Job Listings', link: '/jobListings' }
+  ];
+  const { container } = render(<Breadcrumbs pathElements={pathElements} />);
+  expect(container.querySelector('nav[aria-label="breadcrumb"]')).toBeInTheDocument();
+});
 
 /**
  * Test case for verifying that the 'createPaginationButton' function renders a button with the correct page number.
@@ -310,6 +375,16 @@ test('renders JobListingTable component correctly', () => {
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
   });
+test('ResponsiveNavbar accessibility features', () => {
+  global.innerWidth = 500; // Mobile view
+  const { getByLabelText } = render(<ResponsiveNavbar />);
+  expect(getByLabelText('Toggle menu')).toBeInTheDocument(); // Hamburger menu button should be accessible
+});
+
+test('Sidebar accessibility features', () => {
+  const { getByText } = render(<Sidebar isOpen={true} />);
+  expect(getByText('Employment History').closest('a')).toHaveAttribute('tabIndex', '0');
+});
 
   // Tests the createPaginationButton function to ensure it creates a button with the correct page number, button type, and aria-label. This test verifies the button's properties to ensure they match expected values based on the input page number.
   test('createPaginationButton creates a button with correct page number', () => {
