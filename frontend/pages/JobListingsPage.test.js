@@ -73,3 +73,4 @@ test('renders JobListingTable component correctly', () => {
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
+  // TODO: Add additional test cases for new functionalities of JobListingCard and JobListingTable components as they are developed.
