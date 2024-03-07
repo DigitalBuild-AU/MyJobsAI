@@ -166,6 +166,11 @@ test('renders JobListingTable component correctly', () => {
     const totalPages = 5;
     const currentPage = 2;
     render(<JobListingsPage />);
+/**
+ * Creates a pagination button with the given page number.
+ * @param {number} pageNumber - The page number.
+ * @returns {ReactElement} - The pagination button.
+ */
     // Mocking fetchListings to set totalPages and currentPage
     // This is a placeholder for actual mocking logic
     const buttons = queryAllByRole('button');
