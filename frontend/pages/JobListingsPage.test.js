@@ -148,6 +148,15 @@ test('renders JobListingTable component correctly', () => {
  * correctly renders the pagination buttons with the next and previous buttons disabled.
  */
   test('renderPagination with only one page', () => {
+  test('useEffect cleanup resets filters state', () => {
+    const { unmount } = render(<JobListingsPage />);
+    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
+    // This is a placeholder for actual state verification logic before unmount
+    unmount();
+    // This is a placeholder for actual state verification logic after unmount
+    // Expect filters state to be reset to initial state
+    expect(/* logic to check filters state */).toEqual({status: '', company: ''});
+  });
     const totalPages = 1;
     const currentPage = 0;
     render(<JobListingsPage />);
@@ -158,11 +167,12 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[1].disabled).toBeTruthy(); // Current page button
   });
 
-  test('responsive design renders correct components based on screen size', () => {
-    global.innerWidth = 500;
+  test('responsive design changes view on window resize', () => {
     const { getByText } = render(<JobListingsPage />);
+    global.innerWidth = 500;
+    global.dispatchEvent(new Event('resize'));
     expect(getByText('Card View')).toBeInTheDocument();
     global.innerWidth = 1024;
-    const { getByText: getText } = render(<JobListingsPage />);
-    expect(getText('Table View')).toBeInTheDocument();
+    global.dispatchEvent(new Event('resize'));
+    expect(getByText('Table View')).toBeInTheDocument();
   });
