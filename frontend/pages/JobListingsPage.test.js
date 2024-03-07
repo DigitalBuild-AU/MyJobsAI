@@ -34,8 +34,10 @@ test('renders JobListingCard component correctly', () => {
   });
 
   /**
-   * Test to ensure the JobListingTable component correctly renders multiple job listings.
-   * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
+   /**
+   * Tests that the JobListingTable component correctly renders multiple job listings.
+   * Checks that all provided job listings are displayed, including job titles, companies, and locations.
+   */
 /**
  * Mock function to simulate fetching job listings for testing.
  * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
