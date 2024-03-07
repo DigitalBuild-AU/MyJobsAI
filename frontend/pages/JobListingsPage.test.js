@@ -256,6 +256,7 @@ describe('handleErrorState function tests', () => {
   });
 });
 
+  // Tests the handleErrorState function with an empty input value. It verifies that the error state is correctly set to true for the specified field (in this case, 'status'). This ensures that the form validation logic properly identifies fields with missing required values.
   test('should correctly update errorState for empty input value', () => {
     const name = 'status';
     const value = '';
@@ -292,4 +293,5 @@ describe('handleErrorState function tests', () => {
       JobListingsPage.prototype.handleErrorState(name, value);
     });
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
   });
