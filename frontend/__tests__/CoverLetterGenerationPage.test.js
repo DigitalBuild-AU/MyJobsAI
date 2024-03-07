@@ -33,7 +33,9 @@ test('renders without crashing', async () => {
   expect(getByRole('combobox')).toBeInTheDocument();
 });
 
-// Tests that selecting a job updates the contact person.
+/**
+ * Tests that selecting a job from the dropdown updates the contact person displayed.
+ */
 test('selecting a job updates contact person', async () => {
   const { getByRole, getByDisplayValue } = render(<CoverLetterGenerationPage />);
   await waitFor(() => fireEvent.change(getByRole('combobox'), { target: { value: '1' } }));
