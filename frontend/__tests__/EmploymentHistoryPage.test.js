@@ -15,6 +15,11 @@ beforeEach(() => {
 });
 
 test('renders without crashing', async () => {
+/**
+ * Test suite for the Employment History Page.
+ * 
+ * This file tests the Employment History feature, including rendering of the page, fetching and displaying employment history, adding new roles, and submitting employment history, along with error handling.
+ */
   const { getByPlaceholderText, getByText } = render(<EmploymentHistoryPage />);
   await waitFor(() => expect(getByPlaceholderText('Position')).toBeInTheDocument());
   expect(getByText('Save Employment History')).toBeInTheDocument();
@@ -26,6 +31,8 @@ test('fetching employment history successfully', async () => {
 });
 
 test('adding a new role updates the state and displays the new role', async () => {
+// Tests that the Employment History Page renders without crashing.
+// Tests fetching employment history successfully.
   const { getByPlaceholderText, getByText, getByRole } = render(<EmploymentHistoryPage />);
   fireEvent.change(getByPlaceholderText('Position'), { target: { value: 'Developer' } });
   fireEvent.change(getByPlaceholderText('Company'), { target: { value: 'New Corp' } });
@@ -34,6 +41,7 @@ test('adding a new role updates the state and displays the new role', async () =
 });
 
 test('submitting employment history successfully', async () => {
+// Tests adding a new role updates the state and displays the new role.
   render(<EmploymentHistoryPage />);
   fireEvent.click(getByText('Save Employment History'));
   await waitFor(() => expect(axios.post).toHaveBeenCalledWith('/api/employmentHistory', { employmentHistory: mockEmploymentHistory }));
@@ -51,3 +59,6 @@ test('handles error submitting employment history gracefully', async () => {
   fireEvent.click(getByText('Save Employment History'));
   await waitFor(() => expect(getByText('Failed to save employment history')).toBeInTheDocument());
 });
+// Tests submitting employment history successfully.
+// Tests handling error fetching employment history gracefully.
+// Tests handling error submitting employment history gracefully.

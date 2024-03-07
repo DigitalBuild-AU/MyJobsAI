@@ -21,6 +21,11 @@ beforeEach(() => {
 });
 
 test('renders without crashing', async () => {
+/**
+ * Test suite for the Resume Customization Page.
+ * 
+ * Contains tests for the Resume Customization feature, ensuring the page renders correctly, job selection updates state, and CV customization results are displayed properly, including error handling.
+ */
   const { getByText } = render(<ResumeCustomizationPage />);
   await waitFor(() => expect(getByText('Customize CV')).toBeInTheDocument());
 });
@@ -32,6 +37,9 @@ test('job selection updates selectedJob state', async () => {
 });
 
 test('clicking customize CV button updates cvAnalysisResults and customizedCV', async () => {
+// Tests that the Resume Customization Page renders without crashing.
+// Tests that job selection updates the selectedJob state.
+// Tests clicking the customize CV button updates cvAnalysisResults and customizedCV.
   const { getByText } = render(<ResumeCustomizationPage />);
   fireEvent.click(getByText('Customize CV'));
   await waitFor(() => expect(getByText('Analysis results here.')).toBeInTheDocument());
@@ -50,3 +58,5 @@ test('handles error during CV customization gracefully', async () => {
   fireEvent.click(getByText('Customize CV'));
   await waitFor(() => expect(getByText('Error customizing CV')).toBeInTheDocument());
 });
+// Tests handling error fetching job listings gracefully.
+// Tests handling error during CV customization gracefully.
