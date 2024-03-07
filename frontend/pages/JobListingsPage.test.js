@@ -76,6 +76,12 @@ test('renders JobListingTable component correctly', () => {
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
+  /**
+  * Test if handleFilterChange updates filters state and resets page.
+  * 
+  * This test verifies that the handleFilterChange function correctly updates the filter state
+  * and resets the pagination to the first page.
+  */
   test('handleFilterChange updates filters state and resets page', () => {
     const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
