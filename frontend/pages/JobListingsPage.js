@@ -7,6 +7,8 @@ import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
+import InteractiveGuide from '../components/InteractiveGuide';
+import { getJobListingsPageGuideSteps } from '../utils/guideSteps';
 import Sidebar from '../components/Sidebar';
 import Breadcrumbs from '../components/Breadcrumbs';
 
@@ -43,6 +45,7 @@ const JobListingsPage = () => {
  *  - Table/List View: Renders job listings in a table or list format.
  *  - Filter: Allows users to filter job listings based on various criteria.
  *  - Pagination: Provides pagination functionality for navigating through listings.
+  const [showGuide, setShowGuide] = useState(false);
  * Author: Contributors
  * Created: [Creation Date]
  */
@@ -307,3 +310,5 @@ return (
         <Link to="/coverLetterGeneration">Cover Letter Generation</Link>
         <Link to="/resumeCustomization">Resume Customization</Link>
       </div>
+      <button onClick={() => setShowGuide(true)} style={{ margin: '10px 0', padding: '5px 10px' }}>Show Guide</button>
+      {showGuide && <InteractiveGuide steps={getJobListingsPageGuideSteps()} />}
