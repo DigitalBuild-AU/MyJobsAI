@@ -14,7 +14,7 @@ MyJobsAI is a job search management application aimed at simplifying the job app
 ## Installation
 
 1. Clone the repository to your local machine.
-2. Install the required dependencies by running `npm install` in your terminal.
+2. Install the required dependencies by running `npm install` in your terminal. If using Material-UI and Sass, ensure they are installed by running `npm install @material-ui/core sass`.
 3. Start the application with `npm start`. The app will then be available on `http://localhost:3000/`.
 
 ## Usage
