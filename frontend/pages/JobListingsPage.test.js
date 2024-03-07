@@ -405,6 +405,10 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  /**
+   * Test: handles window resize to switch to card view correctly
+   * Purpose: This test verifies that the JobListingsPage component correctly switches to 'Card View' when the window is resized to a width indicative of a smaller screen (e.g., mobile devices). It simulates a window resize event to a width of 500px and checks if the 'Card View' text is rendered, indicating the UI has correctly adjusted.
+   */
   test('handles window resize to switch to card view correctly', () => {
     act(() => {
       global.innerWidth = 500;
@@ -439,6 +443,10 @@ describe('handleErrorState function tests', () => {
   afterEach(() => {
 /**
  * Test Case: Creates a pagination button with the correct page number.
+ * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
+ */
+    jest.clearAllMocks();
+  });
  * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
  */
     jest.clearAllMocks();
