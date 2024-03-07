@@ -25,6 +25,11 @@ describe('fetchListingsFromAPI tests', () => {
     expect(axios.get).toHaveBeenCalledWith(mockUrl);
   });
 
+  /**
+  * Tests API call handling with empty or undefined filters.
+  *
+  * Ensures that fetchListingsFromAPI handles empty or undefined filters gracefully by checking the URL used in the axios call.
+  */
   it('should handle empty or undefined filters gracefully', async () => {
     axios.get.mockResolvedValue({ data: 'success' });
     await fetchListingsFromAPI({}, mockPage);
