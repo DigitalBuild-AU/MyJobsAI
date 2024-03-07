@@ -1,9 +1,11 @@
 /* New color scheme */
 :root {
-  --primary-color: #0056b3; /* Deep blue for primary actions */
-  --secondary-color: #6c757d; /* Gray for secondary elements */
-  --background-color: #f8f9fa; /* Light gray background for better readability */
-  --button-color: #007bff; /* Bright blue for buttons */
+  --primary-color: #003366; /* Deep blue for primary actions */
+  --secondary-color: #4F5D75; /* Gray for secondary elements */
+  --background-color: #F0F4F8; /* Light gray background for better readability */
+  --button-color: #0056b3; /* Bright blue for buttons */
+  --button-hover-color: #004080; /* Slightly darker blue for button hover state */
+  --error-color: #C82333; /* Red for error messages or critical elements */
   --button-hover-color: #0056b3; /* Slightly darker blue for button hover state */
   --text-color: #212529; /* Dark gray for primary text for better visibility */
   --secondary-text-color: #495057; /* Medium gray for secondary text */
