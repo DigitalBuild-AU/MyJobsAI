@@ -103,7 +103,6 @@ const renderPagination = () => {
   );
 
   return (
-    <div className="job-listings-page">
 const handleErrorState = (name, value) => {
   if (value.trim() === '') {
     setErrorState({ ...errorState, [name]: true });
@@ -111,6 +110,7 @@ const handleErrorState = (name, value) => {
     setErrorState({ ...errorState, [name]: false });
   }
 };
+    <div className="job-listings-page">
       <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
         <option value="table">Table View</option>
         <option value="card">Card View</option>
