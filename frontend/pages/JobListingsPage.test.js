@@ -90,6 +90,10 @@ test('renders JobListingTable component correctly', () => {
     JobListingsPage.__ResetDependency__('setFilters');
   });
 
+  /**
+  * Tests that the renderPagination function renders the correct number of buttons.
+  * Verifies that the button for the current page is disabled.
+  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
   test('input validation updates error state for invalid input', () => {
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
