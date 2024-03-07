@@ -1,9 +1,8 @@
-/**
- * Test suite for the JobListingsPage component.
- * 
- * This file contains tests for the rendering and functionality of the JobListingsPage component,
- * including individual job listing cards, job listing table, pagination, and filter handling.
- */
+"""
+Test suite for the JobListingsPage component.
+
+This file contains tests for the rendering and functionality of the JobListingsPage component, including individual job listing cards, job listing table, pagination, and filter handling.
+"""
 // frontend/pages/JobListingsPage.test.js
 
 import React from 'react';
@@ -36,6 +35,11 @@ test('renders JobListingCard component correctly', () => {
   /**
 
    /**
+"""
+JobListingsPage Test Suite
+
+This file contains tests for the JobListingsPage component, focusing on rendering, functionality, including individual job listing cards, job listing table, pagination, and filter handling.
+"""
    * Tests that the JobListingTable component correctly renders multiple job listings.
    * Checks that all provided job listings are displayed, including job titles, companies, and locations.
    */
@@ -144,6 +148,29 @@ test('renders JobListingTable component correctly', () => {
   * Tests that the createPaginationButton function disables the button for the current page.
   */
   test('createPaginationButton disables button for current page', () => {
+  /**
+  * Tests that the createPaginationButton function adds a specific class to the button for the first page.
+  */
+  test('createPaginationButton adds specific class for first page button', () => {
+    const totalPages = 5;
+    const currentPage = 0; // First page
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // Assuming the first page button has a specific class 'first-page-btn'
+    expect(buttons[1].classList.contains('first-page-btn')).toBeTruthy();
+  });
+
+  /**
+  * Tests that the createPaginationButton function adds a specific class to the button for the last page.
+  */
+  test('createPaginationButton adds specific class for last page button', () => {
+    const totalPages = 5;
+    const currentPage = 4; // Last page
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // Assuming the last page button has a specific class 'last-page-btn'
+    expect(buttons[totalPages].classList.contains('last-page-btn')).toBeTruthy();
+  });
     const totalPages = 5;
     const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
@@ -152,6 +179,17 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[currentPage + 1].disabled).toBeTruthy();
   });
 /**
+/**
+ * `createPaginationButton` function:
+ * This function is responsible for rendering pagination buttons within the JobListingsPage component. It dynamically creates button elements based on the total number of pages and the current page, including 'Next' and 'Previous' buttons for navigation.
+ * 
+ * Parameters:
+ * - `totalPages` (number): The total number of pages to be paginated.
+ * - `currentPage` (number): The current page number that is active.
+ * 
+ * Returns:
+ * - An array of button elements for pagination, including 'Next' and 'Previous' buttons.
+ */
  * Mock function to simulate fetching job listings for testing.
  * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
  */
@@ -273,7 +311,11 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
 
-  // Tests the handleErrorState function with a non-empty input value. It checks that the error state is correctly set to false for the specified field (in this case, 'company'), indicating that the field's value meets the validation criteria.
+  """
+  Tests the handleErrorState function with a non-empty input value.
+  
+  It checks that the error state is correctly set to false for the specified field (in this case, 'company'), indicating that the field's value meets the validation criteria.
+  """
   test('should correctly update errorState for non-empty input value', () => {
     const name = 'company';
     const value = 'Tech Inc';
@@ -284,7 +326,11 @@ describe('handleErrorState function tests', () => {
   });
 });
 
-  // Tests the handleErrorState function with an empty input value. It verifies that the error state is correctly set to true for the specified field (in this case, 'status'). This ensures that the form validation logic properly identifies fields with missing required values.
+  """
+  Tests the handleErrorState function with an empty input value.
+  
+  It verifies that the error state is correctly set to true for the specified field (in this case, 'status'). This ensures that the form validation logic properly identifies fields with missing required values.
+  """
   test('should correctly update errorState for empty input value', () => {
     const name = 'status';
     const value = '';
@@ -327,4 +373,23 @@ describe('handleErrorState function tests', () => {
     
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
+  });
+  // Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
+  test('should correctly update errorState for valid email format', () => {
+    const name = 'email';
+    const value = 'user@example.com';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
+  // Test case: Verifies that the handleErrorState function sets the error state to true for an invalid email format.
+  test('should set errorState to true for invalid email format', () => {
+    const name = 'email';
+    const value = 'userexample.com'; // Missing '@' character
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });

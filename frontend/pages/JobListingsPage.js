@@ -3,7 +3,7 @@
  * This file defines the JobListingsPage component, which is responsible for rendering the job listings page in the MyJobsAI application. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
  */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 
@@ -22,6 +22,7 @@ const JobListingsPage = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
+
     /**
      * Adjusts the view state based on the window's inner width.
      * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
@@ -37,6 +38,9 @@ const JobListingsPage = () => {
       }
     };
     
+    // Extracted window resize listener logic into a separate function
+    const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
+    
 /**
  * Updates the error state for a given field based on whether its value is empty.
  * 
@@ -48,10 +52,8 @@ const JobListingsPage = () => {
     window.addEventListener('resize', handleWindowSizeChange);
     handleWindowSizeChange();
 
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-      setFilters({status: '', company: ''}); // Cleanup
-    };
+    // Utilizing extracted cleanup function
+    return () => cleanupOnUnmount();
   }, [filters, page]);
 
   /**
@@ -61,11 +63,36 @@ const JobListingsPage = () => {
  * @param none - This function does not take any parameters.
  * @returns void - This function does not return a value but performs asynchronous operations to update the component's state.
  */
+  /**
+  * Fetches job listings from the server based on the current filters and page.
+  * Now utilizes fetchListingsFromAPI from jobListingsUtils for fetching.
+  * Updates the listings and totalPages state with the response data.
+  */
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
-      const response = await axios.get(`http://localhost:3000/api/joblistings/filter?page=${page}&status=${filters.status}&company=${filters.company}`);
+      const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
+/**
+ * Handles the change in window size and updates the view state.
+ * Extracted from useEffect to improve readability and maintainability.
+ */
+const handleViewChangeBasedOnWindowSize = () => {
+  if (window.innerWidth < 768) {
+    setView('card');
+  } else {
+    setView('table');
+  }
+};
+
+/**
+ * Encapsulates the cleanup logic to be called on component unmount.
+ * Extracted from useEffect to improve readability and maintainability.
+ */
+const cleanupOnUnmount = () => {
+  window.removeEventListener('resize', handleWindowSizeChange);
+  setFilters({status: '', company: ''}); // Reset filters on component unmount
+};
       setTotalPages(response.data.totalPages);
     } catch (err) {
       console.error('Error fetching job listings', err);
@@ -132,22 +159,20 @@ const renderPagination = () => {
     <div className="job-listings-page">
 /**
  * handleErrorState Function
- * Updates the error state for a given input field based on whether its value is empty. This function is crucial for validating user input and providing immediate feedback on the validity of the data entered.
+ * Refactored to use validateInput from jobListingsUtils for input validation.
+ * Updates the error state for a given input field based on the validation result.
  * 
  * Parameters:
  * - name (string): The name of the input field to validate.
- * - value (string): The value of the input field to check for emptiness.
+ * - value (string): The value of the input field to validate.
  * 
  * Returns:
  * - void: This function does not return a value but updates the component's state directly.
  */
 
 const handleErrorState = (name, value) => {
-  if (value.trim() === '') {
-    setErrorState({ ...errorState, [name]: true });
-  } else {
-    setErrorState({ ...errorState, [name]: false });
-  }
+  const isValid = validateInput(value);
+  setErrorState({ ...errorState, [name]: !isValid });
 };
     <div className="job-listings-page">
       <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
