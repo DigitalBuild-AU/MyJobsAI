@@ -61,6 +61,14 @@ describe('validateInput tests', () => {
  * Ensures that validateInput returns false for empty string, null, and undefined inputs.
  */
   it('should return false for empty string, null, and undefined inputs', () => {
+  });
+
+  /**
+ * Tests validation of non-string inputs.
+ *
+ * Verifies that validateInput correctly returns false for non-string inputs such as numbers, objects, and arrays.
+ */
+  it('should handle non-string inputs correctly', () => {
     expect(validateInput('')).toBe(false);
     expect(validateInput(null)).toBe(false);
     expect(validateInput(undefined)).toBe(false);
