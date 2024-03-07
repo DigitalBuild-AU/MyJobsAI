@@ -46,6 +46,10 @@ const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
+  /**
+   * Renders the pagination component by generating buttons for each page.
+   * The current page button is disabled to indicate the active page.
+   */
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
     const pages = [];
