@@ -141,6 +141,7 @@ test('renders JobListingTable component correctly', () => {
   /**
   * Tests that the createPaginationButton function renders the correct number of buttons.
   */
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('createPaginationButton renders correct number of buttons', () => {
   // Tests the 'updateFilters' method of the JobListingsPage component to ensure it correctly updates the component's filters state with the specified filter type and value.
   test('updateFilters updates filters state with correct values', () => {
@@ -291,7 +292,7 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
-  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to ensure it updates the view state based on window size.
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('handleWindowSizeChange updates view state based on window size', () => {
     global.innerWidth = 500; // Simulate small screen
     const { getByText } = render(<JobListingsPage />);
