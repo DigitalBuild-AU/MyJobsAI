@@ -1,13 +1,13 @@
 
-/**
- * JobListingsPage.test.js
- *
- * This file contains tests for the JobListingsPage component and its child components. It includes tests for rendering, functionality, pagination, and filter handling. The tests utilize React Testing Library to simulate user interaction and verify component behavior.
- *
- * Dependencies:
- * - React: Used for component testing.
- * - @testing-library/react: Provides testing utilities to interact with React components.
- */
+"""
+JobListingsPage.test.js
+
+This file serves as the test suite for the JobListingsPage component within the MyJobsAI application. It includes a series of tests aimed at ensuring the correct rendering and functionality of the JobListingsPage and its child components, such as JobListingCard and JobListingTable. The tests cover various aspects including component rendering, user interaction simulations, pagination, and filter functionality. Utilizing React and the React Testing Library, this test suite verifies the integrity and behavior of the JobListingsPage component, ensuring a seamless user experience.
+
+Dependencies:
+- React: A JavaScript library for building user interfaces, used here for component creation and testing.
+- @testing-library/react: Provides a set of tools to facilitate testing React components, enabling interaction simulation and component behavior verification.
+"""
 
 // frontend/pages/JobListingsPage.test.js
 
