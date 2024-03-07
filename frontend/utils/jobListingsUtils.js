@@ -1,3 +1,7 @@
+/**
+ * Utility functions for fetching job listings from an API and validating input values.
+ * Contains functions to interact with the job listings API endpoint and to ensure input values meet certain criteria.
+ */
 import axios from 'axios';
 
 export const fetchListingsFromAPI = (filters, page) => {
