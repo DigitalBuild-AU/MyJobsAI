@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { postResumeCustomization } from '../utils/apiHelpers';
 import './ResumeCustomizationPage.css';
 
 const ResumeCustomizationPage = () => {
@@ -21,12 +21,14 @@ const ResumeCustomizationPage = () => {
   };
 
   const customizeCV = async () => {
-    const response = await axios.post('/api/cv_customization', {
-      jobDescription: selectedJob.description,
-      userCV: 'User CV' // Placeholder, replace with actual user CV data
-    });
-    setCvAnalysisResults(response.data.analysisResults);
-    setCustomizedCV(response.data.customizedCV);
+    postResumeCustomization(selectedJob.description, 'User CV') // Placeholder, replace with actual user CV data
+      .then(data => {
+        setCvAnalysisResults(data.analysisResults);
+        setCustomizedCV(data.customizedCV);
+      })
+      .catch(error => {
+        console.error('Error customizing CV:', error);
+      });
   };
 
   const downloadAsPDF = () => {
