@@ -10,8 +10,14 @@ import JobListingTable from '../../components/JobListingTable';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 
+/**
+ * Test suite for JobListingsPage component
+ */
 describe('JobListingsPage component', () => {
-  test('renders JobListingCard component correctly', () => {
+  /**
+ * Test if JobListingCard component renders correctly
+ */
+test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
       company: 'ABC Inc.',
@@ -28,7 +34,10 @@ describe('JobListingsPage component', () => {
     expect(getByText('New York')).toBeInTheDocument();
   });
 
-  test('renders JobListingTable component correctly', () => {
+  /**
+ * Test if JobListingTable component renders correctly
+ */
+test('renders JobListingTable component correctly', () => {
     const listings = [
       {
         jobTitle: 'Software Engineer',
