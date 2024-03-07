@@ -144,6 +144,29 @@ test('renders JobListingTable component correctly', () => {
   * Tests that the createPaginationButton function disables the button for the current page.
   */
   test('createPaginationButton disables button for current page', () => {
+  /**
+  * Tests that the createPaginationButton function adds a specific class to the button for the first page.
+  */
+  test('createPaginationButton adds specific class for first page button', () => {
+    const totalPages = 5;
+    const currentPage = 0; // First page
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // Assuming the first page button has a specific class 'first-page-btn'
+    expect(buttons[1].classList.contains('first-page-btn')).toBeTruthy();
+  });
+
+  /**
+  * Tests that the createPaginationButton function adds a specific class to the button for the last page.
+  */
+  test('createPaginationButton adds specific class for last page button', () => {
+    const totalPages = 5;
+    const currentPage = 4; // Last page
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // Assuming the last page button has a specific class 'last-page-btn'
+    expect(buttons[totalPages].classList.contains('last-page-btn')).toBeTruthy();
+  });
     const totalPages = 5;
     const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
