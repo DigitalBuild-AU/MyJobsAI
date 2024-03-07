@@ -141,11 +141,9 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[currentPage + 1].disabled).toBeTruthy(); // +1 to account for previous page button
   });
 
-  /**
- * Test if renderPagination behaves correctly with only one page.
- * 
- * This test ensures that when there is only one page of job listings, the renderPagination function
- * correctly renders the pagination buttons with the next and previous buttons disabled.
+/**
+ * Test case for verifying that the 'createPaginationButton' function renders a button with the correct page number.
+ * It checks that the correct number of buttons are rendered and that the button for the current page is disabled.
  */
   test('renderPagination with only one page', () => {
     const totalPages = 1;

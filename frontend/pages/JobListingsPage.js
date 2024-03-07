@@ -105,6 +105,11 @@ const handleErrorState = (name, value) => {
       {renderPagination()}
     </div>
   );
+/**
+ * Creates and returns a pagination button React component for a given page number.
+ * @param {number} pageNumber - The page number for which the pagination button is created.
+ * @returns {ReactElement} - A React button element for navigating to the specified page number.
+ */
 };
 
 export default JobListingsPage;
