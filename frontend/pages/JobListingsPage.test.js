@@ -128,6 +128,29 @@ test('renders JobListingTable component correctly', () => {
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech Inc', name: 'company' } });
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
     // This is a placeholder for actual state verification logic
+  /**
+  * Tests that the createPaginationButton function renders the correct number of buttons.
+  */
+  test('createPaginationButton renders correct number of buttons', () => {
+    const totalPages = 5;
+    const currentPage = 2;
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // Expecting total buttons to be totalPages + 2 for 'Next' and 'Previous' buttons
+    expect(buttons.length).toBe(totalPages + 2);
+  });
+
+  /**
+  * Tests that the createPaginationButton function disables the button for the current page.
+  */
+  test('createPaginationButton disables button for current page', () => {
+    const totalPages = 5;
+    const currentPage = 2;
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+    const buttons = queryAllByRole('button');
+    // +1 to account for the 'Previous' button in the pagination
+    expect(buttons[currentPage + 1].disabled).toBeTruthy();
+  });
 /**
  * Mock function to simulate fetching job listings for testing.
  * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
