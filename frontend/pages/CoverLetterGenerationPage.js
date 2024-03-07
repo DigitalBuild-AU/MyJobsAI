@@ -24,6 +24,13 @@ const CoverLetterGenerationPage = () => {
 /**
  * useEffect hook to fetch job listings on component mount.
  * Fetches job listings from the server and updates the jobListings state.
+ * Page component for generating personalized cover letters.
+ * Allows users to select job listings and generate cover letters based on their profiles.
+ * Fetches job listings on component mount.
+ * @async
+ * @function fetchJobListings
+ * @throws {Error} When unable to fetch job listings.
+ * @return {Promise<void>} A promise that resolves when job listings are fetched and set in state.
  */
     const job = jobListings.find(job => job.id === e.target.value);
     setSelectedJob(job);
@@ -41,6 +48,18 @@ const CoverLetterGenerationPage = () => {
   };
 
   const downloadAsPDF = () => {
+/**
+ * Handles the selection of a job from the dropdown.
+ * @function handleJobSelection
+ * @param {Event} e - The event triggered on job selection.
+ */
+/**
+ * Generates a personalized cover letter based on the selected job and user profile.
+ * @async
+ * @function createCoverLetter
+ * @throws {Error} When unable to generate the cover letter.
+ * @return {Promise<void>} A promise that resolves when the cover letter is generated and set in state.
+ */
     // Placeholder function for downloading the cover letter as PDF
     console.log('Downloading as PDF...');
   };
@@ -78,3 +97,11 @@ const CoverLetterGenerationPage = () => {
 };
 
 export default CoverLetterGenerationPage;
+/**
+ * Placeholder function for downloading the generated cover letter as a PDF.
+ * @function downloadAsPDF
+ */
+/**
+ * Placeholder function for downloading the generated cover letter as a DOC.
+ * @function downloadAsDOC
+ */
