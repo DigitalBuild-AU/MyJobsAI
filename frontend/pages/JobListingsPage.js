@@ -130,10 +130,15 @@ const handleErrorState = (name, value) => {
       {renderPagination()}
     </div>
   );
+  
 /**
  * Updates the filters state with a new value for a given filter.
  * @param {string} filterName - The name of the filter to update.
  * @param {string} filterValue - The new value for the filter.
+ * Creates and returns a pagination button React component for a given page number.
+ * @param {number} pageNumber - The page number for which the pagination button is created.
+ * @returns {ReactElement} - A React button element for navigating to the specified page number.
+
  */
 };
 

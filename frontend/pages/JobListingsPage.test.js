@@ -34,6 +34,7 @@ test('renders JobListingCard component correctly', () => {
   });
 
   /**
+
    /**
    * Tests that the JobListingTable component correctly renders multiple job listings.
    * Checks that all provided job listings are displayed, including job titles, companies, and locations.
@@ -42,7 +43,7 @@ test('renders JobListingCard component correctly', () => {
  * Mock function to simulate fetching job listings for testing.
  * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
  */
-   */
+
 test('renders JobListingTable component correctly', () => {
     const listings = [
       {
@@ -127,6 +128,10 @@ test('renders JobListingTable component correctly', () => {
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech Inc', name: 'company' } });
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
     // This is a placeholder for actual state verification logic
+/**
+ * Mock function to simulate fetching job listings for testing.
+ * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
+ */
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
 
@@ -144,11 +149,6 @@ test('renders JobListingTable component correctly', () => {
     const totalPages = 5;
     const currentPage = 2;
     render(<JobListingsPage />);
-/**
- * Creates a pagination button with the given page number.
- * @param {number} pageNumber - The page number.
- * @returns {ReactElement} - The pagination button.
- */
     // Mocking fetchListings to set totalPages and currentPage
     // This is a placeholder for actual mocking logic
     const buttons = queryAllByRole('button');
@@ -156,13 +156,20 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[currentPage + 1].disabled).toBeTruthy(); // +1 to account for previous page button
   });
 
-  /**
- * Test if renderPagination behaves correctly with only one page.
- * 
- * This test ensures that when there is only one page of job listings, the renderPagination function
- * correctly renders the pagination buttons with the next and previous buttons disabled.
+/**
+ * Test case for verifying that the 'createPaginationButton' function renders a button with the correct page number.
+ * It checks that the correct number of buttons are rendered and that the button for the current page is disabled.
  */
   test('renderPagination with only one page', () => {
+  test('useEffect cleanup resets filters state', () => {
+    const { unmount } = render(<JobListingsPage />);
+    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
+    // This is a placeholder for actual state verification logic before unmount
+    unmount();
+    // This is a placeholder for actual state verification logic after unmount
+    // Expect filters state to be reset to initial state
+    expect(/* logic to check filters state */).toEqual({status: '', company: ''});
+  });
     const totalPages = 1;
     const currentPage = 0;
     render(<JobListingsPage />);
@@ -174,13 +181,15 @@ test('renders JobListingTable component correctly', () => {
   });
 
 
-  test('responsive design renders correct components based on screen size', () => {
-    global.innerWidth = 500;
+  test('responsive design changes view on window resize', () => {
+
     const { getByText } = render(<JobListingsPage />);
+    global.innerWidth = 500;
+    global.dispatchEvent(new Event('resize'));
     expect(getByText('Card View')).toBeInTheDocument();
     global.innerWidth = 1024;
-    const { getByText: getText } = render(<JobListingsPage />);
-    expect(getText('Table View')).toBeInTheDocument();
+    global.dispatchEvent(new Event('resize'));
+    expect(getByText('Table View')).toBeInTheDocument();
   });
   test('createPaginationButton creates a button with correct page number', () => {
     const pageNumber = 3;
