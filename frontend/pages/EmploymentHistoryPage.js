@@ -16,6 +16,9 @@ const EmploymentHistoryPage = () => {
   const [notableAchievements, setNotableAchievements] = useState('');
 
   useEffect(() => {
+    /**
+     * Fetches and sets the user's employment history from the server.
+     */
     const fetchEmploymentHistory = async () => {
       const response = await axios.get('/api/employmentHistory');
       setEmploymentHistory(response.data);
