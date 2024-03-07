@@ -42,10 +42,13 @@ const ResumeCustomizationPage = () => {
  * @param {Event} e - The event triggered on job selection.
  */
 
-    const response = await axios.post('/api/cv_customization', {
-      jobDescription: selectedJob.description,
-      userCV: uploadedCV // Use the state variable for the uploaded CV
+    // Integrate GPT-4 API for resume analysis and customization
+    const gptResponse = await axios.post('/api/gpt4/cv_customization', {
+      jobDescription: jobListings.find(job => job.id === selectedJob).description,
+      userCV: uploadedCV
     });
+    setCvAnalysisResults(gptResponse.data.analysisResults);
+    setCustomizedCV(gptResponse.data.customizedCV);
     setCvAnalysisResults(response.data.analysisResults);
     setCustomizedCV(response.data.customizedCV);
 
@@ -72,6 +75,8 @@ const [uploadedCV, setUploadedCV] = useState(null);
     });
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement('a');
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', `customized-cv.${fileType}`);
     document.body.appendChild(link);
@@ -93,14 +98,20 @@ const [uploadedCV, setUploadedCV] = useState(null);
         ))}
       </select>
       <button onClick={customizeCV}>Customize CV</button>
-      <div className="cv-analysis-results">
-        {cvAnalysisResults.map((result) => (
-          <div key={result.id} className={`feedback feedback-${result.type}`}>
-            {result.message}
-          </div>
-        ))}
+      <div className="cv-comparison">
+        <h3>Resume Customization Suggestions</h3>
+        <div className="cv-analysis-results">
+          {cvAnalysisResults.map((result, index) => (
+            <div key={index} className={`feedback feedback-${result.type}`}>
+              <p>{result.message}</p>
+            </div>
+          ))}
+        </div>
+        <h3>Customized Resume Preview</h3>
+        <div className="customized-cv-preview">
+          <pre>{customizedCV}</pre>
+        </div>
       </div>
-      <div>{customizedCV}</div>
       <button onClick={downloadAsPDF}>Download as PDF</button>
       <button onClick={downloadAsDOC}>Download as DOC</button>
     </div>
