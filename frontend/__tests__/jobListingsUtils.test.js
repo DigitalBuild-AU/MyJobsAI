@@ -1,3 +1,9 @@
+/**
+ * Tests for job listings utility functions.
+ *
+ * This file contains tests for the utility functions used in fetching and validating job listings from the API.
+ */
+
 import axios from 'axios';
 import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
