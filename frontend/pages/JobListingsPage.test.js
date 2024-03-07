@@ -179,6 +179,17 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons[currentPage + 1].disabled).toBeTruthy();
   });
 /**
+/**
+ * `createPaginationButton` function:
+ * This function is responsible for rendering pagination buttons within the JobListingsPage component. It dynamically creates button elements based on the total number of pages and the current page, including 'Next' and 'Previous' buttons for navigation.
+ * 
+ * Parameters:
+ * - `totalPages` (number): The total number of pages to be paginated.
+ * - `currentPage` (number): The current page number that is active.
+ * 
+ * Returns:
+ * - An array of button elements for pagination, including 'Next' and 'Previous' buttons.
+ */
  * Mock function to simulate fetching job listings for testing.
  * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
  */
