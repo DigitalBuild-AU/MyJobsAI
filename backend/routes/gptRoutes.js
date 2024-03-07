@@ -1,6 +1,6 @@
 const express = require('express');
-const { OpenAI } = require('openai');
 const dotenv = require('dotenv');
+const { generateCvCustomizationSuggestions } = require('../utils/gptHelper');
 
 dotenv.config({ path: './backend/.env' });
 
@@ -57,22 +57,19 @@ module.exports = router;
 // Resume Customization Route using Chat Completions
 router.post('/cv_customization', async (req, res) => {
   const { jobDescription, userCV } = req.body;
-  try {
-    const response = await openai.chat.completions.create({
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant designed to output a list of CV customization suggestions based on the job description in plain text."
-        },
-        {
-          role: "user",
-          content: `Please analyze the CV in comparison to the job description and provide customization suggestions.\nJob Description: ${jobDescription}\nUser CV: ${userCV}`
-        }
-      ],
-      model: "gpt-3.5-turbo",
+  generateCvCustomizationSuggestions(jobDescription, userCV)
+    .then(suggestions => {
+      console.log("CV customization suggestions generated successfully."); // gpt_pilot_debugging_log
+      res.json({ analysisResults: suggestions });
+    })
+    .catch(error => {
+      console.error(`Error processing CV customization request: ${error.message}, Stack: ${error.stack}`); // gpt_pilot_debugging_log
+      res.status(500).json({ error: "Failed to generate CV customization suggestions." });
     });
+
     console.log("CV customization suggestions generated successfully."); // gpt_pilot_debugging_log
     res.json({ analysisResults: response.choices[0].message.content.trim() });
+  
 // Generate Customized CV in PDF Format
 router.post('/generate_cv_pdf', async (req, res) => {
   const { customizedContent } = req.body;
@@ -106,6 +103,7 @@ router.get('/download_cv/doc', async (req, res) => {
   // Simulate sending the DOC file for download
   res.status(200).send("DOC file sent for download.");
 });
+  
   } catch (error) {
     console.error(`Error processing CV customization request: ${error.message}, Stack: ${error.stack}`); // gpt_pilot_debugging_log
     res.status(500).json({ error: "Failed to generate CV customization suggestions." });

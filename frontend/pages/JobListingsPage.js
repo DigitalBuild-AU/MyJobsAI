@@ -73,7 +73,7 @@ const renderPagination = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
-      pages.push(createPageButton(i));
+      pages.push(createPaginationButton(i));
     }
     return <div>{pages}</div>;
   };
@@ -82,10 +82,8 @@ const renderPagination = () => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
-  const createPageButton = (pageNumber) => (
-    <button key={pageNumber} disabled={pageNumber === page} onClick={() => setPage(pageNumber)}>
-      {pageNumber + 1}
-    </button>
+  const createPaginationButton = (pageNumber) => (
+    <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
   );
 
   return (
