@@ -30,7 +30,11 @@ describe('fetchListingsFromAPI tests', () => {
     await fetchListingsFromAPI({}, mockPage);
     expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/api/joblistings/filter?page=${mockPage}&status=undefined&company=undefined`);
   });
-
+/**
+ * Group of tests for the fetchListingsFromAPI function.
+ *
+ * These tests verify the functionality of fetchListingsFromAPI, ensuring it correctly interacts with the API and handles various input scenarios.
+ */
   it('should handle non-200 responses from the API', async () => {
     axios.get.mockRejectedValue(new Error('Request failed with status code 404'));
     await expect(fetchListingsFromAPI(mockFilters, mockPage)).rejects.toThrow('Request failed with status code 404');
