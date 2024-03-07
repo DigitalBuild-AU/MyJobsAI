@@ -23,9 +23,12 @@ const JobListingsPage = () => {
 
   useEffect(() => {
     /**
- * Handles the change in window size.
- * Sets the view state based on the window's inner width.
- */
+     * Adjusts the view state based on the window's inner width.
+     * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
+     * 
+     * @param none - This function does not take any parameters.
+     * @returns void - This function does not return a value.
+     */
     const handleWindowSizeChange = () => {
       if (window.innerWidth < 768) {
         setView('card');
