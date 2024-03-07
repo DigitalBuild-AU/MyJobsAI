@@ -1,4 +1,8 @@
 
+jest.mock('../utils/webVitals', () => ({
+  setupWebVitals: jest.fn(),
+}));
+
 """
 JobListingsPage.test.js
 
