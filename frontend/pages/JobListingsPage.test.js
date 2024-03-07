@@ -161,6 +161,13 @@ test('renders JobListingTable component correctly', () => {
  * It checks that the correct number of buttons are rendered and that the button for the current page is disabled.
  */
   test('renderPagination with only one page', () => {
+  /**
+   * Test to verify if the useEffect cleanup function correctly resets the filters state upon component unmount.
+   * This test renders the JobListingsPage component, unmounts it, and then checks if the filters state is reset to its initial state.
+   * Inputs: None
+   * Outputs: None
+   * Side effects: Modifies the internal state of the JobListingsPage component to test the cleanup functionality.
+   */
   test('useEffect cleanup resets filters state', () => {
     const { unmount } = render(<JobListingsPage />);
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
@@ -187,6 +194,13 @@ test('renders JobListingTable component correctly', () => {
     global.innerWidth = 500;
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Card View')).toBeInTheDocument();
+    global.innerWidth = 1024;
+    global.dispatchEvent(new Event('resize'));
+    expect(getByText('Table View')).toBeInTheDocument();
+  });
+  test('createPaginationButton creates a button with correct page number', () => {
+    const pageNumber = 3;
+    const button = createPaginationButton(pageNumber);
     global.innerWidth = 1024;
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
