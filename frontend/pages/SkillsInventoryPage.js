@@ -1,3 +1,6 @@
+/**
+ * React component page for managing a user's skills inventory.
+ */
 import React, { useState, useEffect } from 'react';
 import { postSkills } from '../utils/apiHelpers';
 import './SkillsInventoryPage.css';
@@ -27,6 +30,12 @@ const SkillsInventoryPage = () => {
 
   const handleSubmit = async (e) => {
 /**
+ * useEffect hook to fetch and set the user's skills from the server.
+ * Fetches skills on component mount and updates the skills state.
+ */
+/**
+ * Adds a new skill to the skills state if the newSkill is not empty.
+ * Resets the newSkill state to an empty string after adding.
  * Adds a new skill to the local skills state if it is not empty.
  * @function addSkill
  * @return {void}
@@ -35,6 +44,7 @@ const SkillsInventoryPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     try {
       await postSkills(skills);
@@ -73,6 +83,10 @@ const SkillsInventoryPage = () => {
 
 export default SkillsInventoryPage;
 /**
+
+ * Handles the submission of the skills form.
+ * Prevents the default form submission behavior, posts the skills to the backend, and alerts the user upon success or failure.
+ * @param {Event} e - The event object from the form submission.
  * Submits the updated skills to the server.
  * @async
  * @function handleSubmit
