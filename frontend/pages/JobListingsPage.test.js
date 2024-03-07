@@ -250,7 +250,8 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
 
-  test('should set errorState to false for non-empty value', () => {
+  // Tests the handleErrorState function with a non-empty input value. It checks that the error state is correctly set to false for the specified field (in this case, 'company'), indicating that the field's value meets the validation criteria.
+  test('should correctly update errorState for non-empty input value', () => {
     const name = 'company';
     const value = 'Tech Inc';
     act(() => {
@@ -260,6 +261,7 @@ describe('handleErrorState function tests', () => {
   });
 });
 
+  // Tests the handleErrorState function with an empty input value. It verifies that the error state is correctly set to true for the specified field (in this case, 'status'). This ensures that the form validation logic properly identifies fields with missing required values.
   test('should correctly update errorState for empty input value', () => {
     const name = 'status';
     const value = '';
@@ -301,4 +303,5 @@ describe('handleErrorState function tests', () => {
     });
     
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
   });
