@@ -71,7 +71,6 @@ test('renders JobListingTable component correctly', () => {
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
-<<<<<<< HEAD
   test('handleFilterChange updates filters state and resets page', () => {
     const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
@@ -82,16 +81,21 @@ test('renders JobListingTable component correctly', () => {
   });
 
   test('renderPagination renders correct number of buttons and disables current page button', () => {
+    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
+    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
+    rerender(<JobListingsPage />);
+    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
+    expect(filters.status).toBe('active');
+    expect(page).toBe(0);
+  });
+  
+  test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
     const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} page={currentPage} />);
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
-  });
-    expect(button.props.children).toEqual(pageNumber + 1);
-    expect(button.props.disabled).toEqual(false);
-    expect(button.props.onClick).toBeDefined();
 =======
   test('handleFilterChange updates filters state and resets page', () => {
     const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
