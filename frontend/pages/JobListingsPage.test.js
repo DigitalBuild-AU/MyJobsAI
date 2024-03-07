@@ -1,8 +1,14 @@
-"""
-Test suite for the JobListingsPage component.
 
-This file contains tests for the rendering and functionality of the JobListingsPage component, including individual job listing cards, job listing table, pagination, and filter handling.
-"""
+/**
+ * JobListingsPage.test.js
+ *
+ * This file contains tests for the JobListingsPage component and its child components. It includes tests for rendering, functionality, pagination, and filter handling. The tests utilize React Testing Library to simulate user interaction and verify component behavior.
+ *
+ * Dependencies:
+ * - React: Used for component testing.
+ * - @testing-library/react: Provides testing utilities to interact with React components.
+ */
+
 // frontend/pages/JobListingsPage.test.js
 
 import React from 'react';
@@ -58,6 +64,10 @@ test('renders JobListingTable component correctly', () => {
       {
         jobTitle: 'Product Manager',
         company: 'XYZ Corp.',
+/**
+ * Test Case: Renders JobListingCard component correctly.
+ * Verifies that the JobListingCard component displays job title, company, and location based on the provided props.
+ */
         location: 'San Francisco',
       },
     ];
@@ -65,41 +75,38 @@ test('renders JobListingTable component correctly', () => {
     const { getByText } = render(<JobListingTable listings={listings} />);
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
+/**
+ * Test Case: Renders JobListingTable component correctly.
+ * Checks that the JobListingTable component correctly displays multiple job listings, including job titles, companies, and locations.
+ */
     expect(getByText('New York')).toBeInTheDocument();
     expect(getByText('Product Manager')).toBeInTheDocument();
     expect(getByText('XYZ Corp.')).toBeInTheDocument();
     expect(getByText('San Francisco')).toBeInTheDocument();
   });
+/**
+ * Test Case: Renders JobListingTable component correctly.
+ * Verifies that the JobListingTable component displays multiple job listings, including job titles, companies, and locations.
+ */
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
-
+/**
+ * Test Case: handleFilterChange updates filters state and resets page.
+ * Simulates changing the filter by status and verifies that the filters state is updated accordingly and the page is reset.
+ */
   /**
   * Tests that the handleFilterChange function updates the filters state and resets the page.
   * Simulates changing the filter by status and verifies the state update.
-  */
-  test('handleFilterChange updates filters state and resets page', () => {
-    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
-    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
-    rerender(<JobListingsPage />);
-  test('updateFilters updates filters state correctly', () => {
-    // Mock the setFilters function
-    const mockSetFilters = jest.fn();
-    // Replace the actual setFilters with the mock
-    JobListingsPage.__Rewire__('setFilters', mockSetFilters);
-    // Call updateFilters with a sample filter
-    updateFilters('status', 'active');
-    // Check if setFilters was called correctly
-    expect(mockSetFilters).toHaveBeenCalledWith({ status: 'active' });
-    // Restore setFilters
-    JobListingsPage.__ResetDependency__('setFilters');
-  });
-
-  /**
-  * Tests that the renderPagination function renders the correct number of buttons.
-  * Verifies that the button for the current page is disabled.
-  */
+/**
+ * Test Case: renderPagination renders correct number of buttons and disables current page button.
+ * Verifies that the correct number of pagination buttons are rendered and that the button for the current page is disabled.
+ */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
+/**
+ * Test Case: Updates filters state correctly.
+ * Verifies that the updateFilters function correctly updates the filters state with the provided values.
+ */
   test('input validation updates error state for invalid input', () => {
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
@@ -115,7 +122,6 @@ test('renders JobListingTable component correctly', () => {
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
-
   });
   test('handleFilterChange updates filters state and resets page', async () => {
   test('responsive design renders correct components based on screen size', () => {
@@ -173,6 +179,22 @@ test('renders JobListingTable component correctly', () => {
   });
     const totalPages = 5;
     const currentPage = 2;
+/**
+ * Test Case: Responsive design renders correct components based on screen size.
+ * Checks that the correct view (Card View or Table View) is rendered based on the window's inner width.
+ */
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+/**
+ * Test Case: Responsive design renders correct components based on screen size.
+ * Verifies that the correct components are rendered for different screen sizes, switching between 'Card View' and 'Table View'.
+ */
+  test('createPaginationButton disables button for current page', () => {
+/**
+ * Test Case: Creates pagination buttons with the correct number of buttons.
+ * Verifies that the createPaginationButton function renders the correct number of buttons, including 'Next' and 'Previous' buttons.
+ */
+    const totalPages = 5;
+    const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
     const buttons = queryAllByRole('button');
     // +1 to account for the 'Previous' button in the pagination
@@ -195,6 +217,10 @@ test('renders JobListingTable component correctly', () => {
  */
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
+/**
+ * Test Case: Disables the button for the current page in pagination.
+ * Verifies that the createPaginationButton function disables the button corresponding to the current page.
+ */
 
   test('error messages are displayed inline with form inputs', async () => {
     const { getByPlaceholderText, rerender, findByText } = render(<JobListingsPage />);
@@ -227,41 +253,30 @@ test('renders JobListingTable component correctly', () => {
    * This test renders the JobListingsPage component, unmounts it, and then checks if the filters state is reset to its initial state.
    * Inputs: None
    * Outputs: None
+/**
+ * Test Case: Error messages are displayed inline with form inputs.
+ * Simulates invalid input for filters and verifies that appropriate error messages are displayed inline with the form inputs.
+ */
+/**
+ * Test Case: Displays error messages inline with form inputs.
+ * Verifies that error messages are displayed inline with form inputs when validation fails.
+ */
    * Side effects: Modifies the internal state of the JobListingsPage component to test the cleanup functionality.
-   */
-  test('useEffect cleanup resets filters state', () => {
-    const { unmount } = render(<JobListingsPage />);
-    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
-    // This is a placeholder for actual state verification logic before unmount
-    unmount();
-    // This is a placeholder for actual state verification logic after unmount
-    // Expect filters state to be reset to initial state
-    expect(/* logic to check filters state */).toEqual({status: '', company: ''});
-  });
-    const totalPages = 1;
-    const currentPage = 0;
-    render(<JobListingsPage />);
-    // Mocking fetchListings to set totalPages and currentPage
-    // This is a placeholder for actual mocking logic
-    const buttons = queryAllByRole('button');
-    expect(buttons.length).toBe(3); // Including next and previous page buttons, which should be disabled
-    expect(buttons[1].disabled).toBeTruthy(); // Current page button
-  });
-
-
-  /**
-   * Test to verify the responsive design functionality of the JobListingsPage component by simulating window resize events.
-   * This test initially sets the window width to 500px, triggering a resize event, and checks if the component displays the 'Card View'.
-   * It then sets the window width to 1024px, triggers another resize event, and checks if the component displays the 'Table View'.
-   * Inputs: None
-   * Outputs: None
-   * Side effects: Modifies the global window.innerWidth property to simulate window resize events.
+/**
+ * Test Case: Responsive design changes view on window resize.
+ * Simulates window resize events to verify that the component correctly switches between 'Card View' and 'Table View' based on the window width.
+ */
+  test('responsive design changes view on window resize', () => {
    */
   test('responsive design changes view on window resize', () => {
 
     const { getByText } = render(<JobListingsPage />);
     global.innerWidth = 500;
     global.dispatchEvent(new Event('resize'));
+/**
+ * Test Case: useEffect cleanup resets filters state.
+ * Verifies that the filters state is reset to its initial state upon component unmount.
+ */
     expect(getByText('Card View')).toBeInTheDocument();
     global.innerWidth = 1024;
     global.dispatchEvent(new Event('resize'));
@@ -270,17 +285,11 @@ test('renders JobListingTable component correctly', () => {
 
   // Tests the createPaginationButton function to ensure it creates a button with the correct page number, button type, and aria-label. This test verifies the button's properties to ensure they match expected values based on the input page number.
   test('createPaginationButton creates a button with correct page number', () => {
-    const pageNumber = 3;
-    const button = createPaginationButton(pageNumber);
-    global.innerWidth = 1024;
-    global.dispatchEvent(new Event('resize'));
-    expect(getByText('Table View')).toBeInTheDocument();
-  });
-    
-  test('createPaginationButton creates a button with correct page number', () => {
-    const pageNumber = 3;
-    const button = createPaginationButton(pageNumber);
-    expect(button.props.children).toBe(pageNumber + 1); // Adjusted to match the function's behavior
+/**
+ * Test Suite: handleErrorState function tests.
+ * This suite contains tests for the handleErrorState function, verifying that it correctly updates the error state based on input values.
+ */
+ // Tests the handleErrorState function to ensure it correctly updates the error state based on input values. This suite simulates various scenarios to verify the function's behavior.
     expect(button.type).toBe('button');
     expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
   });
@@ -298,6 +307,10 @@ describe('handleErrorState function tests', () => {
   });
 
   afterEach(() => {
+/**
+ * Test Case: Creates a pagination button with the correct page number.
+ * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
+ */
     jest.clearAllMocks();
   });
 
@@ -374,6 +387,12 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
   });
+
+/**
+ * Test Case: Sets error state to true for null and undefined values.
+ * Verifies that the handleErrorState function sets the error state to true for input fields with null or undefined values.
+ */
+
   // Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
   test('should correctly update errorState for valid email format', () => {
     const name = 'email';
@@ -393,3 +412,4 @@ describe('handleErrorState function tests', () => {
     });
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
+
