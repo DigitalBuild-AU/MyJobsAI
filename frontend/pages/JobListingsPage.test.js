@@ -161,6 +161,13 @@ test('renders JobListingTable component correctly', () => {
  * It checks that the correct number of buttons are rendered and that the button for the current page is disabled.
  */
   test('renderPagination with only one page', () => {
+  /**
+   * Test to verify if the useEffect cleanup function correctly resets the filters state upon component unmount.
+   * This test renders the JobListingsPage component, unmounts it, and then checks if the filters state is reset to its initial state.
+   * Inputs: None
+   * Outputs: None
+   * Side effects: Modifies the internal state of the JobListingsPage component to test the cleanup functionality.
+   */
   test('useEffect cleanup resets filters state', () => {
     const { unmount } = render(<JobListingsPage />);
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
@@ -181,12 +188,27 @@ test('renders JobListingTable component correctly', () => {
   });
 
 
+  /**
+   * Test to verify the responsive design functionality of the JobListingsPage component by simulating window resize events.
+   * This test initially sets the window width to 500px, triggering a resize event, and checks if the component displays the 'Card View'.
+   * It then sets the window width to 1024px, triggers another resize event, and checks if the component displays the 'Table View'.
+   * Inputs: None
+   * Outputs: None
+   * Side effects: Modifies the global window.innerWidth property to simulate window resize events.
+   */
   test('responsive design changes view on window resize', () => {
 
     const { getByText } = render(<JobListingsPage />);
     global.innerWidth = 500;
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Card View')).toBeInTheDocument();
+    global.innerWidth = 1024;
+    global.dispatchEvent(new Event('resize'));
+    expect(getByText('Table View')).toBeInTheDocument();
+  });
+  test('createPaginationButton creates a button with correct page number', () => {
+    const pageNumber = 3;
+    const button = createPaginationButton(pageNumber);
     global.innerWidth = 1024;
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
