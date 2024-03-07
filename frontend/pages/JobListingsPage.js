@@ -45,11 +45,7 @@ const handleFilterChange = (e) => {
 const renderPagination = () => {
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
-      pages.push(
-        <button key={i} disabled={i === page} onClick={() => setPage(i)}>
-          {i + 1}
-        </button>
-      );
+      pages.push(createPageButton(i));
     }
     return <div>{pages}</div>;
   };
