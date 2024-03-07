@@ -84,7 +84,10 @@ test('renders JobListingTable component correctly', () => {
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
-
+/**
+ * Test Case: handleFilterChange updates filters state and resets page.
+ * Simulates changing the filter by status and verifies that the filters state is updated accordingly and the page is reset.
+ */
   /**
   * Tests that the handleFilterChange function updates the filters state and resets the page.
   * Simulates changing the filter by status and verifies the state update.
