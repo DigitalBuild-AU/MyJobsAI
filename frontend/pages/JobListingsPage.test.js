@@ -276,6 +276,8 @@ describe('handleErrorState function tests', () => {
 
   // Test case: Confirms that the handleErrorState function sets the error state to false for a non-empty input value.
 
+  // Tests the handleErrorState function to ensure it sets the error state to true when the input value is null.
+  // This test verifies that for a 'location' field with a null value, the error state is correctly updated to reflect an error.
   test('should set errorState to true for null value', () => {
     const name = 'location';
     const value = null;
