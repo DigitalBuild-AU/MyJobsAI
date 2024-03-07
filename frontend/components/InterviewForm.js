@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+/**
+ * Renders a form for scheduling an interview. Allows users to input job title, date, and notes for the interview.
+ *
+ * @param {function} setInterviews - Function to update the list of interviews.
+ * @param {Array} interviews - Current list of interviews.
+ */
 function InterviewForm({ setInterviews, interviews }) {
   const [jobTitle, setJobTitle] = useState('');
   const [date, setDate] = useState('');
