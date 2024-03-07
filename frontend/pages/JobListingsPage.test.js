@@ -374,7 +374,11 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
   });
-  // Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
+  /**
+   * Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
+   * This test simulates passing a valid email format to the handleErrorState function and checks if the error state
+   * for the 'email' field is correctly set to false.
+   */
   test('should correctly update errorState for valid email format', () => {
     const name = 'email';
     const value = 'user@example.com';
