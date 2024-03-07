@@ -23,15 +23,22 @@ function InterviewsPage() {
   }, []);
 
   const handleSubmit = (e) => {
-  return (
-    <div className="container mt-4">
-      <h1>Interview Scheduler</h1>
-          <label htmlFor="interviewDateInput">Date and Time</label>
-          <input type="datetime-local" className="form-control" id="interviewDateInput" value={date} onChange={(e) => setDate(e.target.value)} />
-        </div>
-        <div className="form-group">
-    </div>
-  );
-}
+    e.preventDefault();
+    handleFormSubmit(jobTitle, date, notes);
+  };
 
 export default InterviewsPage;
+function handleFormSubmit(jobTitle, date, notes) {
+  axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
+    .then(response => {
+      alert('Interview scheduled successfully.');
+      setInterviews([...interviews, response.data]);
+      setJobTitle('');
+      setDate('');
+      setNotes('');
+    })
+    .catch(error => {
+      console.error('Error scheduling interview:', error);
+      alert('Failed to schedule interview.');
+    });
+}
