@@ -41,6 +41,25 @@ test('clicking customize CV button updates cvAnalysisResults and customizedCV', 
 // Tests that job selection updates the selectedJob state.
 // Tests clicking the customize CV button updates cvAnalysisResults and customizedCV.
   const { getByText } = render(<ResumeCustomizationPage />);
+test('uploading a CV file updates uploadedCV state', async () => {
+  const file = new File(['dummy content'], 'resume.pdf', { type: 'application/pdf' });
+  const { getByLabelText } = render(<ResumeCustomizationPage />);
+  const input = getByLabelText(/upload cv/i);
+  fireEvent.change(input, { target: { files: [file] } });
+  await waitFor(() => expect(input.files[0].name).toBe('resume.pdf'));
+});
+
+test('downloading as PDF triggers download with correct file type', async () => {
+  const { getByText } = render(<ResumeCustomizationPage />);
+  fireEvent.click(getByText('Download as PDF'));
+  await waitFor(() => expect(axios.get).toHaveBeenCalledWith('/api/download_cv/pdf', expect.anything()));
+});
+
+test('downloading as DOC triggers download with correct file type', async () => {
+  const { getByText } = render(<ResumeCustomizationPage />);
+  fireEvent.click(getByText('Download as DOC'));
+  await waitFor(() => expect(axios.get).toHaveBeenCalledWith('/api/download_cv/doc', expect.anything()));
+});
   fireEvent.click(getByText('Customize CV'));
   await waitFor(() => expect(getByText('Analysis results here.')).toBeInTheDocument());
   expect(getByText('Customized CV content here.')).toBeInTheDocument();
@@ -60,3 +79,9 @@ test('handles error during CV customization gracefully', async () => {
 });
 // Tests handling error fetching job listings gracefully.
 // Tests handling error during CV customization gracefully.
+test('handles error during CV file download gracefully', async () => {
+  axios.get.mockRejectedValueOnce(new Error('Error downloading CV'));
+  const { getByText } = render(<ResumeCustomizationPage />);
+  fireEvent.click(getByText('Download as PDF'));
+  await waitFor(() => expect(getByText('Error downloading CV')).toBeInTheDocument());
+});
