@@ -3,7 +3,7 @@
  * This file defines the JobListingsPage component, which is responsible for rendering the job listings page in the MyJobsAI application. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
  */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { fetchListingsFromAPI } from '../utils/jobListingsUtils';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 
@@ -56,10 +56,15 @@ const JobListingsPage = () => {
  * Utilizes axios to make a GET request with query parameters for filtering.
  * Updates the listings and totalPages state with the response data.
  */
+  /**
+  * Fetches job listings from the server based on the current filters and page.
+  * Now utilizes fetchListingsFromAPI from jobListingsUtils for fetching.
+  * Updates the listings and totalPages state with the response data.
+  */
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
-      const response = await axios.get(`http://localhost:3000/api/joblistings/filter?page=${page}&status=${filters.status}&company=${filters.company}`);
+      const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
       setTotalPages(response.data.totalPages);
     } catch (err) {
