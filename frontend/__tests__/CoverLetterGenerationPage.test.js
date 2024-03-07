@@ -42,7 +42,9 @@ test('selecting a job updates contact person', async () => {
   expect(getByDisplayValue('John Doe')).toBeInTheDocument();
 });
 
-test('clicking create cover letter displays generated letter', async () => {
+/**
+ * Tests that clicking the 'Create Cover Letter' button displays the generated cover letter.
+ */
 test('clicking create cover letter displays generated letter', async () => {
   const { getByText, getByRole } = render(<CoverLetterGenerationPage />);
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
