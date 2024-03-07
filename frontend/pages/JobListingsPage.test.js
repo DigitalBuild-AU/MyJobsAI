@@ -1,3 +1,9 @@
+/**
+ * Test suite for the JobListingsPage component.
+ * 
+ * This file contains tests for the rendering and functionality of the JobListingsPage component,
+ * including individual job listing cards, job listing table, pagination, and filter handling.
+ */
 // frontend/pages/JobListingsPage.test.js
 
 import React from 'react';
@@ -79,6 +85,9 @@ test('renders JobListingTable component correctly', () => {
     expect(page).toBe(0);
   });
 
+  /**
+  * Test if renderPagination renders correct number of buttons and disables current page button
+  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
     const currentPage = 2;
@@ -87,6 +96,9 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
   });
+  test('handleFilterChange updates filters state and resets page', async () => {
+  * Test if handleFilterChange updates filters state and resets page
+  */
   test('handleFilterChange updates filters state and resets page', async () => {
     const { getByPlaceholderText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
@@ -97,6 +109,9 @@ test('renders JobListingTable component correctly', () => {
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
   });
 
+  /**
+  * Test if renderPagination renders correct number of buttons and disables current page button
+  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
     const currentPage = 2;
@@ -118,3 +133,6 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons.length).toBe(3); // Including next and previous page buttons, which should be disabled
     expect(buttons[1].disabled).toBeTruthy(); // Current page button
   });
+/**
+ * Test if renderPagination with only one page
+ */
