@@ -62,6 +62,7 @@ const renderAddEditModal = () => (
     }, []);
 
     return (
+
         <div className="dashboard">
             <h1>Dashboard Overview</h1>
             {loading ? <p>Loading...</p> : error ? <p>{error}</p> : (
@@ -76,6 +77,7 @@ const renderAddEditModal = () => (
                         <blockquote>{quote}</blockquote>
                     </Card>
                     {renderAddEditModal()}
+
                 </div>
             )}
         </div>

@@ -35,7 +35,36 @@ const EmploymentHistoryPage = () => {
  * @function useEffect
  * @return {Promise<void>} A promise that resolves when the employment history is fetched and set in state.
  */
-    const newRole = { position, company, startDate, endDate, responsibilities, notableAchievements };
+    const newRole = { position, company, startDate, endDate, location, description, highlights: notableAchievements };
+    setEmploymentHistory([...employmentHistory, newRole]);
+    setPosition('');
+    setCompany('');
+    setStartDate('');
+    setEndDate('');
+    setLocation('');
+    setDescription('');
+    setNotableAchievements('');
+    };
+    
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await postEmploymentHistory(employmentHistory);
+      alert('Employment history saved successfully!');
+    } catch (error) {
+      console.error('Failed to save employment history', error.message);
+    }
+    };
+    
+    return (
+    <div className="employment-history-page">
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={position} onChange={(e) => setPosition(e.target.value)} placeholder="Position" />
+        <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" />
+        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} placeholder="Start Date" />
+        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="End Date" />
+        <textarea value={responsibilities} onChange={(e) => setResponsibilities(e.target.value)} placeholder="Responsibilities"></textarea>
+        <textarea value={notableAchievements} onChange={(e) => setNotableAchievements(e.target.value)} placeholder="Notable Achievements"></textarea>
     setEmploymentHistory([...employmentHistory, newRole]);
     setPosition('');
     setCompany('');
@@ -84,6 +113,7 @@ export default EmploymentHistoryPage;
  * @throws {Error} When the submission fails.
  * @return {Promise<void>} A promise that resolves when the employment history is successfully submitted.
  */
+
 const [isModalOpen, setIsModalOpen] = useState(false);
 const [modalRole, setModalRole] = useState(null);
 

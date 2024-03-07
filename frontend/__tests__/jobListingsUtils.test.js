@@ -1,3 +1,9 @@
+/**
+ * Tests for job listings utility functions.
+ *
+ * This file contains tests for the utility functions used in fetching and validating job listings from the API.
+ */
+
 import axios from 'axios';
 import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
@@ -19,12 +25,26 @@ describe('fetchListingsFromAPI tests', () => {
     expect(axios.get).toHaveBeenCalledWith(mockUrl);
   });
 
+  /**
+  * Tests API call handling with empty or undefined filters.
+  *
+  * Ensures that fetchListingsFromAPI handles empty or undefined filters gracefully by checking the URL used in the axios call.
+  */
   it('should handle empty or undefined filters gracefully', async () => {
     axios.get.mockResolvedValue({ data: 'success' });
     await fetchListingsFromAPI({}, mockPage);
     expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/api/joblistings/filter?page=${mockPage}&status=undefined&company=undefined`);
   });
-
+/**
+ * Tests handling of non-200 responses from the API.
+ *
+ * Verifies that fetchListingsFromAPI correctly handles and throws errors for non-200 responses from the API.
+ */
+/**
+ * Group of tests for the fetchListingsFromAPI function.
+ *
+ * These tests verify the functionality of fetchListingsFromAPI, ensuring it correctly interacts with the API and handles various input scenarios.
+ */
   it('should handle non-200 responses from the API', async () => {
     axios.get.mockRejectedValue(new Error('Request failed with status code 404'));
     await expect(fetchListingsFromAPI(mockFilters, mockPage)).rejects.toThrow('Request failed with status code 404');
@@ -35,8 +55,20 @@ describe('validateInput tests', () => {
   it('should return true for valid string input', () => {
     expect(validateInput('valid input')).toBe(true);
   });
-
+/**
+ * Tests validation of empty, null, and undefined inputs.
+ *
+ * Ensures that validateInput returns false for empty string, null, and undefined inputs.
+ */
   it('should return false for empty string, null, and undefined inputs', () => {
+  });
+
+  /**
+ * Tests validation of non-string inputs.
+ *
+ * Verifies that validateInput correctly returns false for non-string inputs such as numbers, objects, and arrays.
+ */
+  it('should handle non-string inputs correctly', () => {
     expect(validateInput('')).toBe(false);
     expect(validateInput(null)).toBe(false);
     expect(validateInput(undefined)).toBe(false);
@@ -48,3 +80,13 @@ describe('validateInput tests', () => {
     expect(validateInput([])).toBe(false);
   });
 });
+/**
+ * Group of tests for the validateInput function.
+ *
+ * These tests verify the functionality of validateInput, ensuring it correctly validates various types of inputs.
+ */
+/**
+ * Tests validation of valid string input.
+ *
+ * Verifies that validateInput returns true for a valid string input.
+ */
