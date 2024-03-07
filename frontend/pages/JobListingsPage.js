@@ -69,3 +69,8 @@ export default JobListingsPage;
 const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
+const createPageButton = (pageNumber) => (
+    <button key={pageNumber} disabled={pageNumber === page} onClick={() => setPage(pageNumber)}>
+      {pageNumber + 1}
+    </button>
+  );
