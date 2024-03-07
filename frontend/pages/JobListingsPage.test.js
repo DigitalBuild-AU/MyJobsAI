@@ -1,9 +1,8 @@
-/**
- * Test suite for the JobListingsPage component.
- * 
- * This file contains tests for the rendering and functionality of the JobListingsPage component,
- * including individual job listing cards, job listing table, pagination, and filter handling.
- */
+"""
+Test suite for the JobListingsPage component.
+
+This file contains tests for the rendering and functionality of the JobListingsPage component, including individual job listing cards, job listing table, pagination, and filter handling.
+"""
 // frontend/pages/JobListingsPage.test.js
 
 import React from 'react';
