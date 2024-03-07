@@ -32,7 +32,7 @@ const JobListingsPage = () => {
   // Extract the logic for handling filters into a separate function
 const handleFilterChange = (e) => {
     setPage(0);
-    setFilters({ ...filters, [e.target.name]: e.target.value });
+    updateFilters(e.target.name, e.target.value);
   };
 
   // Extract the logic for rendering the pagination into a separate function
@@ -66,3 +66,6 @@ const renderPagination = () => {
 };
 
 export default JobListingsPage;
+const updateFilters = (filterName, filterValue) => {
+    setFilters({ ...filters, [filterName]: filterValue });
+  };
