@@ -233,3 +233,4 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
   });
 });
+  // Test case: Confirms that the handleErrorState function sets the error state to false for a non-empty input value.
