@@ -17,9 +17,9 @@ import { render, fireEvent, screen } from '@testing-library/react';
  */
 describe('JobListingsPage component', () => {
   /**
-   * Test to ensure the JobListingCard component renders its props correctly.
-   * This test verifies that the job title, company, and location are all displayed as expected.
-   */
+ * Tests that the JobListingCard component renders its props correctly.
+ * Verifies that job title, company, and location are displayed as expected.
+ */
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
