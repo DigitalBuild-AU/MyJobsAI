@@ -23,6 +23,22 @@ const JobListingsPage = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
+
+    /**
+     * Adjusts the view state based on the window's inner width.
+     * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
+     * 
+     * @param none - This function does not take any parameters.
+     * @returns void - This function does not return a value.
+     */
+    const handleWindowSizeChange = () => {
+      if (window.innerWidth < 768) {
+        setView('card');
+      } else {
+        setView('table');
+      }
+    };
+    
     // Extracted window resize listener logic into a separate function
     const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
     
@@ -43,8 +59,10 @@ const JobListingsPage = () => {
 
   /**
  * Fetches job listings from the server based on the current filters and page.
- * Utilizes axios to make a GET request with query parameters for filtering.
- * Updates the listings and totalPages state with the response data.
+ * This function uses axios to make a GET request to the server with query parameters for filtering based on the current state of filters and page. It updates the listings and totalPages state with the data received from the response.
+ * 
+ * @param none - This function does not take any parameters.
+ * @returns void - This function does not return a value but performs asynchronous operations to update the component's state.
  */
   /**
   * Fetches job listings from the server based on the current filters and page.
@@ -98,12 +116,11 @@ const cleanupOnUnmount = () => {
 // No changes required as the requested modifications have already been implemented.
 
   /**
-   * Renders the pagination component by generating buttons for each page.
-   * The current page button is disabled to indicate the active page.
-   */
-  /**
-   * Renders the pagination component.
-   * Generates buttons for each page and disables the button for the current page.
+   * Generates the pagination component by creating buttons for each page.
+   * The button corresponding to the current page is disabled to indicate the active page. This function does not take any parameters and returns a JSX.Element containing the pagination buttons.
+   *
+   * @param none - This function does not take any parameters.
+   * @returns {JSX.Element} - A JSX.Element containing the pagination buttons.
    */
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
@@ -124,16 +141,25 @@ const renderPagination = () => {
     return <div>{pages}</div>;
   };
 
+  /**
+   * Updates the filters state with new values for a given filter.
+   * This function is responsible for updating the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
+   *
+   * @param {string} filterName - The name of the filter to update.
+   * @param {string} filterValue - The new value for the filter.
+   * @returns void - This function does not return a value but updates the component's state directly.
+   */
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
   /**
- * Creates a button element for a given page number.
- * The button is disabled if it corresponds to the current page.
- * @param {number} pageNumber - The page number for the button.
- * @returns {JSX.Element} A button element for pagination.
- */
+   * Creates a button element for a given page number.
+   * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
+   *
+   * @param {number} pageNumber - The page number for the button.
+   * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
+   */
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
   );
