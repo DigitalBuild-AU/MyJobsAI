@@ -1,8 +1,5 @@
 /**
- * useEffect hook to fetch and set the user's employment history from the server.
- * Fetches employment history on component mount and updates the employmentHistory state.
- * Page component for managing and submitting employment history.
- * Users can add, edit, and submit their employment history.
+ * Renders the Employment History page, allowing users to add, edit, and submit their employment history.
  */
 
 import React, { useState, useEffect } from 'react';
