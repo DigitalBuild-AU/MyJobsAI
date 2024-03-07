@@ -10,7 +10,7 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 
 /**
  * Test suite for JobListingsPage component
@@ -172,3 +172,36 @@ test('renders JobListingTable component correctly', () => {
     expect(button.type).toBe('button');
     expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
   });
+describe('handleErrorState function tests', () => {
+  let setErrorStateMock;
+  let initialState;
+
+  beforeEach(() => {
+    setErrorStateMock = jest.fn();
+    initialState = { status: false, company: false };
+    // Mocking useState for errorState
+    jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('should set errorState to true for empty value', () => {
+    const name = 'status';
+    const value = '';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('should set errorState to false for non-empty value', () => {
+    const name = 'company';
+    const value = 'Tech Inc';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+});
