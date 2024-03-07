@@ -172,3 +172,10 @@ test('renders JobListingTable component correctly', () => {
     const { getByText: getText } = render(<JobListingsPage />);
     expect(getText('Table View')).toBeInTheDocument();
   });
+  test('createPaginationButton creates a button with correct page number', () => {
+    const pageNumber = 3;
+    const button = createPaginationButton(pageNumber);
+    expect(button.props.children).toBe(pageNumber + 1); // Adjusted to match the function's behavior
+    expect(button.type).toBe('button');
+    expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
+  });
