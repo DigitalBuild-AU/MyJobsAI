@@ -202,15 +202,20 @@ test('Sidebar integration in JobListingsPage', () => {
     const buttons = queryAllByRole('button');
 
   test('updateFilters updates filters state with correct values', () => {
+
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
 
     const instance = new JobListingsPage();
     instance.updateFilters('status', 'active');
     instance.updateFilters('company', 'Tech Inc');
+    instance.updateFilters('location', 'New York');
+    instance.updateFilters('role', 'Developer');
 
     expect(setFiltersMock).toHaveBeenCalledWith({ status: 'active' });
     expect(setFiltersMock).toHaveBeenCalledWith({ company: 'Tech Inc' });
+    expect(setFiltersMock).toHaveBeenCalledWith({ location: 'New York' });
+    expect(setFiltersMock).toHaveBeenCalledWith({ role: 'Developer' });
   });
     // Assuming the first page button has a specific class 'first-page-btn'
     expect(buttons[1].classList.contains('first-page-btn')).toBeTruthy();
@@ -233,6 +238,29 @@ test('Sidebar integration in JobListingsPage', () => {
  * Test Case: Responsive design renders correct components based on screen size.
  * Checks that the correct view (Card View or Table View) is rendered based on the window's inner width.
  */
+  test('handleWindowSizeChange updates view state based on window size', () => {
+    jest.spyOn(window, 'innerWidth', 'get').mockImplementation(() => 500); // Simulate small screen
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+
+    jest.spyOn(window, 'innerWidth', 'get').mockImplementation(() => 1024); // Simulate large screen
+    const { getByText: getText } = render(<JobListingsPage />);
+    expect(getText('Table View')).toBeInTheDocument();
+  });
+
+  test('sequential updates to filters result in combined state', () => {
+    const setFiltersMock = jest.fn();
+    JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
+
+    const instance = new JobListingsPage();
+    instance.updateFilters('status', 'active');
+    instance.updateFilters('company', 'Tech Inc');
+    instance.updateFilters('status', 'closed');
+
+    expect(setFiltersMock).toHaveBeenCalledWith({ status: 'active' });
+    expect(setFiltersMock).toHaveBeenCalledWith({ company: 'Tech Inc', status: 'active' });
+    expect(setFiltersMock).toHaveBeenCalledWith({ company: 'Tech Inc', status: 'closed' });
+  });
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
 /**
  * Test Case: Responsive design renders correct components based on screen size.
