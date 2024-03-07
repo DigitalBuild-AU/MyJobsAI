@@ -10,19 +10,16 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, queryAllByRole, screen } from '@testing-library/react';
-import JobListingCard from '../../components/JobListingCard';
-import JobListingTable from '../../components/JobListingTable';
-import JobListingCard from '../components/JobListingCard';
-import JobListingTable from '../components/JobListingTable';
+import { render, fireEvent, screen } from '@testing-library/react';
 
 /**
  * Test suite for JobListingsPage component
  */
 describe('JobListingsPage component', () => {
   /**
- * Test if JobListingCard component renders correctly
- */
+   * Test to ensure the JobListingCard component renders its props correctly.
+   * This test verifies that the job title, company, and location are all displayed as expected.
+   */
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
@@ -34,14 +31,12 @@ test('renders JobListingCard component correctly', () => {
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
     expect(getByText('New York')).toBeInTheDocument();
-
-    expect(getByText('Software Engineer')).toBeInTheDocument();
-    expect(getByText('ABC Inc.')).toBeInTheDocument();
-    expect(getByText('New York')).toBeInTheDocument();
   });
+
   /**
- * Test if JobListingTable component renders correctly
- */
+   * Test to ensure the JobListingTable component correctly renders multiple job listings.
+   * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
+   */
 test('renders JobListingTable component correctly', () => {
     const listings = [
       {
@@ -60,15 +55,6 @@ test('renders JobListingTable component correctly', () => {
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
     expect(getByText('New York')).toBeInTheDocument();
-
-    expect(getByText('Product Manager')).toBeInTheDocument();
-    expect(getByText('XYZ Corp.')).toBeInTheDocument();
-    expect(getByText('San Francisco')).toBeInTheDocument();
-
-    expect(getByText('Software Engineer')).toBeInTheDocument();
-    expect(getByText('ABC Inc.')).toBeInTheDocument();
-    expect(getByText('New York')).toBeInTheDocument();
-
     expect(getByText('Product Manager')).toBeInTheDocument();
     expect(getByText('XYZ Corp.')).toBeInTheDocument();
     expect(getByText('San Francisco')).toBeInTheDocument();
@@ -76,47 +62,7 @@ test('renders JobListingTable component correctly', () => {
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
-  /**
-  * Test if handleFilterChange updates filters state and resets page.
-  * 
-  * This test verifies that the handleFilterChange function correctly updates the filter state
-  * and resets the pagination to the first page.
-  */
-  test('handleFilterChange updates filters state and resets page', () => {
-    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
-    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
-    rerender(<JobListingsPage />);
-    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
-    expect(filters.status).toBe('active');
-    expect(page).toBe(0);
-  });
 
-  /**
-  * Test if renderPagination renders correct number of buttons and disables current page button
-  */
-  /**
- * Test if renderPagination renders the correct number of buttons and disables the current page button.
- * 
- * This test checks that the renderPagination function correctly renders the pagination buttons
- * based on the total number of pages and disables the button for the current page.
- */
-  test('renderPagination renders correct number of buttons and disables current page button', () => {
-    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
-    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
-    rerender(<JobListingsPage />);
-    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
-    expect(filters.status).toBe('active');
-    expect(page).toBe(0);
-  });
-  
-  test('renderPagination renders correct number of buttons and disables current page button', () => {
-    const totalPages = 5;
-    const currentPage = 2;
-    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} page={currentPage} />);
-    const buttons = queryAllByRole('button');
-    expect(buttons.length).toBe(totalPages);
-    expect(buttons[currentPage].disabled).toBeTruthy();
-=======
   test('handleFilterChange updates filters state and resets page', () => {
     const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
