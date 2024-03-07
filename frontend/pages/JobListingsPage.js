@@ -22,17 +22,8 @@ const JobListingsPage = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
-    /**
- * Handles the change in window size.
- * Sets the view state based on the window's inner width.
- */
-    const handleWindowSizeChange = () => {
-      if (window.innerWidth < 768) {
-        setView('card');
-      } else {
-        setView('table');
-      }
-    };
+    // Extracted window resize listener logic into a separate function
+    const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
     
 /**
  * Updates the error state for a given field based on whether its value is empty.
@@ -45,10 +36,8 @@ const JobListingsPage = () => {
     window.addEventListener('resize', handleWindowSizeChange);
     handleWindowSizeChange();
 
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-      setFilters({status: '', company: ''}); // Cleanup
-    };
+    // Utilizing extracted cleanup function
+    return () => cleanupOnUnmount();
   }, [filters, page]);
 
   /**
@@ -66,6 +55,26 @@ const JobListingsPage = () => {
     try {
       const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
+/**
+ * Handles the change in window size and updates the view state.
+ * Extracted from useEffect to improve readability and maintainability.
+ */
+const handleViewChangeBasedOnWindowSize = () => {
+  if (window.innerWidth < 768) {
+    setView('card');
+  } else {
+    setView('table');
+  }
+};
+
+/**
+ * Encapsulates the cleanup logic to be called on component unmount.
+ * Extracted from useEffect to improve readability and maintainability.
+ */
+const cleanupOnUnmount = () => {
+  window.removeEventListener('resize', handleWindowSizeChange);
+  setFilters({status: '', company: ''}); // Reset filters on component unmount
+};
       setTotalPages(response.data.totalPages);
     } catch (err) {
       console.error('Error fetching job listings', err);
