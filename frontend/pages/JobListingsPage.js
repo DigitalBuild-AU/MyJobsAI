@@ -24,11 +24,13 @@ const JobListingsPage = () => {
   useEffect(() => {
 
     /**
-     * Adjusts the view state based on the window's inner width.
-     * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
-     * 
-     * @param none - This function does not take any parameters.
-/**
+ * Handles changes in window size and updates the view state accordingly.
+ * This function is triggered on window resize events and adjusts the view
+ * between 'card' and 'table' layouts based on the window's width.
+ *
+ * @param none
+ * @returns void
+ */
  * File: JobListingsPage.js
  * Project: MyJobsAI
  * Purpose: This file defines the JobListingsPage component for the MyJobsAI application. It is responsible for rendering the job listings page, which includes features such as displaying job listings in various views (table or card), filtering listings based on user criteria, and pagination. The component leverages React hooks for state management and axios for data fetching from the server.
