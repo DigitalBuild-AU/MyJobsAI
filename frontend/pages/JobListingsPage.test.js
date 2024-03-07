@@ -15,7 +15,7 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, screen, act } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 
 /**
  * Test suite for JobListingsPage component
@@ -405,6 +405,23 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  test('handles window resize to switch to card view correctly', () => {
+    act(() => {
+      global.innerWidth = 500;
+      global.dispatchEvent(new Event('resize'));
+    });
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+  });
+
+  test('handles window resize to switch to table view correctly', () => {
+    act(() => {
+      global.innerWidth = 1024;
+      global.dispatchEvent(new Event('resize'));
+    });
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Table View')).toBeInTheDocument();
+  });
   // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('handleWindowSizeChange updates view state based on window size', () => {
     global.innerWidth = 500; // Simulate small screen
