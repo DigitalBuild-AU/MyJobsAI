@@ -72,3 +72,8 @@ describe('validateInput tests', () => {
     expect(validateInput([])).toBe(false);
   });
 });
+/**
+ * Group of tests for the validateInput function.
+ *
+ * These tests verify the functionality of validateInput, ensuring it correctly validates various types of inputs.
+ */
