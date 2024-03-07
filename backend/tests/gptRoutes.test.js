@@ -9,6 +9,11 @@ beforeEach(() => {
 });
 
 describe('/cv_customization route', () => {
+/**
+ * Test suite for GPT routes.
+ * 
+ * This file contains tests for the GPT-related routes, ensuring that CV customization requests are handled correctly, including success and error scenarios.
+ */
   test('successfully handles a CV customization request', async () => {
     const mockResponse = {
       choices: [{
@@ -52,5 +57,7 @@ describe('/cv_customization route', () => {
     expect(response.statusCode).toBe(500);
     expect(response.body).toHaveProperty('error', 'Failed to generate CV customization suggestions.');
     expect(OpenAI.prototype.chat.completions.create).toHaveBeenCalled();
+  // Tests successful handling of a CV customization request.
   });
 });
+  // Tests error handling for a CV customization request.

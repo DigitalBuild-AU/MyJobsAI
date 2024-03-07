@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { postCoverLetter } from '../utils/apiHelpers';
 import './CoverLetterGenerationPage.css';
 
 const CoverLetterGenerationPage = () => {
@@ -38,17 +38,13 @@ const CoverLetterGenerationPage = () => {
   };
 
   const createCoverLetter = async () => {
-    try {
-      const response = await axios.post('/api/cover_letter', {
-        jobDescription: selectedJob.description,
-        userName: 'User Name', // Placeholder, replace with actual user data
-        userSkills: 'User Skills', // Placeholder, replace with actual user data
-        userExperience: 'User Experience' // Placeholder, replace with actual user data
+    postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
+      .then(data => {
+        setGeneratedCoverLetter(data.coverLetter);
+      })
+      .catch(error => {
+        console.error('Error generating cover letter:', error);
       });
-      setGeneratedCoverLetter(response.data.coverLetter);
-    } catch (error) {
-      console.error('Error generating cover letter:', error);
-    }
   };
 
   const downloadAsPDF = () => {

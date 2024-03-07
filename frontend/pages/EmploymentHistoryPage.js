@@ -3,7 +3,7 @@
  * Users can add, edit, and submit their employment history.
  */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { postEmploymentHistory } from '../utils/apiHelpers';
 import './EmploymentHistoryPage.css';
 
 const EmploymentHistoryPage = () => {
@@ -43,10 +43,10 @@ const EmploymentHistoryPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/employmentHistory', { employmentHistory });
+      await postEmploymentHistory(employmentHistory);
       alert('Employment history saved successfully!');
     } catch (error) {
-      console.error('Failed to save employment history', error);
+      console.error('Failed to save employment history', error.message);
     }
   };
 
