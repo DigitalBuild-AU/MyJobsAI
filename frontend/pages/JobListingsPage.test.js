@@ -36,8 +36,9 @@ test('renders JobListingCard component correctly', () => {
   });
 
   /**
- * Test if JobListingTable component renders correctly
- */
+   * Test to ensure the JobListingTable component correctly renders multiple job listings.
+   * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
+   */
 test('renders JobListingTable component correctly', () => {
     const listings = [
       {
