@@ -206,6 +206,7 @@ test('renders JobListingTable component correctly', () => {
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
   });
+
   // Tests the createPaginationButton function to ensure it creates a button with the correct page number, button type, and aria-label. This test verifies the button's properties to ensure they match expected values based on the input page number.
   test('createPaginationButton creates a button with correct page number', () => {
     const pageNumber = 3;
@@ -214,6 +215,7 @@ test('renders JobListingTable component correctly', () => {
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
   });
+    
   test('createPaginationButton creates a button with correct page number', () => {
     const pageNumber = 3;
     const button = createPaginationButton(pageNumber);
@@ -221,7 +223,8 @@ test('renders JobListingTable component correctly', () => {
     expect(button.type).toBe('button');
     expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
   });
-// Tests the handleErrorState function to ensure it correctly updates the error state based on input values. This suite simulates various scenarios to verify the function's behavior.
+  
+ // Tests the handleErrorState function to ensure it correctly updates the error state based on input values. This suite simulates various scenarios to verify the function's behavior.
 describe('handleErrorState function tests', () => {
   let setErrorStateMock;
   let initialState;
@@ -292,5 +295,6 @@ describe('handleErrorState function tests', () => {
     act(() => {
       JobListingsPage.prototype.handleErrorState(name, value);
     });
+    
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
