@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const GlobalSearchBar = () => {
@@ -6,9 +7,8 @@ const GlobalSearchBar = () => {
 
     const onSearch = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/api/search', { query });
-            // Handle the search response here. This could involve setting state to display the search results.
-            console.log(response.data); // Placeholder for response handling
+            // Redirecting to the SearchResultsPage with the query as a URL parameter
+            history.push(`/search/${query}`);
         } catch (error) {
             console.error('Search request failed:', error);
         }
@@ -28,3 +28,4 @@ const GlobalSearchBar = () => {
 };
 
 export default GlobalSearchBar;
+    const history = useHistory();
