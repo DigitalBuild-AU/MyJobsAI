@@ -43,15 +43,15 @@ const DashboardPage = () => {
 
     return (
         <div>
-            <h1>Dashboard Overview</h1>
+            <h1 style={{ color: 'var(--primary-color)' }}>Dashboard Overview</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
-                <p>{error}</p>
+                <p style={{ color: 'var(--error-color)' }}>{error}</p>
             ) : (
                 <div>
                     <div>
-                        <h2>Job Application Summary</h2>
+                        <h2 style={{ color: 'var(--secondary-color)' }}>Job Application Summary</h2>
                         <ul>
                             <li>Applications Sent: {summary.applicationsSent}</li>
                             <li>Interviews Scheduled: {summary.interviewsScheduled}</li>
@@ -59,7 +59,7 @@ const DashboardPage = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3>Quote of the Day</h3>
+                        <h3 style={{ color: 'var(--secondary-color)' }}>Quote of the Day</h3>
                         <blockquote>{quote}</blockquote>
                     </div>
                 </div>
