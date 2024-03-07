@@ -91,32 +91,10 @@ test('renders JobListingTable component correctly', () => {
   /**
   * Tests that the handleFilterChange function updates the filters state and resets the page.
   * Simulates changing the filter by status and verifies the state update.
-  */
-  test('handleFilterChange updates filters state and resets page', () => {
-    const { getByPlaceholderText, rerender } = render(<JobListingsPage />);
-    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
-    rerender(<JobListingsPage />);
-  test('updateFilters updates filters state correctly', () => {
 /**
- * Test Case: Updates filters state and resets page on filter change.
- * Verifies that changing the filter updates the filters state and resets the pagination to the first page.
+ * Test Case: renderPagination renders correct number of buttons and disables current page button.
+ * Verifies that the correct number of pagination buttons are rendered and that the button for the current page is disabled.
  */
-    // Mock the setFilters function
-    const mockSetFilters = jest.fn();
-    // Replace the actual setFilters with the mock
-    JobListingsPage.__Rewire__('setFilters', mockSetFilters);
-    // Call updateFilters with a sample filter
-    updateFilters('status', 'active');
-    // Check if setFilters was called correctly
-    expect(mockSetFilters).toHaveBeenCalledWith({ status: 'active' });
-    // Restore setFilters
-    JobListingsPage.__ResetDependency__('setFilters');
-  });
-
-  /**
-  * Tests that the renderPagination function renders the correct number of buttons.
-  * Verifies that the button for the current page is disabled.
-  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
 /**
  * Test Case: Updates filters state correctly.
@@ -137,7 +115,6 @@ test('renders JobListingTable component correctly', () => {
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
-
   });
   test('handleFilterChange updates filters state and resets page', async () => {
   test('responsive design renders correct components based on screen size', () => {
