@@ -198,6 +198,7 @@ test('renders JobListingTable component correctly', () => {
     expect(button.type).toBe('button');
     expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
   });
+// Tests the handleErrorState function to ensure it correctly updates the error state based on input values. This suite simulates various scenarios to verify the function's behavior.
 describe('handleErrorState function tests', () => {
   let setErrorStateMock;
   let initialState;
