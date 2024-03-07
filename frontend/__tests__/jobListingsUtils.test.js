@@ -77,3 +77,8 @@ describe('validateInput tests', () => {
  *
  * These tests verify the functionality of validateInput, ensuring it correctly validates various types of inputs.
  */
+/**
+ * Tests validation of valid string input.
+ *
+ * Verifies that validateInput returns true for a valid string input.
+ */
