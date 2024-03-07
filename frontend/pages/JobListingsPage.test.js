@@ -36,6 +36,10 @@ test('renders JobListingCard component correctly', () => {
   /**
    * Test to ensure the JobListingTable component correctly renders multiple job listings.
    * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
+/**
+ * Mock function to simulate fetching job listings for testing.
+ * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
+ */
    */
 test('renders JobListingTable component correctly', () => {
     const listings = [
@@ -96,6 +100,7 @@ test('renders JobListingTable component correctly', () => {
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
+
   });
   test('handleFilterChange updates filters state and resets page', async () => {
   test('responsive design renders correct components based on screen size', () => {
@@ -157,6 +162,7 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons.length).toBe(3); // Including next and previous page buttons, which should be disabled
     expect(buttons[1].disabled).toBeTruthy(); // Current page button
   });
+
 
   test('responsive design renders correct components based on screen size', () => {
     global.innerWidth = 500;
