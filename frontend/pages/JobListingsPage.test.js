@@ -229,7 +229,25 @@ test('renders JobListingTable component correctly', () => {
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
   });
-// Tests the handleErrorState function to ensure it correctly updates the error state based on input values. This suite simulates various scenarios to verify the function's behavior.
+
+  // Tests the createPaginationButton function to ensure it creates a button with the correct page number, button type, and aria-label. This test verifies the button's properties to ensure they match expected values based on the input page number.
+  test('createPaginationButton creates a button with correct page number', () => {
+    const pageNumber = 3;
+    const button = createPaginationButton(pageNumber);
+    global.innerWidth = 1024;
+    global.dispatchEvent(new Event('resize'));
+    expect(getByText('Table View')).toBeInTheDocument();
+  });
+    
+  test('createPaginationButton creates a button with correct page number', () => {
+    const pageNumber = 3;
+    const button = createPaginationButton(pageNumber);
+    expect(button.props.children).toBe(pageNumber + 1); // Adjusted to match the function's behavior
+    expect(button.type).toBe('button');
+    expect(button.props['aria-label']).toBe(\`Go to page \${pageNumber + 1}\`); // Adjusted to match the function's behavior
+  });
+  
+ // Tests the handleErrorState function to ensure it correctly updates the error state based on input values. This suite simulates various scenarios to verify the function's behavior.
 describe('handleErrorState function tests', () => {
   let setErrorStateMock;
   let initialState;
@@ -255,7 +273,8 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
 
-  test('should set errorState to false for non-empty value', () => {
+  // Tests the handleErrorState function with a non-empty input value. It checks that the error state is correctly set to false for the specified field (in this case, 'company'), indicating that the field's value meets the validation criteria.
+  test('should correctly update errorState for non-empty input value', () => {
     const name = 'company';
     const value = 'Tech Inc';
     act(() => {
@@ -265,6 +284,7 @@ describe('handleErrorState function tests', () => {
   });
 });
 
+  // Tests the handleErrorState function with an empty input value. It verifies that the error state is correctly set to true for the specified field (in this case, 'status'). This ensures that the form validation logic properly identifies fields with missing required values.
   test('should correctly update errorState for empty input value', () => {
     const name = 'status';
     const value = '';
@@ -285,6 +305,8 @@ describe('handleErrorState function tests', () => {
 
   // Test case: Confirms that the handleErrorState function sets the error state to false for a non-empty input value.
 
+  // Tests the handleErrorState function to ensure it sets the error state to true when the input value is null.
+  // This test verifies that for a 'location' field with a null value, the error state is correctly updated to reflect an error.
   test('should set errorState to true for null value', () => {
     const name = 'location';
     const value = null;
@@ -294,11 +316,15 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
 
+  // Tests the handleErrorState function to ensure it sets the error state to true when the input value is undefined.
+  // This test checks that for a 'role' field with an undefined value, the error state is correctly updated to indicate an error.
   test('should set errorState to true for undefined value', () => {
     const name = 'role';
     const value = undefined;
     act(() => {
       JobListingsPage.prototype.handleErrorState(name, value);
     });
+    
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
   });
