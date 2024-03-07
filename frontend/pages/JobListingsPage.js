@@ -72,3 +72,11 @@ const renderPagination = () => {
 };
 
 export default JobListingsPage;
+import { Link } from 'react-router-dom';
+
+      <div className="navigation-links">
+        <Link to="/employmentHistory">Employment History</Link>
+        <Link to="/skillsInventory">Skills Inventory</Link>
+        <Link to="/coverLetterGeneration">Cover Letter Generation</Link>
+        <Link to="/resumeCustomization">Resume Customization</Link>
+      </div>
