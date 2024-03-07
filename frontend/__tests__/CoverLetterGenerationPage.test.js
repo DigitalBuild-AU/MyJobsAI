@@ -17,6 +17,10 @@ beforeEach(() => {
   axios.post.mockResolvedValue({ data: { coverLetter: mockCoverLetter } });
 });
 
+/**
+ * Tests if the Cover Letter Generation Page renders without crashing.
+ * It checks for the presence of the 'Create Cover Letter' text and a combobox.
+ */
 test('renders without crashing', async () => {
 /**
  * Test suite for the Cover Letter Generation Page.
@@ -29,7 +33,9 @@ test('renders without crashing', async () => {
   expect(getByRole('combobox')).toBeInTheDocument();
 });
 
-// Tests that selecting a job updates the contact person.
+/**
+ * Tests that selecting a job from the dropdown updates the contact person displayed.
+ */
 test('selecting a job updates contact person', async () => {
 test('download buttons appear after generating cover letter', async () => {
   const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
@@ -40,11 +46,18 @@ test('download buttons appear after generating cover letter', async () => {
   expect(getByText('Download as DOC')).toBeInTheDocument();
 });
   const { getByRole, getByDisplayValue } = render(<CoverLetterGenerationPage />);
+"""
+Tests for the CoverLetterGenerationPage component.
+
+This file contains tests that ensure the functionality of the Cover Letter Generation Page within the MyJobsAI application. It includes tests for component rendering, user interaction, and integration with other services like axios for data fetching.
+"""
   await waitFor(() => fireEvent.change(getByRole('combobox'), { target: { value: '1' } }));
   expect(getByDisplayValue('John Doe')).toBeInTheDocument();
 });
 
-test('clicking create cover letter displays generated letter', async () => {
+/**
+ * Tests that clicking the 'Create Cover Letter' button displays the generated cover letter.
+ */
 test('clicking create cover letter displays generated letter', async () => {
   const { getByText, getByRole } = render(<CoverLetterGenerationPage />);
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
@@ -67,12 +80,17 @@ test('download as DOC button triggers download', async () => {
   fireEvent.click(getByText('Download as DOC'));
   expect(console.log).toHaveBeenCalledWith('Downloading as DOC...');
 });
+
 test('handles error fetching job listings gracefully', async () => {
   axios.get.mockRejectedValue(new Error('Error fetching job listings'));
   const { getByText } = render(<CoverLetterGenerationPage />);
   await waitFor(() => expect(getByText('Error fetching job listings:')).toBeInTheDocument());
 });
 
+/**
+ * Tests error handling when generating a cover letter fails.
+ * It checks for the presence of an error message after attempting to create a cover letter.
+ */
 // Tests error handling when generating a cover letter fails.
 test('handles error generating cover letter gracefully', async () => {
   axios.post.mockRejectedValue(new Error('Error generating cover letter'));
