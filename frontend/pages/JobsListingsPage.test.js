@@ -55,6 +55,11 @@ describe('JobListingsPage component', () => {
   });
 
   test('createPageButton function returns a button with correct properties', () => {
+/**
+ * Updates the filters state with the given filter name and value.
+ * @param {string} filterName - The name of the filter.
+ * @param {string} filterValue - The value of the filter.
+ */
     const pageNumber = 2;
     const setPage = jest.fn();
     const button = createPageButton(pageNumber, setPage);
@@ -63,3 +68,9 @@ describe('JobListingsPage component', () => {
     expect(button.props.onClick).toBeDefined();
   });
 });
+/**
+ * Creates a pagination button with the given page number.
+ * @param {number} pageNumber - The page number.
+ * @param {function} setPage - The function to set the current page.
+ * @returns {ReactElement} - The pagination button.
+ */
