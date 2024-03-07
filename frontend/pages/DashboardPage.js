@@ -18,7 +18,10 @@ const DashboardPage = () => {
         /**
          * Fetches and sets the summary of job applications, interviews, and offers from the server.
          */
-        const fetchSummary = async () => {
+        /**
+         * Fetches and sets a random quote from the local quotes.json file.
+         */
+        const fetchQuote = () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/dashboard/summary');
                 console.log('Fetching summary data from /api/dashboard/summary'); // gpt_pilot_debugging_log
