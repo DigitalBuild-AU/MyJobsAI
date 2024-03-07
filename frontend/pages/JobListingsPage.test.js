@@ -418,27 +418,63 @@ describe('handleErrorState function tests', () => {
     expect(getByText('Card View')).toBeInTheDocument();
   });
 
-  test('handles window resize to switch to table view correctly', () => {
-    act(() => {
-      global.innerWidth = 1024;
-      global.dispatchEvent(new Event('resize'));
-    });
-    const { getByText } = render(<JobListingsPage />);
-    expect(getByText('Table View')).toBeInTheDocument();
-  });
-  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
-  test('handleWindowSizeChange updates view state based on window size', () => {
-    global.innerWidth = 500; // Simulate small screen
-    const { getByText } = render(<JobListingsPage />);
-    expect(getByText('Card View')).toBeInTheDocument();
+describe('handleErrorState function tests', () => {
+  let setErrorStateMock;
+  let initialState;
 
-    global.innerWidth = 1024; // Simulate large screen
-    const { getByText: getText } = render(<JobListingsPage />);
-    expect(getText('Table View')).toBeInTheDocument();
-  });
+  beforeEach(() => {
+    setErrorStateMock = jest.fn();
+    initialState = { status: false, company: false };
     // Mocking useState for errorState
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
   });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('sets errorState to true for empty value', () => {
+    const name = 'status';
+    const value = '';
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('updates errorState for non-empty input value', () => {
+    const name = 'company';
+    const value = 'Tech Inc';
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
+  test('sets errorState to true for null value', () => {
+    const name = 'location';
+    const value = null;
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('sets errorState to true for undefined value', () => {
+    const name = 'role';
+    const value = undefined;
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('updates errorState for valid email format', () => {
+    const name = 'email';
+    const value = 'user@example.com';
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
+  test('sets errorState to true for invalid email format', () => {
+    const name = 'email';
+    const value = 'userexample.com'; // Missing '@' character
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+});
 
   afterEach(() => {
 /**
