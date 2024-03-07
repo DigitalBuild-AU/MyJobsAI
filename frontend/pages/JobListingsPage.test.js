@@ -36,6 +36,10 @@ test('renders JobListingCard component correctly', () => {
   /**
    * Test to ensure the JobListingTable component correctly renders multiple job listings.
    * This test checks that all provided job listings are displayed, including job titles, companies, and locations.
+/**
+ * Mock function to simulate fetching job listings for testing.
+ * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
+ */
    */
 test('renders JobListingTable component correctly', () => {
     const listings = [
@@ -80,6 +84,11 @@ test('renders JobListingTable component correctly', () => {
     JobListingsPage.__ResetDependency__('setFilters');
   });
 
+  /**
+   * Creates a button for pagination with the given page number.
+   * @param {number} pageNumber - The page number for the button.
+   * @returns {ReactElement} - A button element for navigating to the specified page.
+   */
   test('createPageButton returns a button with correct properties', () => {
     const pageNumber = 1;
     const pageButton = createPageButton(pageNumber);
