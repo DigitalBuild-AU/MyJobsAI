@@ -59,4 +59,18 @@ test('handles error submitting skills gracefully', async () => {
   const { getByText } = render(&lt;SkillsInventoryPage /&gt;);
   fireEvent.click(getByText('Save Skills'));
   await waitFor(() => expect(getByText('Failed to save skills')).toBeInTheDocument());
+test('removing a skill updates the state and removes the skill from the display', async () => {
+  const { getByText, queryByText } = render(<SkillsInventoryPage />);
+  // Assuming 'React' is already in the list from mockSkills
+  fireEvent.click(getByText('Remove React'));
+  await waitFor(() => expect(queryByText('React')).not.toBeInTheDocument());
+});
+
+test('editing a skill updates the state and displays the updated skill', async () => {
+  const { getByText, getByDisplayValue, getByRole } = render(<SkillsInventoryPage />);
+  fireEvent.click(getByText('Edit Node.js'));
+  fireEvent.change(getByDisplayValue('Node.js'), { target: { value: 'Express.js' } });
+  fireEvent.click(getByRole('button', { name: 'Save Skill' }));
+  await waitFor(() => expect(getByText('Express.js')).toBeInTheDocument());
+});
 });

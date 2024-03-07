@@ -35,6 +35,13 @@ test('adding a new role updates the state and displays the new role', async () =
 // Tests fetching employment history successfully.
   const { getByPlaceholderText, getByText, getByRole } = render(<EmploymentHistoryPage />);
   fireEvent.change(getByPlaceholderText('Position'), { target: { value: 'Developer' } });
+test('editing an existing role updates the state correctly', async () => {
+  const { getByText, getAllByPlaceholderText, getByRole } = render(<EmploymentHistoryPage />);
+  // Assume the first role's position is 'Software Engineer' and we want to change it to 'Senior Software Engineer'
+  fireEvent.change(getAllByPlaceholderText('Position')[0], { target: { value: 'Senior Software Engineer' } });
+  fireEvent.click(getByRole('button', { name: 'Update Role' }));
+  await waitFor(() => expect(getByText('Senior Software Engineer')).toBeInTheDocument());
+});
   fireEvent.change(getByPlaceholderText('Company'), { target: { value: 'New Corp' } });
   fireEvent.click(getByRole('button', { name: 'Add New Role' }));
   await waitFor(() => expect(getByText('Developer')).toBeInTheDocument());
@@ -62,3 +69,18 @@ test('handles error submitting employment history gracefully', async () => {
 // Tests submitting employment history successfully.
 // Tests handling error fetching employment history gracefully.
 // Tests handling error submitting employment history gracefully.
+test('editing an existing role and submitting updates employment history successfully', async () => {
+  const updatedEmploymentHistory = [
+    ...mockEmploymentHistory,
+    { position: 'Senior Software Engineer', company: 'Tech Corp', startDate: '2020-01-01', endDate: '2021-01-01', responsibilities: 'Leading software development', notableAchievements: 'Launched major product' }
+  ];
+  render(<EmploymentHistoryPage />);
+  fireEvent.click(getByText('Save Employment History'));
+  await waitFor(() => expect(axios.post).toHaveBeenCalledWith('/api/employmentHistory', { employmentHistory: updatedEmploymentHistory }));
+});
+test('handles error when updating an existing role gracefully', async () => {
+  axios.post.mockRejectedValueOnce(new Error('Failed to update employment history'));
+  const { getByText, getByRole } = render(<EmploymentHistoryPage />);
+  fireEvent.click(getByRole('button', { name: 'Update Role' }));
+  await waitFor(() => expect(getByText('Failed to update employment history')).toBeInTheDocument());
+});

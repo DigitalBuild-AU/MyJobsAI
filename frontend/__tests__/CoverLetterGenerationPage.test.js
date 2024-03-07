@@ -37,6 +37,14 @@ test('renders without crashing', async () => {
  * Tests that selecting a job from the dropdown updates the contact person displayed.
  */
 test('selecting a job updates contact person', async () => {
+test('download buttons appear after generating cover letter', async () => {
+  const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
+  expect(queryByText('Download as PDF')).not.toBeInTheDocument();
+  expect(queryByText('Download as DOC')).not.toBeInTheDocument();
+  await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
+  expect(getByText('Download as PDF')).toBeInTheDocument();
+  expect(getByText('Download as DOC')).toBeInTheDocument();
+});
   const { getByRole, getByDisplayValue } = render(<CoverLetterGenerationPage />);
 """
 Tests for the CoverLetterGenerationPage component.
@@ -56,10 +64,23 @@ test('clicking create cover letter displays generated letter', async () => {
   expect(getByText(mockCoverLetter)).toBeInTheDocument();
 });
 
-/**
- * Tests error handling when fetching job listings fails.
- * It checks for the presence of an error message.
- */
+// Tests error handling when fetching job listings fails.
+test('download as PDF button triggers download', async () => {
+  console.log = jest.fn(); // Mock console.log for this test
+  const { getByText } = render(<CoverLetterGenerationPage />);
+  await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
+  fireEvent.click(getByText('Download as PDF'));
+  expect(console.log).toHaveBeenCalledWith('Downloading as PDF...');
+});
+
+test('download as DOC button triggers download', async () => {
+  console.log = jest.fn(); // Mock console.log for this test
+  const { getByText } = render(<CoverLetterGenerationPage />);
+  await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
+  fireEvent.click(getByText('Download as DOC'));
+  expect(console.log).toHaveBeenCalledWith('Downloading as DOC...');
+});
+
 test('handles error fetching job listings gracefully', async () => {
   axios.get.mockRejectedValue(new Error('Error fetching job listings'));
   const { getByText } = render(<CoverLetterGenerationPage />);
