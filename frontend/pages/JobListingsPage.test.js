@@ -418,6 +418,10 @@ describe('handleErrorState function tests', () => {
     expect(getByText('Card View')).toBeInTheDocument();
   });
 
+  /**
+   * Test: handles window resize to switch to table view correctly
+   * Purpose: This test ensures that the JobListingsPage component transitions to 'Table View' when the window is resized to a width typical of larger screens (e.g., desktops). By dispatching a resize event with a width of 1024px, the test checks for the presence of 'Table View' text, confirming the UI's adaptability to screen size changes.
+   */
   test('handles window resize to switch to table view correctly', () => {
     act(() => {
       global.innerWidth = 1024;
