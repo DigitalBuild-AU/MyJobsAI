@@ -62,8 +62,8 @@ const EmploymentHistoryPage = () => {
         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="End Date" />
         <textarea value={responsibilities} onChange={(e) => setResponsibilities(e.target.value)} placeholder="Responsibilities"></textarea>
         <textarea value={notableAchievements} onChange={(e) => setNotableAchievements(e.target.value)} placeholder="Notable Achievements"></textarea>
-        <button type="button" onClick={addNewRole}>Add New Role</button>
-        <button type="submit">Save Employment History</button>
+        <button type="button" className="btn-primary" onClick={addNewRole}>Add New Role</button>
+        <button type="submit" className="btn-primary">Save Employment History</button>
       </form>
     </div>
   );
