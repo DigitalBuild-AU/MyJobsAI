@@ -94,6 +94,12 @@ test('renders JobListingTable component correctly', () => {
   /**
   * Test if renderPagination renders correct number of buttons and disables current page button
   */
+  /**
+ * Test if renderPagination renders the correct number of buttons and disables the current page button.
+ * 
+ * This test checks that the renderPagination function correctly renders the pagination buttons
+ * based on the total number of pages and disables the button for the current page.
+ */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
     const currentPage = 2;
