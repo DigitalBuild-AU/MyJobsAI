@@ -32,3 +32,8 @@ Contributions are welcome! Feel free to submit pull requests or open issues to s
 ## License
 
 MyJobsAI is released under the ISC License.
+### Frontend Technologies
+- **React**: Utilized for building a Single Page Application (SPA) that offers a dynamic user experience.
+- **Bootstrap**: Employed for responsive design and utilizing a wide range of components for the UI.
+- **Material-UI (Optional)**: Considered for providing a set of components that implement Google's Material Design for a clean and modern UI.
+- **Sass (Optional)**: Proposed for advanced CSS features and easier maintenance of stylesheets.
