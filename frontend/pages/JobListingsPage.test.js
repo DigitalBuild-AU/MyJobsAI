@@ -40,7 +40,14 @@ test('renders JobListingCard component correctly', () => {
 
   /**
 
-   /**
+  /**
+   * Mock function to simulate fetching job listings for testing pagination.
+   * This function is crucial for setting up the 'totalPages' and 'currentPage' values
+   * needed to test the pagination functionality of the JobListingsPage component.
+   * 
+   * @returns {Object} An object containing 'totalPages' and 'currentPage' values.
+   */
+  /**
 """
 JobListingsPage Test Suite
 
