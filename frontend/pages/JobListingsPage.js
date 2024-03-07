@@ -15,9 +15,24 @@ const JobListingsPage = () => {
   const [filters, setFilters] = useState({status: '', company: ''});
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
-    fetchListings();
+    const handleWindowSizeChange = () => {
+      if (window.innerWidth < 768) {
+        setView('card');
+      } else {
+        setView('table');
+      }
+    };
+    
+    window.addEventListener('resize', handleWindowSizeChange);
+    handleWindowSizeChange();
+
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+      setFilters({status: '', company: ''}); // Cleanup
+    };
   }, [filters, page]);
 
   const fetchListings = async () => {
@@ -30,20 +45,23 @@ const JobListingsPage = () => {
       console.error('Error fetching job listings', err);
     }
   };
-
-  const handleViewChange = (viewType) => {
-    setView(viewType);
-  };
-
+  
   /**
    * Handles the change event for filters by updating the page and filters state.
    *
    * @param {Event} e - The change event object, containing the filter name and value.
    */
   // Extract the logic for handling filters into a separate function
+  
 const handleFilterChange = (e) => {
-    setPage(0);
-    updateFilters(e.target.name, e.target.value);
+    const { name, value } = e.target;
+    if (value.trim() === '') {
+      setErrorState({ ...errorState, [name]: true });
+    } else {
+      setPage(0);
+      setFilters({ ...filters, [name]: value });
+      setErrorState({ ...errorState, [name]: false });
+    }
   };
 
   /**
@@ -52,6 +70,7 @@ const handleFilterChange = (e) => {
    */
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
+  const [errorState, setErrorState] = useState({ status: false, company: false });
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
       pages.push(createPageButton(i));
@@ -76,8 +95,14 @@ const renderPagination = () => {
         <option value="card">Card View</option>
       </select>
 
-      <input name="status" placeholder="Filter by status" onChange={handleFilterChange} />
-      <input name="company" placeholder="Filter by company" onChange={handleFilterChange} />
+      <div>
+        <input name="status" placeholder="Filter by status" onChange={handleFilterChange} />
+        {errorState.status && <span className="validation-error">Please enter a valid status.</span>}
+      </div>
+      <div>
+        <input name="company" placeholder="Filter by company" onChange={handleFilterChange} />
+        {errorState.company && <span className="validation-error">Please enter a valid company name.</span>}
+      </div>
 
       {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
 
