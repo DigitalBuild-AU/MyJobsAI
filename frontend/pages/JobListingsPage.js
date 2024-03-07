@@ -35,6 +35,11 @@ const JobListingsPage = () => {
     setView(viewType);
   };
 
+  /**
+   * Handles the change event for filters by updating the page and filters state.
+   *
+   * @param {Event} e - The change event object, containing the filter name and value.
+   */
   // Extract the logic for handling filters into a separate function
 const handleFilterChange = (e) => {
     setPage(0);
@@ -69,6 +74,9 @@ const renderPagination = () => {
       {renderPagination()}
     </div>
   );
+};
+
+export default JobListingsPage;
 };
 
 export default JobListingsPage;
