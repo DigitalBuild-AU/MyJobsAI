@@ -49,3 +49,30 @@ async function postSkills(skills) {
 }
 
 export { postCoverLetter, postEmploymentHistory, postResumeCustomization, postSkills };
+/**
+ * Utility functions for making API requests to the backend for various features like cover letter generation, employment history management, CV customization, and skills inventory.
+ */
+/**
+ * Sends a request to generate a cover letter based on user inputs.
+ * @param {string} jobDescription - The job description for the cover letter.
+ * @param {string} userName - The user's name.
+ * @param {string} userSkills - The user's skills.
+ * @param {string} userExperience - The user's experience.
+ * @returns {Promise<Object>} The response object containing the generated cover letter.
+ */
+/**
+ * Sends a request to save the user's employment history.
+ * @param {Array<Object>} employmentHistory - An array of employment history objects.
+ * @returns {Promise<Object>} The response object confirming the save operation.
+ */
+/**
+ * Sends a request to customize a CV based on a job description and user's CV.
+ * @param {string} jobDescription - The job description to customize the CV for.
+ * @param {string} userCV - The user's current CV.
+ * @returns {Promise<Object>} The response object containing the customized CV.
+ */
+/**
+ * Sends a request to save the user's skills.
+ * @param {Array<string>} skills - An array of skills.
+ * @returns {Promise<Object>} The response object confirming the save operation.
+ */
