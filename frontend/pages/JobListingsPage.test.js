@@ -351,3 +351,22 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
   });
+  // Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
+  test('should correctly update errorState for valid email format', () => {
+    const name = 'email';
+    const value = 'user@example.com';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
+  // Test case: Verifies that the handleErrorState function sets the error state to true for an invalid email format.
+  test('should set errorState to true for invalid email format', () => {
+    const name = 'email';
+    const value = 'userexample.com'; // Missing '@' character
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
