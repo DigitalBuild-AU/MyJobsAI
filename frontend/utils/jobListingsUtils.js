@@ -16,6 +16,11 @@ export const fetchListingsFromAPI = (filters, page) => {
   return axios.get(url);
 };
 
+/**
+ * Validates the given input value to ensure it is not empty, null, or undefined.
+ * @param value - The input value to validate.
+ * @returns boolean - True if the value is valid, false otherwise.
+ */
 export const validateInput = (value) => {
   return value !== '' && value !== null && value !== undefined;
 };
