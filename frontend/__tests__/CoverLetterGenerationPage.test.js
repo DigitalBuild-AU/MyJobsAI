@@ -38,6 +38,11 @@ test('renders without crashing', async () => {
  */
 test('selecting a job updates contact person', async () => {
   const { getByRole, getByDisplayValue } = render(<CoverLetterGenerationPage />);
+"""
+Tests for the CoverLetterGenerationPage component.
+
+This file contains tests that ensure the functionality of the Cover Letter Generation Page within the MyJobsAI application. It includes tests for component rendering, user interaction, and integration with other services like axios for data fetching.
+"""
   await waitFor(() => fireEvent.change(getByRole('combobox'), { target: { value: '1' } }));
   expect(getByDisplayValue('John Doe')).toBeInTheDocument();
 });
