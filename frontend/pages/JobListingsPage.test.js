@@ -206,6 +206,7 @@ test('renders JobListingTable component correctly', () => {
     global.dispatchEvent(new Event('resize'));
     expect(getByText('Table View')).toBeInTheDocument();
   });
+  // Tests the createPaginationButton function to ensure it creates a button with the correct page number, button type, and aria-label. This test verifies the button's properties to ensure they match expected values based on the input page number.
   test('createPaginationButton creates a button with correct page number', () => {
     const pageNumber = 3;
     const button = createPaginationButton(pageNumber);
