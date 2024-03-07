@@ -255,7 +255,27 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
   });
 });
+
+  test('should correctly update errorState for empty input value', () => {
+    const name = 'status';
+    const value = '';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('should correctly update errorState for non-empty input value', () => {
+    const name = 'company';
+    const value = 'Tech Corp';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
   // Test case: Confirms that the handleErrorState function sets the error state to false for a non-empty input value.
+
   test('should set errorState to true for null value', () => {
     const name = 'location';
     const value = null;
