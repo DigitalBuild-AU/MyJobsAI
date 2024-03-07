@@ -101,6 +101,12 @@ const renderPagination = () => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
+  /**
+ * Creates a button element for a given page number.
+ * The button is disabled if it corresponds to the current page.
+ * @param {number} pageNumber - The page number for the button.
+ * @returns {JSX.Element} A button element for pagination.
+ */
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
   );
