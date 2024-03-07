@@ -83,6 +83,10 @@ const handleFilterChange = (e) => {
    * Renders the pagination component by generating buttons for each page.
    * The current page button is disabled to indicate the active page.
    */
+  /**
+   * Renders the pagination component.
+   * Generates buttons for each page and disables the button for the current page.
+   */
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
