@@ -15,8 +15,9 @@ import JobListingTable from '../components/JobListingTable';
  */
 describe('JobListingsPage component', () => {
   /**
- * Test if JobListingCard component renders correctly
- */
+   * Test to ensure the JobListingCard component renders its props correctly.
+   * This test verifies that the job title, company, and location are all displayed as expected.
+   */
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
