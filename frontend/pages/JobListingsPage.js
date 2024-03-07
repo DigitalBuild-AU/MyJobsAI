@@ -16,6 +16,7 @@ import JobListingTable from '../components/JobListingTable';
 const JobListingsPage = () => {
   const [listings, setListings] = useState([]);
   const [view, setView] = useState('table');
+  const [modalVisible, setModalVisible] = useState(false);
   const [filters, setFilters] = useState({status: '', company: ''});
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -24,10 +25,24 @@ const JobListingsPage = () => {
   useEffect(() => {
 
     /**
-     * Adjusts the view state based on the window's inner width.
-     * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
-     * 
-     * @param none - This function does not take any parameters.
+ * Handles changes in window size and updates the view state accordingly.
+ * This function is triggered on window resize events and adjusts the view
+ * between 'card' and 'table' layouts based on the window's width.
+ *
+ * @param none
+ * @returns void
+ */
+ * File: JobListingsPage.js
+ * Project: MyJobsAI
+ * Purpose: This file defines the JobListingsPage component for the MyJobsAI application. It is responsible for rendering the job listings page, which includes features such as displaying job listings in various views (table or card), filtering listings based on user criteria, and pagination. The component leverages React hooks for state management and axios for data fetching from the server.
+ * Components:
+ *  - JobListingsPage: Main component for displaying job listings.
+ *  - Table/List View: Renders job listings in a table or list format.
+ *  - Filter: Allows users to filter job listings based on various criteria.
+ *  - Pagination: Provides pagination functionality for navigating through listings.
+ * Author: Contributors
+ * Created: [Creation Date]
+ */
      * @returns void - This function does not return a value.
      */
     const handleWindowSizeChange = () => {
@@ -38,7 +53,13 @@ const JobListingsPage = () => {
       }
     };
     
-    // Extracted window resize listener logic into a separate function
+    /**
+     * Adjusts the view state based on the window's inner width.
+     * This function is triggered on window resize events to switch between 'card' and 'table' views depending on the window's width. It is designed to enhance user experience by adapting the layout to different screen sizes.
+     * 
+     * @param none - This function does not take any parameters.
+     * @returns void - This function does not return a value.
+     */
     const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
     
 /**
@@ -89,6 +110,12 @@ const handleViewChangeBasedOnWindowSize = () => {
  * Encapsulates the cleanup logic to be called on component unmount.
  * Extracted from useEffect to improve readability and maintainability.
  */
+/**
+* Encapsulates the cleanup logic to be called on component unmount.
+* Specifically, it removes the 'resize' event listener from the window object, ensuring no memory leaks occur.
+* @param none - This function does not take any parameters.
+* @returns void - This function does not return a value.
+*/
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
   setFilters({status: '', company: ''}); // Reset filters on component unmount
@@ -124,6 +151,15 @@ const cleanupOnUnmount = () => {
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
+    // Toggle modal visibility
+    const toggleModal = () => {
+      setModalVisible(!modalVisible);
+    };
+
+    // Handle view change
+    const handleViewChange = (newView) => {
+      setView(newView);
+    };
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
       pages.push(createPaginationButton(i));
@@ -190,6 +226,42 @@ const handleErrorState = (name, value) => {
       </div>
 
       {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
+      <button onClick={toggleModal}>Add Job Listing</button>
+      {modalVisible && (
+        <div className="modal">
+          <form onSubmit={handleAddListing}>
+            <input name="jobTitle" placeholder="Job Title" required />
+            <input name="company" placeholder="Company" required />
+            <input name="salary" placeholder="Salary" />
+            <input name="location" placeholder="Location" required />
+            <select name="jobType" required>
+              <option value="">Select Job Type</option>
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Casual">Casual</option>
+              <option value="Temp">Temp</option>
+              <option value="Contract">Contract</option>
+            </select>
+            <input name="contactPerson" placeholder="Contact Person" />
+            <select name="status" required>
+              <option value="">Select Status</option>
+              <option value="New">New</option>
+              <option value="Applied">Applied</option>
+              <option value="Interviewed">Interviewed</option>
+              <option value="Closed">Closed</option>
+              <option value="Offer">Offer</option>
+            </select>
+            <textarea name="description" placeholder="Description"></textarea>
+            <input name="jobUrl" placeholder="Job URL" />
+            <button type="submit">Add Listing</button>
+            <button type="button" onClick={toggleModal}>Cancel</button>
+          </form>
+        </div>
+      )}
+        <button onClick={() => setView('table')}>Table View</button>
+        <button onClick={() => setView('card')}>Card View</button>
+      </div>
+      {view === 'table' ? <JobListingTable listings={listings} /> : <div className="card-view">{listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}</div>}
       {renderPagination()}
     </div>
   );

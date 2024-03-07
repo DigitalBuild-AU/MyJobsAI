@@ -33,8 +33,8 @@ const CoverLetterGenerationPage = () => {
  * @return {Promise<void>} A promise that resolves when job listings are fetched and set in state.
  */
     const job = jobListings.find(job => job.id === e.target.value);
-    setSelectedJob(job);
-    setContactPerson(job.contact); // Assuming each job has a 'contact' field
+    setSelectedJob(job.id); // Update to store only the job ID
+    setContactPerson(job.contactPerson || ''); // Update to use the correct field and handle possible undefined value
   };
 
   const createCoverLetter = async () => {
@@ -55,21 +55,33 @@ const CoverLetterGenerationPage = () => {
  */
 /**
  * Generates a personalized cover letter based on the selected job and user profile.
+        <div className="cover-letter-preview">
+          <h3>Generated Cover Letter Preview</h3>
+          <p>{generatedCoverLetter}</p>
+        </div>
  * @async
  * @function createCoverLetter
  * @throws {Error} When unable to generate the cover letter.
  * @return {Promise<void>} A promise that resolves when the cover letter is generated and set in state.
  */
-    // Placeholder function for downloading the cover letter as PDF
-    console.log('Downloading as PDF...');
+    const element = document.createElement("a");
+    const file = new Blob([generatedCoverLetter], {type: 'application/pdf'});
+    element.href = URL.createObjectURL(file);
+    element.download = "coverLetter.pdf";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
   };
 /**
  * React component page for generating personalized cover letters based on job descriptions.
  * Allows users to select a job listing, generate a cover letter, and download it in PDF or DOC format.
  */
   const downloadAsDOC = () => {
-    // Placeholder function for downloading the cover letter as DOC
-    console.log('Downloading as DOC...');
+    const element = document.createElement("a");
+    const file = new Blob([generatedCoverLetter], {type: 'application/msword'});
+    element.href = URL.createObjectURL(file);
+    element.download = "coverLetter.doc";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
   };
 
   return (
