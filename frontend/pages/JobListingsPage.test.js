@@ -221,38 +221,11 @@ test('renders JobListingTable component correctly', () => {
  * Verifies that error messages are displayed inline with form inputs when validation fails.
  */
    * Side effects: Modifies the internal state of the JobListingsPage component to test the cleanup functionality.
-   */
-  test('useEffect cleanup resets filters state', () => {
 /**
- * Test Case: Renders pagination with only one page.
- * Verifies that when there is only one page of results, the pagination renders correctly with 'Next' and 'Previous' buttons disabled.
+ * Test Case: Responsive design changes view on window resize.
+ * Simulates window resize events to verify that the component correctly switches between 'Card View' and 'Table View' based on the window width.
  */
-    const { unmount } = render(<JobListingsPage />);
-    // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
-    // This is a placeholder for actual state verification logic before unmount
-    unmount();
-    // This is a placeholder for actual state verification logic after unmount
-    // Expect filters state to be reset to initial state
-    expect(/* logic to check filters state */).toEqual({status: '', company: ''});
-  });
-    const totalPages = 1;
-    const currentPage = 0;
-    render(<JobListingsPage />);
-    // Mocking fetchListings to set totalPages and currentPage
-    // This is a placeholder for actual mocking logic
-    const buttons = queryAllByRole('button');
-    expect(buttons.length).toBe(3); // Including next and previous page buttons, which should be disabled
-    expect(buttons[1].disabled).toBeTruthy(); // Current page button
-  });
-
-
-  /**
-   * Test to verify the responsive design functionality of the JobListingsPage component by simulating window resize events.
-   * This test initially sets the window width to 500px, triggering a resize event, and checks if the component displays the 'Card View'.
-   * It then sets the window width to 1024px, triggers another resize event, and checks if the component displays the 'Table View'.
-   * Inputs: None
-   * Outputs: None
-   * Side effects: Modifies the global window.innerWidth property to simulate window resize events.
+  test('responsive design changes view on window resize', () => {
    */
   test('responsive design changes view on window resize', () => {
 
