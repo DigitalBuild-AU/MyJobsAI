@@ -21,6 +21,10 @@ const CoverLetterGenerationPage = () => {
   }, []);
 
   const handleJobSelection = (e) => {
+/**
+ * useEffect hook to fetch job listings on component mount.
+ * Fetches job listings from the server and updates the jobListings state.
+ */
     const job = jobListings.find(job => job.id === e.target.value);
     setSelectedJob(job);
     setContactPerson(job.contact); // Assuming each job has a 'contact' field
@@ -40,7 +44,10 @@ const CoverLetterGenerationPage = () => {
     // Placeholder function for downloading the cover letter as PDF
     console.log('Downloading as PDF...');
   };
-
+/**
+ * React component page for generating personalized cover letters based on job descriptions.
+ * Allows users to select a job listing, generate a cover letter, and download it in PDF or DOC format.
+ */
   const downloadAsDOC = () => {
     // Placeholder function for downloading the cover letter as DOC
     console.log('Downloading as DOC...');
@@ -62,6 +69,10 @@ const CoverLetterGenerationPage = () => {
           <button onClick={downloadAsDOC}>Download as DOC</button>
         </div>
       )}
+/**
+ * Generates a cover letter based on the selected job's description, user's name, skills, and experience.
+ * Updates the generatedCoverLetter state with the response from the server.
+ */
     </div>
   );
 };
