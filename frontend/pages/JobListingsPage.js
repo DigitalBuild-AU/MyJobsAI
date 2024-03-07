@@ -6,6 +6,9 @@ import React, { useState, useEffect } from 'react';
 import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
+import ResponsiveNavbar from '../components/ResponsiveNavbar';
+import Sidebar from '../components/Sidebar';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 /**
  * Renders the JobListingsPage component.
@@ -282,6 +285,39 @@ import { Link } from 'react-router-dom';
 
       <div className="navigation-links">
         <Link to="/employmentHistory">Employment History</Link>
+import { useState } from 'react';
+
+const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+const breadcrumbPath = [
+  { label: 'Home', link: '/' },
+  { label: 'Job Listings', link: '/jobListings' },
+];
+
+return (
+  <>
+    <ResponsiveNavbar />
+    <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+    <div className="job-listings-page">
+      <Breadcrumbs pathElements={breadcrumbPath} />
+      <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
+        <option value="table">Table View</option>
+        <option value="card">Card View</option>
+      </select>
+      <div>
+        <input name="status" placeholder="Filter by status" onChange={handleFilterChange} />
+        {errorState.status && <span className="validation-error">Please enter a valid status.</span>}
+      </div>
+      <div>
+        <input name="company" placeholder="Filter by company" onChange={handleFilterChange} />
+        {errorState.company && <span className="validation-error">Please enter a valid company name.</span>}
+      </div>
+      {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
+      {renderPagination()}
+    </div>
+  </>
+);
         <Link to="/skillsInventory">Skills Inventory</Link>
         <Link to="/coverLetterGeneration">Cover Letter Generation</Link>
         <Link to="/resumeCustomization">Resume Customization</Link>
