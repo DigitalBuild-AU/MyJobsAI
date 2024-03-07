@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { postSkills } from '../utils/apiHelpers';
 import './SkillsInventoryPage.css';
 
 const SkillsInventoryPage = () => {
@@ -28,10 +28,10 @@ const SkillsInventoryPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/skills', { skills });
+      await postSkills(skills);
       alert('Skills saved successfully!');
     } catch (error) {
-      console.error('Failed to save skills', error);
+      console.error('Failed to save skills', error.message);
     }
   };
 
