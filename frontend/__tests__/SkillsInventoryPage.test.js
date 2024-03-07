@@ -12,6 +12,7 @@ beforeEach(() => {
   axios.post.mockResolvedValue({});
 });
 
+// Tests that the Skills Inventory Page renders without crashing.
 test('renders without crashing', async () => {
   const { getByPlaceholderText, getByText } = render(&lt;SkillsInventoryPage /&gt;);
   await waitFor(() => expect(getByPlaceholderText('Add a new skill')).toBeInTheDocument());
@@ -39,10 +40,20 @@ test('submitting skills successfully', async () => {
 
 test('handles error fetching skills gracefully', async () => {
   axios.get.mockRejectedValue(new Error('Failed to fetch skills'));
+/**
+ * Test suite for the Skills Inventory Page.
+ * 
+ * This file tests the Skills Inventory feature, including rendering of the page, fetching and displaying skills, adding new skills, and submitting skills, along with error handling.
+ */
+
+// Tests handling error fetching skills gracefully.
+test('handles error fetching skills gracefully', async () => {
+  axios.get.mockRejectedValue(new Error('Failed to fetch skills'));
   const { getByText } = render(&lt;SkillsInventoryPage /&gt;);
   await waitFor(() => expect(getByText('Failed to fetch skills')).toBeInTheDocument());
 });
 
+// Tests handling error submitting skills gracefully.
 test('handles error submitting skills gracefully', async () => {
   axios.post.mockRejectedValue(new Error('Failed to save skills'));
   const { getByText } = render(&lt;SkillsInventoryPage /&gt;);
