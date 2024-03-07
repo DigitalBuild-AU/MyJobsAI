@@ -388,12 +388,12 @@ describe('handleErrorState function tests', () => {
   });
   });
 
-/**
- * Test Case: Sets error state to true for null and undefined values.
- * Verifies that the handleErrorState function sets the error state to true for input fields with null or undefined values.
- */
+  /**
+   * Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
+   * This test simulates passing a valid email format to the handleErrorState function and checks if the error state
+   * for the 'email' field is correctly set to false.
+   */
 
-  // Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
   test('should correctly update errorState for valid email format', () => {
     const name = 'email';
     const value = 'user@example.com';
@@ -403,7 +403,11 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
   });
 
-  // Test case: Verifies that the handleErrorState function sets the error state to true for an invalid email format.
+  /**
+   * Test case: Verifies that the handleErrorState function sets the error state to true for an invalid email format.
+   * This test simulates passing an invalid email format (missing '@' character) to the handleErrorState function
+   * and checks if the error state for the 'email' field is correctly set to true.
+   */
   test('should set errorState to true for invalid email format', () => {
     const name = 'email';
     const value = 'userexample.com'; // Missing '@' character
