@@ -162,6 +162,17 @@ test('renders JobListingTable component correctly', () => {
     const currentPage = 0; // First page
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
     const buttons = queryAllByRole('button');
+  test('updateFilters updates filters state with correct values', () => {
+    const setFiltersMock = jest.fn();
+    JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
+
+    const instance = new JobListingsPage();
+    instance.updateFilters('status', 'active');
+    instance.updateFilters('company', 'Tech Inc');
+
+    expect(setFiltersMock).toHaveBeenCalledWith({ status: 'active' });
+    expect(setFiltersMock).toHaveBeenCalledWith({ company: 'Tech Inc' });
+  });
     // Assuming the first page button has a specific class 'first-page-btn'
     expect(buttons[1].classList.contains('first-page-btn')).toBeTruthy();
   });
@@ -302,6 +313,15 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  test('handleWindowSizeChange updates view state based on window size', () => {
+    global.innerWidth = 500; // Simulate small screen
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+
+    global.innerWidth = 1024; // Simulate large screen
+    const { getByText: getText } = render(<JobListingsPage />);
+    expect(getText('Table View')).toBeInTheDocument();
+  });
     // Mocking useState for errorState
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
   });
