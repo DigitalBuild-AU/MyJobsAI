@@ -1,3 +1,6 @@
+/**
+ * Renders the Dashboard page, displaying a summary of job applications, interviews, offers, and a random quote.
+ */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -12,7 +15,13 @@ const DashboardPage = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const fetchSummary = async () => {
+        /**
+         * Fetches and sets the summary of job applications, interviews, and offers from the server.
+         */
+        /**
+         * Fetches and sets a random quote from the local quotes.json file.
+         */
+        const fetchQuote = () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/dashboard/summary');
                 console.log('Fetching summary data from /api/dashboard/summary'); // gpt_pilot_debugging_log

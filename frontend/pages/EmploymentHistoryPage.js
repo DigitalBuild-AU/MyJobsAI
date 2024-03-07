@@ -1,8 +1,5 @@
 /**
- * useEffect hook to fetch and set the user's employment history from the server.
- * Fetches employment history on component mount and updates the employmentHistory state.
- * Page component for managing and submitting employment history.
- * Users can add, edit, and submit their employment history.
+ * Renders the Employment History page, allowing users to add, edit, and submit their employment history.
  */
 
 import React, { useState, useEffect } from 'react';
@@ -19,6 +16,9 @@ const EmploymentHistoryPage = () => {
   const [notableAchievements, setNotableAchievements] = useState('');
 
   useEffect(() => {
+    /**
+     * Fetches and sets the user's employment history from the server.
+     */
     const fetchEmploymentHistory = async () => {
       const response = await axios.get('/api/employmentHistory');
       setEmploymentHistory(response.data);
@@ -26,13 +26,10 @@ const EmploymentHistoryPage = () => {
     fetchEmploymentHistory();
   }, []);
 
+  /**
+   * Adds a new role to the local employment history state based on user input.
+   */
   const addNewRole = () => {
-/**
- * Fetches the user's employment history from the server on component mount.
- * @async
- * @function useEffect
- * @return {Promise<void>} A promise that resolves when the employment history is fetched and set in state.
- */
     const newRole = { position, company, startDate, endDate, location, description, highlights: notableAchievements };
     setEmploymentHistory([...employmentHistory, newRole]);
     setPosition('');
@@ -44,6 +41,9 @@ const EmploymentHistoryPage = () => {
     setNotableAchievements('');
     };
     
+    /**
+     * Submits the updated employment history to the server and alerts the user upon success or failure.
+     */
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {

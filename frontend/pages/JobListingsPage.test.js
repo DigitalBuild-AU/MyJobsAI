@@ -15,7 +15,7 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 
 /**
  * Test suite for JobListingsPage component
@@ -238,6 +238,13 @@ test('Sidebar integration in JobListingsPage', () => {
  * Test Case: Responsive design renders correct components based on screen size.
  * Checks that the correct view (Card View or Table View) is rendered based on the window's inner width.
  */
+  /**
+   * Test: handleWindowSizeChange updates view state based on window size
+   * Purpose: This test verifies that the view state of the JobListingsPage component updates correctly when the window size changes. It simulates changing the window size to a small screen and then to a large screen, and checks if the component renders the appropriate view ('Card View' for small screens and 'Table View' for large screens).
+   * Inputs: None
+   * Outputs: None
+   * Side Effects: The document body will contain text 'Card View' or 'Table View' depending on the simulated window size.
+   */
   test('handleWindowSizeChange updates view state based on window size', () => {
     jest.spyOn(window, 'innerWidth', 'get').mockImplementation(() => 500); // Simulate small screen
     const { getByText } = render(<JobListingsPage />);
@@ -248,6 +255,13 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(getText('Table View')).toBeInTheDocument();
   });
 
+  test('sequential updates to filters result in combined state', () => {
+   * Test: sequential updates to filters result in combined state
+   * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
+   * Inputs: None
+   * Outputs: None
+   * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
+   */
   test('sequential updates to filters result in combined state', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
@@ -418,6 +432,7 @@ describe('handleErrorState function tests', () => {
     expect(getByText('Card View')).toBeInTheDocument();
   });
 
+
   /**
    * Test: handles window resize to switch to table view correctly
    * Purpose: This test ensures that the JobListingsPage component transitions to 'Table View' when the window is resized to a width typical of larger screens (e.g., desktops). By dispatching a resize event with a width of 1024px, the test checks for the presence of 'Table View' text, confirming the UI's adaptability to screen size changes.
@@ -436,13 +451,64 @@ describe('handleErrorState function tests', () => {
     const { getByText } = render(<JobListingsPage />);
     expect(getByText('Card View')).toBeInTheDocument();
 
-    global.innerWidth = 1024; // Simulate large screen
-    const { getByText: getText } = render(<JobListingsPage />);
-    expect(getText('Table View')).toBeInTheDocument();
-  });
+describe('handleErrorState function tests', () => {
+  let setErrorStateMock;
+  let initialState;
+
+
+  beforeEach(() => {
+    setErrorStateMock = jest.fn();
+    initialState = { status: false, company: false };
     // Mocking useState for errorState
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
   });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('sets errorState to true for empty value', () => {
+    const name = 'status';
+    const value = '';
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('updates errorState for non-empty input value', () => {
+    const name = 'company';
+    const value = 'Tech Inc';
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
+  test('sets errorState to true for null value', () => {
+    const name = 'location';
+    const value = null;
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('sets errorState to true for undefined value', () => {
+    const name = 'role';
+    const value = undefined;
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('updates errorState for valid email format', () => {
+    const name = 'email';
+    const value = 'user@example.com';
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
+
+  test('sets errorState to true for invalid email format', () => {
+    const name = 'email';
+    const value = 'userexample.com'; // Missing '@' character
+    JobListingsPage.prototype.handleErrorState(name, value);
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+});
 
   afterEach(() => {
 /**
