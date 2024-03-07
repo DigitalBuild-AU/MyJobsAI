@@ -68,25 +68,53 @@ const CoverLetterGenerationPage = () => {
  * Allows users to select a job listing, generate a cover letter, and download it in PDF or DOC format.
  */
   const downloadAsDOC = () => {
+import Card from '../components/Card';
+import Modal from '../components/Modal';
+
+const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+
+const handleSaveCoverLetter = () => {
+  setIsSaveModalOpen(true);
+};
+
+const handleCloseSaveModal = () => {
+  setIsSaveModalOpen(false);
+};
+
+const renderSaveModal = () => (
+  <Modal isOpen={isSaveModalOpen} onClose={handleCloseSaveModal}>
+    <div>
+      <h2>Save Cover Letter</h2>
+      <p>Do you want to save the generated cover letter?</p>
+      <button onClick={() => {
+        console.log('Cover letter saved.');
+        setIsSaveModalOpen(false);
+      }}>Save</button>
+      <button onClick={() => setIsSaveModalOpen(false)}>Cancel</button>
+    </div>
+  </Modal>
+);
     // Placeholder function for downloading the cover letter as DOC
     console.log('Downloading as DOC...');
   };
 
   return (
     <div className="cover-letter-generation-page">
-      <select onChange={handleJobSelection} value={selectedJob.id}>
-        {jobListings.map(job => (
-          <option key={job.id} value={job.id}>{job.title}</option>
-        ))}
-      </select>
-      <input type="text" value={contactPerson} readOnly />
-      <button onClick={createCoverLetter}>Create Cover Letter</button>
+      <Card>
+        <select onChange={handleJobSelection} value={selectedJob.id}>
+          {jobListings.map(job => (
+            <option key={job.id} value={job.id}>{job.title}</option>
+          ))}
+        </select>
+        <input type="text" value={contactPerson} readOnly />
+        <button onClick={createCoverLetter}>Create Cover Letter</button>
+      </Card>
       {generatedCoverLetter && (
-        <div>
+        <Card>
           <p>{generatedCoverLetter}</p>
           <button onClick={downloadAsPDF}>Download as PDF</button>
           <button onClick={downloadAsDOC}>Download as DOC</button>
-        </div>
+        </Card>
       )}
 /**
  * Generates a cover letter based on the selected job's description, user's name, skills, and experience.
