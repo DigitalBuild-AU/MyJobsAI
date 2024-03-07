@@ -4,6 +4,12 @@
  */
 import axios from 'axios';
 
+/**
+ * Fetches job listings from the API based on provided filters and pagination.
+ * @param filters - An object containing filter criteria such as status and company.
+ * @param page - The current page number for pagination.
+ * @returns Promise - A promise that resolves with the API response.
+ */
 export const fetchListingsFromAPI = (filters, page) => {
   const { status, company } = filters;
   const url = `http://localhost:3000/api/joblistings/filter?page=${page}&status=${status}&company=${company}`;
