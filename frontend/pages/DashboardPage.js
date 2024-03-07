@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import SummaryChart from '../components/SummaryChart';
 
 const DashboardPage = () => {
     const [summary, setSummary] = useState({
@@ -80,3 +81,4 @@ const DashboardPage = () => {
 }
 
 export default DashboardPage;
+                        <SummaryChart summary={summary} />
