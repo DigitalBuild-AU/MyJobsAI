@@ -1,3 +1,7 @@
+/**
+ * JobListingsPage Component
+ * This file defines the JobListingsPage component, which is responsible for rendering the job listings page in the MyJobsAI application. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import JobListingCard from '../components/JobListingCard';
@@ -30,6 +34,14 @@ const JobListingsPage = () => {
       }
     };
     
+/**
+ * Updates the error state for a given field based on whether its value is empty.
+ * 
+ * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
+ *
+ * @param {string} name - The name of the field to update the error state for.
+ * @param {string} value - The new value of the field.
+ */
     window.addEventListener('resize', handleWindowSizeChange);
     handleWindowSizeChange();
 
