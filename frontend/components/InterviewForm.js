@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
-function InterviewForm({ onSubmit, onJobTitleChange, onDateChange, onNotesChange }) {
+import axios from 'axios';
+function InterviewForm({ setInterviews, interviews }) {
   const [jobTitle, setJobTitle] = useState('');
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
@@ -25,7 +25,18 @@ function InterviewForm({ onSubmit, onJobTitleChange, onDateChange, onNotesChange
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ jobTitle, date, notes });
+    axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
+      .then(response => {
+        alert('Interview scheduled successfully.');
+        setInterviews([...interviews, response.data]);
+        setJobTitle('');
+        setDate('');
+        setNotes('');
+      })
+      .catch(error => {
+        console.error('Error scheduling interview:', error);
+        alert('Failed to schedule interview.');
+      });
   };
 
   return (
