@@ -1,3 +1,6 @@
+/**
+ * Renders the Dashboard page, displaying a summary of job applications, interviews, offers, and a random quote.
+ */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
