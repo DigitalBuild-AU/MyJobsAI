@@ -3,6 +3,12 @@ import axios from 'axios';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 
+/**
+ * Renders the JobListingsPage component.
+ * This component displays a list of job listings and provides filtering and pagination functionality.
+ *
+ * @returns {JSX.Element} The JobListingsPage component
+ */
 const JobListingsPage = () => {
   const [listings, setListings] = useState([]);
   const [view, setView] = useState('table');
