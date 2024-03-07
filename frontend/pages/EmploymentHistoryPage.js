@@ -26,13 +26,10 @@ const EmploymentHistoryPage = () => {
     fetchEmploymentHistory();
   }, []);
 
+  /**
+   * Adds a new role to the local employment history state based on user input.
+   */
   const addNewRole = () => {
-/**
- * Fetches the user's employment history from the server on component mount.
- * @async
- * @function useEffect
- * @return {Promise<void>} A promise that resolves when the employment history is fetched and set in state.
- */
     const newRole = { position, company, startDate, endDate, location, description, highlights: notableAchievements };
     setEmploymentHistory([...employmentHistory, newRole]);
     setPosition('');
