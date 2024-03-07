@@ -166,6 +166,17 @@ test('renders JobListingTable component correctly', () => {
     const currentPage = 0; // First page
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
     const buttons = queryAllByRole('button');
+  test('updateFilters updates filters state with correct values', () => {
+    const setFiltersMock = jest.fn();
+    JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
+
+    const instance = new JobListingsPage();
+    instance.updateFilters('status', 'active');
+    instance.updateFilters('company', 'Tech Inc');
+
+    expect(setFiltersMock).toHaveBeenCalledWith({ status: 'active' });
+    expect(setFiltersMock).toHaveBeenCalledWith({ company: 'Tech Inc' });
+  });
     // Assuming the first page button has a specific class 'first-page-btn'
     expect(buttons[1].classList.contains('first-page-btn')).toBeTruthy();
   });
@@ -204,20 +215,6 @@ test('renders JobListingTable component correctly', () => {
     // +1 to account for the 'Previous' button in the pagination
     expect(buttons[currentPage + 1].disabled).toBeTruthy();
   });
-/**
-/**
- * `createPaginationButton` function:
- * This function is responsible for rendering pagination buttons within the JobListingsPage component. It dynamically creates button elements based on the total number of pages and the current page, including 'Next' and 'Previous' buttons for navigation.
- * 
- * Parameters:
- * - `totalPages` (number): The total number of pages to be paginated.
- * - `currentPage` (number): The current page number that is active.
- * 
- * Returns:
- * - An array of button elements for pagination, including 'Next' and 'Previous' buttons.
- */
- * Mock function to simulate fetching job listings for testing.
- * This function is used to set the 'totalPages' and 'currentPage' values for pagination tests.
  */
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
@@ -241,6 +238,17 @@ test('renders JobListingTable component correctly', () => {
     const currentPage = 2;
     render(<JobListingsPage />);
     // Mocking fetchListings to set totalPages and currentPage
+/**
+ * `createPaginationButton` function:
+ * This function is responsible for rendering pagination buttons within the JobListingsPage component. It dynamically creates button elements based on the total number of pages and the current page, including 'Next' and 'Previous' buttons for navigation.
+ * 
+ * Parameters:
+ * - `totalPages` (number): The total number of pages to be paginated.
+ * - `currentPage` (number): The current page number that is active.
+ * 
+ * Returns:
+ * - An array of button elements for pagination, including 'Next' and 'Previous' buttons.
+ */
     // This is a placeholder for actual mocking logic
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages + 2); // Including next and previous page buttons
@@ -306,6 +314,15 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  test('handleWindowSizeChange updates view state based on window size', () => {
+    global.innerWidth = 500; // Simulate small screen
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+
+    global.innerWidth = 1024; // Simulate large screen
+    const { getByText: getText } = render(<JobListingsPage />);
+    expect(getText('Table View')).toBeInTheDocument();
+  });
     // Mocking useState for errorState
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
   });
@@ -392,12 +409,12 @@ describe('handleErrorState function tests', () => {
   });
   });
 
-/**
- * Test Case: Sets error state to true for null and undefined values.
- * Verifies that the handleErrorState function sets the error state to true for input fields with null or undefined values.
- */
+  /**
+   * Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
+   * This test simulates passing a valid email format to the handleErrorState function and checks if the error state
+   * for the 'email' field is correctly set to false.
+   */
 
-  // Test case: Verifies that the handleErrorState function sets the error state to false for a valid email format.
   test('should correctly update errorState for valid email format', () => {
     const name = 'email';
     const value = 'user@example.com';
@@ -407,7 +424,11 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
   });
 
-  // Test case: Verifies that the handleErrorState function sets the error state to true for an invalid email format.
+  /**
+   * Test case: Verifies that the handleErrorState function sets the error state to true for an invalid email format.
+   * This test simulates passing an invalid email format (missing '@' character) to the handleErrorState function
+   * and checks if the error state for the 'email' field is correctly set to true.
+   */
   test('should set errorState to true for invalid email format', () => {
     const name = 'email';
     const value = 'userexample.com'; // Missing '@' character
