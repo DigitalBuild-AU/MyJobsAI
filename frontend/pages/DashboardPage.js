@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import GlobalSearchBar from '../components/GlobalSearchBar';
 
 const DashboardPage = () => {
     const [summary, setSummary] = useState({
@@ -80,3 +81,4 @@ const DashboardPage = () => {
 }
 
 export default DashboardPage;
+            <GlobalSearchBar />
