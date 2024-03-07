@@ -80,18 +80,33 @@ test('renders JobListingTable component correctly', () => {
     JobListingsPage.__ResetDependency__('setFilters');
   });
 
-  test('createPageButton returns a button with correct properties', () => {
-    const pageNumber = 1;
-    const pageButton = createPageButton(pageNumber);
-    // Assuming createPageButton returns a React element
-    expect(pageButton.props.disabled).toBeFalsy();
-    expect(pageButton.props.children).toBe(pageNumber + 1);
-    expect(pageButton.type).toBe('button');
+  test('renderPagination renders correct number of buttons and disables current page button', () => {
+  test('input validation updates error state for invalid input', () => {
+    const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
+    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
+    rerender(<JobListingsPage />);
+    expect(getByText('Please enter a valid status.')).toBeInTheDocument();
+    fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: '', name: 'company' } });
+    rerender(<JobListingsPage />);
+    expect(getByText('Please enter a valid company name.')).toBeInTheDocument();
+  });
+    const totalPages = 5;
+    const currentPage = 2;
+    const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} page={currentPage} />);
+    const buttons = queryAllByRole('button');
+    expect(buttons.length).toBe(totalPages);
+    expect(buttons[currentPage].disabled).toBeTruthy();
   });
   test('handleFilterChange updates filters state and resets page', async () => {
-  * Test if handleFilterChange updates filters state and resets page
-  */
-  test('handleFilterChange updates filters state and resets page', async () => {
+  test('responsive design renders correct components based on screen size', () => {
+    global.innerWidth = 500;
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+    global.innerWidth = 1024;
+    const { getByText: getText } = render(<JobListingsPage />);
+    expect(getText('Table View')).toBeInTheDocument();
+  });
+    
     const { getByPlaceholderText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech Inc', name: 'company' } });
@@ -99,15 +114,17 @@ test('renders JobListingTable component correctly', () => {
     // This is a placeholder for actual state verification logic
     expect(await screen.findByDisplayValue('active')).toBeInTheDocument();
     expect(await screen.findByDisplayValue('Tech Inc')).toBeInTheDocument();
+
+  test('error messages are displayed inline with form inputs', async () => {
+    const { getByPlaceholderText, rerender, findByText } = render(<JobListingsPage />);
+    fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
+    rerender(<JobListingsPage />);
+    expect(await findByText('Please enter a valid status.')).toBeInTheDocument();
+    fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: '', name: 'company' } });
+    rerender(<JobListingsPage />);
+    expect(await findByText('Please enter a valid company name.')).toBeInTheDocument();
   });
-/**
- * Updates the filters state with the given filter name and value.
- * @param {string} filterName - The name of the filter.
- * @param {string} filterValue - The value of the filter.
- */
-  /**
-  * Test if renderPagination renders correct number of buttons and disables current page button
-  */
+
   test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
     const currentPage = 2;
@@ -140,6 +157,12 @@ test('renders JobListingTable component correctly', () => {
     expect(buttons.length).toBe(3); // Including next and previous page buttons, which should be disabled
     expect(buttons[1].disabled).toBeTruthy(); // Current page button
   });
-/**
- * Test if renderPagination with only one page
- */
+
+  test('responsive design renders correct components based on screen size', () => {
+    global.innerWidth = 500;
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+    global.innerWidth = 1024;
+    const { getByText: getText } = render(<JobListingsPage />);
+    expect(getText('Table View')).toBeInTheDocument();
+  });
