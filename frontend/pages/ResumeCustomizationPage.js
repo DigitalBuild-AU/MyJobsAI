@@ -1,3 +1,7 @@
+/**
+ * Page component for customizing resumes based on job listings.
+ * Users can select a job listing and receive suggestions for customizing their CVs accordingly.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ResumeCustomizationPage.css';
@@ -21,6 +25,17 @@ const ResumeCustomizationPage = () => {
   };
 
   const customizeCV = async () => {
+/**
+ * Fetches job listings on component mount and updates the state.
+ * @async
+ * @function useEffect
+ * @return {Promise<void>} A promise that resolves when job listings are fetched and set in state.
+ */
+/**
+ * Handles the selection of a job from the dropdown.
+ * @function handleJobSelection
+ * @param {Event} e - The event triggered on job selection.
+ */
     const response = await axios.post('/api/cv_customization', {
       jobDescription: selectedJob.description,
       userCV: 'User CV' // Placeholder, replace with actual user CV data
@@ -54,3 +69,18 @@ const ResumeCustomizationPage = () => {
 };
 
 export default ResumeCustomizationPage;
+/**
+ * Sends the selected job and user CV to the server for customization suggestions.
+ * @async
+ * @function customizeCV
+ * @throws {Error} When unable to customize the CV.
+ * @return {Promise<void>} A promise that resolves when CV customization suggestions are received and set in state.
+ */
+/**
+ * Placeholder function for downloading the customized CV as a PDF.
+ * @function downloadAsPDF
+ */
+/**
+ * Placeholder function for downloading the customized CV as a DOC.
+ * @function downloadAsDOC
+ */
