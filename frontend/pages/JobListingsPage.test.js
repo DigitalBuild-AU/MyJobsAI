@@ -107,6 +107,10 @@ test('renders JobListingTable component correctly', () => {
  * Test Case: Updates filters state correctly.
  * Verifies that the updateFilters function correctly updates the filters state with the provided values.
  */
+  /**
+  * Test Case: Validates input and updates error state for invalid input.
+  * This test simulates user input for filters and verifies that the error state is updated appropriately for invalid inputs, ensuring the robustness of form validation within the component.
+  */
   test('input validation updates error state for invalid input', () => {
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
