@@ -5,7 +5,8 @@ import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
 import { render } from '@testing-library/react';
-import JobListingsPage from './JobListingsPage';
+import JobListingCard from '../../components/JobListingCard';
+import JobListingTable from '../../components/JobListingTable';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 
@@ -18,6 +19,9 @@ describe('JobListingsPage component', () => {
     };
 
     const { getByText } = render(<JobListingCard listing={listing} />);
+    expect(getByText('Software Engineer')).toBeInTheDocument();
+    expect(getByText('ABC Inc.')).toBeInTheDocument();
+    expect(getByText('New York')).toBeInTheDocument();
 
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
@@ -39,6 +43,13 @@ describe('JobListingsPage component', () => {
     ];
 
     const { getByText } = render(<JobListingTable listings={listings} />);
+    expect(getByText('Software Engineer')).toBeInTheDocument();
+    expect(getByText('ABC Inc.')).toBeInTheDocument();
+    expect(getByText('New York')).toBeInTheDocument();
+
+    expect(getByText('Product Manager')).toBeInTheDocument();
+    expect(getByText('XYZ Corp.')).toBeInTheDocument();
+    expect(getByText('San Francisco')).toBeInTheDocument();
 
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
