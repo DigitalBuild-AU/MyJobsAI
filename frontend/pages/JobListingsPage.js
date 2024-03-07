@@ -60,6 +60,12 @@ const JobListingsPage = () => {
    *
    * @param {Event} e - The change event object, containing the filter name and value.
    */
+    /**
+   * Handles changes to filter inputs.
+   * Updates the filters state and resets the page to 0 if the input is valid.
+   * Sets an error state for the corresponding filter if the input is invalid.
+   * @param {Event} e - The change event object from the input element.
+   */
   // Extract the logic for handling filters into a separate function
   
 const handleFilterChange = (e) => {
