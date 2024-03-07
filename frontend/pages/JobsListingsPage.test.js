@@ -54,6 +54,12 @@ describe('JobListingsPage component', () => {
     expect(setState).toHaveBeenCalledWith({ ...initialState, company: 'ABC Inc.' });
   });
 
+  /**
+   * Creates a pagination button element for a given page number.
+   * @param {number} pageNumber - The page number for the button.
+   * @param {function} setPage - Callback function to set the current page.
+   * @returns {ReactElement} A button element with properties set for pagination functionality.
+   */
   test('createPageButton function returns a button with correct properties', () => {
 /**
  * Updates the filters state with the given filter name and value.
