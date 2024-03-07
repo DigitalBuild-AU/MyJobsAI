@@ -15,6 +15,9 @@ const DashboardPage = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
+        /**
+         * Fetches and sets the summary of job applications, interviews, and offers from the server.
+         */
         const fetchSummary = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/dashboard/summary');
