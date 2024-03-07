@@ -62,6 +62,17 @@ const DashboardPage = () => {
                         <h3>Quote of the Day</h3>
                         <blockquote>{quote}</blockquote>
                     </div>
+                    <div className="quick-actions">
+                        <Link to="/jobListings">View Job Listings</Link>
+                        <Link to="/applicationTracking">Track Applications</Link>
+                    </div>
+                    <div>
+                        <h4>Upcoming Features</h4>
+                        <ul>
+                            <li>Interview Scheduler</li>
+                            <li>Task and Networking Tracker</li>
+                        </ul>
+                    </div>
                 </div>
             )}
         </div>
