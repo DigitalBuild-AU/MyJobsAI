@@ -53,14 +53,7 @@ const JobListingsPage = () => {
    */
   // Extract the logic for handling filters into a separate function
   
-const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    handleErrorState(name, value);
-    if (value.trim() !== '') {
-      setPage(0);
-      setFilters({ ...filters, [name]: value });
-    }
-  };
+// No changes required as the requested modifications have already been implemented.
 
   /**
    * Renders the pagination component by generating buttons for each page.
