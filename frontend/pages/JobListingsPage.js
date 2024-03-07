@@ -18,6 +18,10 @@ const JobListingsPage = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
+    /**
+ * Handles the change in window size.
+ * Sets the view state based on the window's inner width.
+ */
     const handleWindowSizeChange = () => {
       if (window.innerWidth < 768) {
         setView('card');
@@ -35,6 +39,11 @@ const JobListingsPage = () => {
     };
   }, [filters, page]);
 
+  /**
+ * Fetches job listings from the server based on the current filters and page.
+ * Utilizes axios to make a GET request with query parameters for filtering.
+ * Updates the listings and totalPages state with the response data.
+ */
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
@@ -51,6 +60,12 @@ const JobListingsPage = () => {
    *
    * @param {Event} e - The change event object, containing the filter name and value.
    */
+    /**
+   * Handles changes to filter inputs.
+   * Updates the filters state and resets the page to 0 if the input is valid.
+   * Sets an error state for the corresponding filter if the input is invalid.
+   * @param {Event} e - The change event object from the input element.
+   */
   // Extract the logic for handling filters into a separate function
   
 // No changes required as the requested modifications have already been implemented.
@@ -58,6 +73,10 @@ const JobListingsPage = () => {
   /**
    * Renders the pagination component by generating buttons for each page.
    * The current page button is disabled to indicate the active page.
+   */
+  /**
+   * Renders the pagination component.
+   * Generates buttons for each page and disables the button for the current page.
    */
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
@@ -73,6 +92,12 @@ const renderPagination = () => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
+  /**
+ * Creates a button element for a given page number.
+ * The button is disabled if it corresponds to the current page.
+ * @param {number} pageNumber - The page number for the button.
+ * @returns {JSX.Element} A button element for pagination.
+ */
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
   );
@@ -113,10 +138,15 @@ const handleErrorState = (name, value) => {
       {renderPagination()}
     </div>
   );
+  
 /**
+ * Updates the filters state with a new value for a given filter.
+ * @param {string} filterName - The name of the filter to update.
+ * @param {string} filterValue - The new value for the filter.
  * Creates and returns a pagination button React component for a given page number.
  * @param {number} pageNumber - The page number for which the pagination button is created.
  * @returns {ReactElement} - A React button element for navigating to the specified page number.
+
  */
 };
 
