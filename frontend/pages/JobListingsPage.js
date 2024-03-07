@@ -126,6 +126,11 @@ const renderPagination = () => {
       {renderPagination()}
     </div>
   );
+/**
+ * Updates the filters state with a new value for a given filter.
+ * @param {string} filterName - The name of the filter to update.
+ * @param {string} filterValue - The new value for the filter.
+ */
 };
 
 export default JobListingsPage;
