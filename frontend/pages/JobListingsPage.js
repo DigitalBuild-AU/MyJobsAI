@@ -86,12 +86,11 @@ const JobListingsPage = () => {
 // No changes required as the requested modifications have already been implemented.
 
   /**
-   * Renders the pagination component by generating buttons for each page.
-   * The current page button is disabled to indicate the active page.
-   */
-  /**
-   * Renders the pagination component.
-   * Generates buttons for each page and disables the button for the current page.
+   * Generates the pagination component by creating buttons for each page.
+   * The button corresponding to the current page is disabled to indicate the active page. This function does not take any parameters and returns a JSX.Element containing the pagination buttons.
+   *
+   * @param none - This function does not take any parameters.
+   * @returns {JSX.Element} - A JSX.Element containing the pagination buttons.
    */
   // Extract the logic for rendering the pagination into a separate function
 const renderPagination = () => {
