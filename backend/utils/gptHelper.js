@@ -20,3 +20,12 @@ async function generateCvCustomizationSuggestions(jobDescription, userCV) {
 }
 
 module.exports = { generateCvCustomizationSuggestions };
+/**
+ * Utility functions for interacting with OpenAI's GPT models to generate CV customization suggestions.
+ */
+/**
+ * Generates CV customization suggestions based on a job description and user's CV.
+ * @param {string} jobDescription - The job description to compare the CV against.
+ * @param {string} userCV - The user's CV that needs customization suggestions.
+ * @returns {Promise<string>} A string containing CV customization suggestions.
+ */

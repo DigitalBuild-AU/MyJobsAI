@@ -1,5 +1,5 @@
 /**
- * Page component for customizing resumes based on job listings.
+ * React component page for customizing resumes based on selected job listings.
  * Users can select a job listing and receive suggestions for customizing their CVs accordingly.
  */
 import React, { useState, useEffect } from 'react';
@@ -7,6 +7,10 @@ import { postResumeCustomization } from '../utils/apiHelpers';
 import './ResumeCustomizationPage.css';
 
 const ResumeCustomizationPage = () => {
+/**
+ * useEffect hook to fetch job listings on component mount.
+ * Fetches job listings from the server and updates the jobListings state.
+ */
   const [jobListings, setJobListings] = useState([]);
   const [selectedJob, setSelectedJob] = useState('');
   const [cvAnalysisResults, setCvAnalysisResults] = useState('');
@@ -104,6 +108,24 @@ const [uploadedCV, setUploadedCV] = useState(null);
 };
 
 export default ResumeCustomizationPage;
+
+/**
+ * Customizes the user's CV based on the selected job's description.
+ * Sends a request to the server with the selected job description and user's CV, then updates the state with the analysis results and customized CV.
+ */
+  const customizeCV = async () => {
+
+/**
+ * Downloads the customized CV as a PDF.
+ * Placeholder function for future implementation of PDF download functionality.
+ */
+  const downloadAsPDF = () => {
+
+/**
+ * Downloads the customized CV as a DOC.
+ * Placeholder function for future implementation of DOC download functionality.
+ */
+  const downloadAsDOC = () => {
 
 /**
  * Sends the selected job and user CV to the server for customization suggestions.
