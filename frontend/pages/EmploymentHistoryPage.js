@@ -1,3 +1,7 @@
+/**
+ * Page component for managing and submitting employment history.
+ * Users can add, edit, and submit their employment history.
+ */
 import React, { useState, useEffect } from 'react';
 import { postEmploymentHistory } from '../utils/apiHelpers';
 import './EmploymentHistoryPage.css';
@@ -20,6 +24,12 @@ const EmploymentHistoryPage = () => {
   }, []);
 
   const addNewRole = () => {
+/**
+ * Fetches the user's employment history from the server on component mount.
+ * @async
+ * @function useEffect
+ * @return {Promise<void>} A promise that resolves when the employment history is fetched and set in state.
+ */
     const newRole = { position, company, startDate, endDate, responsibilities, notableAchievements };
     setEmploymentHistory([...employmentHistory, newRole]);
     setPosition('');
@@ -57,3 +67,16 @@ const EmploymentHistoryPage = () => {
 };
 
 export default EmploymentHistoryPage;
+/**
+ * Adds a new role to the local employment history state.
+ * @function addNewRole
+ * @return {void}
+ */
+/**
+ * Submits the employment history to the server.
+ * @async
+ * @function handleSubmit
+ * @param {Event} e - The event object from the form submission.
+ * @throws {Error} When the submission fails.
+ * @return {Promise<void>} A promise that resolves when the employment history is successfully submitted.
+ */
