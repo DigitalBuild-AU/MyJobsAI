@@ -61,6 +61,10 @@ test('handles error fetching job listings gracefully', async () => {
   await waitFor(() => expect(getByText('Error fetching job listings:')).toBeInTheDocument());
 });
 
+/**
+ * Tests error handling when generating a cover letter fails.
+ * It checks for the presence of an error message after attempting to create a cover letter.
+ */
 // Tests error handling when generating a cover letter fails.
 test('handles error generating cover letter gracefully', async () => {
   axios.post.mockRejectedValue(new Error('Error generating cover letter'));
