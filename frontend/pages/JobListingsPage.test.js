@@ -213,6 +213,10 @@ test('renders JobListingTable component correctly', () => {
    * Inputs: None
    * Outputs: None
 /**
+ * Test Case: Error messages are displayed inline with form inputs.
+ * Simulates invalid input for filters and verifies that appropriate error messages are displayed inline with the form inputs.
+ */
+/**
  * Test Case: Displays error messages inline with form inputs.
  * Verifies that error messages are displayed inline with form inputs when validation fails.
  */
