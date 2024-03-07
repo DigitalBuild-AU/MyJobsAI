@@ -419,6 +419,10 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  /**
+   * Test: handles window resize to switch to card view correctly
+   * Purpose: This test verifies that the JobListingsPage component correctly switches to 'Card View' when the window is resized to a width indicative of a smaller screen (e.g., mobile devices). It simulates a window resize event to a width of 500px and checks if the 'Card View' text is rendered, indicating the UI has correctly adjusted.
+   */
   test('handles window resize to switch to card view correctly', () => {
     act(() => {
       global.innerWidth = 500;
@@ -428,9 +432,29 @@ describe('handleErrorState function tests', () => {
     expect(getByText('Card View')).toBeInTheDocument();
   });
 
+
+  /**
+   * Test: handles window resize to switch to table view correctly
+   * Purpose: This test ensures that the JobListingsPage component transitions to 'Table View' when the window is resized to a width typical of larger screens (e.g., desktops). By dispatching a resize event with a width of 1024px, the test checks for the presence of 'Table View' text, confirming the UI's adaptability to screen size changes.
+   */
+  test('handles window resize to switch to table view correctly', () => {
+    act(() => {
+      global.innerWidth = 1024;
+      global.dispatchEvent(new Event('resize'));
+    });
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Table View')).toBeInTheDocument();
+  });
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
+  test('handleWindowSizeChange updates view state based on window size', () => {
+    global.innerWidth = 500; // Simulate small screen
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+
 describe('handleErrorState function tests', () => {
   let setErrorStateMock;
   let initialState;
+
 
   beforeEach(() => {
     setErrorStateMock = jest.fn();
@@ -489,6 +513,10 @@ describe('handleErrorState function tests', () => {
   afterEach(() => {
 /**
  * Test Case: Creates a pagination button with the correct page number.
+ * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
+ */
+    jest.clearAllMocks();
+  });
  * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
  */
     jest.clearAllMocks();
