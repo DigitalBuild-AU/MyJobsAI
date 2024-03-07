@@ -231,3 +231,20 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
   });
 });
+  test('should correctly update errorState for empty input value', () => {
+    const name = 'status';
+    const value = '';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
+  });
+
+  test('should correctly update errorState for non-empty input value', () => {
+    const name = 'company';
+    const value = 'Tech Corp';
+    act(() => {
+      JobListingsPage.prototype.handleErrorState(name, value);
+    });
+    expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
+  });
