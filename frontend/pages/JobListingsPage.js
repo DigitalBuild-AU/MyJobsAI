@@ -39,6 +39,11 @@ const JobListingsPage = () => {
     };
   }, [filters, page]);
 
+  /**
+ * Fetches job listings from the server based on the current filters and page.
+ * Utilizes axios to make a GET request with query parameters for filtering.
+ * Updates the listings and totalPages state with the response data.
+ */
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
