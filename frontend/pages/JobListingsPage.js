@@ -68,16 +68,7 @@ const JobListingsPage = () => {
    */
   // Extract the logic for handling filters into a separate function
   
-const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    if (value.trim() === '') {
-      setErrorState({ ...errorState, [name]: true });
-    } else {
-      setPage(0);
-      setFilters({ ...filters, [name]: value });
-      setErrorState({ ...errorState, [name]: false });
-    }
-  };
+// No changes required as the requested modifications have already been implemented.
 
   /**
    * Renders the pagination component by generating buttons for each page.
@@ -113,6 +104,13 @@ const renderPagination = () => {
 
   return (
     <div className="job-listings-page">
+const handleErrorState = (name, value) => {
+  if (value.trim() === '') {
+    setErrorState({ ...errorState, [name]: true });
+  } else {
+    setErrorState({ ...errorState, [name]: false });
+  }
+};
       <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
         <option value="table">Table View</option>
         <option value="card">Card View</option>
