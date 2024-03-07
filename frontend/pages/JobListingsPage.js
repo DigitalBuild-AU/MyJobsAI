@@ -55,12 +55,10 @@ const JobListingsPage = () => {
   
 const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    if (value.trim() === '') {
-      setErrorState({ ...errorState, [name]: true });
-    } else {
+    handleErrorState(name, value);
+    if (value.trim() !== '') {
       setPage(0);
       setFilters({ ...filters, [name]: value });
-      setErrorState({ ...errorState, [name]: false });
     }
   };
 
@@ -90,6 +88,13 @@ const renderPagination = () => {
 
   return (
     <div className="job-listings-page">
+const handleErrorState = (name, value) => {
+  if (value.trim() === '') {
+    setErrorState({ ...errorState, [name]: true });
+  } else {
+    setErrorState({ ...errorState, [name]: false });
+  }
+};
       <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
         <option value="table">Table View</option>
         <option value="card">Card View</option>
