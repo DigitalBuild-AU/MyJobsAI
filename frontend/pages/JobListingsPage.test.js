@@ -214,6 +214,7 @@ describe('handleErrorState function tests', () => {
     jest.clearAllMocks();
   });
 
+  // Test case: Verifies that the handleErrorState function sets the error state to true for an empty input value.
   test('should set errorState to true for empty value', () => {
     const name = 'status';
     const value = '';
