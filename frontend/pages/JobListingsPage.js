@@ -18,6 +18,10 @@ const JobListingsPage = () => {
   const [errorState, setErrorState] = useState({ status: false, company: false });
 
   useEffect(() => {
+    /**
+ * Handles the change in window size.
+ * Sets the view state based on the window's inner width.
+ */
     const handleWindowSizeChange = () => {
       if (window.innerWidth < 768) {
         setView('card');
