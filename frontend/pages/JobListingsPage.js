@@ -103,6 +103,7 @@ const renderPagination = () => {
   );
 
   return (
+
     <div className="job-listings-page">
 /**
  * Updates the error state for a given field based on whether its value is empty.
@@ -112,6 +113,7 @@ const renderPagination = () => {
  * @param {string} name - The name of the field to update the error state for.
  * @param {string} value - The new value of the field.
  */
+
 const handleErrorState = (name, value) => {
   if (value.trim() === '') {
     setErrorState({ ...errorState, [name]: true });
@@ -119,6 +121,7 @@ const handleErrorState = (name, value) => {
     setErrorState({ ...errorState, [name]: false });
   }
 };
+    <div className="job-listings-page">
       <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
         <option value="table">Table View</option>
         <option value="card">Card View</option>
