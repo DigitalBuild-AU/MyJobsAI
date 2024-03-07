@@ -14,7 +14,7 @@ MyJobsAI is a job search management application aimed at simplifying the job app
 ## Installation
 
 1. Clone the repository to your local machine.
-2. Install the required dependencies by running `npm install` in your terminal.
+2. Install the required dependencies by running `npm install` in your terminal. If using Material-UI and Sass, ensure they are installed by running `npm install @material-ui/core sass`.
 3. Start the application with `npm start`. The app will then be available on `http://localhost:3000/`.
 
 ## Usage
@@ -32,3 +32,8 @@ Contributions are welcome! Feel free to submit pull requests or open issues to s
 ## License
 
 MyJobsAI is released under the ISC License.
+### Frontend Technologies
+- **React**: Utilized for building a Single Page Application (SPA) that offers a dynamic user experience.
+- **Bootstrap**: Employed for responsive design and utilizing a wide range of components for the UI.
+- **Material-UI (Optional)**: Considered for providing a set of components that implement Google's Material Design for a clean and modern UI.
+- **Sass (Optional)**: Proposed for advanced CSS features and easier maintenance of stylesheets.
