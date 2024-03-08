@@ -40,11 +40,9 @@ const InterviewsComponent = () => {
           </div>
           <div className="form-group">
             <label htmlFor="interviewDateInput">Date and Time</label>
-            <input type="datetime-local" className="form-control" id="interviewDateInput" value={interviewDate} onChange={(e) => setInterviewDate(e.target.value)} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="notesInput">Notes</label>
-            <textarea className="form-control" id="notesInput" placeholder="Enter any notes" rows="3" value={notes} onChange={(e) => setNotes(e.target.value)}></textarea>
+/**
+ * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
+ */
           </div>
           <button type="submit" className="btn btn-primary">Schedule Interview</button>
         </form>
