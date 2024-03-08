@@ -1,3 +1,6 @@
+"""
+Tests the successful generation of a cover letter through the generateCoverLetter function.
+"""
 import axios from 'axios';
 import { generateCoverLetter, handleCoverLetterResponse, handleCoverLetterError } from '../utils/coverLetterAPI';
 
@@ -17,10 +20,16 @@ describe('generateCoverLetter', () => {
   });
 
   it('fails to generate a cover letter with an error', async () => {
+  Tests the failure in generating a cover letter due to an error, verifying error handling.
+  """
+  it('fails to generate a cover letter with an error', async () => {
     const mockError = new Error('Network error');
     axios.post.mockRejectedValue(mockError);
     await expect(generateCoverLetter(mockJobDescription, mockUserName, mockUserSkills, mockUserExperience)).rejects.toThrow(mockError);
   });
+});
+Tests the extraction of a cover letter from the response, verifying the response handling.
+"""
 });
 
 describe('handleCoverLetterResponse', () => {
@@ -49,3 +58,6 @@ Test suite for the coverLetterAPI utility functions. It verifies the behavior of
     expect(console.error).toHaveBeenCalledWith('Failed to generate Cover Letter:', mockError);
   });
 });
+"""
+Tests logging of the error message when cover letter generation fails, verifying error logging.
+"""
