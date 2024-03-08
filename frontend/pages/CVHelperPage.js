@@ -21,19 +21,8 @@ const CVHelperPage = () => {
   return (
 
     useEffect(() => {
-        axios.get('navbar.html')
-            .then(response => {
-                // Assuming a state and method to set navbar content exists
-                setNavbarContent(response.data);
-                console.log('Navbar dynamically added.'); // gpt_pilot_debugging_log
-            })
-            .catch(error => {
-                console.error('Failed to load navbar:', error); // gpt_pilot_debugging_log
-            });
-
-        // Remove the bootstrap script tag if it exists, and append a new one
-        const scriptTags = document.getElementsByTagName('script');
-        for (let i = 0; i < scriptTags.length; i++) {
+        fetchNavbarContent();
+        handleBootstrapScript();
             if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
                 scriptTags[i].remove();
                 break;
@@ -54,9 +43,34 @@ const CVHelperPage = () => {
         <div>
           <h2>CV Suggestions</h2>
           <p>{cvSuggestions}</p>
+    // Fetches the navbar content and sets it using setNavbarContent
+    const fetchNavbarContent = () => {
+        axios.get('navbar.html')
+            .then(response => {
+                setNavbarContent(response.data);
+                console.log('Navbar dynamically added.'); // gpt_pilot_debugging_log
+            })
+            .catch(error => {
+                console.error('Failed to load navbar:', error); // gpt_pilot_debugging_log
+            });
+    };
         </div>
       )}
     </div>
 };
 
 export default CVHelperPage;
+    // Handles the removal of existing bootstrap script tag and appends a new one
+    const handleBootstrapScript = () => {
+        const scriptTags = document.getElementsByTagName('script');
+        for (let i = 0; i < scriptTags.length; i++) {
+            if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
+                scriptTags[i].remove();
+                break;
+            }
+        }
+
+        const newBootstrapScript = document.createElement('script');
+        newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
+        document.body.appendChild(newBootstrapScript);
+    };
