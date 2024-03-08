@@ -298,6 +298,28 @@ test('Save button inside modal triggers save functionality', async () => {
 
   /**
    * Test case: Handles error when creating a cover letter fails.
+test('generateCoverLetter with valid inputs displays generated letter', async () => {
+  const mockPostData = { jobDescription: 'Software Engineer role', userName: 'John Doe', userSkills: 'JavaScript, React', userExperience: '3 years' };
+  axios.post.mockResolvedValue({ data: { coverLetter: 'Your application for the Software Engineer role has been created.' } });
+
+  await act(async () => {
+    const { getByPlaceholderText, getByText, findByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.change(getByPlaceholderText('Paste the job description here...'), { target: { value: mockPostData.jobDescription } });
+    fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: mockPostData.userName } });
+    fireEvent.change(getByPlaceholderText('Your Skills...'), { target: { value: mockPostData.userSkills } });
+    fireEvent.change(getByPlaceholderText('Your Experience...'), { target: { value: mockPostData.userExperience } });
+    fireEvent.click(getByText('Generate Cover Letter'));
+    expect(await findByText('Your application for the Software Engineer role has been created.')).toBeInTheDocument();
+  });
+});
+test('generateCoverLetter error scenario displays error message', async () => {
+  axios.post.mockRejectedValue(new Error('Error generating cover letter'));
+  const { getByText, getByRole, findByText } = render(<CoverLetterGenerationPage />);
+  await act(async () => {
+    fireEvent.click(getByRole('button', { name: 'Generate Cover Letter' }));
+    expect(await findByText('Error generating Cover Letter.')).toBeInTheDocument();
+  });
+});
    * This test checks the error handling of the CoverLetterGenerationPage component when the cover letter creation fails.
    * It mocks the axios.post call to simulate a failed API response and verifies that an appropriate error message
    * is displayed to the user.

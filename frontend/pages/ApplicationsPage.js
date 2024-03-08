@@ -1,5 +1,9 @@
+/**
+ * ApplicationsPage is a React functional component that renders the applications page.
+ */
 import React, { useEffect } from 'react';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
+import ApplicationsComponent from '../components/ApplicationsComponent';
 
 const ApplicationsPage = () => {
   useEffect(() => {

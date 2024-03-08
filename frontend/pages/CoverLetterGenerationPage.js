@@ -1,9 +1,8 @@
-
 /**
- * This file contains the CoverLetterGenerationPage component, which facilitates the generation of personalized cover letters based on user input and selected job descriptions.
+ * CoverLetterGenerationPage is a React functional component that renders the cover letter generation page,
+ * allowing users to input details and generate a cover letter.
  */
-import React, { useState, useEffect } from 'react';
-import { generateCoverLetter, handleCoverLetterResponse, handleCoverLetterError } from '../utils/coverLetterAPI';
+
 import React, { useState } from 'react';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
 import { postCoverLetter } from '../utils/apiHelpers';
@@ -37,7 +36,9 @@ const CoverLetterGenerationPage = () => {
  * Handles the selection of a job from the dropdown, updating the state with the selected job's details.
  * @param {Event} e - The event object from the job selection.
  */
+  
   const handleJobSelection = (e) => {
+    
 /**
  * useEffect hook to fetch job listings on component mount.
  * Fetches job listings from the server and updates the jobListings state.
@@ -51,6 +52,11 @@ const CoverLetterGenerationPage = () => {
     setContactPerson(job.contactPerson || ''); // Update to use the correct field and handle possible undefined value
   };
 
+  /**
+  * Generates a cover letter based on the provided user inputs.
+  * @async
+  * @returns {Promise<void>} A promise that resolves when the cover letter has been generated and set in the state.
+  */
   const generateCoverLetter = async () => {
     // Assuming postCoverLetter is a function that sends user inputs to the server and receives the generated cover letter
     try {
