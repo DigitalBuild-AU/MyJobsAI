@@ -88,6 +88,9 @@ const CoverLetterGenerationPage = () => {
  * React component page for generating personalized cover letters based on job descriptions.
  * Allows users to select a job listing, generate a cover letter, and download it in PDF or DOC format.
  */
+/**
+ * Downloads the generated cover letter as a DOC file.
+ */
   const downloadAsDOC = () => {
 
 import Card from '../components/Card';
