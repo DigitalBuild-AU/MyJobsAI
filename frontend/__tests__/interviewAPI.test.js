@@ -17,6 +17,9 @@ describe('submitInterview', () => {
   Verifies that the submitInterview function can successfully schedule an interview and update the application state accordingly.
   """
   it('successfully schedules an interview', async () => {
+  """
+  Tests the submitInterview function's error handling for an empty job title input, expecting an error indicating invalid job title.
+  """
   it('handles invalid job title input', async () => {
     const updateInterviewsState = jest.fn();
     await expect(submitInterview('', mockDate, mockNotes, updateInterviewsState)).rejects.toThrow('Invalid job title');
