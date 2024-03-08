@@ -21,6 +21,10 @@ const CoverLetterGenerationPage = () => {
     fetchJobListings();
   }, []);
 
+/**
+ * Handles the selection of a job from the dropdown, updating the state with the selected job's details.
+ * @param {Event} e - The event object from the job selection.
+ */
   const handleJobSelection = (e) => {
 /**
  * useEffect hook to fetch job listings on component mount.
@@ -52,23 +56,27 @@ const CoverLetterGenerationPage = () => {
       });
   };
 
-  const downloadAsPDF = () => {
-/**
- * Handles the selection of a job from the dropdown.
- * @function handleJobSelection
- * @param {Event} e - The event triggered on job selection.
- */
 /**
  * Generates a personalized cover letter based on the selected job and user profile.
-        <div className="cover-letter-preview">
-          <h3>Generated Cover Letter Preview</h3>
-          <p>{generatedCoverLetter}</p>
-        </div>
- * @async
- * @function createCoverLetter
- * @throws {Error} When unable to generate the cover letter.
- * @return {Promise<void>} A promise that resolves when the cover letter is generated and set in state.
  */
+  const createCoverLetter = async () => {
+    postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
+      .then(data => {
+        setGeneratedCoverLetter(data.coverLetter);
+      .then(function(response) {
+        setGeneratedCoverLetter(response.data.coverLetter);
+        console.log('Cover Letter generated.');
+      })
+      .catch(function(error) {
+        console.error('Failed to generate Cover Letter:', error);
+        setGeneratedCoverLetter('Error generating Cover Letter.');
+      });
+  };
+
+/**
+ * Downloads the generated cover letter as a PDF file.
+ */
+  const downloadAsPDF = () => {
     const element = document.createElement("a");
     const file = new Blob([generatedCoverLetter], {type: 'application/pdf'});
     element.href = URL.createObjectURL(file);
@@ -79,6 +87,9 @@ const CoverLetterGenerationPage = () => {
 /**
  * React component page for generating personalized cover letters based on job descriptions.
  * Allows users to select a job listing, generate a cover letter, and download it in PDF or DOC format.
+ */
+/**
+ * Downloads the generated cover letter as a DOC file.
  */
   const downloadAsDOC = () => {
 

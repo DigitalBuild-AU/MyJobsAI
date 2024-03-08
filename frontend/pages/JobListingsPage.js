@@ -68,10 +68,8 @@ import { logError } from '../utils/logger';
   }, [filters, page]);
 
   /**
-   * Fetches job listings from the server based on the current filters and page number.
-   * Utilizes axios to make a GET request to the server with query parameters.
-   * @returns {Promise<void>} A promise that resolves when the state is updated with fetched data.
-   */
+  * Fetches job listings from the server based on the current filters and page number.
+  */
 
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
@@ -79,6 +77,9 @@ import { logError } from '../utils/logger';
       const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
 
+  /**
+  * Adjusts the view state between 'card' and 'table' layouts based on the window's width.
+  */
   /**
    * Updates the view state based on the current window size.
    * Sets the view to 'card' if window width is less than 768px, otherwise sets to 'table'.
@@ -94,10 +95,13 @@ const handleViewChangeBasedOnWindowSize = () => {
 };
 
   /**
-   * Cleans up event listeners and resets filters state on component unmount.
-   * Specifically, removes the 'resize' event listener from the window.
-   * @returns {void}
-   */
+  * Cleans up event listeners and resets filters state on component unmount.
+  */
+  /**
+  * Cleans up event listeners and resets filters state on component unmount.
+  * Specifically, removes the 'resize' event listener from the window.
+  * @returns {void}
+  */
 
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);

@@ -39,6 +39,10 @@ const CVHelperPage = () => {
           />
         </div>
         <button type="submit">Generate CV Suggestions</button>
+/**
+ * Handles the submission of the job description and user CV to generate CV suggestions.
+ * @param {Event} e - The event object from the form submission.
+ */
       </form>
       {cvSuggestions && (
         <div>
