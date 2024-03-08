@@ -33,12 +33,9 @@ router.post('/cv_suggestions', async (req, res) => {
   }
 });
 
-// Cover Letter Route using Chat Completions
 /**
- * Generates a cover letter based on the provided job description and user's CV.
- * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
- * @param {Object} res - The response object used to return the cover letter or an error message.
- * @returns {void} - Sends a JSON response with the cover letter or an error status.
+ * POST route for generating a cover letter.
+ * Takes a job description and user's CV from the request body and returns a customized cover letter.
  */
 router.post('/cover_letter', async (req, res) => {
   const { jobDescription, userCV } = req.body;
