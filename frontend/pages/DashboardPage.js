@@ -1,5 +1,6 @@
 /**
- * Renders the Dashboard page, displaying a summary of job applications, interviews, offers, and a random quote.
+ * DashboardPage Component
+ * This component renders the dashboard page, displaying a summary of job applications, interviews, offers, and a random quote.
  */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,6 +9,10 @@ import GlobalSearchBar from '../components/GlobalSearchBar';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
 
+const DashboardPage = () => {
+ * Renders the dashboard page.
+ * Displays a summary of job applications, interviews, offers, and a random quote. Also provides functionality to add new entries.
+ */
 const DashboardPage = () => {
     const [summary, setSummary] = useState({
         applicationsSent: 0,
@@ -45,19 +50,27 @@ const DashboardPage = () => {
                     console.log('Quote of the day fetched successfully.'); // gpt_pilot_debugging_log
                 })
                 .catch(error => {
-const [isModalOpen, setIsModalOpen] = useState(false);
-const [modalContent, setModalContent] = useState(null);
-
+/**
+ * Opens the modal with the provided content.
+ * @param {string} content - The content to display in the modal.
+ */
 const handleOpenModal = (content) => {
   setModalContent(content);
   setIsModalOpen(true);
 };
 
+/**
+ * Closes the modal and clears its content.
+ */
 const handleCloseModal = () => {
   setIsModalOpen(false);
   setModalContent(null);
 };
 
+/**
+ * Renders the modal for adding or editing entries.
+ * @returns {JSX.Element} The modal component.
+ */
 const renderAddEditModal = () => (
   <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
     {modalContent}
