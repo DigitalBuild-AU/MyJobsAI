@@ -14,7 +14,7 @@ async function handleCvSuggestions(jobDescription, userCV) {
           content: `Extract keywords from this job description and compare to a CV.\nJob Description: ${jobDescription}\nUser CV: ${userCV}`
         }
       ],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4", // Updated model as per the latest format
     });
     return { suggestions: response.choices[0].message.content.trim() };
   } catch (error) {

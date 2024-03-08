@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const { handleCvSuggestions, handleCoverLetter, handleCvCustomization } = require('../utils/gptRequestHandlers');
+const { handleCvSuggestions, handleCvCustomization } = require('../utils/gptRequestHandlers');
 
 dotenv.config({ path: './backend/.env' });
 
@@ -10,8 +10,10 @@ const openai = new OpenAI();
 // CV Suggestions Route using Chat Completions
 router.post('/cv_suggestions', async (req, res) => {
 /**
-
- * This file defines the routes for generating CV suggestions, cover letters, and CV customization using OpenAI's GPT models.
+ * Handles the generation of CV suggestions based on a given job description and user's CV.
+ * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
+ * @param {Object} res - The response object used to return the suggestions or an error message.
+ * @returns {void} - Sends a JSON response with CV suggestions or an error status.
  */
   const { jobDescription, userCV } = req.body;
   try {
@@ -25,15 +27,28 @@ router.post('/cv_suggestions', async (req, res) => {
 });
 
 // Cover Letter Route using Chat Completions
+/**
+ * Generates a cover letter based on the provided job description and user's CV.
+ * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
+ * @param {Object} res - The response object used to return the cover letter or an error message.
+ * @returns {void} - Sends a JSON response with the cover letter or an error status.
+ */
 router.post('/cover_letter', async (req, res) => {
   const { jobDescription, userCV } = req.body;
   try {
     const response = await openai.chat.completions.create({
-const { logSuccess, logError } = require('../utils/logger');
-const { handleError } = require('../utils/errorHandler');
-    console.log("Cover letter analysis and feedback generated successfully."); // gpt_pilot_debugging_log
-    res.json(analysisResults);
+      model: "text-davinci-003",
+      prompt: `Create a cover letter based on the job description: ${jobDescription} and user CV: ${userCV}`,
+      max_tokens: 1000,
+    });
+    console.log("Cover letter generated successfully."); // Debug log
+    res.json({ coverLetter: response.choices[0].text.trim() });
+  } catch (error) {
+    console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
+    res.status(500).json({ error: "Failed to generate cover letter." });
+  }
 });
+
 
 module.exports = router;
 // Resume Customization Route using Chat Completions
@@ -51,12 +66,10 @@ router.post('/cv_customization', async (req, res) => {
           role: "user",
           content: `Please analyze the CV in comparison to the job description and provide customization suggestions.\nJob Description: ${jobDescription}\nUser CV: ${userCV}`
 /**
- * POST route to generate CV customization suggestions.
- * This route takes a job description and user CV as input and uses OpenAI's GPT models to generate suggestions for customizing the CV to better match the job description.
- * @route POST /cv_customization
- * @param {Object} req.body - Contains 'jobDescription' and 'userCV'.
- * @returns {Object} - The response object containing 'analysisResults' with the generated suggestions.
- * @throws {500} - Returns a 500 status code if there is an error in generating suggestions.
+ * Provides CV customization suggestions based on a job description and the user's CV.
+ * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
+ * @param {Object} res - The response object used to return customization suggestions or an error message.
+ * @returns {void} - Sends a JSON response with customization suggestions or an error status.
  */
         }
       ],
