@@ -1,6 +1,5 @@
 /**
- * Renders the interviews page, displaying a list of scheduled interviews.
- * Fetches and displays interviews from the backend.
+ * This file contains the React component for the Interviews Page, facilitating the scheduling and display of interviews.
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -28,7 +27,9 @@ function InterviewsPage() {
   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleFormSubmit(jobTitle, date, notes);
+    submitInterview(jobTitle, date, notes, setInterviews)
+      .then(response => handleInterviewResponse(response))
+      .catch(error => handleInterviewError(error));
   };
 
 export default function InterviewsPage() {
