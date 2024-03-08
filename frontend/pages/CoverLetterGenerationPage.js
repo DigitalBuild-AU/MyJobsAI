@@ -8,6 +8,7 @@ import ResponsiveNavbar from '../components/ResponsiveNavbar';
 import { postCoverLetter } from '../utils/apiHelpers';
 import axios from 'axios'; // Assuming axios is used for HTTP requests
 import './CoverLetterGenerationPage.css';
+import { CoverLetterForm, CoverLetterPreview, DownloadButtons } from '../components/CoverLetterSubComponents';
 
 const CoverLetterGenerationPage = () => {
   const [jobDescription, setJobDescription] = useState('');
@@ -133,38 +134,15 @@ const renderSaveModal = () => (
   <Modal isOpen={isSaveModalOpen} onClose={handleCloseSaveModal}>
     <div>
       <h2>Save Cover Letter</h2>
-      <p>Do you want to save the generated cover letter?</p>
-      <button onClick={() => {
-        console.log('Cover letter saved.');
-        setIsSaveModalOpen(false);
-      }}>Save</button>
-      <button onClick={() => setIsSaveModalOpen(false)}>Cancel</button>
-    </div>
-  </Modal>
-);
-    /**
-     * Creates a DOC file of the generated cover letter for download.
-     */
-    // Placeholder function for downloading the cover letter as DOC
-
-    const element = document.createElement("a");
-    const file = new Blob([generatedCoverLetter], {type: 'application/msword'});
-    element.href = URL.createObjectURL(file);
-    element.download = "coverLetter.doc";
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
-  };
-
-  return (
-    <>
-      <ResponsiveNavbar />
-      <div className="container mt-4">
-        <div id="coverLetterAssistant">
-          <input type="text" id="userName" placeholder="Your Name" value={userName} onChange={(e) => setUserName(e.target.value)} />
-          <textarea id="jobDescriptionInput" placeholder="Paste the job description here..." value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}></textarea>
-          <textarea id="userSkills" placeholder="Your Skills..." value={userSkills} onChange={(e) => setUserSkills(e.target.value)}></textarea>
-          <textarea id="userExperience" placeholder="Your Experience..." value={userExperience} onChange={(e) => setUserExperience(e.target.value)}></textarea>
-          <button onClick={generateCoverLetter}>Generate Cover Letter</button>
+        <CoverLetterForm
+          setUserName={setUserName}
+          setJobDescription={setJobDescription}
+          setUserSkills={setUserSkills}
+          setUserExperience={setUserExperience}
+          generateCoverLetter={generateCoverLetter}
+        />
+        <CoverLetterPreview generatedCoverLetter={generatedCoverLetter} />
+        <DownloadButtons generatedCoverLetter={generatedCoverLetter} />
         </div>
         <div id="coverLetterOutput">{generatedCoverLetter && <p>{generatedCoverLetter}</p>}</div>
       </div>
