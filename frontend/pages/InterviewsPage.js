@@ -1,5 +1,5 @@
 /**
- * Implements the InterviewsPage component for scheduling and displaying interviews.
+ * InterviewsPage is a React functional component that renders the interviews scheduling and listing page.
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -102,6 +102,7 @@ import { useForm } from 'react-hook-form';
  * @param {string} jobTitle - The title of the job.
  * @param {string} date - The date of the interview.
  * @param {string} notes - Additional notes for the interview.
+ * @returns {void}
  */
 function handleFormSubmit(jobTitle, date, notes) {
     axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
