@@ -11,7 +11,12 @@ const CVHelper = () => {
 
   const [cvSuggestions, setCvSuggestions] = useState('');
   const [error, setError] = useState('');
-  
+  /**
+   * Handles the generation of CV suggestions.
+   * Fetches suggestions based on the user's job description and CV input.
+   * Parameters: None.
+   * Returns: None.
+   */
   const handleGenerateCVSuggestions = () => {
     console.log('Sending request to generate CV suggestions.'); // Log for debugging
     axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: jobDescriptionInput, userCV: userCVInput })
