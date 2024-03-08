@@ -1,3 +1,9 @@
+/**
+ * Logs a debug message with a timestamp to the console.
+ *
+ * @param {string} message - The message to log.
+ * @param {Error|null} [error=null] - Optional error object whose message will be logged.
+ */
 function debugLog(message, error = null) {
   const timestamp = new Date().toISOString();
   console.log(`[${timestamp}] DEBUG: ${message}`);
@@ -27,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
       debugLog('Invalid or missing job URL provided.');
       alert('Please provide a valid job URL.');
       return;
+/**
+ * Frontend JavaScript for handling job listings in MyJobsAI.
+ * This file includes functions for fetching job listings, adding new job listings,
+ * validating URLs, and dynamically updating the UI based on server responses.
+ */
     }
 
     if (!jobTitle || !company || !location || !jobType || !status) {
@@ -65,6 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  /**
+  * Fetches job listings from the server and updates the UI.
+  */
   function fetchJobListings() {
     debugLog('Fetching job listings...');
 
@@ -96,10 +110,21 @@ document.addEventListener('DOMContentLoaded', function() {
   function isValidURL(string) {
     const urlPattern = new RegExp('^(https?:\\/\\/)?[\\w-]+(\\.[\\w-]+)+[\\w-.,@?^=%&:;\\/\\+#]*$', 'i'); // Adjusted for more inclusive URL validation
     const isValid = !!urlPattern.test(string);
+  * @param {string} string - The string to validate.
+  * @returns {boolean} - True if the string is a valid URL, false otherwise.
+  */
+  function isValidURL(string) {
+    const urlPattern = new RegExp('^(https?:\\/\\/)?[\\w-]+(\\.[\\w-]+)+[\\w-.,@?^=%&:;\\/\\+#]*$', 'i'); // Adjusted for more inclusive URL validation
+    const isValid = !!urlPattern.test(string);
     debugLog(`URL being validated: ${string}, isValid: ${isValid}`);
     return isValid;
   }
 
+  function validateJobListingForm() {
+  * Validates the job listing form inputs and displays error messages if invalid.
+  *
+  * @returns {boolean} - True if the form data is valid, false otherwise.
+  */
   function validateJobListingForm() {
     let isValid = true;
     const jobURL = document.getElementById('jobURL').value.trim();
@@ -140,6 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
     return isValid;
   }
 
+  /**
+  * Displays an error message next to the form element.
+  *
+  * @param {string} elementId - The ID of the form element.
+  * @param {string} message - The error message to display.
+  */
   function displayErrorMessage(elementId, message) {
     const inputElement = document.getElementById(elementId);
     const errorMessage = document.createElement('div');
