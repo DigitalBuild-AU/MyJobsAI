@@ -71,3 +71,30 @@ Description: Test suite for the Applications component, covering rendering, stat
     expect(screen.getByText('Application not found')).toBeInTheDocument();
   });
 });
+import { BrowserRouter } from 'react-router-dom';
+
+describe('App.js Routing', () => {
+  test('navigates to CoverLetterComponent', () => {
+    render(<BrowserRouter><App /></BrowserRouter>);
+    fireEvent.click(screen.getByText('Cover Letter'));
+    expect(screen.getByText('Generate Cover Letter')).toBeInTheDocument();
+  });
+
+  test('navigates to CVHelperComponent', () => {
+    render(<BrowserRouter><App /></BrowserRouter>);
+    fireEvent.click(screen.getByText('CV Helper'));
+    expect(screen.getByText('Get CV Suggestions')).toBeInTheDocument();
+  });
+
+  test('navigates to EmailComponent', () => {
+    render(<BrowserRouter><App /></BrowserRouter>);
+    fireEvent.click(screen.getByText('Email'));
+    expect(screen.getByText('Send Email')).toBeInTheDocument();
+  });
+
+  test('navigates to AnalyticsComponent', () => {
+    render(<BrowserRouter><App /></BrowserRouter>);
+    fireEvent.click(screen.getByText('Analytics'));
+    expect(screen.getByText('Total Applications:')).toBeInTheDocument();
+  });
+});
