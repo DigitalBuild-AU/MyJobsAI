@@ -111,7 +111,11 @@ describe('/cv_suggestions route', () => {
         jobDescription: 'Software Engineer role requiring problem-solving skills.',
         userCV: 'Problem solver with a keen interest in software development.'
       });
-
+/**
+ * Test Suite for '/cv_suggestions' Route
+ * 
+ * This suite tests the handling of CV suggestions requests by the '/cv_suggestions' route. It aims to ensure that the application can generate meaningful CV suggestions based on the input provided and properly manage any errors that may occur during the process.
+ */
     expect(response.statusCode).toBe(500);
     expect(response.body).toHaveProperty('error', 'Failed to generate CV suggestions.');
   });
