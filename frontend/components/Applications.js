@@ -1,6 +1,12 @@
+/**
+ * This file contains the Applications component that renders the applications page. It dynamically loads the Bootstrap script for styling and includes the Navbar component.
+ */
 import React, { useEffect } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
 
+/**
+ * Applications component: Renders the applications page, dynamically loads Bootstrap script, and includes the Navbar.
+ */
 const Applications = () => {
   /**
    * Applications component responsible for rendering the applications page.

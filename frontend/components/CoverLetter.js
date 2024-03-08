@@ -1,7 +1,13 @@
+/**
+ * CoverLetter component: Assists users in generating a personalized cover letter using their name, skills, and experience.
+ */
 import React, { useState } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
 
 const CoverLetter = () => {
+  /**
+   * Assists users in generating a personalized cover letter using their name, skills, and experience.
+   */
   /**
    * CoverLetter component aids in generating personalized cover letters.
    * Users input their details, job description, skills, and experience to receive a custom cover letter.
@@ -33,6 +39,9 @@ const CoverLetter = () => {
     </>
   );
 };
+
+export default CoverLetter;
+import { Link } from 'react-router-dom';
 
 export default CoverLetter;
 import { Link } from 'react-router-dom';
