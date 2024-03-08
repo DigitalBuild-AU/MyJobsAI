@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from './Navbar';
 
 const JobListings = () => {
@@ -53,6 +54,18 @@ const JobListings = () => {
               <option value="">Any</option>
               <option value="Full-Time">Full-Time</option>
               <option value="Contract">Contract</option>
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/analytics')
+      .then(function(response) {
+        const data = response.data;
+        console.log('Analytics fetched and displayed successfully.'); // Log for debugging
+        // Update component state with fetched analytics data here
+      })
+      .catch(function(error) {
+        console.error(`Error fetching analytics: ${error.message}, Stack: ${error.stack}`);
+        // Update component state to indicate error in fetching analytics
+      });
+  }, []);
               <option value="Temp">Temp</option>
               <option value="Casual">Casual</option>
               <option value="Part Time">Part Time</option>

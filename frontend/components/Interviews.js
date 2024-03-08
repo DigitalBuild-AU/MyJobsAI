@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 /**
  * Interviews Component
@@ -14,7 +15,17 @@ const Interviews = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Scheduling interview with details:', { jobTitle, interviewDate, notes });
-    // Placeholder for actual interview scheduling logic
+    // Send an email notification about the scheduled interview
+    const emailBody = `An interview for the position of ${jobTitle} has been scheduled. Date and Time: ${interviewDate}. Notes: ${notes}`;
+    axios.post('http://localhost:3000/api/email/send', { to: 'email@example.com', subject: 'Interview Scheduled', body: emailBody })
+      .then(function(response) {
+        console.log('Email was sent successfully.'); // Success log
+        // Update state to show confirmation message
+      })
+      .catch(function(error) {
+        console.error(`Error sending email: ${error.message}, Stack: ${error.stack}`);
+        // Update state to show error message
+      });
   };
 
   return (
