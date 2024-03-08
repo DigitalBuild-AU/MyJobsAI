@@ -9,6 +9,9 @@ describe('debugLogger tests', () => {
     jest.spyOn(global, 'Date').mockImplementation(() => new Date('2023-04-01T00:00:00.000Z'));
   });
 
+  /**
+   * Restores all mocks to their original state after each test to ensure clean test environment.
+   */
   afterEach(() => {
     jest.restoreAllMocks();
   });
