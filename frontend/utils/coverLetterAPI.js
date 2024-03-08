@@ -41,6 +41,16 @@ export const handleCoverLetterError = (error) => {
  */
 /**
  * Processes the server's response to extract the generated cover letter.
+/**
+ * Generates a cover letter based on the provided job description, user name, skills, and experience.
+ * 
+ * @param {string} jobDescription - The job description for which the cover letter is being generated.
+ * @param {string} userName - The name of the user for whom the cover letter is being generated.
+ * @param {string} userSkills - The skills of the user to be included in the cover letter.
+ * @param {string} userExperience - The experience of the user to be highlighted in the cover letter.
+ * @returns {Promise} A promise that resolves with the response from the cover letter generation endpoint.
+ */
+export const generateCoverLetter = async (jobDescription, userName, userSkills, userExperience) => {
  * @param {Object} response - The server's response containing the generated cover letter.
  * @returns {string} The generated cover letter.
  */
