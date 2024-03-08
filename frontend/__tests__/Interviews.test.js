@@ -1,3 +1,6 @@
+/**
+ * Test suite for the Interviews component, focusing on the addition, update, and removal of interview entries.
+ */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -10,6 +13,9 @@ describe('Interviews Component', () => {
   });
 
   test('adds a new interview and updates state', () => {
+   * Tests that adding a new interview correctly updates the component's state.
+   */
+  test('adds a new interview and updates state', () => {
     render(<Interviews />);
     fireEvent.change(screen.getByPlaceholderText('Interview Date'), { target: { value: '2023-04-15' } });
     fireEvent.change(screen.getByPlaceholderText('Company Name'), { target: { value: 'Tech Innovations Inc.' } });
@@ -18,7 +24,9 @@ describe('Interviews Component', () => {
   });
 
   test('updates an existing interview and reflects changes', () => {
-// Tests that adding a new interview correctly updates the component's state.
+   * Tests that updating an existing interview correctly reflects the changes in the component.
+   */
+  test('updates an existing interview and reflects changes', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Edit', { selector: 'button' }));
     fireEvent.change(screen.getByPlaceholderText('Interview Date'), { target: { value: '2023-05-20' } });
@@ -26,6 +34,7 @@ describe('Interviews Component', () => {
     expect(screen.getByText('Interview with Tech Innovations Inc. on 2023-05-20')).toBeInTheDocument();
   });
 
+  test('removes an interview entry and updates state', () => {
   test('removes an interview entry and updates state', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Delete', { selector: 'button' }));
