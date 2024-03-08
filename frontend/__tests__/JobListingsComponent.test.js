@@ -16,6 +16,10 @@ describe('JobListingsComponent', () => {
   });
 
   /**
+  /**
+   * Test case: Renders the JobListingsComponent correctly.
+   * Verifies that the 'Job Listings | MyJobsAI' text is present in the document.
+   */
   * Tests if the JobListingsComponent correctly loads the Bootstrap script dynamically.
   */
   it('loads Bootstrap script dynamically', () => {
@@ -38,6 +42,10 @@ describe('JobListingsComponent', () => {
     expect(getByPlaceholderText('Company').value).toBe('MyJobsAI');
     expect(getByPlaceholderText('Location').value).toBe('Remote');
     expect(getByPlaceholderText('Job Description').value).toBe('Develop amazing applications');
+  /**
+   * Test case: Updates state on input change.
+   * Verifies that the component state updates correctly when input fields are changed.
+   */
   });
 
   it('adds a new job listing on form submit', () => {
@@ -74,9 +82,17 @@ describe('JobListingsComponent', () => {
 });
 it('loads Bootstrap script on component mount', async () => {
   jest.mock('../../utils/bootstrapUtils', () => ({
+  /**
+   * Test case: Adds a new job listing on form submit.
+   * Verifies that a new job listing is added to the list when the form is submitted.
+   */
     loadBootstrapScript: jest.fn(),
   }));
   const { loadBootstrapScript } = require('../../utils/bootstrapUtils');
   render(<JobListingsComponent />);
   expect(loadBootstrapScript).toHaveBeenCalledTimes(1);
 });
+  /**
+   * Test case: Loads Bootstrap script on component mount.
+   * Verifies that the Bootstrap script is loaded when the component mounts.
+   */
