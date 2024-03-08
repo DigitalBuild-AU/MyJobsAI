@@ -37,15 +37,18 @@ router.post('/cover_letter', async (req, res) => {
   const { jobDescription, userCV } = req.body;
   try {
     const response = await openai.chat.completions.create({
-
-      console.log("Cover letter analysis and feedback generated successfully."); // Debug log
-      res.json(analysisResults);
-    } catch (error) {
-      console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
-      res.status(500).json({ error: "Failed to generate cover letter analysis." });
-    }
-
+      model: "text-davinci-003",
+      prompt: `Create a cover letter based on the job description: ${jobDescription} and user CV: ${userCV}`,
+      max_tokens: 1000,
+    });
+    console.log("Cover letter generated successfully."); // Debug log
+    res.json({ coverLetter: response.choices[0].text.trim() });
+  } catch (error) {
+    console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
+    res.status(500).json({ error: "Failed to generate cover letter." });
+  }
 });
+
 
 module.exports = router;
 // Resume Customization Route using Chat Completions
