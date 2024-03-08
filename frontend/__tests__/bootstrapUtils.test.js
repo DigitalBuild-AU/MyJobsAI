@@ -22,6 +22,10 @@ describe('bootstrapUtils tests', () => {
     expect(scriptTags[0]).toHaveAttribute('async', '');
   });
 
+  /**
+   * Test case: Appends a bootstrap script tag when none exists.
+   * Verifies that a Bootstrap script tag is correctly appended to the document body when no such tag exists beforehand.
+   */
   it('appends bootstrap script tag when none exists', () => {
   /**
    * Test: Ensures that an existing Bootstrap script tag is removed and a new one is appended correctly.
