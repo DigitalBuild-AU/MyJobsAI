@@ -39,6 +39,13 @@ router.post('/cv_suggestions', async (req, res) => {
 
 // Cover Letter Route using Chat Completions
 router.post('/cover_letter', async (req, res) => {
+/**
+ * POST /cover_letter
+ * Generates a cover letter based on a job description and user's CV.
+ * Inputs: jobDescription (String), userCV (String)
+ * Output: JSON object containing the generated cover letter
+ * Exceptions: Returns a 500 status code with an error message if the request fails.
+ */
   const { jobDescription, userCV } = req.body;
   try {
     const response = await openai.createCompletion({
@@ -75,3 +82,10 @@ router.post('/cv_customization', async (req, res) => {
 });
 
 module.exports = router;
+/**
+ * POST /cv_customization
+ * Generates customized CV suggestions based on a job description and user's CV.
+ * Inputs: jobDescription (String), userCV (String)
+ * Output: JSON object containing customized CV suggestions
+ * Exceptions: Returns a 500 status code with an error message if the request fails.
+ */
