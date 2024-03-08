@@ -14,6 +14,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('GlobalSearchBar Component', () => {
+  // Tests that the input field updates correctly when the user types.
   test('updates input field value when user types', () => {
     render(<GlobalSearchBar />);
     const input = screen.getByPlaceholderText('Search...');
@@ -21,6 +22,7 @@ describe('GlobalSearchBar Component', () => {
     expect(input.value).toBe('React');
   });
 
+  test('redirects user to SearchResultsPage with correct query parameter on search button click', () => {
   test('redirects user to SearchResultsPage with correct query parameter on search button click', () => {
     const mockHistoryPush = jest.fn();
     useHistory.mockReturnValue({ push: mockHistoryPush });
