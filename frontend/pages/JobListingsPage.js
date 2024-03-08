@@ -182,18 +182,13 @@ const renderPagination = () => {
   return (
 
     <div className="job-listings-page">
-/**
- * handleErrorState Function
- * Refactored to use validateInput from jobListingsUtils for input validation.
- * Updates the error state for a given input field based on the validation result.
- * 
- * Parameters:
- * - name (string): The name of the input field to validate.
- * - value (string): The value of the input field to validate.
- * 
- * Returns:
- * - void: This function does not return a value but updates the component's state directly.
- */
+  /**
+   * Updates the error state for a given input field based on validation result.
+   * Utilizes validateInput function to check the validity of the input value.
+   * @param {string} name - The name of the input field to validate.
+   * @param {string} value - The value of the input field to validate.
+   * @returns {void}
+   */
 
 const handleErrorState = (name, value) => {
   const isValid = validateInput(value);
