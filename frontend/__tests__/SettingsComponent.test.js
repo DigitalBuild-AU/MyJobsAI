@@ -18,3 +18,16 @@ describe('SettingsComponent', () => {
     expect(bootstrapScript).not.toBeNull();
   });
 });
+/**
+ * Test suite for the SettingsComponent.
+ * This file contains tests that verify the rendering and dynamic script loading of the SettingsComponent.
+ */
+/**
+ * Tests for SettingsComponent.
+ */
+    render(<SettingsComponent />);
+    const scripts = Array.from(document.getElementsByTagName('script'));
+    const bootstrapScript = scripts.find(script => script.src.includes('bootstrap.bundle.min.js'));
+    expect(bootstrapScript).not.toBeNull();
+  });
+});
