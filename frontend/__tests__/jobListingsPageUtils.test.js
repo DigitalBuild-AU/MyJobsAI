@@ -13,6 +13,9 @@ describe('jobListingsPageUtils', () => {
  * and cleanup operations on component unmount.
  */
   describe('handleWindowSizeChange', () => {
+    /**
+    * Tests that handleWindowSizeChange sets the view mode to 'card' when the window width is less than 768px.
+    */
     it('sets view to card on window width less than 768px', () => {
       const setViewMock = jest.fn();
       global.innerWidth = 500;
@@ -46,6 +49,9 @@ describe('jobListingsPageUtils', () => {
       expect(setListingsMock).toHaveBeenCalledWith(mockData.listings);
       expect(setTotalPagesMock).toHaveBeenCalledWith(mockData.totalPages);
     });
+
+    it('logs error on fetch failure', async () => {
+      const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     it('logs error on fetch failure', async () => {
       const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
