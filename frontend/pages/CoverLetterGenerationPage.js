@@ -30,21 +30,9 @@ const CoverLetterGenerationPage = () => {
  * useEffect hook to fetch job listings on component mount.
  * Fetches job listings from the server and updates the jobListings state.
  * Page component for generating personalized cover letters.
- * Allows users to select job listings and generate cover letters based on their profiles.
- * Fetches job listings on component mount.
- * @async
- * @function fetchJobListings
- * @throws {Error} When unable to fetch job listings.
- * @return {Promise<void>} A promise that resolves when job listings are fetched and set in state.
+/**
+ * This file implements the React component for generating personalized cover letters based on user input and selected job descriptions.
  */
-    const job = jobListings.find(job => job.id === e.target.value);
-    setSelectedJob(job.id); // Update to store only the job ID
-    setContactPerson(job.contactPerson || ''); // Update to use the correct field and handle possible undefined value
-  };
-
-  const createCoverLetter = async () => {
-    postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
-      .then(data => {
         setGeneratedCoverLetter(data.coverLetter);
       .then(function(response) {
         setGeneratedCoverLetter(response.data.coverLetter);
