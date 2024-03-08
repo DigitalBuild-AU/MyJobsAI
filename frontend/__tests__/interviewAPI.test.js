@@ -13,6 +13,9 @@ describe('submitInterview', () => {
   const mockResponse = { data: { message: 'Interview scheduled successfully' } };
   const mockError = new Error('Network error');
 
+  """
+  Verifies that the submitInterview function can successfully schedule an interview and update the application state accordingly.
+  """
   it('successfully schedules an interview', async () => {
     axios.post.mockResolvedValue(mockResponse);
     const updateInterviewsState = jest.fn();
@@ -20,6 +23,9 @@ describe('submitInterview', () => {
     expect(updateInterviewsState).toHaveBeenCalledWith(mockResponse.data);
   });
 
+  it('fails to schedule an interview with an error', async () => {
+  Tests the error handling when the submitInterview function fails to schedule an interview due to a network or server error.
+  """
   it('fails to schedule an interview with an error', async () => {
     axios.post.mockRejectedValue(mockError);
     const updateInterviewsState = jest.fn();
@@ -50,3 +56,12 @@ describe('handleInterviewError', () => {
     expect(console.error).toHaveBeenCalledWith('Error submitting interview:', mockError);
   });
 });
+  it('logs the error message', () => {
+    const mockError = new Error('Error submitting interview');
+    handleInterviewError(mockError);
+    expect(console.error).toHaveBeenCalledWith('Error submitting interview:', mockError);
+  });
+});
+"""
+Verifies that the handleInterviewError function logs the appropriate error message when an error occurs during the interview scheduling process.
+"""
