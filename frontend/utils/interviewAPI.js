@@ -6,6 +6,15 @@
  */
 import axios from 'axios';
 
+/**
+ * Submits interview details to the server and updates the interviews state.
+ * 
+ * @param {string} jobTitle - The title of the job associated with the interview.
+ * @param {string} date - The date of the interview.
+ * @param {string} notes - Any notes related to the interview.
+ * @param {Function} updateInterviewsState - A callback function to update the interviews state with the response data.
+ * @returns {Promise} A promise that resolves with the response from the interviews submission endpoint.
+ */
 export const submitInterview = async (jobTitle, date, notes, updateInterviewsState) => {
   try {
     const response = await axios.post('/api/interviews', {
