@@ -189,6 +189,13 @@ test('successfully creates a cover letter', async () => {
   });
 });
 
+  /**
+   * Test case: Handles error when creating a cover letter fails.
+   * This test verifies that the CoverLetterGenerationPage component properly handles and displays an error message
+   * when the cover letter generation process fails. It mocks the axios.post call to simulate a failed API response
+   * and checks if the appropriate error message is rendered in the document.
+   */
+
 test('handles error when creating a cover letter fails', async () => {
   axios.post.mockRejectedValue(new Error('Error generating cover letter'));
   const { getByText, getByRole, findByText } = render(<CoverLetterGenerationPage />);
