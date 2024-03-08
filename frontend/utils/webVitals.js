@@ -11,3 +11,7 @@ export function setupWebVitals() {
   getFCP(console.log);
   getTTFB(console.log);
 }
+/**
+ * This file includes the setup for web vitals monitoring in the application.
+ * It imports web vitals from 'web-vitals' package and logs them to the console.
+ */
