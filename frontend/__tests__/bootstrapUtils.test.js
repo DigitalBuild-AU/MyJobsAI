@@ -26,3 +26,14 @@ describe('bootstrapUtils tests', () => {
     expect(scriptTags[0]).toHaveAttribute('async', '');
   });
 });
+describe('loadBootstrapScript utility function', () => {
+  it('correctly creates and appends the Bootstrap script tag to the document body', () => {
+    document.body.innerHTML = '';
+    loadBootstrapScript();
+    const scriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
+    expect(scriptTag).toBeInTheDocument();
+    expect(scriptTag).toHaveAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+    expect(scriptTag).toHaveAttribute('async', true);
+    expect(document.body).toContainElement(scriptTag);
+  });
+});
