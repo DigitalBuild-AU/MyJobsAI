@@ -39,4 +39,7 @@ describe('bootstrapUtils tests', () => {
    * Test: Verifies that a Bootstrap script tag is appended when none exists.
    * This test checks the functionality of the loadBootstrapScript function in a scenario where no Bootstrap script tag is present in the document.
    * It ensures that the function correctly appends a new Bootstrap script tag.
+/**
+ * Describes the suite of tests for bootstrap utility functions.
+ */
    */
