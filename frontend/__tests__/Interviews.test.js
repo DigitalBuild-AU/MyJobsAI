@@ -18,6 +18,7 @@ describe('Interviews Component', () => {
   });
 
   test('updates an existing interview and reflects changes', () => {
+// Tests that adding a new interview correctly updates the component's state.
     render(<Interviews />);
     fireEvent.click(screen.getByText('Edit', { selector: 'button' }));
     fireEvent.change(screen.getByPlaceholderText('Interview Date'), { target: { value: '2023-05-20' } });
@@ -38,6 +39,14 @@ describe('Interviews Component', () => {
   });
 
   test('attempts to update a non-existent interview', () => {
+"""
+File: Interviews.test.js
+Description: Test suite for the Interviews component, focusing on the addition, update, and removal of interview entries.
+"""
+// Tests that the Interviews component renders correctly and verifies its initial state.
+  test('attempts to update a non-existent interview', () => {
+// Tests that removing an interview entry correctly updates the component's state.
+// Tests that attempting to add an interview with missing details displays the appropriate error message.
     render(<Interviews />);
     // Assuming the UI provides a way to select an interview to edit, which doesn't exist
     fireEvent.click(screen.getByText('Edit', { selector: 'button[data-id="nonexistent"]' }));
@@ -45,3 +54,4 @@ describe('Interviews Component', () => {
     expect(screen.getByText('Interview not found')).toBeInTheDocument();
   });
 });
+// Tests that attempting to update a non-existent interview displays the appropriate error message.
