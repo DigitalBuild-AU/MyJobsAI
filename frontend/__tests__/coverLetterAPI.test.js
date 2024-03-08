@@ -42,10 +42,20 @@ describe('handleCoverLetterResponse', () => {
 
 describe('handleCoverLetterError', () => {
   beforeEach(() => {
-  it('fails to generate a cover letter with empty strings', async () => {
+  """
+  Tests the generateCoverLetter function's ability to handle empty string inputs for all parameters, expecting an error indicating invalid input.
+  """
+  Tests the generateCoverLetter function's ability to handle null values for all parameters, expecting an error indicating invalid input.
+  """
+  Tests the generateCoverLetter function's ability to handle empty string inputs for all parameters, expecting an error indicating invalid input.
+  """
+  it('fails to generate a cover letter with null values', async () => {
     await expect(generateCoverLetter('', '', '', '')).rejects.toThrow('Invalid input');
   });
 
+  """
+  Tests the generateCoverLetter function's ability to handle null values for all parameters, expecting an error indicating invalid input.
+  """
   it('fails to generate a cover letter with null values', async () => {
     await expect(generateCoverLetter(null, null, null, null)).rejects.toThrow('Invalid input');
   });
@@ -57,6 +67,9 @@ describe('handleCoverLetterError', () => {
     expect(response).toEqual(mockResponse);
   });
 
+  """
+  Tests the generateCoverLetter function with a very long list of skills, ensuring that the function can process a large number of skills without error.
+  """
   it('successfully generates a cover letter with a very long list of skills', async () => {
     axios.post.mockResolvedValue(mockResponse);
     const longSkills = 'JavaScript, React, Node.js, Express, MongoDB, SQL, Python, Django, Flask, RESTful API design';
@@ -78,6 +91,9 @@ Test suite for the coverLetterAPI utility functions. It verifies the behavior of
     handleCoverLetterError(mockError);
     expect(console.error).toHaveBeenCalledWith('Failed to generate Cover Letter:', mockError);
   });
+  """
+  Tests the generateCoverLetter function with an extreme value for userExperience, verifying that the function can handle unusually high experience values without error.
+  """
 });
 """
 Tests logging of the error message when cover letter generation fails, verifying error logging.
@@ -87,7 +103,6 @@ Tests logging of the error message when cover letter generation fails, verifying
     const result = handleCoverLetterResponse(unexpectedResponse);
     expect(result).toBeUndefined();
   });
-
   it('logs different types of errors', () => {
     const networkError = new Error('Network error');
     handleCoverLetterError(networkError);
