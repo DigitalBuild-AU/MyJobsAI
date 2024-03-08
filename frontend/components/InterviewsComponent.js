@@ -7,8 +7,11 @@ const InterviewsComponent = () => {
   const [notes, setNotes] = useState('');
 
   /**
-  * useEffect hook to dynamically load the Bootstrap script for styling purposes.
-  */
+   * Dynamically loads the Bootstrap script for styling purposes upon component mount.
+   * This useEffect hook runs once after the initial render.
+   * @params None
+   * @return None
+   */
   useEffect(() => {
     loadBootstrapScript();
   }, []);
@@ -34,6 +37,19 @@ const InterviewsComponent = () => {
             <input type="datetime-local" className="form-control" id="interviewDateInput" value={interviewDate} onChange={(e) => setInterviewDate(e.target.value)} />
           </div>
           <div className="form-group">
+/**
+ * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
+ */
+          </div>
+          <div className="form-group">
+            <label htmlFor="interviewDateInput">Date and Time</label>
+  /**
+   * Handles the form submission event.
+   * Prevents the default form submission behavior, logs the form data,
+   * and would typically send this data to a backend service or API.
+   * @param {Object} event - The form submission event
+   * @return None
+   */
 /**
  * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
  */
