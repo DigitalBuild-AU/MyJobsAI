@@ -174,11 +174,12 @@ const renderPagination = () => {
   };
 
   /**
-   * Creates a button element for a given page number.
-   * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
-   *
-   * @param {number} pageNumber - The page number for the button.
-   * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
+   /**
+    * Creates a button element for a given page number.
+    * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
+    * @param {number} pageNumber - The page number for the button.
+    * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
+    */
    */
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
