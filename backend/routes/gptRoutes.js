@@ -81,11 +81,11 @@ router.post('/cv_customization', async (req, res) => {
   }
 });
 
-module.exports = router;
 /**
  * POST /cv_customization
- * Generates customized CV suggestions based on a job description and user's CV.
+ * Generates CV customization suggestions based on a job description and user's CV.
  * Inputs: jobDescription (String), userCV (String)
- * Output: JSON object containing customized CV suggestions
+ * Output: JSON object containing CV customization suggestions
  * Exceptions: Returns a 500 status code with an error message if the request fails.
  */
+router.post('/cv_customization', async (req, res) => {
