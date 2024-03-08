@@ -41,24 +41,37 @@ function InterviewForm({ setInterviews, interviews }) {
   };
 
   const handleSubmit = (e) => {
-    setNotes(value);
-    onNotesChange(value);
+  /**
+   * Submits interview data to the backend.
+   * 
+   * @param {string} jobTitle - The job title for the interview.
+   * @param {string} date - The date and time for the interview.
+   * @param {string} notes - Notes related to the interview.
+   * @returns {Promise} - The promise returned from the axios post call.
+   */
+  const submitInterviewData = (jobTitle, date, notes) => {
+    return axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes });
   };
 
-  const handleSubmit = (e) => {
+  /**
+   * Resets the form fields to their default empty values.
+   */
+  const resetFormFields = () => {
+    setJobTitle('');
+    setDate('');
+    setNotes('');
+  };
     e.preventDefault();
-    axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
-      .then(response => {
-        alert('Interview scheduled successfully.');
-        setInterviews([...interviews, response.data]);
-        setJobTitle('');
-        setDate('');
-        setNotes('');
-      })
-      .catch(error => {
-        console.error('Error scheduling interview:', error);
-        alert('Failed to schedule interview.');
-      });
+    submitInterviewData(jobTitle, date, notes)
+    .then(response => {
+      alert('Interview scheduled successfully.');
+      setInterviews([...interviews, response.data]);
+      resetFormFields();
+    })
+    .catch(error => {
+      console.error('Error scheduling interview:', error);
+      alert('Failed to schedule interview.');
+    });
   };
 
   return (
