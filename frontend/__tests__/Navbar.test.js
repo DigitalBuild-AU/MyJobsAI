@@ -1,3 +1,7 @@
+/**
+ * This file tests the Navbar component, ensuring it renders without crashing and displays all expected links correctly.
+ */
+
 import React from 'react';
 import { render } from '@testing-library/react';
 import Navbar from '../components/Navbar';
@@ -22,9 +26,15 @@ describe('Navbar Component Tests', () => {
     expect(getByText('Job Listings')).toBeInTheDocument();
   });
 
+  /**
+   * Test if the Navbar component renders the 'Applications' link correctly.
+   */
   it('renders Applications link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('Applications')).toBeInTheDocument();
+  });
+
+  it('renders CV Helper link', () => {
   });
 
   it('renders CV Helper link', () => {
@@ -44,6 +54,27 @@ describe('Navbar Component Tests', () => {
 
   it('renders Settings link', () => {
     const { getByText } = render(<Navbar />);
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
     expect(getByText('Settings')).toBeInTheDocument();
   });
 });
