@@ -1,6 +1,6 @@
 /**
- * ApplicationsPage is a React component that serves as the page for viewing and managing job applications within the MyJobsAI application.
- * It utilizes the ApplicationsComponent to render the main content.
+ * Renders the applications page.
+ * This component displays the Applications component, allowing users to view and manage job applications.
  */
 import React from 'react';
 import Applications from '../components/Applications';

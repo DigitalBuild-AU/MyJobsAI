@@ -4,6 +4,11 @@
 import React from 'react';
 import Settings from '../components/Settings';
 
+/**
+ * Renders the settings page.
+ * This component displays the Settings component, allowing users to view and modify their application settings.
+ */
+
 const SettingsPage = () => {
   // State hooks for managing form inputs could be defined here
   // Example: const [email, setEmail] = React.useState('');
