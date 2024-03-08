@@ -8,8 +8,7 @@ const addJobListing = async (jobListingData) => {
         console.log(`Job listing added: ${savedJobListing.jobTitle}`);
         return savedJobListing;
     } catch (error) {
-        console.error(`Error adding job listing: ${error.stack}`);
-        throw error;
+        return { error: `Error adding job listing: ${error.message}` };
     }
 };
 
@@ -19,8 +18,7 @@ const findAllJobListings = async () => {
         console.log(`Fetched all job listings, count: ${listings.length}`);
         return listings;
     } catch (error) {
-        console.error(`Error fetching all job listings: ${error.stack}`);
-        throw error;
+        return { error: `Error fetching all job listings: ${error.message}` };
     }
 };
 
@@ -34,8 +32,7 @@ const findJobListingById = async (id) => {
         }
         return listing;
     } catch (error) {
-        console.error(`Error fetching job listing by ID: ${error.stack}`);
-        throw error;
+        return { error: `Error fetching job listing by ID: ${error.message}` };
     }
 };
 
@@ -49,8 +46,7 @@ const updateJobListingById = async (id, updateData) => {
         }
         return updatedListing;
     } catch (error) {
-        console.error(`Error updating job listing: ${error.stack}`);
-        throw error;
+        return { error: `Error updating job listing: ${error.message}` };
     }
 };
 
@@ -64,8 +60,7 @@ const deleteJobListingById = async (id) => {
         }
         return deletedListing;
     } catch (error) {
-        console.error(`Error deleting job listing: ${error.stack}`);
-        throw error;
+        return { error: `Error deleting job listing: ${error.message}` };
     }
 };
 
@@ -88,6 +83,7 @@ const calculateAnalytics = async () => {
     ]);
 
     console.log('Analytics calculated successfully.');
+    return {
 
     return {
       totalApplications,
@@ -96,8 +92,7 @@ const calculateAnalytics = async () => {
       avgResponseTime: avgResponseTime.length ? avgResponseTime[0].avgResponseInDays.toFixed(2) : null
     };
   } catch (error) {
-    console.error(`Error calculating analytics: ${error.stack}`);
-    throw error;
+        return { error: `Error calculating analytics: ${error.message}` };
   }
 };
 
