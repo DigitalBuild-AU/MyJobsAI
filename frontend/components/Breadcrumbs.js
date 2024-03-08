@@ -21,3 +21,11 @@ const Breadcrumbs = ({ pathElements }) => {
 };
 
 export default Breadcrumbs;
+// This component renders breadcrumb navigation links for the MyJobsAI application, allowing users to track their navigation path within the application.
+        ))}
+      </ol>
+    </nav>
+  );
+};
+
+export default Breadcrumbs;
