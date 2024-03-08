@@ -87,6 +87,10 @@ router.post('/cv_customization', async (req, res) => {
       model: "gpt-3.5-turbo",
 
     });
+/**
+ * POST route for CV customization suggestions.
+ * Receives a job description and user's CV in the request body and provides suggestions for customizing the CV accordingly.
+ */
 
   // Placeholder for DOC download logic
   // Simulate sending the DOC file for download
