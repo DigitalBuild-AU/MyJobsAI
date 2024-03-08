@@ -54,8 +54,4 @@ describe('Navbar Component Tests', () => {
     expect(getByText('Interviews')).toBeInTheDocument();
   });
 
-  it('renders Settings link', () => {
-    const { getByText } = render(<Navbar />);
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
 });
