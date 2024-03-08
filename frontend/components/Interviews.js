@@ -12,6 +12,12 @@ const Interviews = () => {
   const [interviewDate, setInterviewDate] = useState('');
   const [notes, setNotes] = useState('');
 
+  /**
+   * Handles the submission of the interview scheduling form.
+   * Logs the input values and sends an email notification.
+   * Parameters: event (Event) - The form submission event.
+   * Returns: None.
+   */
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Scheduling interview with details:', { jobTitle, interviewDate, notes });
