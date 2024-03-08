@@ -10,8 +10,10 @@ const openai = new OpenAI();
 // CV Suggestions Route using Chat Completions
 router.post('/cv_suggestions', async (req, res) => {
 /**
-
- * This file defines the routes for generating CV suggestions, cover letters, and CV customization using OpenAI's GPT models.
+ * Handles the generation of CV suggestions based on a given job description and user's CV.
+ * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
+ * @param {Object} res - The response object used to return the suggestions or an error message.
+ * @returns {void} - Sends a JSON response with CV suggestions or an error status.
  */
   const { jobDescription, userCV } = req.body;
   try {
