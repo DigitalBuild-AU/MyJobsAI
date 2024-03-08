@@ -23,6 +23,9 @@ describe('submitInterviewData', () => {
   });
 
   it('correctly handles a failed POST request', async () => {
+/**
+ * Tests that the submitInterviewData function sends a POST request with the correct parameters and successfully returns the expected response.
+ */
     const errorMessage = 'Network Error';
     axios.post.mockRejectedValue(new Error(errorMessage));
 
@@ -31,4 +34,7 @@ describe('submitInterviewData', () => {
 });
 /**
  * This file contains tests for the submitInterviewData function, specifically testing successful and failed POST requests.
+ */
+/**
+ * Tests that the submitInterviewData function correctly handles a failed POST request by throwing an error with the expected message.
  */
