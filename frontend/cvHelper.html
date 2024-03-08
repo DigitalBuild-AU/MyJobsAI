@@ -4,38 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV Helper | MyJobsAI</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.body.insertAdjacentHTML('afterbegin', data);
-                console.log('Navbar dynamically added.'); // gpt_pilot_debugging_log
-            })
-            .catch(error => {
-                console.error('Failed to load navbar:', error); // gpt_pilot_debugging_log
-            });
-
-        const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
-        if (bootstrapScriptTag) bootstrapScriptTag.remove();
-
-        const newBootstrapScript = document.createElement('script');
-        newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
-        document.body.appendChild(newBootstrapScript);
-    });
-  </script>
-  <div class="container mt-4">
-    <div id="cvAssistant">
-      <textarea id="jobDescriptionInput" placeholder="Paste the job description here..." class="form-control mb-2"></textarea>
-      <textarea id="userCVInput" placeholder="Paste your CV here..." class="form-control mb-2"></textarea>
-      <button onclick="generateCVSuggestions()" class="btn btn-primary">Get CV Suggestions</button>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="cvHelperApp.js"></script>
-</body>
 </html>
