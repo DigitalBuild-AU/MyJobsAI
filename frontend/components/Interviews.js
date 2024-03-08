@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 /**
- * Interviews component for scheduling and managing job interviews.
- * Allows users to input job title, interview date, and notes for organization.
+ * Interviews component: Offers a form interface for users to schedule interviews, including job title, date, and additional notes.
  */
 
 const Interviews = () => {
@@ -37,6 +36,9 @@ const Interviews = () => {
     </div>
   );
 };
+/**
+ * This file contains the Interviews component that provides a form for users to schedule interviews and keep track of them.
+ */
 import { Link } from 'react-router-dom';
 
 export default Interviews;
