@@ -4,7 +4,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Interviews from '../pages/Interviews';
+import Interviews from '../components/Interviews';
 
 describe('Interviews Component', () => {
   /**
@@ -27,6 +27,66 @@ describe('Interviews Component', () => {
   });
 
   test('updates an existing interview and reflects changes', () => {
+import { waitFor } from '@testing-library/react';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+
+describe('Interviews Component - New Business Logic', () => {
+  let mock;
+
+  beforeEach(() => {
+    mock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
+  test('form submission triggers email API call with correct data', async () => {
+    mock.onPost('http://localhost:3000/api/email/send').reply(200, { message: 'Email sent' });
+
+    render(<Interviews />);
+    fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
+    fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Discuss project details' } });
+    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-04-20T10:00' } });
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await waitFor(() => {
+      expect(mock.history.post.length).toBe(1);
+      expect(mock.history.post[0].data).toContain('Software Engineer');
+      expect(mock.history.post[0].data).toContain('2023-04-20T10:00');
+      expect(mock.history.post[0].data).toContain('Discuss project details');
+    });
+  });
+
+  test('displays success message on successful email send', async () => {
+    mock.onPost('http://localhost:3000/api/email/send').reply(200, { message: 'Email sent' });
+
+    render(<Interviews />);
+    fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
+    fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Discuss project details' } });
+    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-04-20T10:00' } });
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
+    });
+  });
+
+  test('displays error message on email send failure', async () => {
+    mock.onPost('http://localhost:3000/api/email/send').networkError();
+
+    render(<Interviews />);
+    fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
+    fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Discuss project details' } });
+    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-04-20T10:00' } });
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Error sending email: Network Error')).toBeInTheDocument();
+    });
+  });
+});
    * Tests that updating an existing interview correctly reflects the changes in the component.
    */
   test('updates an existing interview and reflects changes', () => {
