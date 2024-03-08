@@ -310,5 +310,33 @@ return (
         <Link to="/coverLetterGeneration">Cover Letter Generation</Link>
         <Link to="/resumeCustomization">Resume Customization</Link>
       </div>
+
       <button onClick={() => setShowGuide(true)} style={{ margin: '10px 0', padding: '5px 10px' }}>Show Guide</button>
       {showGuide && <InteractiveGuide steps={getJobListingsPageGuideSteps()} />}
+      
+import Modal from '../components/Modal';
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [modalContent, setModalContent] = useState(null);
+
+const handleOpenModal = (content) => {
+  setModalContent(content);
+  setIsModalOpen(true);
+};
+
+const handleCloseModal = () => {
+  setIsModalOpen(false);
+  setModalContent(null);
+};
+
+const renderAddEditModal = () => (
+  <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+    {modalContent}
+  </Modal>
+);
+
+<div className="add-edit-buttons">
+  <button onClick={() => handleOpenModal('add')}>Add Listing</button>
+  <button onClick={() => handleOpenModal('edit')}>Edit Listing</button>
+</div>
+{renderAddEditModal()}
