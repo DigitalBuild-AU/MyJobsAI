@@ -60,12 +60,10 @@ router.post('/cv_customization', async (req, res) => {
           role: "user",
           content: `Please analyze the CV in comparison to the job description and provide customization suggestions.\nJob Description: ${jobDescription}\nUser CV: ${userCV}`
 /**
- * POST route to generate CV customization suggestions.
- * This route takes a job description and user CV as input and uses OpenAI's GPT models to generate suggestions for customizing the CV to better match the job description.
- * @route POST /cv_customization
- * @param {Object} req.body - Contains 'jobDescription' and 'userCV'.
- * @returns {Object} - The response object containing 'analysisResults' with the generated suggestions.
- * @throws {500} - Returns a 500 status code if there is an error in generating suggestions.
+ * Provides CV customization suggestions based on a job description and the user's CV.
+ * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
+ * @param {Object} res - The response object used to return customization suggestions or an error message.
+ * @returns {void} - Sends a JSON response with customization suggestions or an error status.
  */
         }
       ],
