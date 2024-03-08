@@ -90,16 +90,11 @@ const handleViewChangeBasedOnWindowSize = () => {
   }
 };
 
-/**
- * Encapsulates the cleanup logic to be called on component unmount.
- * Extracted from useEffect to improve readability and maintainability.
- */
-/**
-* Encapsulates the cleanup logic to be called on component unmount.
-* Specifically, it removes the 'resize' event listener from the window object, ensuring no memory leaks occur.
-* @param none - This function does not take any parameters.
-* @returns void - This function does not return a value.
-*/
+  /**
+   * Cleans up event listeners and resets filters state on component unmount.
+   * Specifically, removes the 'resize' event listener from the window.
+   * @returns {void}
+   */
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
   setFilters({status: '', company: ''}); // Reset filters on component unmount
