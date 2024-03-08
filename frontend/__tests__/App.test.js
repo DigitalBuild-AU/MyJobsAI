@@ -7,7 +7,8 @@ import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import App from '../app';
 import axios from 'axios';
-
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from '../app';
 jest.mock('axios');
 
 /**
@@ -37,25 +38,23 @@ describe('App Routing', () => {
       expect(getByText(route.component)).toBeInTheDocument();
     });
   });
-});
 
-describe('sendEmail Function', () => {
-  beforeEach(() => {
-    axios.post.mockClear();
-  });
+  describe('sendEmail Functionality', () => {
+    beforeEach(() => {
+      document.body.innerHTML = `
+        <input id="emailTo" value="test@example.com" />
+        <input id="emailSubject" value="Test Subject" />
+        <textarea id="emailBody">Test Body</textarea>
+        <div id="emailResponse"></div>
+      `;
+    });
 
-  it('displays success message on successful email sending', async () => {
-    axios.post.mockResolvedValue({ data: { message: 'Email was sent successfully.' } });
-    const { getByText, getByLabelText } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
+    test('successfully sends an email', async () => {
+      const response = { data: { message: 'Email was sent successfully.' } };
+      axios.post.mockResolvedValue(response);
 
-    fireEvent.change(getByLabelText(/to/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText(/subject/i), { target: { value: 'Test Subject' } });
-    fireEvent.change(getByLabelText(/body/i), { target: { value: 'Test Body' } });
-    fireEvent.click(getByText(/send email/i));
+      App.sendEmail();
+      await screen.findByText('Email was sent successfully.');
 
     await expect(getByText(/Email was sent successfully./i)).toBeInTheDocument();
 /**
@@ -63,19 +62,19 @@ describe('sendEmail Function', () => {
  */
   });
 
-  it('displays error message when email sending fails', async () => {
-    axios.post.mockRejectedValue(new Error('Failed to send email.'));
-    const { getByText, getByLabelText } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
 
-    fireEvent.change(getByLabelText(/to/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText(/subject/i), { target: { value: 'Test Subject' } });
-    fireEvent.change(getByLabelText(/body/i), { target: { value: 'Test Body' } });
-    fireEvent.click(getByText(/send email/i));
+    test('handles error when sending an email fails', async () => {
+      axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
-    await expect(getByText(/Failed to send email./i)).toBeInTheDocument();
+      App.sendEmail();
+      await screen.findByText('Failed to send email.');
+
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
+        to: 'test@example.com',
+        subject: 'Test Subject',
+        body: 'Test Body'
+      });
+      expect(screen.getByText('Failed to send email.')).toBeInTheDocument();
+    });
   });
 });
