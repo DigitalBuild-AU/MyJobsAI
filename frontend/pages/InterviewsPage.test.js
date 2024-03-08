@@ -48,7 +48,9 @@ describe('InterviewForm handleSubmit function', () => {
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/interviews', formData);
     });
   });
-
+/**
+ * Tests successful fetching of interviews from the API and their rendering.
+ */
   test('displays error message on submission failure', async () => {
     axios.post.mockRejectedValue(new Error('Error scheduling interview'));
     render(<InterviewForm />);
