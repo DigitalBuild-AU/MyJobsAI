@@ -4,7 +4,9 @@ import '@testing-library/jest-dom';
 import CoverLetter from '../pages/CoverLetter';
 
 describe('CoverLetter Component', () => {
-  // Tests that the CoverLetter component renders correctly and verifies its initial display.
+  /**
+   * Tests that the CoverLetter component renders correctly and verifies its initial display.
+   */
   test('renders and verifies initial display', () => {
     render(<CoverLetter />);
     expect(screen.getByText('Your Cover Letters')).toBeInTheDocument();
@@ -12,6 +14,11 @@ describe('CoverLetter Component', () => {
 
   // Tests that creating a new cover letter correctly updates the UI.
   test('creates a new cover letter and updates UI', () => {
+/**
+ * Test suite for the CoverLetter component, covering creation, editing, deletion, and validation of cover letters.
+ */
+   * Tests that creating a new cover letter correctly updates the UI.
+   */
     render(<CoverLetter />);
     fireEvent.change(screen.getByPlaceholderText('Cover Letter Title'), { target: { value: 'My Cover Letter' } });
     fireEvent.change(screen.getByPlaceholderText('Cover Letter Content'), { target: { value: 'This is the content of my cover letter.' } });
