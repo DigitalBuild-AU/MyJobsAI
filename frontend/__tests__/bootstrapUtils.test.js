@@ -23,6 +23,14 @@ describe('bootstrapUtils tests', () => {
   });
 
   /**
+  it('does not append a new script tag if an identical one exists', () => {
+    document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" async></script>';
+    loadBootstrapScript();
+    const scriptTags = document.querySelectorAll('script');
+    expect(scriptTags.length).toBe(1);
+    expect(scriptTags[0]).toHaveAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+    expect(scriptTags[0]).toHaveAttribute('async', '');
+  });
    * Test case: Appends a bootstrap script tag when none exists.
    * Verifies that a Bootstrap script tag is correctly appended to the document body when no such tag exists beforehand.
    */
@@ -39,6 +47,16 @@ describe('bootstrapUtils tests', () => {
     expect(scriptTags[0]).toHaveAttribute('async', '');
   });
 });
+  it('ensures correct behavior when multiple Bootstrap script tags are present', () => {
+    document.body.innerHTML = `
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>`;
+    loadBootstrapScript();
+    const scriptTags = document.querySelectorAll('script');
+    expect(scriptTags.length).toBe(1);
+    expect(scriptTags[0]).toHaveAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+    expect(scriptTags[0]).toHaveAttribute('async', '');
+  });
 
 describe('loadBootstrapScript utility function', () => {
   it('correctly creates and appends the Bootstrap script tag to the document body', () => {
@@ -67,3 +85,13 @@ describe('loadBootstrapScript utility function', () => {
 /**
  * Describes the suite of tests for bootstrap utility functions.
  */
+  it('simulates network delays or errors when loading the Bootstrap script', () => {
+    jest.spyOn(document, 'createElement').mockImplementation(() => {
+      const script = document.createElement('script');
+      setTimeout(() => script.onerror(new Error('Network error')), 100);
+      return script;
+    });
+    loadBootstrapScript();
+    // Assertions for error handling mechanism can be added here
+    // For example, checking if a retry occurs or if an error message is logged
+  });
