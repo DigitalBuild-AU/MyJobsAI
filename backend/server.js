@@ -29,7 +29,10 @@ debugLog('Static files middleware for frontend setup completed.');
 // Serve static files like 'quotes.json' from the 'public' directory
 app.use(express.static('public'));
 debugLog('Static files middleware for public directory setup completed.');
-
+/**
+ * Main server file for MyJobsAI backend.
+ * This file sets up the express server, connects to MongoDB, and initializes all route handlers.
+ */
 debugLog('Connecting to MongoDB at URI: ' + process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => debugLog('MongoDB Connected'))
