@@ -47,10 +47,15 @@ describe('handleCoverLetterError', () => {
   """
   Tests the generateCoverLetter function's ability to handle null values for all parameters, expecting an error indicating invalid input.
   """
+  Tests the generateCoverLetter function's ability to handle empty string inputs for all parameters, expecting an error indicating invalid input.
+  """
   it('fails to generate a cover letter with null values', async () => {
     await expect(generateCoverLetter('', '', '', '')).rejects.toThrow('Invalid input');
   });
 
+  """
+  Tests the generateCoverLetter function's ability to handle null values for all parameters, expecting an error indicating invalid input.
+  """
   it('fails to generate a cover letter with null values', async () => {
     await expect(generateCoverLetter(null, null, null, null)).rejects.toThrow('Invalid input');
   });
@@ -83,6 +88,9 @@ Test suite for the coverLetterAPI utility functions. It verifies the behavior of
     handleCoverLetterError(mockError);
     expect(console.error).toHaveBeenCalledWith('Failed to generate Cover Letter:', mockError);
   });
+  """
+  Tests the generateCoverLetter function with an extreme value for userExperience, verifying that the function can handle unusually high experience values without error.
+  """
 });
 """
 Tests logging of the error message when cover letter generation fails, verifying error logging.
