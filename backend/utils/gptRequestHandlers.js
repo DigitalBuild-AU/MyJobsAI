@@ -81,3 +81,9 @@ async function handleCvCustomization(jobDescription, userCV) {
 }
 
 module.exports = { handleCvSuggestions, handleCoverLetter, handleCvCustomization };
+/**
+ * Provides CV customization suggestions based on a job description and user's CV.
+ * @param {string} jobDescription - The job description.
+ * @param {string} userCV - The user's CV.
+ * @returns {Object} An object containing customization suggestions.
+ */
