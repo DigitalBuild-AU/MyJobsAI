@@ -2,7 +2,7 @@
  * This file contains the React component for the Interviews Page, facilitating the scheduling and display of interviews.
  */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { submitInterview, handleInterviewResponse, handleInterviewError } from '../utils/interviewAPI';
 import InterviewForm from './components/InterviewForm';
 
 function InterviewsPage() {
@@ -26,3 +26,8 @@ function InterviewsPage() {
   * @param {Event} e - The event object from the form submission.
   */
   const handleSubmit = (e) => {
+    e.preventDefault();
+    submitInterview(jobTitle, date, notes, setInterviews)
+      .then(response => handleInterviewResponse(response))
+      .catch(error => handleInterviewError(error));
+  };

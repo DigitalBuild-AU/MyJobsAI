@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { postCoverLetter } from '../utils/apiHelpers';
+import { generateCoverLetter, handleCoverLetterResponse, handleCoverLetterError } from '../utils/coverLetterAPI';
 import './CoverLetterGenerationPage.css';
 
 const CoverLetterGenerationPage = () => {
@@ -47,18 +47,11 @@ const CoverLetterGenerationPage = () => {
 /**
  * Generates a personalized cover letter based on the selected job and user profile.
  */
-  const createCoverLetter = async () => {
-    postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
-      .then(data => {
-        setGeneratedCoverLetter(data.coverLetter);
-      .then(function(response) {
-        setGeneratedCoverLetter(response.data.coverLetter);
-        console.log('Cover Letter generated.');
-      })
-      .catch(function(error) {
-        console.error('Failed to generate Cover Letter:', error);
-        setGeneratedCoverLetter('Error generating Cover Letter.');
-      });
+  const createCoverLetter = () => {
+    generateCoverLetter(jobDescription, userName, userSkills, userExperience)
+      .then(response => handleCoverLetterResponse(response))
+      .then(coverLetter => setGeneratedCoverLetter(coverLetter))
+      .catch(error => handleCoverLetterError(error));
   };
 
 /**
