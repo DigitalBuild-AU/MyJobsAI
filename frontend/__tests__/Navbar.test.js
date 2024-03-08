@@ -34,10 +34,12 @@ describe('Navbar Component Tests', () => {
     expect(getByText('Applications')).toBeInTheDocument();
   });
 
+
   // Test case to ensure the CV Helper link is rendered in the Navbar component.
   /**
    * Test if the Navbar component renders the 'CV Helper' link correctly.
    */
+
   it('renders CV Helper link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('CV Helper')).toBeInTheDocument();
