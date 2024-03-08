@@ -1,3 +1,7 @@
+/**
+ * Utility functions for handling requests to OpenAI's GPT models.
+ * Includes functions for generating CV suggestions, cover letters, and CV customization based on user inputs.
+ */
 const { OpenAI } = require('openai');
 const openai = new OpenAI();
 
