@@ -1,3 +1,10 @@
+/**
+ * Dynamically loads the Bootstrap script into the document. If an existing script tag for Bootstrap is found, it is removed and a new one is appended.
+ * This ensures that the Bootstrap script is always up to date and correctly loaded.
+ *
+ * @param none - This function does not accept any parameters.
+ * @returns {void} - This function does not return a value.
+ */
 export const loadBootstrapScript = () => {
   const existingScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
   if (existingScriptTag) {
