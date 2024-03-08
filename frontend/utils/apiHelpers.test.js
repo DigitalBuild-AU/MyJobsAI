@@ -38,3 +38,6 @@ describe('submitInterviewData', () => {
 /**
  * Tests that the submitInterviewData function correctly handles a failed POST request by throwing an error with the expected message.
  */
+"""
+This file contains tests for the API helper functions defined in apiHelpers.js. It includes tests for submitting interview data to the backend and handling both successful and failed POST requests. The tests utilize Jest for the testing framework and mock axios for HTTP requests.
+"""
