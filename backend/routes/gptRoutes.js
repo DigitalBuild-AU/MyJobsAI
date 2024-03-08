@@ -37,9 +37,14 @@ router.post('/cover_letter', async (req, res) => {
   const { jobDescription, userCV } = req.body;
   try {
     const response = await openai.chat.completions.create({
+
 /**
  * @fileoverview This file defines the routes for interacting with OpenAI's GPT models to generate CV suggestions, cover letters, and CV customization. It utilizes express.js for routing and includes handlers for each specific GPT-based functionality.
  */
+
+const { logSuccess, logError } = require('../utils/logger');
+const { handleError } = require('../utils/errorHandler');
+
     console.log("Cover letter analysis and feedback generated successfully."); // gpt_pilot_debugging_log
     res.json(analysisResults);
 });
@@ -68,22 +73,15 @@ router.post('/cv_customization', async (req, res) => {
         }
       ],
     });
-    console.log("CV analysis and customization suggestions generated successfully."); // gpt_pilot_debugging_log
+    logSuccess("CV analysis and customization suggestions generated successfully.");
     res.json({ analysisResults: response.choices[0].message.content.trim() });
   } catch (error) {
-    console.error(`Error processing CV customization request: ${error.message}, Stack: ${error.stack}`);
-    res.status(500).json({ error: "Failed to generate CV customization suggestions." });
+    logError(error);
+    handleError(res, "Failed to generate CV customization suggestions.", 500);
   }
       model: "gpt-3.5-turbo",
 
     });
 
-    console.log("CV customization suggestions generated successfully."); // gpt_pilot_debugging_log
-    res.json({ analysisResults: response.choices[0].message.content.trim() });
-  } catch (error) {
-    console.error(`Error processing CV customization request: ${error.message}, Stack: ${error.stack}`); // gpt_pilot_debugging_log
-    res.status(500).json({ error: "Failed to generate CV customization suggestions." });
-  }
   // Placeholder for DOC download logic
-  console.log("Downloading DOC...");
   // Simulate sending the DOC file for download
