@@ -1,3 +1,7 @@
+/**
+ * InterviewForm Component
+ * This component renders a form for scheduling interviews. It allows users to input details such as job title, date, and notes for the interview. The form supports submission to a backend API for persistence.
+ */
 import React, { useState } from 'react';
 import InteractiveGuide from '../components/InteractiveGuide';
 import { getInterviewFormGuideSteps } from '../utils/guideSteps';
@@ -25,8 +29,18 @@ function InterviewForm({ setInterviews, interviews }) {
     onDateChange(value);
   };
 
+  /**
+   * Handles changes to the notes input field.
+   * 
+   * @param {Event} e - The change event from the notes input field.
+   */
   const handleNotesChange = (e) => {
     const value = e.target.value;
+    setNotes(value);
+    onNotesChange(value);
+  };
+
+  const handleSubmit = (e) => {
     setNotes(value);
     onNotesChange(value);
   };
@@ -47,6 +61,16 @@ function InterviewForm({ setInterviews, interviews }) {
       });
   };
 
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="jobTitleInput">Job Title</label>
+        <input type="text" className="form-control" id="jobTitleInput" value={jobTitle} onChange={handleJobTitleChange} placeholder="Enter job title" />
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="jobTitleInput">Job Title</label>
+        <input type="text" className="form-control" id="jobTitleInput" value={jobTitle} onChange={handleJobTitleChange} placeholder="Enter job title" />
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
