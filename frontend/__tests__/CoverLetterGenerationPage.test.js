@@ -1,12 +1,5 @@
 """
-CoverLetterGenerationPage.test.js
-
-This file contains tests for the Cover Letter Generation Page component of the MyJobsAI application. It includes:
-- Rendering tests to ensure the component loads correctly.
-- Interaction tests for user inputs and button clicks.
-- Mock API calls to test the integration with the backend services.
-
-The tests utilize React Testing Library and axios-mock-adapter for mocking API requests.
+This test suite focuses on the Cover Letter Generation Page component of the MyJobsAI application. It includes tests for rendering the component, user interactions, and integration with the backend for generating and downloading cover letters.
 """
 
 import React from 'react';
@@ -34,7 +27,6 @@ Contains tests for the CoverLetterGenerationPage component, focusing on renderin
   axios.get.mockResolvedValue({ data: mockJobListings });
   axios.post.mockResolvedValue({ data: { coverLetter: mockCoverLetter } });
 });
-
 """
 Ensures that the CoverLetterGenerationPage renders successfully without throwing any errors.
 """
@@ -113,6 +105,9 @@ test('clicking create cover letter displays generated letter', async () => {
 });
 
 // Tests error handling when fetching job listings fails.
+"""
+Tests that clicking the 'Download as PDF' button triggers the downloading process of the generated cover letter in PDF format.
+"""
 test('download as PDF button triggers download', async () => {
 """
 Ensures that clicking the 'Create Cover Letter' button on the CoverLetterGenerationPage displays the generated cover letter to the user.

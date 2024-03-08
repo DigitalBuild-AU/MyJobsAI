@@ -1,3 +1,7 @@
+"""
+This file contains tests for the InterviewsPage component, covering functionalities such as fetching and displaying interviews, scheduling new interviews, and handling errors.
+"""
+
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
@@ -78,7 +82,7 @@ it('handleSubmit with valid inputs schedules interview and updates state', async
   });
 });
   """
-  Verifies the error handling in the InterviewsPage component when an attempt to schedule an interview fails. It checks that an appropriate error message is displayed.
+  Tests the integration of the InterviewsPage with the submitInterview function to ensure that interviews are scheduled successfully.
   """
 
 it('handleSubmit error scenario displays error message', async () => {
