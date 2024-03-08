@@ -17,6 +17,11 @@ describe('debugLogger tests', () => {
   });
 
   test('should log messages and error stack trace correctly when error is provided', () => {
+  /**
+   * Tests that debugLog logs messages correctly without any errors.
+   * No parameters are passed to this test function.
+   * It asserts that console.log is called with the correct timestamp and message.
+   */
     const consoleErrorSpy = jest.spyOn(console, 'error');
     const consoleLogSpy = jest.spyOn(console, 'log');
     const mockError = new Error('Test error');
@@ -37,4 +42,30 @@ describe('debugLogger tests', () => {
     expect(() => debugLog('Test message with undefined error', undefined)).not.toThrow();
     expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message with undefined error');
   });
+/**
+ * This file contains tests for the debugLogger utility. It includes tests for logging messages with and without errors,
+ * handling non-Error objects, and ensuring no errors are thrown for undefined inputs. These tests ensure the debugLogger
+ * functions as expected under various conditions.
+ */
+  /**
+   * Mocks the global Date object to ensure consistent timestamps in tests.
+   */
+  /**
+   * Restores all mocks to their original value after each test to ensure test isolation.
+   */
 });
+  /**
+   * Tests that debugLog does not throw an error when undefined is passed as the error parameter.
+   * Parameters: A string message and undefined.
+   * It asserts that the function call does not throw any errors.
+   */
+    const consoleLogSpy = jest.spyOn(console, 'log');
+    expect(() => debugLog('Test message with undefined error', undefined)).not.toThrow();
+    expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message with undefined error');
+  });
+});
+  /**
+   * Tests that debugLog handles non-Error objects gracefully when passed as the error parameter.
+   * Parameters: A string message and a non-Error object.
+   * It asserts that console.log is called with the correct message, indicating successful handling of non-Error objects.
+   */
