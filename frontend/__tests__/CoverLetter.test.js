@@ -1,7 +1,9 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import axios from 'axios';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CoverLetter from '../pages/CoverLetter';
+import CoverLetter from '../components/CoverLetter';
+jest.mock('axios');
 
 describe('CoverLetter Component', () => {
   /**
@@ -37,6 +39,11 @@ Description: Test suite for the CoverLetter component, covering creation, editin
     render(<CoverLetter />);
     fireEvent.click(screen.getByText('Edit', { selector: 'button' }));
     fireEvent.change(screen.getByPlaceholderText('Cover Letter Content'), { target: { value: 'Updated content of my cover letter.' } });
+test('handleGenerateCoverLetter function exists and is callable', () => {
+  const coverLetterComponent = render(<CoverLetter />);
+  const generateButton = coverLetterComponent.getByText('Generate Cover Letter');
+  expect(typeof generateButton.onclick).toBe('function');
+});
     fireEvent.click(screen.getByText('Save Changes'));
     expect(screen.getByText('Updated content of my cover letter.')).toBeInTheDocument();
   });
