@@ -36,6 +36,10 @@ describe('InterviewsPage', () => {
     render(<InterviewsPage />);
     await waitFor(() => {
       expect(screen.getByText('Error fetching interviews:')).toBeInTheDocument();
+/**
+ * Group of tests for the handleSubmit function of the InterviewForm component.
+ * Includes tests for successful submission, error handling, and field validation.
+ */
 describe('InterviewForm handleSubmit function', () => {
   test('submits form data correctly', async () => {
     const formData = { jobTitle: 'Frontend Developer', date: '2023-05-01', notes: 'Technical interview' };
