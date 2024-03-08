@@ -37,6 +37,9 @@ describe('debugLogger tests', () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith('Error stack trace');
   });
 
+  /**
+   * Tests that non-Error objects are handled gracefully and logged correctly.
+   */
   test('should handle non-Error objects gracefully', () => {
     const consoleLogSpy = jest.spyOn(console, 'log');
     debugLog('Test message with non-error object', { some: 'object' });
