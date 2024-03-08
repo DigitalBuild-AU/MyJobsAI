@@ -68,10 +68,8 @@ import { logError } from '../utils/logger';
   }, [filters, page]);
 
   /**
-   * Fetches job listings from the server based on the current filters and page number.
-   * Utilizes axios to make a GET request to the server with query parameters.
-   * @returns {Promise<void>} A promise that resolves when the state is updated with fetched data.
-   */
+  * Fetches job listings from the server based on the current filters and page number.
+  */
 
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
