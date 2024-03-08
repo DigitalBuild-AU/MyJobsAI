@@ -95,10 +95,13 @@ const handleViewChangeBasedOnWindowSize = () => {
 };
 
   /**
-   * Cleans up event listeners and resets filters state on component unmount.
-   * Specifically, removes the 'resize' event listener from the window.
-   * @returns {void}
-   */
+  * Cleans up event listeners and resets filters state on component unmount.
+  */
+  /**
+  * Cleans up event listeners and resets filters state on component unmount.
+  * Specifically, removes the 'resize' event listener from the window.
+  * @returns {void}
+  */
 
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
