@@ -1,7 +1,7 @@
 /**
- * Tests for GPT-related routes in the MyJobsAI application.
+ * Unit Tests for GPT Routes in MyJobsAI Application
  * 
- * This file contains unit tests for the GPT routes, specifically focusing on CV customization, CV suggestions, and cover letter generation functionalities. It includes tests for both successful operations and error handling scenarios.
+ * This file contains unit tests for the GPT-related routes within the MyJobsAI application. It is designed to test the functionality of CV customization, CV suggestions, and cover letter generation. The tests cover a range of scenarios, including successful responses and error handling, to ensure the reliability and robustness of the application's GPT features.
  */
 import request from 'supertest';
 import { app } from '../server'; // Assuming app is exported from server.js
