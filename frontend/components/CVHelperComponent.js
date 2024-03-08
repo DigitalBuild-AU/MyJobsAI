@@ -26,6 +26,8 @@ const CVHelperComponent = () => {
           </div>
           <button type="submit" className="btn btn-primary">Generate Suggestions</button>
         </form>
+import { loadBootstrapScript } from '../../utils/bootstrapUtils';
+// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
         <div className="mt-3">
           <h3>CV Suggestions:</h3>
           <p id="cvSuggestionsOutput">{cvSuggestionsOutput}</p>
@@ -95,7 +97,3 @@ const CVHelperComponent = () => {
 };
 
 export default CVHelperComponent;
-
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
-// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
