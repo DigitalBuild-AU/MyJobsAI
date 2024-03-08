@@ -57,6 +57,10 @@ describe('App Routing', () => {
     });
 
     test('successfully sends an email', async () => {
+  /**
+   * Test suite for verifying the sendEmail function in the App component.
+   * Checks the function's ability to successfully send an email and handle errors.
+   */
       const response = { data: { message: 'Email was sent successfully.' } };
       axios.post.mockResolvedValue(response);
 
@@ -71,6 +75,9 @@ describe('App Routing', () => {
 
 
     test('handles error when sending an email fails', async () => {
+  /**
+   * Tests the successful sending of an email using the sendEmail function.
+   */
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
       App.sendEmail();
@@ -85,3 +92,6 @@ describe('App Routing', () => {
     });
   });
 });
+  /**
+   * Tests error handling in the sendEmail function when email sending fails.
+   */
