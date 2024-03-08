@@ -93,6 +93,7 @@ import { useForm } from 'react-hook-form';
  * @param {string} jobTitle - The title of the job.
  * @param {string} date - The date of the interview.
  * @param {string} notes - Additional notes for the interview.
+ * @returns {void}
  */
 function handleFormSubmit(jobTitle, date, notes) {
     axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
