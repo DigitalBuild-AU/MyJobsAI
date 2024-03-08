@@ -20,6 +20,10 @@ describe('CoverLetterComponent', () => {
     expect(getByText('Generate Cover Letter')).toBeInTheDocument();
   });
 
+  /**
+   * Test case: Dynamically loads the Bootstrap script.
+   * Verifies that the Bootstrap script is appended to the document body when the CoverLetterComponent is rendered.
+   */
   it('loads Bootstrap script dynamically', () => {
 /**
  * Tests if the CoverLetterComponent renders correctly with all expected inputs and the generate button.
