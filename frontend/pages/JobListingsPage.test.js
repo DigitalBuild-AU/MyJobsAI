@@ -1,4 +1,8 @@
 
+/**
+ * This file contains tests for the JobListingsPage component.
+ * It focuses on component rendering, pagination, filtering, and user interactions.
+ */
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
 jest.mock('web-vitals', () => ({
@@ -9,9 +13,12 @@ jest.mock('web-vitals', () => ({
   getTTFB: jest.fn(),
 }));
 
-"""
+/**
+ * Tests for the JobListingsPage component.
+ * This file contains a suite of tests to ensure the JobListingsPage component renders correctly and functions as expected, including rendering of child components, pagination functionality, and responsiveness to user interactions.
+ */
 
-JobListingsPage.test.js - Test Suite for JobListingsPage Component
+"""
 
 This test suite is designed to ensure the correct rendering and functionality of the JobListingsPage component within the MyJobsAI application. It includes tests for component rendering, user interaction simulations, pagination, and filter functionality. The suite utilizes React and the React Testing Library to verify the integrity and behavior of the JobListingsPage component, aiming to ensure a seamless user experience.
 
@@ -50,6 +57,11 @@ test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
 test('filters listings based on user input', async () => {
+/**
+
+ * Test case for ensuring the JobListingCard component renders with the correct job title, company, and location based on provided props.
+
+ */
   const mockListings = [
     { id: 1, jobTitle: 'Software Engineer', company: 'Tech Corp', location: 'San Francisco' },
     { id: 2, jobTitle: 'Product Manager', company: 'Innovate LLC', location: 'New York' }
@@ -61,6 +73,12 @@ test('filters listings based on user input', async () => {
   fireEvent.change(screen.getByPlaceholderText('Filter by company'), { target: { value: 'Tech Corp', name: 'company' } });
 
   await waitFor(() => {
+/**
+
+ * Test case for filtering job listings based on user input.
+ * Verifies that the JobListingsPage component correctly filters listings based on user-provided status and company filters.
+ 
+ */
     expect(screen.getByText('Software Engineer')).toBeInTheDocument();
     expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
   });
@@ -78,6 +96,12 @@ test('view changes between table and card based on window size', () => {
 
   expect(getByText('Table View')).toBeInTheDocument();
 });
+/**
+
+ * Test case for responsive design functionality.
+ * Verifies that the JobListingsPage component correctly switches between table and card views based on window size.
+
+ */
 
 test('pagination component renders and navigates correctly', async () => {
   const mockListingsPage1 = [
@@ -92,6 +116,10 @@ test('pagination component renders and navigates correctly', async () => {
 
   render(<JobListingsPage />);
   await waitFor(() => {
+/**
+ * Test case for pagination component functionality.
+ * Verifies that the pagination component within the JobListingsPage correctly renders and navigates between pages of job listings.
+ */
     expect(screen.getByText('Software Engineer')).toBeInTheDocument();
     expect(screen.getByText('Product Manager')).toBeInTheDocument();
   });
@@ -102,22 +130,37 @@ test('pagination component renders and navigates correctly', async () => {
     expect(screen.queryByText('Software Engineer')).not.toBeInTheDocument();
   });
 });
+/**
+ * Test case for pagination navigation.
+ * Ensures that clicking on pagination buttons correctly changes the page of job listings displayed.
+ */
 
     const { getByText } = render(<JobListingCard listing={listing} />);
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
     expect(getByText('New York')).toBeInTheDocument();
+/**
+ * Test case for rendering the JobListingCard component with props.
+ * Verifies that the JobListingCard component correctly displays job details based on the provided props.
+ */
   });
 
   /**
  * Test Case: Simulates fetching job listings for testing pagination.
  * This test uses a mock function to simulate fetching job listings, crucial for setting up the 'totalPages' and 'currentPage' values needed to test the pagination functionality of the JobListingsPage component.
+/**
+ * Tests the rendering and navigation functionality of the pagination component.
+ */
  */
   /**
  * Test Case: Verifies the rendering of multiple job listings in the JobListingTable component.
  * This test checks if the JobListingTable component correctly displays all provided job listings, including job titles, companies, and locations.
  */
    * Tests that the JobListingTable component correctly renders multiple job listings.
+/**
+ * Test case for simulating fetching job listings for pagination.
+ * Uses a mock function to simulate API calls for fetching job listings, crucial for testing pagination functionality.
+ */
    * Checks that all provided job listings are displayed, including job titles, companies, and locations.
    */
 /**
@@ -130,6 +173,10 @@ test('renders JobListingTable component correctly', () => {
  * This test checks if the JobListingTable component correctly displays job titles, companies, and locations for all provided job listings.
  */
 /**
+/**
+ * Test case for rendering multiple job listings in the JobListingTable component.
+ * Verifies that the JobListingTable component correctly displays all provided job listings.
+ */
  * Test Case: Renders JobListingCard component correctly.
  * Verifies that the JobListingCard component displays job title, company, and location based on the provided props.
  */
@@ -141,6 +188,10 @@ test('renders JobListingTable component correctly', () => {
     expect(getByText('Software Engineer')).toBeInTheDocument();
     expect(getByText('ABC Inc.')).toBeInTheDocument();
 /**
+ * Test case for rendering the JobListingCard component correctly.
+ * Verifies that the JobListingCard component displays job title, company, and location based on the provided props.
+ */
+/**
  * Test Case: Renders JobListingTable component correctly.
  * Checks that the JobListingTable component correctly displays multiple job listings, including job titles, companies, and locations.
  */
@@ -150,6 +201,10 @@ test('renders JobListingTable component correctly', () => {
 });
  * Test Case: Verifies the functionality of pagination button rendering and disabling the current page button.
  * This test checks if the correct number of pagination buttons are rendered and that the button for the current page is correctly disabled.
+/**
+ * Test case for rendering the JobListingTable component correctly.
+ * Checks that the JobListingTable component correctly displays multiple job listings, including job titles, companies, and locations.
+ */
  */
 /**
  * Test Case: renderPagination renders correct number of buttons and disables current page button.
@@ -160,10 +215,18 @@ test('renders JobListingTable component correctly', () => {
  * This test simulates user input for filters and verifies that the error state is updated appropriately for invalid inputs, ensuring the robustness of form validation within the component.
  */
   /**
+/**
+ * Test case for pagination button functionality.
+ * Verifies the correct rendering and disabling of the current page button in the pagination component.
+ */
   * Test Case: Validates input and updates error state for invalid input.
   * This test simulates user input for filters and verifies that the error state is updated appropriately for invalid inputs, ensuring the robustness of form validation within the component.
   */
   test('input validation updates error state for invalid input', () => {
+/**
+ * Test case for input validation and error state updates.
+ * Simulates user input for filters and verifies that the error state is updated appropriately for invalid inputs.
+ */
     const { getByPlaceholderText, rerender, getByText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
     rerender(<JobListingsPage />);
@@ -180,12 +243,20 @@ test('ResponsiveNavbar switches between Navbar and Hamburger Menu based on scree
 });
     expect(getByText('Please enter a valid status.')).toBeInTheDocument();
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: '', name: 'company' } });
+/**
+ * Test case for responsive design and navigation menu behavior.
+ * Verifies that the navigation menu switches between a standard navbar and a hamburger menu based on screen size.
+ */
     rerender(<JobListingsPage />);
     expect(getByText('Please enter a valid company name.')).toBeInTheDocument();
   });
     const totalPages = 5;
     const currentPage = 2;
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} page={currentPage} />);
+/**
+ * Test case for validating input and updating error states.
+ * Verifies that error messages are displayed inline with form inputs for invalid input values.
+ */
     const buttons = queryAllByRole('button');
     expect(buttons.length).toBe(totalPages);
     expect(buttons[currentPage].disabled).toBeTruthy();
@@ -203,6 +274,10 @@ test('ResponsiveNavbar switches between Navbar and Hamburger Menu based on scree
     const { getByPlaceholderText } = render(<JobListingsPage />);
     fireEvent.change(getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
     fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech Inc', name: 'company' } });
+/**
+ * Test case for updating filters state and resetting page.
+ * Verifies that changing filter inputs updates the filters state and resets the pagination to the first page.
+ */
     // Assuming JobListingsPage component exposes its state for testing or using a testing-library utility to check state changes
     // This is a placeholder for actual state verification logic
   /**
@@ -210,6 +285,10 @@ test('ResponsiveNavbar switches between Navbar and Hamburger Menu based on scree
   */
   // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
   test('createPaginationButton renders correct number of buttons', () => {
+/**
+ * Test case for creating pagination buttons.
+ * Verifies that the correct number of pagination buttons are rendered and that the button for the current page is disabled.
+ */
 
     const totalPages = 5;
     const currentPage = 2;
@@ -244,6 +323,12 @@ test('Sidebar integration in JobListingsPage', () => {
     const totalPages = 5;
     const currentPage = 0; // First page
     const { queryAllByRole } = render(<JobListingsPage totalPages={totalPages} currentPage={currentPage} />);
+/**
+ * Utility function for creating pagination buttons within the JobListingsPage test suite. It generates button elements based on the total number of pages and the current page, including 'Next' and 'Previous' buttons for navigation.
+ * @param {number} totalPages - The total number of pages to generate buttons for.
+ * @param {number} currentPage - The current page number, used to disable the corresponding pagination button.
+ * @returns An array of button elements for pagination.
+ */
     const buttons = queryAllByRole('button');
 
   test('updateFilters updates filters state with correct values', () => {
@@ -328,6 +413,9 @@ test('Sidebar integration in JobListingsPage', () => {
   test('createPaginationButton disables button for current page', () => {
 /**
  * Test Case: Creates pagination buttons with the correct number of buttons.
+/**
+ * Tests that sequential updates to filters result in a combined state that reflects all changes.
+ */
  * Verifies that the createPaginationButton function renders the correct number of buttons, including 'Next' and 'Previous' buttons.
  */
     const totalPages = 5;
@@ -357,6 +445,10 @@ test('Sidebar integration in JobListingsPage', () => {
 
   test('renderPagination renders correct number of buttons and disables current page button', () => {
     const totalPages = 5;
+/**
+ * Test case for sequential updates to filters resulting in a combined state.
+ * Verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes.
+ */
     const currentPage = 2;
     render(<JobListingsPage />);
     // Mocking fetchListings to set totalPages and currentPage
@@ -376,6 +468,9 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(buttons.length).toBe(totalPages + 2); // Including next and previous page buttons
     expect(buttons[currentPage + 1].disabled).toBeTruthy(); // +1 to account for previous page button
   });
+/**
+ * Tests that error messages are displayed inline with form inputs upon validation failure.
+ */
 test('Breadcrumbs component renders correct navigational path', () => {
   const pathElements = [
     { label: 'Home', link: '/' },
@@ -394,6 +489,10 @@ test('Breadcrumbs component accessibility features', () => {
   const { container } = render(<Breadcrumbs pathElements={pathElements} />);
   expect(container.querySelector('nav[aria-label="breadcrumb"]')).toBeInTheDocument();
 });
+/**
+ * Test case for error messages displayed inline with form inputs.
+ * Verifies that appropriate error messages are displayed inline with form inputs when validation fails.
+ */
 
 /**
  * Test case for verifying that the 'createPaginationButton' function renders a button with the correct page number.
@@ -479,6 +578,9 @@ describe('handleErrorState function tests', () => {
 
 
   /**
+/**
+ * Tests the functionality of the component to switch to card view correctly upon window resize.
+ */
    * Test: handles window resize to switch to table view correctly
    * Purpose: This test ensures that the JobListingsPage component transitions to 'Table View' when the window is resized to a width typical of larger screens (e.g., desktops). By dispatching a resize event with a width of 1024px, the test checks for the presence of 'Table View' text, confirming the UI's adaptability to screen size changes.
    */
@@ -503,6 +605,9 @@ describe('handleErrorState function tests', () => {
 
   beforeEach(() => {
     setErrorStateMock = jest.fn();
+/**
+ * Tests the functionality of the component to switch to table view correctly upon window resize.
+ */
     initialState = { status: false, company: false };
     // Mocking useState for errorState
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
@@ -554,6 +659,9 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
 });
+/**
+ * Tests that the error state is correctly updated for non-empty input values.
+ */
 
   afterEach(() => {
 /**

@@ -33,10 +33,11 @@ import { logError } from '../utils/logger';
   useEffect(() => {
 
     /**
- /**
- * Handles changes in window size and updates the view state accordingly.
- * This function is triggered on window resize events and adjusts the view between 'card' and 'table' layouts based on the window's width.
- */
+   * Adjusts the view state between 'card' and 'table' layouts based on the window's width.
+   * This function is triggered on window resize events.
+   * @returns {void}
+   */
+
  * File: JobListingsPage.js
  * Project: MyJobsAI
  * Purpose: This file defines the JobListingsPage component for the MyJobsAI application. It is responsible for rendering the job listings page, which includes features such as displaying job listings in various views (table or card), filtering listings based on user criteria, and pagination. The component leverages React hooks for state management and axios for data fetching from the server.
@@ -69,19 +70,23 @@ import { logError } from '../utils/logger';
   }, [filters, page]);
 
   /**
- /**
- * Fetches job listings from the server based on the current filters and page.
- * This function uses axios to make a GET request to the server with query parameters for filtering based on the current state of filters and page. It updates the listings and totalPages state with the data received from the response.
- */
+   * Fetches job listings from the server based on the current filters and page number.
+   * Utilizes axios to make a GET request to the server with query parameters.
+   * @returns {Promise<void>} A promise that resolves when the state is updated with fetched data.
+   */
+
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
       const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
-/**
- * Handles the change in window size and updates the view state accordingly.
- * Extracted from useEffect to improve readability and maintainability. This function checks the window's width and updates the view state to either 'card' or 'table'.
- */
+
+  /**
+   * Updates the view state based on the current window size.
+   * Sets the view to 'card' if window width is less than 768px, otherwise sets to 'table'.
+   * @returns {void}
+   */
+
 const handleViewChangeBasedOnWindowSize = () => {
   if (window.innerWidth < 768) {
     setView('card');
@@ -90,14 +95,12 @@ const handleViewChangeBasedOnWindowSize = () => {
   }
 };
 
-/**
- * Encapsulates the cleanup logic to be called on component unmount.
- * Extracted from useEffect to improve readability and maintainability.
- */
-/**
- * Encapsulates the cleanup logic to be called on component unmount.
- * Specifically, it removes the 'resize' event listener from the window object, ensuring no memory leaks occur. This function is called when the component is unmounted to prevent memory leaks.
- */
+  /**
+   * Cleans up event listeners and resets filters state on component unmount.
+   * Specifically, removes the 'resize' event listener from the window.
+   * @returns {void}
+   */
+
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
   setFilters({status: '', company: ''}); // Reset filters on component unmount
@@ -151,29 +154,37 @@ const renderPagination = () => {
 
   /**
    * Updates the filters state with new values for a given filter.
-   * This function is responsible for updating the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
+   * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
    *
    * @param {string} filterName - The name of the filter to update.
    * @param {string} filterValue - The new value for the filter.
-   * @returns void - This function does not return a value but updates the component's state directly.
    */
+
  /**
  * Updates the filters state with new values for a given filter.
  * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
  * @param {string} filterName - The name of the filter to update.
  * @param {string} filterValue - The new value for the filter.
  */
+  /**
+   * Updates the filters state with new values for a given filter.
+   * @param {string} filterName - The name of the filter to update.
+   * @param {string} filterValue - The new value for the filter.
+   * @returns {void}
+   */
+
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
   /**
-  * Creates a button element for a given page number.
-  * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
-  * @param {number} pageNumber - The page number for the button.
-  * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
-  */
+   * Creates a button element for a given page number in the pagination component.
+   * This function generates a button for navigating to a specific page. The button is labeled with the page number.
+   *
+   * @param {number} pageNumber - The page number for the button.
+   * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page
    */
+  
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
   );
@@ -181,11 +192,13 @@ const renderPagination = () => {
   return (
 
     <div className="job-listings-page">
+
 /**
- * Updates the error state for a given input field based on the validation result.
- * This function uses validateInput from jobListingsUtils for input validation and updates the error state accordingly.
- * @param {string} name - The name of the input field to validate.
- * @param {string} value - The value of the input field to validate.
+ * Updates the error state for a given field based on whether its value is empty.
+ * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
+ *
+ * @param {string} name - The name of the field to update the error state for.
+ * @param {string} value - The new value of the field.
  */
 
 const handleErrorState = (name, value) => {
