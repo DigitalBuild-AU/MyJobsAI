@@ -1,4 +1,14 @@
 /**
+ * bootstrapUtils.js
+ * 
+ * Overview:
+ * This file contains utility functions for dynamically loading Bootstrap resources into the application.
+ * It includes functions to ensure that the Bootstrap script is correctly loaded and up to date, enhancing the application's use of Bootstrap's JavaScript components.
+ * 
+ * Contents:
+ * - loadBootstrapScript(): Dynamically loads the Bootstrap script into the document.
+ */
+/**
  * Dynamically loads the Bootstrap script into the document. If an existing script tag for Bootstrap is found, it is removed and a new one is appended.
  * This ensures that the Bootstrap script is always up to date and correctly loaded.
  *
