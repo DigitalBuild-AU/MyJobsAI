@@ -26,7 +26,6 @@ const JobListingsComponent = () => {
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
     loadBootstrapScript();
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
   /**
    * Handles changes in form inputs by updating the component's state.
