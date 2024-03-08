@@ -51,7 +51,6 @@ const JobListingsPage = () => {
  * Author: Contributors
  * Created: [Creation Date]
  */
-     * @returns void - This function does not return a value.
      */
     const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
     
@@ -71,16 +70,10 @@ const JobListingsPage = () => {
   }, [filters, page]);
 
   /**
+ /**
  * Fetches job listings from the server based on the current filters and page.
  * This function uses axios to make a GET request to the server with query parameters for filtering based on the current state of filters and page. It updates the listings and totalPages state with the data received from the response.
- * 
- * @param none - This function does not take any parameters.
  * @returns void - This function does not return a value but performs asynchronous operations to update the component's state.
- */
-  /**
-  * Fetches job listings from the server based on the current filters and page.
-  * Now utilizes fetchListingsFromAPI from jobListingsUtils for fetching.
-  * Updates the listings and totalPages state with the response data.
   */
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
@@ -168,16 +161,23 @@ const renderPagination = () => {
    * @param {string} filterValue - The new value for the filter.
    * @returns void - This function does not return a value but updates the component's state directly.
    */
+  /**
+ * Updates the filters state with new values for a given filter.
+ * @param {string} filterName - The name of the filter to update.
+ * @param {string} filterValue - The new value for the filter.
+ * @returns void - This function does not return a value but updates the component's state directly.
+ */
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
   /**
-   * Creates a button element for a given page number.
-   * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
-   *
-   * @param {number} pageNumber - The page number for the button.
-   * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
+   /**
+    * Creates a button element for a given page number.
+    * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
+    * @param {number} pageNumber - The page number for the button.
+    * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
+    */
    */
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
