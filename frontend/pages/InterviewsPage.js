@@ -1,5 +1,5 @@
 /**
- * This file contains the React component for the Interviews Page, facilitating the scheduling and display of interviews.
+ * Implements the InterviewsPage component for scheduling and displaying interviews.
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -31,6 +31,14 @@ function InterviewsPage() {
       .then(response => handleInterviewResponse(response))
       .catch(error => handleInterviewError(error));
   };
+
+/**
+ * Fetches interviews from the server on component mount and updates the state accordingly.
+ */
+/**
+ * The InterviewsPage component manages the scheduling and display of interviews. It uses state to manage interviews, job title, date, and notes.
+ * The component fetches existing interviews from the server on mount using the useEffect hook and updates the state.
+ */
 
 export default function InterviewsPage() {
   const [interviews, setInterviews] = useState([]);
