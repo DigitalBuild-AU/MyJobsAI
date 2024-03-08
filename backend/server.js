@@ -12,6 +12,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes'); // Analytics routes
 const fetchJobInfoRoutes = require('./routes/fetchJobInfoRoutes'); // Import Fetch Job Info routes
 const { debugLog } = require('./utils/debugLogger');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Import Dashboard routes
+const errorLogger = require('../middleware/errorLogger');
 
 app.use(express.json());
 
@@ -50,6 +51,8 @@ app.use('/api/interviews', interviewRoutes); // Setup Interview routes
 app.use('/api', analyticsRoutes); // Setup Analytics routes
 app.use('/api/fetch-job-info', fetchJobInfoRoutes); // Setup Fetch Job Info routes
 app.use('/api/dashboard', dashboardRoutes); // Setup Dashboard routes
+
+app.use(errorLogger);
 
 app.listen(PORT, () => {
   debugLog(`Server is running on port ${PORT}`);
