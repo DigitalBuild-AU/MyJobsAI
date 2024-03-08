@@ -20,6 +20,11 @@ describe('App.js Tests', () => {
       `;
     });
 
+    /**
+     * Tests the sendEmail function for a successful email send scenario.
+     * Asserts that the axios.post method is called with the correct parameters and
+     * that the success message is displayed to the user.
+     */
     test('successfully sends an email', async () => {
       const response = { data: { message: 'Email was sent successfully.' } };
       axios.post.mockResolvedValue(response);
