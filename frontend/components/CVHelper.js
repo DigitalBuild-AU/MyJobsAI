@@ -1,3 +1,6 @@
+/**
+ * CVHelper component: Offers an interface for generating CV suggestions by comparing user's CV and job description inputs.
+ */
 import React, { useState } from 'react';
 
 const CVHelper = () => {
@@ -23,6 +26,9 @@ const CVHelper = () => {
     </div>
   );
 };
+
+export default CVHelper;
+import { Link } from 'react-router-dom';
 
 export default CVHelper;
 import { Link } from 'react-router-dom';
