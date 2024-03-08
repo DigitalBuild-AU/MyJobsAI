@@ -25,6 +25,12 @@ const SearchResultsPage = () => {
     }, [query]);
 
     return (
+/**
+ * Renders job listings based on search results.
+ * Takes a results object as a parameter and returns JSX elements representing job listings or a message indicating no jobs were found.
+ * @param {Object} results - The search results object containing an array of jobs.
+ * @returns {JSX.Element} A list of JobListingCard components if jobs are found, otherwise a message indicating no jobs were found.
+ */
 const renderJobs = (results) => {
     return results.jobs.length > 0 ? (
         results.jobs.map((job) => <JobListingCard key={job.id} listing={job} />)
