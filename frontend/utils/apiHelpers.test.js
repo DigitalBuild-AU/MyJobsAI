@@ -29,3 +29,6 @@ describe('submitInterviewData', () => {
     await expect(submitInterviewData(mockJobTitle, mockDate, mockNotes)).rejects.toThrow(errorMessage);
   });
 });
+/**
+ * This file contains tests for the submitInterviewData function, specifically testing successful and failed POST requests.
+ */
