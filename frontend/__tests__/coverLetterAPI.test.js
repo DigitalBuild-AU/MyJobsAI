@@ -42,6 +42,9 @@ describe('handleCoverLetterResponse', () => {
 
 describe('handleCoverLetterError', () => {
   beforeEach(() => {
+  """
+  Tests the generateCoverLetter function's ability to handle empty string inputs for all parameters, expecting an error indicating invalid input.
+  """
   it('fails to generate a cover letter with empty strings', async () => {
     await expect(generateCoverLetter('', '', '', '')).rejects.toThrow('Invalid input');
   });
@@ -87,7 +90,6 @@ Tests logging of the error message when cover letter generation fails, verifying
     const result = handleCoverLetterResponse(unexpectedResponse);
     expect(result).toBeUndefined();
   });
-
   it('logs different types of errors', () => {
     const networkError = new Error('Network error');
     handleCoverLetterError(networkError);
