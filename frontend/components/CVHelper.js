@@ -33,6 +33,9 @@ const CVHelper = () => {
         <textarea id="jobDescriptionInput" placeholder="Paste the job description here..." className="form-control mb-2" value={jobDescriptionInput} onChange={(e) => setJobDescriptionInput(e.target.value)}></textarea>
         <textarea id="userCVInput" placeholder="Paste your CV here..." className="form-control mb-2" value={userCVInput} onChange={(e) => setUserCVInput(e.target.value)}></textarea>
         <button onClick={handleGenerateCVSuggestions} className="btn btn-primary">Get CV Suggestions</button>
+/**
+ * This file defines the CVHelper component, which assists users by generating CV suggestions based on job descriptions and user CV input.
+ */
       </div>
     </div>
   );
