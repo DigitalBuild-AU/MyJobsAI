@@ -1,12 +1,11 @@
 /**
- * useEffect hook to fetch and set the user's employment history from the server.
- * Fetches employment history on component mount and updates the employmentHistory state.
- * Page component for managing and submitting employment history.
- * Users can add, edit, and submit their employment history.
+ * Renders the Employment History page, allowing users to add, edit, and submit their employment history.
  */
 
 import React, { useState, useEffect } from 'react';
 import { postEmploymentHistory } from '../utils/apiHelpers';
+import Card from '../components/Card';
+import Modal from '../components/Modal';
 import './EmploymentHistoryPage.css';
 
 const EmploymentHistoryPage = () => {
@@ -19,6 +18,9 @@ const EmploymentHistoryPage = () => {
   const [notableAchievements, setNotableAchievements] = useState('');
 
   useEffect(() => {
+    /**
+     * Fetches and sets the user's employment history from the server.
+     */
     const fetchEmploymentHistory = async () => {
       const response = await axios.get('/api/employmentHistory');
       setEmploymentHistory(response.data);
@@ -26,7 +28,7 @@ const EmploymentHistoryPage = () => {
     fetchEmploymentHistory();
   }, []);
 
-  const addNewRole = () => {
+  // Removed the addNewRole function as it will be handled by the modal interaction now.
 /**
  * Fetches the user's employment history from the server on component mount.
  * @async
@@ -44,6 +46,9 @@ const EmploymentHistoryPage = () => {
     setNotableAchievements('');
     };
     
+    /**
+     * Submits the updated employment history to the server and alerts the user upon success or failure.
+     */
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -91,11 +96,9 @@ const EmploymentHistoryPage = () => {
         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="End Date" />
         <textarea value={responsibilities} onChange={(e) => setResponsibilities(e.target.value)} placeholder="Responsibilities"></textarea>
         <textarea value={notableAchievements} onChange={(e) => setNotableAchievements(e.target.value)} placeholder="Notable Achievements"></textarea>
-        <button type="button" className="btn-primary" onClick={addNewRole}>Add New Role</button>
-        <button type="submit" className="btn-primary">Save Employment History</button>
-        <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description"></textarea>
-        <textarea value={notableAchievements} onChange={(e) => setNotableAchievements(e.target.value)} placeholder="Highlights"></textarea>
+        <button type="button" onClick={addNewRole}>Add New Role</button>
+        <button type="submit">Save Employment History</button>
+        <button type="submit">Save Employment History</button>
       </form>
     </div>
   );
@@ -113,16 +116,48 @@ export default EmploymentHistoryPage;
  * @throws {Error} When the submission fails.
  * @return {Promise<void>} A promise that resolves when the employment history is successfully submitted.
  */
-      <div className="employment-history-list">
-        {employmentHistory.map((role, index) => (
-          <div key={index} className="employment-history-item">
-            <h3>{role.position} at {role.company}</h3>
-            <p>{role.startDate} - {role.endDate}</p>
-            <p>Location: {role.location}</p>
-            <p>Description: {role.description}</p>
-            <p>Highlights: {role.highlights}</p>
-            <button onClick={() => editRole(index)}>Edit</button>
-            <button onClick={() => deleteRole(index)}>Delete</button>
-          </div>
-        ))}
-      </div>
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [modalRole, setModalRole] = useState(null);
+
+const handleOpenModal = (role = null) => {
+  setModalRole(role);
+  setIsModalOpen(true);
+};
+
+const handleCloseModal = () => {
+  setIsModalOpen(false);
+  setModalRole(null);
+};
+
+const saveRole = (role) => {
+  if (modalRole) {
+    // Edit existing role
+    const updatedHistory = employmentHistory.map((item) =>
+      item === modalRole ? role : item
+    );
+    setEmploymentHistory(updatedHistory);
+  } else {
+    // Add new role
+    setEmploymentHistory([...employmentHistory, role]);
+  }
+  handleCloseModal();
+};
+
+const renderModal = () => (
+  <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+    {/* Modal content for adding or editing a role */}
+    <div>
+      <h2>{modalRole ? 'Edit Role' : 'Add New Role'}</h2>
+      {/* Form inputs and save button */}
+      <button onClick={() => saveRole({
+        position, company, startDate, endDate, responsibilities, notableAchievements
+      })}>
+        {modalRole ? 'Save Changes' : 'Add Role'}
+      </button>
+    </div>
+  </Modal>
+);
+
+<button onClick={() => handleOpenModal()}>Add New Role</button>
+{renderModal()}
