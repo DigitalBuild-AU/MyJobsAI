@@ -29,6 +29,9 @@ router.post('/cover_letter', async (req, res) => {
   const { jobDescription, userCV } = req.body;
   try {
     const response = await openai.chat.completions.create({
+/**
+ * @fileoverview This file defines the routes for interacting with OpenAI's GPT models to generate CV suggestions, cover letters, and CV customization. It utilizes express.js for routing and includes handlers for each specific GPT-based functionality.
+ */
     console.log("Cover letter analysis and feedback generated successfully."); // gpt_pilot_debugging_log
     res.json(analysisResults);
 });
