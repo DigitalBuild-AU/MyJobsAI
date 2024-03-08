@@ -28,6 +28,10 @@ import { loadBootstrapScript } from '../../utils/bootstrapUtils';
     loadBootstrapScript();
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
+  /**
+   * Handles changes in form inputs by updating the component's state.
+   * @param {Object} event - The event object from the form input change.
+   */
   const handleChange = (event) => {
 
 /**
