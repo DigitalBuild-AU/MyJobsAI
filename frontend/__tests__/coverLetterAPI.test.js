@@ -45,7 +45,9 @@ describe('handleCoverLetterError', () => {
   """
   Tests the generateCoverLetter function's ability to handle empty string inputs for all parameters, expecting an error indicating invalid input.
   """
-  it('fails to generate a cover letter with empty strings', async () => {
+  Tests the generateCoverLetter function's ability to handle null values for all parameters, expecting an error indicating invalid input.
+  """
+  it('fails to generate a cover letter with null values', async () => {
     await expect(generateCoverLetter('', '', '', '')).rejects.toThrow('Invalid input');
   });
 
