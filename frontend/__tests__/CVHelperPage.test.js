@@ -36,9 +36,9 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
       expect(getByText(cvSuggestions)).toBeInTheDocument();
     });
   });
-  """
-  Tests that the CVHelperPage submits the form data correctly and displays CV suggestions upon successful API response.
-  """
+  /**
+   * Tests the CVHelperPage component's response to an API request failure by ensuring that an appropriate error message is displayed.
+   */
 
   it('displays error message on API request failure', async () => {
     const jobDescription = 'Frontend Developer';
