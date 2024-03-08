@@ -4,6 +4,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { postEmploymentHistory } from '../utils/apiHelpers';
+import Card from '../components/Card';
+import Modal from '../components/Modal';
 import './EmploymentHistoryPage.css';
 
 const EmploymentHistoryPage = () => {
@@ -26,10 +28,13 @@ const EmploymentHistoryPage = () => {
     fetchEmploymentHistory();
   }, []);
 
-  /**
-   * Adds a new role to the local employment history state based on user input.
-   */
-  const addNewRole = () => {
+  // Removed the addNewRole function as it will be handled by the modal interaction now.
+/**
+ * Fetches the user's employment history from the server on component mount.
+ * @async
+ * @function useEffect
+ * @return {Promise<void>} A promise that resolves when the employment history is fetched and set in state.
+ */
     const newRole = { position, company, startDate, endDate, location, description, highlights: notableAchievements };
     setEmploymentHistory([...employmentHistory, newRole]);
     setPosition('');
@@ -91,11 +96,9 @@ const EmploymentHistoryPage = () => {
         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="End Date" />
         <textarea value={responsibilities} onChange={(e) => setResponsibilities(e.target.value)} placeholder="Responsibilities"></textarea>
         <textarea value={notableAchievements} onChange={(e) => setNotableAchievements(e.target.value)} placeholder="Notable Achievements"></textarea>
-        <button type="button" className="btn-primary" onClick={addNewRole}>Add New Role</button>
-        <button type="submit" className="btn-primary">Save Employment History</button>
-        <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description"></textarea>
-        <textarea value={notableAchievements} onChange={(e) => setNotableAchievements(e.target.value)} placeholder="Highlights"></textarea>
+        <button type="button" onClick={addNewRole}>Add New Role</button>
+        <button type="submit">Save Employment History</button>
+        <button type="submit">Save Employment History</button>
       </form>
     </div>
   );
@@ -113,16 +116,48 @@ export default EmploymentHistoryPage;
  * @throws {Error} When the submission fails.
  * @return {Promise<void>} A promise that resolves when the employment history is successfully submitted.
  */
-      <div className="employment-history-list">
-        {employmentHistory.map((role, index) => (
-          <div key={index} className="employment-history-item">
-            <h3>{role.position} at {role.company}</h3>
-            <p>{role.startDate} - {role.endDate}</p>
-            <p>Location: {role.location}</p>
-            <p>Description: {role.description}</p>
-            <p>Highlights: {role.highlights}</p>
-            <button onClick={() => editRole(index)}>Edit</button>
-            <button onClick={() => deleteRole(index)}>Delete</button>
-          </div>
-        ))}
-      </div>
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [modalRole, setModalRole] = useState(null);
+
+const handleOpenModal = (role = null) => {
+  setModalRole(role);
+  setIsModalOpen(true);
+};
+
+const handleCloseModal = () => {
+  setIsModalOpen(false);
+  setModalRole(null);
+};
+
+const saveRole = (role) => {
+  if (modalRole) {
+    // Edit existing role
+    const updatedHistory = employmentHistory.map((item) =>
+      item === modalRole ? role : item
+    );
+    setEmploymentHistory(updatedHistory);
+  } else {
+    // Add new role
+    setEmploymentHistory([...employmentHistory, role]);
+  }
+  handleCloseModal();
+};
+
+const renderModal = () => (
+  <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+    {/* Modal content for adding or editing a role */}
+    <div>
+      <h2>{modalRole ? 'Edit Role' : 'Add New Role'}</h2>
+      {/* Form inputs and save button */}
+      <button onClick={() => saveRole({
+        position, company, startDate, endDate, responsibilities, notableAchievements
+      })}>
+        {modalRole ? 'Save Changes' : 'Add Role'}
+      </button>
+    </div>
+  </Modal>
+);
+
+<button onClick={() => handleOpenModal()}>Add New Role</button>
+{renderModal()}
