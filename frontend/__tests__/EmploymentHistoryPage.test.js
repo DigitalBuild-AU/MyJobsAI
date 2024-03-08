@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import EmploymentHistoryPage from '../pages/EmploymentHistoryPage';
+import Modal from '../components/Modal';
 
 jest.mock('axios');
 
@@ -35,6 +36,20 @@ test('adding a new role updates the state and displays the new role', async () =
 // Tests fetching employment history successfully.
   const { getByPlaceholderText, getByText, getByRole } = render(<EmploymentHistoryPage />);
   fireEvent.change(getByPlaceholderText('Position'), { target: { value: 'Developer' } });
+test('modal opens when a new role is added', async () => {
+  const { getByText, queryByText } = render(<EmploymentHistoryPage />);
+  fireEvent.click(getByText('Add New Role'));
+  await waitFor(() => expect(queryByText('Add New Role')).toBeInTheDocument());
+});
+
+test('modal closes and state updates correctly when employment history is successfully submitted', async () => {
+  const { getByText, queryByText, getByRole } = render(<EmploymentHistoryPage />);
+  fireEvent.click(getByText('Add New Role')); // Open modal
+  fireEvent.change(getByRole('textbox', { name: 'Position' }), { target: { value: 'Developer' } });
+  fireEvent.click(getByText('Save Employment History')); // Submit form
+  await waitFor(() => expect(queryByText('Add New Role')).not.toBeInTheDocument()); // Modal should be closed
+  expect(axios.post).toHaveBeenCalled();
+});
 test('editing an existing role updates the state correctly', async () => {
   const { getByText, getAllByPlaceholderText, getByRole } = render(<EmploymentHistoryPage />);
   // Assume the first role's position is 'Software Engineer' and we want to change it to 'Senior Software Engineer'
