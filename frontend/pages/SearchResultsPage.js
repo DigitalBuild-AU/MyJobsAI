@@ -28,6 +28,16 @@ const SearchResultsPage = () => {
 const renderJobs = (results) => {
     return results.jobs.length > 0 ? (
         results.jobs.map((job) => <JobListingCard key={job.id} listing={job} />)
+/**
+ * This file defines the SearchResultsPage component, responsible for displaying search results
+ * for jobs, contacts, and tasks based on the user's search query. It utilizes React hooks for
+ * state management and effects, and axios for API requests.
+ */
+ * @returns A list of JobListingCard components if jobs are found, otherwise a message indicating no jobs were found.
+ */
+const renderJobs = (results) => {
+    return results.jobs.length > 0 ? (
+        results.jobs.map((job) => <JobListingCard key={job.id} listing={job} />)
     ) : (
         <p>No job listings found.</p>
     );
@@ -73,6 +83,16 @@ const renderTasks = (results) => {
             <div>
                 <h3>Tasks</h3>
                 {renderTasks(results)}
+/**
+ * Renders contact information based on search results.
+ * @param {Object} results - The search results object containing an array of contacts.
+ * @returns A list of div elements with contact names if contacts are found, otherwise a message indicating no contacts were found.
+ */
+/**
+ * Renders tasks based on search results.
+ * @param {Object} results - The search results object containing an array of tasks.
+ * @returns A list of div elements with task titles if tasks are found, otherwise a message indicating no tasks were found.
+ */
             </div>
         </div>
     );
