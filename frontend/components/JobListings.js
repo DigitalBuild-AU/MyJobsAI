@@ -47,7 +47,16 @@ const JobListings = () => {
       <Navbar />
       <div id="filterSidebar" style={{ float: 'left', width: '200px', marginRight: '20px' }}>
         <h3>Filter Listings</h3>
-        <form id="filterForm" onSubmit={handleFilterSubmit}>
+// Filter form code extracted to JobFilterForm component
+        <JobFilterForm
+          filterLocation={filterLocation}
+          setFilterLocation={setFilterLocation}
+          filterJobType={filterJobType}
+          setFilterJobType={setFilterJobType}
+          filterKeywords={filterKeywords}
+          setFilterKeywords={setFilterKeywords}
+          handleFilterSubmit={handleFilterSubmit}
+        />
           <div className="form-group">
             <label htmlFor="filterLocation">Location</label>
             <input type="text" className="form-control mb-3" id="filterLocation" placeholder="Enter location" value={filterLocation} onChange={(e) => setFilterLocation(e.target.value)} />
@@ -101,9 +110,11 @@ const JobListings = () => {
                 <th scope="col" className="table-header" data-column-name="jobDescription">Job Description</th>
               </tr>
             </thead>
-            <tbody id='listingsContainer'>
-              {/* Job listings will be dynamically injected here */}
-            </tbody>
+            {/* Implementation of a virtualized or paginated table to improve performance with large datasets */}
+            <VirtualizedTable
+              listings={jobListings}
+              columns={['Job Title', 'Company', 'Location', 'Job Description']}
+            />
           </table>
         </div>
       </div>
