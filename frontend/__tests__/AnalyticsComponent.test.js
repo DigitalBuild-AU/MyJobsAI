@@ -6,6 +6,10 @@ import AnalyticsComponent from '../components/AnalyticsComponent';
 jest.mock('axios');
 
 describe('AnalyticsComponent - Success Scenarios', () => {
+/**
+ * @file AnalyticsComponent.test.js
+ * @description Test suite for the AnalyticsComponent, covering both success and error handling scenarios for analytics data fetching and rendering.
+ */
   beforeEach(() => {
     axios.get.mockReset();
   });
@@ -19,6 +23,15 @@ describe('AnalyticsComponent - Success Scenarios', () => {
   });
 
   test('updates and renders analytics data upon successful API call', async () => {
+/**
+ * Describes tests for successful scenarios including initial rendering and updates upon successful API calls.
+ */
+/**
+ * Tests the initial rendering state of the AnalyticsComponent before any API call is made.
+ */
+/**
+ * Tests the AnalyticsComponent's ability to update and render analytics data upon a successful API call.
+ */
     const mockData = {
       totalApplications: 120,
       interviewsScheduled: 5,
@@ -48,3 +61,9 @@ describe('AnalyticsComponent - Error Handling', () => {
     });
   });
 });
+/**
+ * Describes tests for handling errors during analytics data fetching.
+ */
+/**
+ * Tests the display of an appropriate error message in the AnalyticsComponent upon an API error.
+ */
