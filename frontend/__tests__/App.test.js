@@ -32,6 +32,10 @@ describe('App.js Tests', () => {
         subject: 'Test Subject',
         body: 'Test Body'
 /**
+ * Tests for the generateCoverLetter functionality within the App component.
+ * Ensures that the generateCoverLetter function exists and is callable.
+ */
+/**
  * App.test.js
  * 
  * This file contains tests for the App component, focusing on its functionality
