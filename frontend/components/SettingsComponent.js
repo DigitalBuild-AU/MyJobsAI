@@ -1,3 +1,6 @@
+/**
+ * SettingsComponent is a React functional component that allows users to configure their preferences and settings within the MyJobsAI application.
+ */
 import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 
@@ -20,4 +23,6 @@ const SettingsComponent = () => {
 };
 
 export default SettingsComponent;
+
+// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';

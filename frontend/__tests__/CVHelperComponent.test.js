@@ -22,6 +22,7 @@ describe('CVHelperComponent', () => {
     expect(document.body.appendChild.mock.calls[0][0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
   });
 });
+
   it('triggers API call with correct data on form submission', async () => {
     axios.post.mockResolvedValue({ data: { suggestions: 'Your CV is great!' } });
     const { getByLabelText, getByText } = render(<CVHelperComponent />);

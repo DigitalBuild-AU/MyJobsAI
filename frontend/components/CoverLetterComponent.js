@@ -10,11 +10,31 @@ const CoverLetterComponent = () => {
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState('');
 
   useEffect(() => {
+    
+// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
+
+/**
+ * CoverLetterComponent is a React functional component that provides users with tools to generate cover letters based on their job application data in MyJobsAI.
+ */
+    const loadBootstrapScript = () => {
+      const existingScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
+      if (existingScriptTag) {
+        existingScriptTag.remove();
+      }
+      const bootstrapScript = document.createElement('script');
+      bootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
+      bootstrapScript.async = true;
+      document.body.appendChild(bootstrapScript);
+    };
+
     loadBootstrapScript();
   }, []);
 
   const generateCoverLetter = () => {
+/**
+ * useEffect hook to dynamically load the Bootstrap script for styling purposes.
+ */
     const coverLetter = `Dear Hiring Manager,\n\nBased on the job description, my skills include ${userSkills} and my experience includes ${userExperience}. I am excited about the opportunity to work with your team.\n\nSincerely,\n${userName}`;
     setGeneratedCoverLetter(coverLetter);
   };
@@ -48,3 +68,8 @@ import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 };
 
 export default CoverLetterComponent;
+/**
+ * Generates a cover letter based on user input.
+ *
+ * @returns {void} - Sets the state of the generatedCoverLetter.
+ */

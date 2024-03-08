@@ -42,6 +42,27 @@ describe('handleCoverLetterResponse', () => {
 
 describe('handleCoverLetterError', () => {
   beforeEach(() => {
+  it('fails to generate a cover letter with empty strings', async () => {
+    await expect(generateCoverLetter('', '', '', '')).rejects.toThrow('Invalid input');
+  });
+
+  it('fails to generate a cover letter with null values', async () => {
+    await expect(generateCoverLetter(null, null, null, null)).rejects.toThrow('Invalid input');
+  });
+
+  it('successfully generates a cover letter with extreme userExperience value', async () => {
+    axios.post.mockResolvedValue(mockResponse);
+    const extremeExperience = '30 years';
+    const response = await generateCoverLetter(mockJobDescription, mockUserName, mockUserSkills, extremeExperience);
+    expect(response).toEqual(mockResponse);
+  });
+
+  it('successfully generates a cover letter with a very long list of skills', async () => {
+    axios.post.mockResolvedValue(mockResponse);
+    const longSkills = 'JavaScript, React, Node.js, Express, MongoDB, SQL, Python, Django, Flask, RESTful API design';
+    const response = await generateCoverLetter(mockJobDescription, mockUserName, longSkills, mockUserExperience);
+    expect(response).toEqual(mockResponse);
+  });
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
@@ -61,3 +82,18 @@ Test suite for the coverLetterAPI utility functions. It verifies the behavior of
 """
 Tests logging of the error message when cover letter generation fails, verifying error logging.
 """
+  it('handles unexpected response structure', () => {
+    const unexpectedResponse = { data: { message: 'Cover letter generated successfully' } };
+    const result = handleCoverLetterResponse(unexpectedResponse);
+    expect(result).toBeUndefined();
+  });
+
+  it('logs different types of errors', () => {
+    const networkError = new Error('Network error');
+    handleCoverLetterError(networkError);
+    expect(console.error).toHaveBeenCalledWith('Failed to generate Cover Letter:', networkError);
+
+    const timeoutError = new Error('Timeout error');
+    handleCoverLetterError(timeoutError);
+    expect(console.error).toHaveBeenCalledWith('Failed to generate Cover Letter:', timeoutError);
+  });
