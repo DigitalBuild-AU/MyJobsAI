@@ -86,6 +86,10 @@ describe('/cv_customization route', () => {
    * Test: Error handling for a CV suggestions request.
    * Description: This test checks the error handling capabilities of the CV suggestions endpoint. It simulates a scenario where generating CV suggestions fails, expecting the endpoint to return a 500 status code and an appropriate error message. The `handleCvSuggestions` function is mocked to reject with an error to test this behavior.
    */
+  /**
+   * Test: Handles errors during CV suggestions request.
+   * Description: This test aims to verify the robustness of the CV suggestions endpoint's error handling by simulating a failure scenario. It expects the endpoint to respond with a 500 status code and a specific error message when the `handleCvSuggestions` function encounters an error. The function is mocked to reject with a predefined error for this purpose.
+   */
   // Tests error handling for a CV customization request.
 describe('/cv_suggestions route', () => {
   test('successfully handles a CV suggestions request', async () => {
