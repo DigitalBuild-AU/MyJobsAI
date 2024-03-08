@@ -25,6 +25,9 @@ describe('debugLogger tests', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message');
   });
 
+  /**
+   * Tests that debugLog function logs both messages and error stack traces correctly when an error is provided.
+   */
   test('should log messages and error stack trace correctly when error is provided', () => {
   /**
    * Tests that debugLog logs messages correctly without any errors.
@@ -56,6 +59,9 @@ describe('debugLogger tests', () => {
    */
   test('should not throw error when undefined is passed as error', () => {
    * Tests that the debugLog function does not throw an error when undefined is passed as the error parameter.
+   */
+  test('should not throw error when undefined is passed as error', () => {
+  /**
    */
   test('should not throw error when undefined is passed as error', () => {
   /**
