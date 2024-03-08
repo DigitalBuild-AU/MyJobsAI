@@ -22,6 +22,10 @@ function InterviewsPage() {
       });
   }, []);
 
+  /**
+  * Handles the submission of the interview form, scheduling a new interview.
+  * @param {Event} e - The event object from the form submission.
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     handleFormSubmit(jobTitle, date, notes);
@@ -43,6 +47,10 @@ export default function InterviewsPage() {
       });
   }, []);
 
+  /**
+  * Handles the submission of the interview form, scheduling a new interview.
+  * @param {Event} e - The event object from the form submission.
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     handleFormSubmit(jobTitle, date, notes);
