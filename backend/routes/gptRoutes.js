@@ -1,3 +1,7 @@
+/**
+ * Routes for generating CV suggestions, cover letters, and CV customization based on user input and job descriptions.
+ * Utilizes OpenAI's GPT models for content generation and analysis.
+ */
 const express = require('express');
 const dotenv = require('dotenv');
 const { handleCvSuggestions, handleCvCustomization } = require('../utils/gptRequestHandlers');
