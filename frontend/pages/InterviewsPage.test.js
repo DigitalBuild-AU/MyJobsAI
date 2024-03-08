@@ -1,3 +1,7 @@
+/**
+ * Tests for the InterviewsPage component.
+ * This file includes tests for fetching, displaying, and submitting interviews.
+ */
 import React from 'react';
 import { render, waitFor, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -24,11 +28,18 @@ describe('InterviewsPage', () => {
     });
   });
 
+  /**
+  * Tests error handling when fetching interviews fails, expecting an error message to be displayed.
+  */
   test('handles errors during the fetching of interviews and displays an error message', async () => {
     axios.get.mockRejectedValue(new Error('Error fetching interviews'));
     render(<InterviewsPage />);
     await waitFor(() => {
       expect(screen.getByText('Error fetching interviews:')).toBeInTheDocument();
+/**
+ * Group of tests for the handleSubmit function of the InterviewForm component.
+ * Includes tests for successful submission, error handling, and field validation.
+ */
 describe('InterviewForm handleSubmit function', () => {
   test('submits form data correctly', async () => {
     const formData = { jobTitle: 'Frontend Developer', date: '2023-05-01', notes: 'Technical interview' };
@@ -44,7 +55,9 @@ describe('InterviewForm handleSubmit function', () => {
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/interviews', formData);
     });
   });
-
+/**
+ * Tests successful fetching of interviews from the API and their rendering.
+ */
   test('displays error message on submission failure', async () => {
     axios.post.mockRejectedValue(new Error('Error scheduling interview'));
     render(<InterviewForm />);
