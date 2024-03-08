@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import ResponsiveNavbar from '../components/ResponsiveNavbar';
 import { postCoverLetter } from '../utils/apiHelpers';
+import axios from 'axios'; // Assuming axios is used for HTTP requests
 import './CoverLetterGenerationPage.css';
 
 const CoverLetterGenerationPage = () => {
@@ -42,18 +44,16 @@ const CoverLetterGenerationPage = () => {
     setContactPerson(job.contactPerson || ''); // Update to use the correct field and handle possible undefined value
   };
 
-  const createCoverLetter = async () => {
-    postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
-      .then(data => {
-        setGeneratedCoverLetter(data.coverLetter);
-      .then(function(response) {
-        setGeneratedCoverLetter(response.data.coverLetter);
-        console.log('Cover Letter generated.');
-      })
-      .catch(function(error) {
-        console.error('Failed to generate Cover Letter:', error);
-        setGeneratedCoverLetter('Error generating Cover Letter.');
-      });
+  const generateCoverLetter = async () => {
+    // Assuming postCoverLetter is a function that sends user inputs to the server and receives the generated cover letter
+    try {
+      const response = await postCoverLetter({ userName, jobDescription, userSkills, userExperience });
+      setGeneratedCoverLetter(response.data.coverLetter);
+      console.log('Cover Letter generated.'); // For debugging
+    } catch (error) {
+      console.error('Failed to generate Cover Letter:', error); // For debugging
+      setGeneratedCoverLetter('Error generating Cover Letter.');
+    }
   };
 
 /**
@@ -131,23 +131,19 @@ const renderSaveModal = () => (
   };
 
   return (
-    <div className="cover-letter-generation-page">
-      <Card>
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Job Description" value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} />
-          <input type="text" placeholder="Your Name" value={userName} onChange={(e) => setUserName(e.target.value)} />
-          <input type="text" placeholder="Your Skills" value={userSkills} onChange={(e) => setUserSkills(e.target.value)} />
-          <input type="text" placeholder="Your Experience" value={userExperience} onChange={(e) => setUserExperience(e.target.value)} />
-          <button type="submit">Generate Cover Letter</button>
-        </form>
-      </Card>
-      {generatedCoverLetter && (
-        <Card>
-          <p>{generatedCoverLetter}</p>
-          <button onClick={downloadAsPDF}>Download as PDF</button>
-          <button onClick={downloadAsDOC}>Download as DOC</button>
-        </Card>
-      )}
+    <>
+      <ResponsiveNavbar />
+      <div className="container mt-4">
+        <div id="coverLetterAssistant">
+          <input type="text" id="userName" placeholder="Your Name" value={userName} onChange={(e) => setUserName(e.target.value)} />
+          <textarea id="jobDescriptionInput" placeholder="Paste the job description here..." value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}></textarea>
+          <textarea id="userSkills" placeholder="Your Skills..." value={userSkills} onChange={(e) => setUserSkills(e.target.value)}></textarea>
+          <textarea id="userExperience" placeholder="Your Experience..." value={userExperience} onChange={(e) => setUserExperience(e.target.value)}></textarea>
+          <button onClick={generateCoverLetter}>Generate Cover Letter</button>
+        </div>
+        <div id="coverLetterOutput">{generatedCoverLetter && <p>{generatedCoverLetter}</p>}</div>
+      </div>
+    </>
 /**
  * Generates a cover letter based on the selected job's description, user's name, skills, and experience.
  * Updates the generatedCoverLetter state with the response from the server.
