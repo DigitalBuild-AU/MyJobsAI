@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import CoverLetterGenerationPage from '../pages/CoverLetterGenerationPage';
+import Modal from '../components/Modal';
 
 jest.mock('axios');
 
@@ -97,4 +98,24 @@ test('handles error generating cover letter gracefully', async () => {
   const { getByText, getByRole } = render(<CoverLetterGenerationPage />);
   fireEvent.click(getByRole('button', { name: 'Create Cover Letter' }));
   await waitFor(() => expect(getByText('Error generating cover letter:')).toBeInTheDocument());
+});
+test('modal opens with handleSaveCoverLetter', async () => {
+  const { getByText } = render(<CoverLetterGenerationPage />);
+  fireEvent.click(getByText('Save Cover Letter'));
+  expect(getByText('Do you want to save the generated cover letter?')).toBeInTheDocument();
+});
+
+test('modal closes with handleCloseSaveModal', async () => {
+  const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
+  fireEvent.click(getByText('Save Cover Letter')); // Open modal first
+  fireEvent.click(getByText('Cancel')); // Then close it
+  await waitFor(() => expect(queryByText('Do you want to save the generated cover letter?')).not.toBeInTheDocument());
+});
+
+test('Save button inside modal triggers save functionality', async () => {
+  console.log = jest.fn(); // Mock console.log for this test
+  const { getByText } = render(<CoverLetterGenerationPage />);
+  fireEvent.click(getByText('Save Cover Letter')); // Open modal
+  fireEvent.click(getByText('Save')); // Click save button
+  expect(console.log).toHaveBeenCalledWith('Cover letter saved.');
 });
