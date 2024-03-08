@@ -1,6 +1,12 @@
 
-jest.mock('../utils/webVitals', () => ({
-  setupWebVitals: jest.fn(),
+import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
+
+jest.mock('web-vitals', () => ({
+  getCLS: jest.fn(),
+  getFID: jest.fn(),
+  getLCP: jest.fn(),
+  getFCP: jest.fn(),
+  getTTFB: jest.fn(),
 }));
 
 """
@@ -523,6 +529,39 @@ describe('handleErrorState function tests', () => {
     const name = 'company';
     const value = 'Tech Inc';
     act(() => {
+  test('setupWebVitals function is called on JobListingsPage component render', () => {
+    render(<JobListingsPage />);
+    expect(setupWebVitals).toHaveBeenCalled();
+  });
+
+  test('getCLS function is called within setupWebVitals', () => {
+    setupWebVitals();
+    expect(getCLS).toHaveBeenCalled();
+  });
+
+  test('getFID function is called within setupWebVitals', () => {
+    setupWebVitals();
+    expect(getFID).toHaveBeenCalled();
+  });
+
+  test('getLCP function is called within setupWebVitals', () => {
+    setupWebVitals();
+    expect(getLCP).toHaveBeenCalled();
+  });
+
+  test('getFCP function is called within setupWebVitals', () => {
+    setupWebVitals();
+    expect(getFCP).toHaveBeenCalled();
+  });
+
+  test('getTTFB function is called within setupWebVitals', () => {
+    setupWebVitals();
+    expect(getTTFB).toHaveBeenCalled();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
       JobListingsPage.prototype.handleErrorState(name, value);
     });
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: false });
