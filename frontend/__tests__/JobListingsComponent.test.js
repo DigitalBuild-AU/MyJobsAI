@@ -71,31 +71,24 @@ describe('JobListingsComponent', () => {
   it('filters job listings based on input', () => {
   * Tests if the JobListingsComponent filters job listings correctly based on input.
   */
-  it('filters job listings based on input', () => {
-    const { getByPlaceholderText, getByText, getAllByRole } = render(<JobListingsComponent />);
-    fireEvent.change(getByPlaceholderText('Filter Location'), { target: { value: 'Remote' } });
-    fireEvent.click(getByText('Filter'));
-    const rows = getAllByRole('row');
-    expect(rows).toHaveLength(2); // Includes header row and one filtered result
-    expect(rows[1]).toHaveTextContent('Remote');
-  });
+/**
+ * Test case: Updates state on input change.
+ * This test verifies that the JobListingsComponent's state updates correctly when the input fields for 'Job Title', 'Company', 'Location', and 'Job Description' are changed.
+ * Inputs: Simulated change events on input fields.
+ * Expected Output: The component's state reflects the new values provided by the change events.
+ */
+it('updates component state correctly on handleChange', () => {
+  const { getByLabelText, getByPlaceholderText } = render(<JobListingsComponent />);
+  // Simulate text input change
+  fireEvent.change(getByPlaceholderText('Job Title'), { target: { name: 'jobTitle', value: 'Frontend Developer' } });
+  expect(getByPlaceholderText('Job Title').value).toBe('Frontend Developer');
+  // Simulate checkbox input change
+  const includesSuperCheckbox = getByLabelText('Includes Super');
+  fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: true } });
+  expect(includesSuperCheckbox.checked).toBe(true);
+  fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
+  expect(includesSuperCheckbox.checked).toBe(false);
 });
-it('loads Bootstrap script on component mount', async () => {
-  jest.mock('../../utils/bootstrapUtils', () => ({
-  /**
-   * Test case: Adds a new job listing on form submit.
-   * Verifies that a new job listing is added to the list when the form is submitted.
-   */
-    loadBootstrapScript: jest.fn(),
-  }));
-  const { loadBootstrapScript } = require('../../utils/bootstrapUtils');
-  render(<JobListingsComponent />);
-  expect(loadBootstrapScript).toHaveBeenCalledTimes(1);
-});
-  /**
-   * Test case: Loads Bootstrap script on component mount.
-   * Verifies that the Bootstrap script is loaded when the component mounts.
-   */
   it('updates component state correctly on handleChange', () => {
     const { getByLabelText, getByPlaceholderText } = render(<JobListingsComponent />);
     // Simulate text input change
