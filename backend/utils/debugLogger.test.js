@@ -45,6 +45,9 @@ describe('debugLogger tests', () => {
     debugLog('Test message with non-error object', { some: 'object' });
     expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message with non-error object');
   });
+  /**
+   * Tests that no error is thrown and messages are logged correctly when undefined is passed as the error parameter.
+   */
   test('should not throw error when undefined is passed as error', () => {
   /**
    * Tests that messages are logged correctly without any errors.
