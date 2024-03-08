@@ -42,6 +42,10 @@ describe('/cv_customization route', () => {
  * This suite tests the handling of CV customization requests by the '/cv_customization' route. It verifies that the application can successfully process requests and return appropriate suggestions, as well as handle errors gracefully.
  */
 
+  /**
+   * Test: Successfully handles a CV suggestions request.
+   * Description: This test ensures that the CV suggestions endpoint properly handles a request, returning a 200 status code and the expected suggestions in the response body. It mocks the `handleCvSuggestions` function to return a predefined response and verifies that the function is called with the specified arguments.
+   */
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
     handleCvSuggestions.mockResolvedValue(mockResponse);
