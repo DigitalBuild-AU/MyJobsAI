@@ -18,6 +18,9 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
     mock.reset();
   });
 
+  /**
+ * Tests that the CVHelperPage component correctly submits form data and displays CV suggestions upon receiving a successful API response.
+ */
   it('submits form and displays CV suggestions on success', async () => {
     const jobDescription = 'Frontend Developer';
     const userCV = 'Experienced in React';
