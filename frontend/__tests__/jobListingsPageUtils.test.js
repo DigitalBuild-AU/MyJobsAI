@@ -71,6 +71,9 @@ describe('jobListingsPageUtils', () => {
   });
 
   describe('cleanupOnUnmount', () => {
+    /**
+     * Tests that cleanupOnUnmount removes the resize event listener and resets filters to their default values.
+     */
     it('removes resize event listener and resets filters', () => {
       const removeEventListenerMock = jest.spyOn(window, 'removeEventListener');
       const setFiltersMock = jest.fn();
