@@ -1,9 +1,4 @@
-/**
- * CVHelper component: Offers an interface for generating CV suggestions by comparing user's CV and job description inputs.
- */
-/**
- * This React component provides an interface for users to input their CV and job descriptions to receive tailored CV suggestions.
- */
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const CVHelper = () => {
@@ -14,12 +9,22 @@ const CVHelper = () => {
   const [jobDescriptionInput, setJobDescriptionInput] = useState('');
   const [userCVInput, setUserCVInput] = useState('');
 
+  const [cvSuggestions, setCvSuggestions] = useState('');
+  const [error, setError] = useState('');
+  
   const handleGenerateCVSuggestions = () => {
-    /**
-     * Placeholder function for generating CV suggestions based on user inputs.
-     */
-    // Placeholder for generating CV suggestions based on jobDescriptionInput and userCVInput
-    console.log('Generating CV suggestions for:', jobDescriptionInput, userCVInput);
+    console.log('Sending request to generate CV suggestions.'); // Log for debugging
+    axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: jobDescriptionInput, userCV: userCVInput })
+      .then(function(response) {
+        console.log('CV suggestions were successfully fetched.'); // Success log
+        setCvSuggestions(response.data.suggestions);
+        setError('');
+      })
+      .catch(function(error) {
+        console.error(`Error fetching CV suggestions: ${error.message}, Stack: ${error.stack}`);
+        setError('Failed to fetch CV suggestions.');
+        setCvSuggestions('');
+      });
   };
 
   return (
@@ -37,3 +42,5 @@ import { Link } from 'react-router-dom';
 
 export default CVHelper;
 import { Link } from 'react-router-dom';
+        <div id="cvSuggestionsOutput">{cvSuggestions}</div>
+        {error && <div className="error">{error}</div>}
