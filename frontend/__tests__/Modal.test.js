@@ -11,12 +11,18 @@ describe('Modal Component', () => {
   """
   Tests that the Modal component renders correctly when its 'isOpen' prop is set to true.
   """
-  test('renders correctly when isOpen is true', () => {
+  """
+Tests the Modal component's rendering behavior based on its 'isOpen' prop. It checks that the modal renders its content when open and remains hidden when not.
+"""
+test('renders correctly when isOpen is true', () => {
     render(<Modal isOpen={true} content="Test Content" actions={<button>Action</button>} />);
     expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
 
-  test('does not render when isOpen is false', () => {
+  """
+Validates that the Modal component does not render its content when the 'isOpen' prop is set to false, ensuring the modal remains hidden.
+"""
+test('does not render when isOpen is false', () => {
     render(<Modal isOpen={false} content="Test Content" actions={<button>Action</button>} />);
     expect(screen.queryByText('Test Content')).not.toBeInTheDocument();
   });
