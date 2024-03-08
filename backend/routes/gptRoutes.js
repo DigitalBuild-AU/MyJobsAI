@@ -103,60 +103,10 @@ router.post('/cv_customization', async (req, res) => {
 
     console.log("CV customization suggestions generated successfully."); // gpt_pilot_debugging_log
     res.json({ analysisResults: response.choices[0].message.content.trim() });
-  
-// Generate Customized CV in PDF Format
-router.post('/generate_cv_pdf', async (req, res) => {
-  const { customizedContent } = req.body;
-  // Placeholder for PDF generation logic
-  console.log("Generating PDF...");
-  // Simulate PDF generation and sending the file
-  res.status(200).send("PDF generated and sent.");
-});
-
-// Generate Customized CV in DOC Format
-router.post('/generate_cv_doc', async (req, res) => {
-  const { customizedContent } = req.body;
-  // Placeholder for DOC generation logic
-  console.log("Generating DOC...");
-  // Simulate DOC generation and sending the file
-  res.status(200).send("DOC generated and sent.");
-});
-
-// Download Customized CV in PDF Format
-router.get('/download_cv/pdf', async (req, res) => {
-  // Placeholder for PDF download logic
-  console.log("Downloading PDF...");
-  // Simulate sending the PDF file for download
-  res.status(200).send("PDF file sent for download.");
-});
-
-// Download Customized CV in DOC Format
-router.get('/download_cv/doc', async (req, res) => {
-  // Placeholder for DOC download logic
-  console.log("Downloading DOC...");
-  // Simulate sending the DOC file for download
-  res.status(200).send("DOC file sent for download.");
-});
-  
   } catch (error) {
-/**
- * Route for generating a personalized cover letter.
- * Expects a request body with jobDescription, userName, userSkills, and userExperience.
- * Returns a JSON object with the generated cover letter.
- */
     console.error(`Error processing CV customization request: ${error.message}, Stack: ${error.stack}`); // gpt_pilot_debugging_log
     res.status(500).json({ error: "Failed to generate CV customization suggestions." });
   }
-});
-/**
- * Route for generating CV customization suggestions.
- * Expects a request body with jobDescription and userCV.
- * Returns a JSON object with analysisResults containing suggestions.
- * Handles the generation of CV customization suggestions using GPT models.
- * @async
- * @function cvCustomizationHandler
- * @param {Object} req - The request object containing job description and user CV.
- * @param {Object} res - The response object used to return customization suggestions.
- * @throws {Error} When GPT model fails to generate customization suggestions.
- * @return {Promise<Object>} A promise that resolves to an object containing CV customization suggestions.
- */
+  // Placeholder for DOC download logic
+  console.log("Downloading DOC...");
+  // Simulate sending the DOC file for download
