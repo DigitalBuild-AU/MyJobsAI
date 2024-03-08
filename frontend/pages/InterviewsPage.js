@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import InterviewForm from './components/InterviewForm';
+import ResponsiveNavbar from '../components/ResponsiveNavbar';
 
 function InterviewsPage() {
   const [interviews, setInterviews] = useState([]);
@@ -52,6 +52,37 @@ export default function InterviewsPage() {
   * @param {Event} e - The event object from the form submission.
   */
   const handleSubmit = (e) => {
+import { useForm } from 'react-hook-form';
+
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = data => {
+    handleFormSubmit(data.jobTitle, data.date, data.notes);
+  };
+
+  return (
+    <>
+      <ResponsiveNavbar />
+      <div className="container mt-4">
+        <h1>Interview Scheduler</h1>
+        <form onSubmit={handleSubmit(onSubmit)} id="scheduleInterviewForm">
+          <div className="form-group">
+            <label htmlFor="jobTitleInput">Job Title</label>
+            <input type="text" className="form-control" id="jobTitleInput" placeholder="Enter job title" {...register('jobTitle')} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="interviewDateInput">Date and Time</label>
+            <input type="datetime-local" className="form-control" id="interviewDateInput" {...register('date')} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="notesInput">Notes</label>
+            <textarea className="form-control" id="notesInput" placeholder="Enter any notes" rows="3" {...register('notes')}></textarea>
+          </div>
+          <button type="submit" className="btn btn-primary">Schedule Interview</button>
+        </form>
+      </div>
+    </>
+  );
     e.preventDefault();
     handleFormSubmit(jobTitle, date, notes);
   };
