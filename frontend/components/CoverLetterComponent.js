@@ -30,10 +30,13 @@ const CoverLetterComponent = () => {
 
     loadBootstrapScript();
   }, []);
-
+/**
+ * CoverLetterComponent.js
+ * This component assists users in generating a cover letter based on their skills, experience, and the job description they are applying for.
+ */
   const generateCoverLetter = () => {
 /**
- * useEffect hook to dynamically load the Bootstrap script for styling purposes.
+ * Generates a personalized cover letter based on user input.
  */
     const coverLetter = `Dear Hiring Manager,\n\nBased on the job description, my skills include ${userSkills} and my experience includes ${userExperience}. I am excited about the opportunity to work with your team.\n\nSincerely,\n${userName}`;
     setGeneratedCoverLetter(coverLetter);
