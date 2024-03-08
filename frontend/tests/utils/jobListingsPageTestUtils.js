@@ -20,6 +20,11 @@ export const simulateWindowSizeChange = (newWidth) => {
   window.dispatchEvent(new Event('resize'));
 };
 
+/**
+   * Initializes mock functions and states for testing the JobListingsPage component.
+   * Sets up mocks for useState to control filters and error states.
+   * @returns {Object} An object containing mock functions and the initial state.
+   */
 export const initializeTestMocks = () => {
   const setFiltersMock = jest.fn();
   const setErrorStateMock = jest.fn();
