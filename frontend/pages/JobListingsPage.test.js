@@ -32,7 +32,11 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, screen, act } from '@testing-library/react';
+import { render, fireEvent, screen, act, waitFor } from '@testing-library/react';
+import { fetchListingsFromAPI } from '../utils/jobListingsUtils';
+jest.mock('../utils/jobListingsUtils', () => ({
+  fetchListingsFromAPI: jest.fn(),
+}));
 
 /**
  * Test suite for JobListingsPage component
@@ -45,6 +49,59 @@ describe('JobListingsPage component', () => {
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
+test('filters listings based on user input', async () => {
+  const mockListings = [
+    { id: 1, jobTitle: 'Software Engineer', company: 'Tech Corp', location: 'San Francisco' },
+    { id: 2, jobTitle: 'Product Manager', company: 'Innovate LLC', location: 'New York' }
+  ];
+  fetchListingsFromAPI.mockResolvedValue({ data: { listings: mockListings, totalPages: 1 } });
+
+  render(<JobListingsPage />);
+  fireEvent.change(screen.getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
+  fireEvent.change(screen.getByPlaceholderText('Filter by company'), { target: { value: 'Tech Corp', name: 'company' } });
+
+  await waitFor(() => {
+    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
+  });
+});
+
+test('view changes between table and card based on window size', () => {
+  global.innerWidth = 500; // Simulate mobile view
+  const { getByText } = render(<JobListingsPage />);
+  expect(getByText('Card View')).toBeInTheDocument();
+
+  act(() => {
+    global.innerWidth = 1024; // Simulate desktop view
+    global.dispatchEvent(new Event('resize'));
+  });
+
+  expect(getByText('Table View')).toBeInTheDocument();
+});
+
+test('pagination component renders and navigates correctly', async () => {
+  const mockListingsPage1 = [
+    { id: 1, jobTitle: 'Software Engineer', company: 'Tech Corp', location: 'San Francisco' },
+    { id: 2, jobTitle: 'Product Manager', company: 'Innovate LLC', location: 'New York' }
+  ];
+  const mockListingsPage2 = [
+    { id: 3, jobTitle: 'Designer', company: 'Creative Inc', location: 'Los Angeles' }
+  ];
+  fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 2 } })
+                      .mockResolvedValueOnce({ data: { listings: mockListingsPage2, totalPages: 2 } });
+
+  render(<JobListingsPage />);
+  await waitFor(() => {
+    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Product Manager')).toBeInTheDocument();
+  });
+
+  fireEvent.click(screen.getByText('2')); // Navigate to page 2
+  await waitFor(() => {
+    expect(screen.getByText('Designer')).toBeInTheDocument();
+    expect(screen.queryByText('Software Engineer')).not.toBeInTheDocument();
+  });
+});
 
     const { getByText } = render(<JobListingCard listing={listing} />);
     expect(getByText('Software Engineer')).toBeInTheDocument();
