@@ -20,6 +20,9 @@ beforeEach(() => {
   axios.post.mockResolvedValue({});
 });
 
+"""
+Tests if the Employment History Page renders without crashing. It checks for the presence of placeholders and buttons related to employment history.
+"""
 test('renders without crashing', async () => {
 /**
  * Test suite for the Employment History Page.
