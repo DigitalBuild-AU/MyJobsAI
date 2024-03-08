@@ -1,3 +1,12 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Applications from './components/Applications';
+import CoverLetter from './components/CoverLetter';
+import CVHelper from './components/CVHelper';
+import Interviews from './components/Interviews';
+import JobListings from './components/JobListings';
+import Settings from './components/Settings';
+
 console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
 function generateCVSuggestions() {
