@@ -18,10 +18,9 @@ beforeEach(() => {
   axios.post.mockResolvedValue({ data: { coverLetter: mockCoverLetter } });
 });
 
-/**
- * Tests if the Cover Letter Generation Page renders without crashing.
- * It checks for the presence of the 'Create Cover Letter' text and a combobox.
- */
+"""
+Tests if the Cover Letter Generation Page renders without crashing. It checks for the presence of the 'Create Cover Letter' text and a combobox.
+"""
 test('renders without crashing', async () => {
 /**
  * Test suite for the Cover Letter Generation Page.
