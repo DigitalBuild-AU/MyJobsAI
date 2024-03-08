@@ -29,6 +29,15 @@ const Navbar = () => {
                   <Link className='nav-link' to='/interviews'>Interviews</Link>
               </li>
               <li className='nav-item'>
+/**
+ * This file defines the Navbar component used across the MyJobsAI application.
+ * It renders the main navigation bar allowing users to navigate between different sections of the application.
+ */
+/**
+ * Navbar function that returns a navigation bar component.
+ * No parameters.
+ * Returns a JSX element representing the navigation bar.
+ */
                   <Link className='nav-link' to='/settings'>Settings</Link>
               </li>
           </ul>
