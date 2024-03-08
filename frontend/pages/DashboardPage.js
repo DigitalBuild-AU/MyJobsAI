@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SummaryChart from '../components/SummaryChart';
+import GlobalSearchBar from '../components/GlobalSearchBar';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
 
@@ -96,3 +97,4 @@ const renderAddEditModal = () => (
 
 export default DashboardPage;
                         <SummaryChart summary={summary} />
+            <GlobalSearchBar />
