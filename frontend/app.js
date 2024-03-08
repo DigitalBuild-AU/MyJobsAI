@@ -17,12 +17,12 @@ console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
  * This function is a placeholder for future implementation.
  */
 /**
- * Sends an email with the provided details.
+ * Sends an email with the specified details.
  * Parameters:
  * - to (string): The recipient's email address.
- * - subject (string): The email's subject.
- * - body (string): The email's body content.
- * Returns: None.
+ * - subject (string): The email's subject line.
+ * - body (string): The content of the email.
+ * This function performs an HTTP POST request to the backend to send the email and does not return anything.
  */
 function generateCoverLetter() {
 function sendEmail() {
