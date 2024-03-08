@@ -160,6 +160,27 @@ test('Displays error message on API failure', async () => {
   axios.get.mockRejectedValue(new Error('API call failed'));
 
   render(<JobListingsPage />);
+test('Filter functionality with different inputs updates displayed listings correctly', async () => {
+  axios.get.mockResolvedValueOnce({
+    data: { listings: [{ id: 3, jobTitle: 'Frontend Developer', company: 'Innovatech', location: 'Remote' }], totalPages: 1 }
+  });
+
+  render(<JobListingsPage />);
+  userEvent.type(screen.getByPlaceholderText('Filter by status'), 'Open');
+  userEvent.type(screen.getByPlaceholderText('Filter by company'), 'Innovatech');
+
+  await waitFor(() => {
+    expect(screen.getByText('Frontend Developer')).toBeInTheDocument();
+  });
+});
+test('Error message displayed when fetching filtered job listings fails', async () => {
+  axios.get.mockRejectedValue(new Error('Failed to fetch filtered listings'));
+
+  render(<JobListingsPage />);
+  await waitFor(() => {
+    expect(screen.getByText('Error fetching job listings')).toBeInTheDocument();
+  });
+});
   await waitFor(() => {
     expect(screen.getByText('Error fetching job listings')).toBeInTheDocument();
 
