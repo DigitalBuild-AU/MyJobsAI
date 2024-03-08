@@ -1,0 +1,49 @@
+import React from 'react';
+import { render } from '@testing-library/react';
+import Navbar from '../components/Navbar';
+
+describe('Navbar Component Tests', () => {
+  it('renders without crashing', () => {
+    render(<Navbar />);
+  });
+
+  it('displays the brand name MyJobsAI', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('MyJobsAI')).toBeInTheDocument();
+  });
+
+  it('renders Dashboard link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('Dashboard')).toBeInTheDocument();
+  });
+
+  it('renders Job Listings link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('Job Listings')).toBeInTheDocument();
+  });
+
+  it('renders Applications link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('Applications')).toBeInTheDocument();
+  });
+
+  it('renders CV Helper link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('CV Helper')).toBeInTheDocument();
+  });
+
+  it('renders Cover Letter link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('Cover Letter')).toBeInTheDocument();
+  });
+
+  it('renders Interviews link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('Interviews')).toBeInTheDocument();
+  });
+
+  it('renders Settings link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+});
