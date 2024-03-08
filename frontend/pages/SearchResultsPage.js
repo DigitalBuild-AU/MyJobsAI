@@ -1,3 +1,7 @@
+/**
+ * SearchResultsPage Component
+ * This component renders the search results page, displaying job listings, contacts, and tasks based on the user's search query.
+ */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -58,6 +62,14 @@ const renderTasks = (results) => {
                 <h3>Contacts</h3>
                 {renderContacts(results)}
             </div>
+/**
+ * Renders the search results page.
+ * Fetches and displays job listings, contacts, and tasks based on the user's search query.
+ */
+/**
+ * useEffect hook to fetch search results based on the query parameter.
+ * It updates the state with the fetched results for jobs, contacts, and tasks.
+ */
             <div>
                 <h3>Tasks</h3>
                 {renderTasks(results)}

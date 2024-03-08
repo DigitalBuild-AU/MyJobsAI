@@ -29,3 +29,11 @@ const GlobalSearchBar = () => {
 
 export default GlobalSearchBar;
     const history = useHistory();
+/**
+ * GlobalSearchBar Component
+ * This component renders a global search bar that allows users to search for job listings, contacts, and tasks.
+ */
+};
+
+export default GlobalSearchBar;
+    const history = useHistory();
