@@ -1,3 +1,11 @@
+/**
+ * Tests for Job Listings Page Utility Functions.
+ *
+ * This file contains tests for the utility functions specific to the Job Listings Page. It includes
+ * tests for fetching, filtering, and processing job listings data to be displayed on the Job Listings Page.
+ * These tests ensure that the utility functions behave as expected under various conditions.
+ */
+
 import { describe, it, expect, jest } from '@jest/globals';
 import { handleWindowSizeChange, fetchListings, cleanupOnUnmount } from '../utils/jobListingsPageUtils';
 import { fetchListingsFromAPI } from '../utils/jobListingsUtils';
