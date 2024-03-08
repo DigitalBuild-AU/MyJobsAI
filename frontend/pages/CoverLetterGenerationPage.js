@@ -41,6 +41,12 @@ const CoverLetterGenerationPage = () => {
     setContactPerson(job.contactPerson || ''); // Update to use the correct field and handle possible undefined value
   };
 
+  /**
+  * Asynchronously sends user inputs to the server to generate a cover letter.
+  * Updates the state with the generated cover letter or an error message.
+  * @async
+  * @function generateCoverLetter
+  */
   const generateCoverLetter = async () => {
     // Assuming postCoverLetter is a function that sends user inputs to the server and receives the generated cover letter
     try {
