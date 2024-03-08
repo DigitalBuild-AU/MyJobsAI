@@ -69,9 +69,19 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
   });
 
   it('handles failure when fetching navbar content on component mount', async () => {
+
   /**
    * Tests the CVHelperPage's ability to successfully fetch navbar content on component mount and verify its presence in the document.
    */
+
+  it('successfully fetches and sets navbar content on component mount', async () => {
+    mock.onGet('navbar.html').reply(200, '<div>Mock Navbar</div>');
+    const { getByText } = render(<CVHelperPage />);
+    await waitFor(() => {
+      expect(getByText('<div>Mock Navbar</div>')).toBeInTheDocument();
+    });
+  });
+
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     mock.onGet('navbar.html').networkError();
     render(<CVHelperPage />);
@@ -90,6 +100,27 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
       expect(scriptTags[0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
     });
   });
+
   /**
    * Verifies the CVHelperPage's behavior when there is a failure in fetching navbar content on component mount, ensuring error handling is correctly implemented.
    */
+
+  it('displays error on failing to fetch navbar content', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mock.onGet('navbar.html').networkError();
+    render(<CVHelperPage />);
+    await waitFor(() => {
+      expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Failed to load navbar:'));
+    });
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('removes existing bootstrap script and appends a new one on component mount', () => {
+    document.body.innerHTML = '<script src="arbitrary-script-url.js"></script>';
+    render(<CVHelperPage />);
+    act(() => {
+      const scriptTags = document.querySelectorAll('script');
+      expect(scriptTags.length).toBe(1);
+      expect(scriptTags[0].src).toContain('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+    });
+  });
