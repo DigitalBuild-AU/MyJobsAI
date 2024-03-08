@@ -29,7 +29,10 @@ describe('InteractiveGuide Component Tests', () => {
     render(<InteractiveGuide steps={jobListingsSteps} />);
     expect(screen.getByText('This is a job listing.')).toBeInTheDocument();
   });
-
+/**
+ * This file contains tests for the InteractiveGuide component.
+ * It verifies the guide's initialization, user interaction handling, and navigation through steps.
+ */
   test('hides and shows the guide based on user interaction', () => {
     const { rerender } = render(<InteractiveGuide steps={jobListingsSteps} />);
     fireEvent.click(screen.getByText('Skip'));
@@ -40,6 +43,9 @@ describe('InteractiveGuide Component Tests', () => {
   });
 
   test('navigates through the steps correctly', () => {
+/**
+ * Tests the functionality of hiding and showing the guide based on user interaction.
+ */
     render(<InteractiveGuide steps={interviewFormSteps} />);
     fireEvent.click(screen.getByText('Next'));
     expect(screen.getByText('Click here to submit the form.')).toBeInTheDocument();
@@ -52,3 +58,12 @@ describe('InteractiveGuide Component Tests', () => {
     expect(screen.queryByText('Click here to submit the form.')).not.toBeInTheDocument();
   });
 });
+/**
+ * Tests that the InteractiveGuide component initializes and displays the first step correctly.
+ */
+/**
+ * Tests the completion of the guide upon reaching the last step.
+ */
+/**
+ * Tests the navigation through the steps of the InteractiveGuide component.
+ */
