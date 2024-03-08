@@ -20,6 +20,10 @@ describe('CoverLetterComponent', () => {
     expect(getByText('Generate Cover Letter')).toBeInTheDocument();
   });
 
+  /**
+   * Test case: Dynamically loads the Bootstrap script.
+   * Verifies that the Bootstrap script is appended to the document body when the CoverLetterComponent is rendered.
+   */
   it('loads Bootstrap script dynamically', () => {
 /**
  * Tests if the CoverLetterComponent renders correctly with all expected inputs and the generate button.
@@ -41,6 +45,10 @@ describe('CoverLetterComponent', () => {
     fireEvent.change(getByPlaceholderText('Your Experience...'), { target: { value: 'My Experience' } });
     fireEvent.click(getByText('Generate Cover Letter'));
     expect(getByText('Dear Hiring Manager,')).toBeInTheDocument();
+  /**
+   * Test case: Renders the CoverLetterComponent correctly.
+   * Verifies that all expected text fields and the 'Generate Cover Letter' button are present in the document.
+   */
     expect(getByText('Based on the job description, my skills include My Skills and my experience includes My Experience. I am excited about the opportunity to work with your team.')).toBeInTheDocument();
     expect(getByText('Sincerely,')).toBeInTheDocument();
     expect(getByText('John Doe')).toBeInTheDocument();
