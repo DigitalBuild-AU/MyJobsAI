@@ -10,6 +10,9 @@ import InterviewForm from './InterviewForm';
 
 jest.mock('axios');
 
+/**
+ * Tests if the InterviewForm component renders all input fields and the submit button correctly.
+ */
 describe('InterviewForm Component', () => {
   test('renders form with all input fields and submit button', () => {
     render(<InterviewForm />);
