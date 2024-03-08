@@ -54,4 +54,5 @@ const InterviewsComponent = () => {
 };
 
 export default InterviewsComponent;
+// Importing loadBootstrapScript to dynamically load Bootstrap for component functionality
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';

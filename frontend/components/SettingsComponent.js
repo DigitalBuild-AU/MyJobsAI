@@ -23,4 +23,6 @@ const SettingsComponent = () => {
 };
 
 export default SettingsComponent;
+
+// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
