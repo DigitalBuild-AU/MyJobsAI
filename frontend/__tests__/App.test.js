@@ -14,6 +14,10 @@ jest.mock('axios');
 /**
  * Test suite for App component routing. Ensures that navigation to each route renders the correct component.
  */
+/**
+ * Test suite for verifying the routing functionality of the App component.
+ * Ensures that navigation to each defined route renders the expected component.
+ */
 describe('App Routing', () => {
   const routes = [
     { path: '/', component: 'Home' },
@@ -27,6 +31,9 @@ describe('App Routing', () => {
     { path: '/analytics', component: 'AnalyticsComponent' },
   ];
 
+  /**
+   * Tests navigation to a specific route and verifies that the correct component is rendered.
+   */
   routes.forEach(route => {
     it(`navigates to ${route.path} and renders ${route.component}`, () => {
       const { getByText } = render(
