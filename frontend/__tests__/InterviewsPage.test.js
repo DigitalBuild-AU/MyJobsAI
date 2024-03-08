@@ -6,6 +6,9 @@ import InterviewsPage from '../pages/InterviewsPage';
 import { act } from 'react-dom/test-utils';
 
 describe('InterviewsPage', () => {
+"""
+Tests for the InterviewsPage component, covering the functionality of fetching and displaying interviews, scheduling new interviews, and error handling.
+"""
   let mock;
 
   beforeEach(() => {
@@ -23,6 +26,9 @@ describe('InterviewsPage', () => {
   });
 
   it('submits form and schedules interview successfully', async () => {
+  """
+  Verifies that the InterviewsPage component correctly fetches and displays interviews upon mounting.
+  """
     const formData = { jobTitle: 'Developer', date: '2023-04-01', notes: 'First round' };
     mock.onPost('/api/interviews', formData).reply(200);
 
@@ -36,6 +42,9 @@ describe('InterviewsPage', () => {
       expect(window.alert).toHaveBeenCalledWith('Interview scheduled successfully.');
     });
   });
+  """
+  Tests the functionality of the InterviewsPage form for scheduling a new interview. It verifies that submitting the form with valid data schedules an interview and displays a success message.
+  """
 
   it('handles error when scheduling interview fails', async () => {
     const formData = { jobTitle: 'Developer', date: '2023-04-01', notes: 'First round' };
@@ -52,3 +61,6 @@ describe('InterviewsPage', () => {
     });
   });
 });
+  """
+  Verifies the error handling in the InterviewsPage component when an attempt to schedule an interview fails. It checks that an appropriate error message is displayed.
+  """
