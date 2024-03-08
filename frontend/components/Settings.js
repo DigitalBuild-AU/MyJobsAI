@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Navbar from './Navbar';
 
 const Settings = () => {
@@ -33,3 +33,7 @@ const Settings = () => {
 };
 
 export default Settings;
+import { SettingsContext } from '../contexts/SettingsContext';
+
+const Settings = () => {
+  const { settings, updateSettings } = useContext(SettingsContext);
