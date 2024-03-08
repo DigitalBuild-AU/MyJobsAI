@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Navbar from './Navbar';
 
 const CoverLetterComponent = () => {
@@ -9,6 +10,7 @@ const CoverLetterComponent = () => {
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState('');
 
   useEffect(() => {
+
 /**
  * CoverLetterComponent is a React functional component that provides users with tools to generate cover letters based on their job application data in MyJobsAI.
  */
@@ -32,6 +34,14 @@ const CoverLetterComponent = () => {
  */
     const coverLetter = `Dear Hiring Manager,\n\nBased on the job description, my skills include ${userSkills} and my experience includes ${userExperience}. I am excited about the opportunity to work with your team.\n\nSincerely,\n${userName}`;
     setGeneratedCoverLetter(coverLetter);
+  };
+
+  return (
+        setGeneratedCoverLetter(response.data.coverLetter);
+      })
+      .catch(function(error) {
+        console.error(`Error generating cover letter: ${error.message}, Stack: ${error.stack}`);
+      });
   };
 
   return (
