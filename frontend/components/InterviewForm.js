@@ -40,10 +40,6 @@ function InterviewForm({ setInterviews, interviews }) {
     onNotesChange(value);
   };
 
-  const handleSubmit = (e) => {
-    setNotes(value);
-    onNotesChange(value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,6 +81,12 @@ function InterviewForm({ setInterviews, interviews }) {
         <label htmlFor="notesInput">Notes</label>
         <textarea className="form-control" id="notesInput" value={notes} onChange={handleNotesChange} placeholder="Enter any notes" rows="3"></textarea>
       </div>
+  /**
+   * Submits the interview form data to the server.
+   * This function prevents the default form submission behavior, sends the job title, date, and notes to the server via a POST request, and handles the response by either showing a success message and updating the interviews state or logging an error.
+   *
+   * @param {Event} e - The form submission event.
+   */
       <button type="submit" className="btn btn-primary">Schedule Interview</button>
     </form>
   );
