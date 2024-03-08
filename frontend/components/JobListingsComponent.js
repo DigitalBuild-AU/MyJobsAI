@@ -25,7 +25,7 @@ const JobListingsComponent = () => {
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
     loadBootstrapScript();
-  }, []);
+import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
   const handleChange = (event) => {
 /**
