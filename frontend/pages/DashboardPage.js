@@ -8,6 +8,7 @@ import SummaryChart from '../components/SummaryChart';
 import GlobalSearchBar from '../components/GlobalSearchBar';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
+import ResponsiveNavbar from '../components/ResponsiveNavbar';
 
 const DashboardPage = () => {
  * Renders the dashboard page.
@@ -87,24 +88,27 @@ const renderAddEditModal = () => (
 
     return (
 
-        <div className="dashboard">
+        <>
+          <ResponsiveNavbar />
+          <div className="container mt-4" id="dashboardOverview">
             <h1>Dashboard Overview</h1>
-            {loading ? <p>Loading...</p> : error ? <p>{error}</p> : (
-                <div className="dashboard-content">
-                    <Card title="Job Application Summary" className="summary-card">
-                        <p>Applications Sent: {summary.applicationsSent}</p>
-                        <p>Interviews Scheduled: {summary.interviewsScheduled}</p>
-                        <p>Offers Received: {summary.offersReceived}</p>
-                        <button onClick={() => handleOpenModal('add')}>Add Entry</button>
-                    </Card>
-                    <Card title="Quote of the Day" className="quote-card">
-                        <blockquote>{quote}</blockquote>
-                    </Card>
-                    {renderAddEditModal()}
-
-                </div>
-            )}
-        </div>
+            {/* Content will be dynamically injected here */}
+            <div id='analyticsSection'>
+              <h2>Analytics and Insights</h2>
+              <div id='analyticsContent'>
+                {/* Analytics data will be dynamically injected here */}
+              </div>
+            </div>
+            <div id="emailForm">
+              <h2>Send an Email</h2>
+              <input type="text" id="emailTo" placeholder="Recipient's email" />
+              <input type="text" id="emailSubject" placeholder="Subject" />
+              <textarea id="emailBody" placeholder="Your message here"></textarea>
+              <button onClick={() => {/* Function to send email */}}>Send Email</button>
+            </div>
+            <div id="emailResponse"></div>
+          </div>
+        </>
     );
 }
 
