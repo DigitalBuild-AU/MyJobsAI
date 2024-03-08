@@ -7,6 +7,11 @@ jest.mock('../utils/jobListingsUtils', () => ({
 }));
 
 describe('jobListingsPageUtils', () => {
+/**
+ * Tests for utility functions used in the Job Listings Page.
+ * This file includes tests for handling window size changes, fetching job listings from the API,
+ * and cleanup operations on component unmount.
+ */
   describe('handleWindowSizeChange', () => {
     it('sets view to card on window width less than 768px', () => {
       const setViewMock = jest.fn();
@@ -24,6 +29,12 @@ describe('jobListingsPageUtils', () => {
   });
 
   describe('fetchListings', () => {
+/**
+ * Tests the handleWindowSizeChange function.
+ * This function adjusts the view mode based on the window's width.
+ * 
+ * @param {Function} setView - A function to set the view mode ('card' or 'table').
+ */
     it('calls setListings and setTotalPages with correct data on successful fetch', async () => {
       const mockData = { listings: [{ id: 1, title: 'Test Job' }], totalPages: 3 };
       fetchListingsFromAPI.mockResolvedValue({ data: mockData });
@@ -57,6 +68,21 @@ describe('jobListingsPageUtils', () => {
       expect(removeEventListenerMock).toHaveBeenCalled();
       expect(setFiltersMock).toHaveBeenCalledWith({ status: '', company: '' });
       removeEventListenerMock.mockRestore();
+/**
+ * Tests the fetchListings function.
+ * This function fetches job listings from the API and updates the state with the fetched data.
+ * 
+ * @param {Object} filters - The filters to apply when fetching the listings.
+ * @param {number} page - The current page number.
+ * @param {Function} setListings - A function to set the listings state.
+ * @param {Function} setTotalPages - A function to set the total pages state.
+ */
     });
   });
 });
+/**
+ * Tests the cleanupOnUnmount function.
+ * This function performs cleanup operations, such as removing event listeners and resetting filters, when the component unmounts.
+ * 
+ * @param {Function} setFilters - A function to reset the filters state.
+ */
