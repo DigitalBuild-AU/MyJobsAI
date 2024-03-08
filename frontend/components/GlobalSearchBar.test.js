@@ -1,3 +1,7 @@
+/**
+ * Tests for the GlobalSearchBar component.
+ * This file contains tests that verify the functionality of the GlobalSearchBar component, including user input handling and search execution.
+ */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -10,6 +14,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('GlobalSearchBar Component', () => {
+  // Tests that the input field updates correctly when the user types.
   test('updates input field value when user types', () => {
     render(<GlobalSearchBar />);
     const input = screen.getByPlaceholderText('Search...');
@@ -17,6 +22,7 @@ describe('GlobalSearchBar Component', () => {
     expect(input.value).toBe('React');
   });
 
+  test('redirects user to SearchResultsPage with correct query parameter on search button click', () => {
   test('redirects user to SearchResultsPage with correct query parameter on search button click', () => {
     const mockHistoryPush = jest.fn();
     useHistory.mockReturnValue({ push: mockHistoryPush });
