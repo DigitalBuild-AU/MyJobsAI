@@ -12,6 +12,10 @@ import AnalyticsComponent from './components/AnalyticsComponent';
 console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
 
+/**
+ * Generates a cover letter based on user input.
+ * This function is a placeholder for future implementation.
+ */
 function generateCoverLetter() {
 function sendEmail() {
   const to = document.getElementById('emailTo').value;
