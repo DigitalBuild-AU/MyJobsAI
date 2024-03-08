@@ -55,6 +55,11 @@ describe('Navbar Component Tests', () => {
     expect(getByText('Interviews')).toBeInTheDocument();
   });
 
+  /**
+   * Test if the Navbar component renders the 'Settings' link correctly.
+   * This test verifies that the Navbar component includes a link for 'Settings',
+   * ensuring that users can navigate to the Settings page from the Navbar.
+   */
   it('renders Settings link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('Settings')).toBeInTheDocument();
