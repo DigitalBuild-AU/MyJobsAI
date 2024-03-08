@@ -22,7 +22,10 @@ const CoverLetter = () => {
 
   const handleGenerateCoverLetter = () => {
     /**
-     * Placeholder function for generating a personalized cover letter based on state variables.
+     * Generates a personalized cover letter based on user input.
+     * Parameters: None.
+     * Returns: None.
+     * This function is a placeholder for future implementation.
      */
     // Logic to generate cover letter based on state variables
     // This is a placeholder for the actual implementation
