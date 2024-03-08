@@ -199,6 +199,13 @@ test('handles error when creating a cover letter fails', async () => {
 });
 });
   await waitFor(() => expect(queryByText('Do you want to save the generated cover letter?')).not.toBeInTheDocument());
+  /**
+   * Test case: Successfully creates a cover letter.
+   * This test verifies that the CoverLetterGenerationPage component can successfully create a cover letter
+   * using provided user input (job description, name, skills, and experience) and display the generated cover letter.
+   * It mocks the axios.post call to simulate a successful API response and checks if the generated cover letter
+   * is rendered in the document.
+   */
 });
 
 test('Save button inside modal triggers save functionality', async () => {
@@ -208,3 +215,9 @@ test('Save button inside modal triggers save functionality', async () => {
   fireEvent.click(getByText('Save')); // Click save button
   expect(console.log).toHaveBeenCalledWith('Cover letter saved.');
 });
+  /**
+   * Test case: Handles error when creating a cover letter fails.
+   * This test checks the error handling of the CoverLetterGenerationPage component when the cover letter creation fails.
+   * It mocks the axios.post call to simulate a failed API response and verifies that an appropriate error message
+   * is displayed to the user.
+   */
