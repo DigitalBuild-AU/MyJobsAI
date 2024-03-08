@@ -69,6 +69,12 @@ async function handleCvCustomization(jobDescription, userCV) {
       model: "gpt-3.5-turbo",
     });
     return { analysisResults: response.choices[0].message.content.trim() };
+/**
+ * Generates a cover letter based on a job description and user's CV.
+ * @param {string} jobDescription - The job description.
+ * @param {string} userCV - The user's CV.
+ * @returns {Object} An object containing the generated cover letter.
+ */
   } catch (error) {
     throw new Error("Failed to generate CV customization suggestions.");
   }
