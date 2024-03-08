@@ -1,3 +1,7 @@
+/**
+ * This file tests the Navbar component, ensuring it renders without crashing and displays all expected links correctly.
+ */
+
 import React from 'react';
 import { render } from '@testing-library/react';
 import Navbar from '../components/Navbar';
