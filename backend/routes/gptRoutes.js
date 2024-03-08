@@ -97,6 +97,13 @@ router.post('/cv_customization', async (req, res) => {
  */
         }
       ],
+    });
+    console.log("CV analysis and customization suggestions generated successfully."); // gpt_pilot_debugging_log
+    res.json({ analysisResults: response.choices[0].message.content.trim() });
+  } catch (error) {
+    console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
+    res.status(500).json({ error: "Failed to generate cover letter." });
+  }
       model: "gpt-3.5-turbo",
 
     });
