@@ -8,3 +8,11 @@ export const loadBootstrapScript = () => {
   bootstrapScript.async = true;
   document.body.appendChild(bootstrapScript);
 };
+/**
+ * bootstrapUtils.js
+ * Purpose: Utility functions for loading Bootstrap resources dynamically in the application.
+ */
+/**
+ * Dynamically loads the Bootstrap script into the document.
+ * This ensures that Bootstrap's JavaScript components can be used throughout the application.
+ */
