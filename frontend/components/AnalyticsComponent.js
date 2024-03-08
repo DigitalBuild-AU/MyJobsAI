@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+/**
+ * AnalyticsComponent is a React functional component that fetches and displays analytics data such as total applications, interviews scheduled, offers received, and average response time.
+ * It makes a GET request to the backend analytics API and updates its state with the fetched data to display to the user.
+ */
 const AnalyticsComponent = () => {
   const [totalApplications, setTotalApplications] = useState(0);
   const [interviewsScheduled, setInterviewsScheduled] = useState(0);
