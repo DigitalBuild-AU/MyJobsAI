@@ -1,5 +1,6 @@
 /**
- * Defines the JobListingsPage component for displaying job listings with filtering, pagination, and different view options.
+ * JobListingsPage is a React functional component that renders the job listings page,
+ * allowing users to view and filter job listings.
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
