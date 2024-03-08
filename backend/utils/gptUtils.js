@@ -1,3 +1,10 @@
+/**
+ * gptUtils.js
+ * This file contains utility functions for interacting with the OpenAI API to generate cover letters. 
+ * Functions include generating cover letters based on job descriptions and user CVs, logging generation events, 
+ * and handling errors during the cover letter generation process.
+ */
+
 const { Configuration, OpenAIApi } = require("openai");
 const dotenv = require("dotenv");
 
