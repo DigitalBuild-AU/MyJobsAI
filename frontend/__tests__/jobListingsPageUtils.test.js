@@ -38,6 +38,9 @@ describe('jobListingsPageUtils', () => {
  * 
  * @param {Function} setView - A function to set the view mode ('card' or 'table').
  */
+    /**
+     * Tests that fetchListings calls setListings and setTotalPages with correct data on successful API fetch.
+     */
     it('calls setListings and setTotalPages with correct data on successful fetch', async () => {
       const mockData = { listings: [{ id: 1, title: 'Test Job' }], totalPages: 3 };
       fetchListingsFromAPI.mockResolvedValue({ data: mockData });
@@ -50,6 +53,9 @@ describe('jobListingsPageUtils', () => {
       expect(setTotalPagesMock).toHaveBeenCalledWith(mockData.totalPages);
     });
 
+    /**
+     * Tests that fetchListings logs an error to the console on fetch failure.
+     */
     it('logs error on fetch failure', async () => {
       const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 
