@@ -106,6 +106,60 @@ describe('Interviews Component - New Business Logic', () => {
 
   /**
    * Tests that attempting to add an interview with missing details displays the appropriate error message.
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import Interviews from '../components/Interviews';
+
+jest.mock('axios');
+
+describe('handleSubmit Functionality in Interviews Component', () => {
+  let mock;
+
+  beforeEach(() => {
+    mock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
+  test('successful form submission with correct API call and success message display', async () => {
+    const jobTitle = 'Software Engineer';
+    const interviewDate = '2023-04-20T10:00';
+    const notes = 'Discuss project details';
+    const emailBody = `An interview for the position of ${jobTitle} has been scheduled. Date and Time: ${interviewDate}. Notes: ${notes}`;
+    mock.onPost('http://localhost:3000/api/email/send', {
+      to: 'email@example.com',
+      subject: 'Interview Scheduled',
+      body: emailBody
+    }).reply(200, { message: 'Email was sent successfully.' });
+
+    render(<Interviews />);
+    fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: jobTitle } });
+    fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: notes } });
+    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: interviewDate } });
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
+    });
+  });
+
+  test('form submission error handling with error message display', async () => {
+    mock.onPost('http://localhost:3000/api/email/send').networkError();
+
+    render(<Interviews />);
+    fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
+    fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Discuss project details' } });
+    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-04-20T10:00' } });
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Error sending email: Network Error')).toBeInTheDocument();
+    });
+  });
+});
    */
   test('attempts to add an interview with missing details', () => {
     render(<Interviews />);
