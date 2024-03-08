@@ -56,12 +56,24 @@ const CoverLetterGenerationPage = () => {
       });
   };
 
-  const downloadAsPDF = () => {
 /**
- * Handles the selection of a job from the dropdown.
- * @function handleJobSelection
- * @param {Event} e - The event triggered on job selection.
+ * Generates a personalized cover letter based on the selected job and user profile.
  */
+  const createCoverLetter = async () => {
+    postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
+      .then(data => {
+        setGeneratedCoverLetter(data.coverLetter);
+      .then(function(response) {
+        setGeneratedCoverLetter(response.data.coverLetter);
+        console.log('Cover Letter generated.');
+      })
+      .catch(function(error) {
+        console.error('Failed to generate Cover Letter:', error);
+        setGeneratedCoverLetter('Error generating Cover Letter.');
+      });
+  };
+
+  const downloadAsPDF = () => {
 /**
  * Generates a personalized cover letter based on the selected job and user profile.
         <div className="cover-letter-preview">
