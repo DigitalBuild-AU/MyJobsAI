@@ -1,3 +1,7 @@
+/**
+ * CoverLetterGenerationPage is a React functional component that renders the cover letter generation page,
+ * allowing users to input details and generate a cover letter.
+ */
 import React, { useState } from 'react';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
 import { postCoverLetter } from '../utils/apiHelpers';
