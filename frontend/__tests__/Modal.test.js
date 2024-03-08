@@ -1,8 +1,16 @@
+"""
+File: Modal.test.js
+Description: This file contains tests for the Modal component. It tests the rendering of the modal based on its open state, and the onClose event handling when the escape key is pressed or the backdrop is clicked.
+"""
+
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import Modal from '../components/Modal';
 
 describe('Modal Component', () => {
+  """
+  Tests that the Modal component renders correctly when its 'isOpen' prop is set to true.
+  """
   test('renders correctly when isOpen is true', () => {
     render(<Modal isOpen={true} content="Test Content" actions={<button>Action</button>} />);
     expect(screen.getByText('Test Content')).toBeInTheDocument();
