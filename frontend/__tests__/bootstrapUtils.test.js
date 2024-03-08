@@ -1,3 +1,7 @@
+  /**
+   * Test case: Removes existing bootstrap script tag and appends a new one.
+   * Verifies that if a Bootstrap script tag already exists, it is replaced with a new one, ensuring only one script tag is present.
+   */
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { loadBootstrapScript } from '../utils/bootstrapUtils';
