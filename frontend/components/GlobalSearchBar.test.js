@@ -1,3 +1,7 @@
+/**
+ * Tests for the GlobalSearchBar component.
+ * This file contains tests that verify the functionality of the GlobalSearchBar component, including user input handling and search execution.
+ */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
