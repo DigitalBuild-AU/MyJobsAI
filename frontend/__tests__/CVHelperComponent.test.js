@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import CVHelperComponent from '../components/CVHelperComponent';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -31,6 +30,16 @@ describe('CVHelperComponent', () => {
     fireEvent.click(getByText('Generate Suggestions'));
     await waitFor(() => expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: 'Software Engineer', userCV: 'My CV content' }));
   });
+
+});
+it('loads Bootstrap script on component mount', async () => {
+  jest.mock('../../utils/bootstrapUtils', () => ({
+    loadBootstrapScript: jest.fn(),
+  }));
+  const { loadBootstrapScript } = require('../../utils/bootstrapUtils');
+  render(<CVHelperComponent />);
+  expect(loadBootstrapScript).toHaveBeenCalledTimes(1);
+});
 
   it('updates component state with CV suggestions upon successful API call', async () => {
     const mockSuggestions = 'Consider highlighting your teamwork skills.';
