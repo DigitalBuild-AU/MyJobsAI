@@ -139,10 +139,12 @@ Tests the updateFilters function, verifying it updates the filter state correctl
     expect(screen.getByText('Filtered Job')).toBeInTheDocument();
   });
 });
-test('Pagination updates displayed job listings', async () => {
-"""
-Tests the functionality of filtering job listings, ensuring that the displayed listings update based on the applied filters.
-"""
+test('Filter functionality with different inputs updates displayed listings correctly', async () => {
+  """
+  Test case: Verifies that the filter functionality updates the displayed job listings correctly based on different inputs.
+  Inputs: Mock responses for job listings and filter criteria such as status ('Open') and company ('Innovatech').
+  Expected Outcome: The displayed job listings are correctly updated to show only those that match the applied filters.
+  """
   axios.get.mockResolvedValueOnce({
     data: { listings: [{ id: 1, jobTitle: 'Job Page 1', company: 'Company 1', location: 'Remote' }], totalPages: 2 }
   }).mockResolvedValueOnce({
@@ -156,23 +158,11 @@ Tests the functionality of filtering job listings, ensuring that the displayed l
 
   expect(screen.getByText('Job Page 2')).toBeInTheDocument();
 });
-test('Displays error message on API failure', async () => {
-  axios.get.mockRejectedValue(new Error('API call failed'));
-
-  render(<JobListingsPage />);
-test('Filter functionality with different inputs updates displayed listings correctly', async () => {
-  axios.get.mockResolvedValueOnce({
-    data: { listings: [{ id: 3, jobTitle: 'Frontend Developer', company: 'Innovatech', location: 'Remote' }], totalPages: 1 }
-  });
-
-  render(<JobListingsPage />);
-  userEvent.type(screen.getByPlaceholderText('Filter by status'), 'Open');
-  userEvent.type(screen.getByPlaceholderText('Filter by company'), 'Innovatech');
-
-  await waitFor(() => {
-    expect(screen.getByText('Frontend Developer')).toBeInTheDocument();
-  });
-});
+  """
+  Test case: Verifies that an error message is displayed when fetching filtered job listings fails.
+  Simulation: Mocks a get request to return an error.
+  Expected Outcome: An error message indicating the failure to fetch job listings is displayed.
+  """
 test('Error message displayed when fetching filtered job listings fails', async () => {
   axios.get.mockRejectedValue(new Error('Failed to fetch filtered listings'));
 
