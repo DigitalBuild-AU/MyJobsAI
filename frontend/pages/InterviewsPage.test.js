@@ -28,6 +28,9 @@ describe('InterviewsPage', () => {
     });
   });
 
+  /**
+  * Tests error handling when fetching interviews fails, expecting an error message to be displayed.
+  */
   test('handles errors during the fetching of interviews and displays an error message', async () => {
     axios.get.mockRejectedValue(new Error('Error fetching interviews'));
     render(<InterviewsPage />);
