@@ -121,10 +121,10 @@ describe('/cv_suggestions route', () => {
   });
 });
     /**
-     * Tests error handling during a CV suggestions request.
-     * 
-     * Verifies that the server responds with a 500 status code and an appropriate error message when an error occurs while processing a CV suggestions request.
-     */
+    * Test Suite for '/cover_letter' Route
+    * 
+    * This suite evaluates the '/cover_letter' route's capability to generate personalized cover letters. It tests the functionality under various scenarios, ensuring that the application can produce relevant cover letters and handle any errors encountered during the process.
+    */
 
 describe('/cover_letter route', () => {
   /**
