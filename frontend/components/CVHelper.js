@@ -25,3 +25,4 @@ const CVHelper = () => {
 };
 
 export default CVHelper;
+import { Link } from 'react-router-dom';

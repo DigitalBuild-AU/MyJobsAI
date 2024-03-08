@@ -19,6 +19,7 @@ const Applications = () => {
     bootstrapScript.onload = () => console.log('Bootstrap 5 script loaded successfully.');
     bootstrapScript.onerror = (error) => console.error('Bootstrap 5 script failed to load:', error.message, error.stack);
     document.body.appendChild(bootstrapScript);
+import { Link } from 'react-router-dom';
 
     return () => {
       // Cleanup script tag on component unmount

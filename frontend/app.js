@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Applications from './components/Applications';
 import CoverLetter from './components/CoverLetter';
 import CVHelper from './components/CVHelper';

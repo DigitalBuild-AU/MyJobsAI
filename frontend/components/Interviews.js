@@ -37,5 +37,6 @@ const Interviews = () => {
     </div>
   );
 };
+import { Link } from 'react-router-dom';
 
 export default Interviews;
