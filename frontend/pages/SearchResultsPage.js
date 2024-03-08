@@ -62,6 +62,12 @@ const renderContacts = (results) => {
     );
 };
 
+/**
+ * Renders tasks based on search results.
+ * Takes a results object as a parameter and returns JSX elements representing tasks or a message indicating no tasks were found.
+ * @param {Object} results - The search results object containing an array of tasks.
+ * @returns {JSX.Element} A list of div elements with task titles if tasks are found, otherwise a message indicating no tasks were found.
+ */
 const renderTasks = (results) => {
     return results.tasks.length > 0 ? (
         results.tasks.map((task) => (
