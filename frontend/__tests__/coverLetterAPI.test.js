@@ -37,6 +37,9 @@ describe('handleCoverLetterError', () => {
   });
 
   afterEach(() => {
+"""
+Test suite for the coverLetterAPI utility functions. It verifies the behavior of generating cover letters, handling successful responses, and error scenarios.
+"""
     jest.clearAllMocks();
   });
 
