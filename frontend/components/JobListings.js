@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 
 const JobListings = () => {
+  /**
+   * JobListings component for viewing and filtering job listings.
+   * Users can filter listings by location, job type, and keywords, and add new job listings.
+   */
   const [filterLocation, setFilterLocation] = useState('');
   const [filterJobType, setFilterJobType] = useState('');
   const [filterKeywords, setFilterKeywords] = useState('');

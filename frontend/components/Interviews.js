@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+/**
+ * Interviews component for scheduling and managing job interviews.
+ * Allows users to input job title, interview date, and notes for organization.
+ */
+
 const Interviews = () => {
   const [jobTitle, setJobTitle] = useState('');
   const [interviewDate, setInterviewDate] = useState('');

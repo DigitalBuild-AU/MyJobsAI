@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
 
 const Applications = () => {
+  /**
+   * Applications component responsible for rendering the applications page.
+   * This includes dynamically loading the Bootstrap script for UI components.
+   */
   useEffect(() => {
     // Assuming the Navbar component handles its own dynamic content loading
     // Dynamically add Bootstrap script

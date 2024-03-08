@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
 
 const CoverLetter = () => {
+  /**
+   * CoverLetter component aids in generating personalized cover letters.
+   * Users input their details, job description, skills, and experience to receive a custom cover letter.
+   */
   const [userName, setUserName] = useState('');
   const [jobDescriptionInput, setJobDescriptionInput] = useState('');
   const [userSkills, setUserSkills] = useState('');

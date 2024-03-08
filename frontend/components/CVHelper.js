@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
 const CVHelper = () => {
+  /**
+   * CVHelper component assists users by generating CV suggestions.
+   * It takes user input for job descriptions and CV content to provide tailored advice.
+   */
   const [jobDescriptionInput, setJobDescriptionInput] = useState('');
   const [userCVInput, setUserCVInput] = useState('');
 
