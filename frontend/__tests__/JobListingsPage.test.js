@@ -8,6 +8,9 @@ import '@testing-library/jest-dom';
 import JobListingsPage from '../pages/JobListingsPage';
 import Modal from '../components/Modal';
 jest.mock('axios');
+import axios from 'axios';
+import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 
 describe('JobListingsPage Component', () => {
   test('Modal opens when the "Add Job Listing" button is clicked', () => {
@@ -47,3 +50,40 @@ Tests that the modal on the Job Listings Page opens as expected when the 'Add Jo
 """
 Verifies that the form within the modal on the Job Listings Page correctly submits new job listings with the provided information when the 'Submit' button is clicked.
 """
+import { waitFor } from '@testing-library/react';
+
+test('Filtering job listings updates displayed listings', async () => {
+  axios.get.mockResolvedValue({
+    data: { listings: [{ id: 1, jobTitle: 'Filtered Job', company: 'Filtered Company', location: 'Remote' }], totalPages: 1 }
+  });
+
+  render(<JobListingsPage />);
+  userEvent.type(screen.getByPlaceholderText('Filter by status'), 'Active');
+  userEvent.type(screen.getByPlaceholderText('Filter by company'), 'Filtered Company');
+
+  await waitFor(() => {
+    expect(screen.getByText('Filtered Job')).toBeInTheDocument();
+  });
+});
+test('Pagination updates displayed job listings', async () => {
+  axios.get.mockResolvedValueOnce({
+    data: { listings: [{ id: 1, jobTitle: 'Job Page 1', company: 'Company 1', location: 'Remote' }], totalPages: 2 }
+  }).mockResolvedValueOnce({
+    data: { listings: [{ id: 2, jobTitle: 'Job Page 2', company: 'Company 2', location: 'Remote' }], totalPages: 2 }
+  });
+
+  render(<JobListingsPage />);
+  await act(async () => {
+    userEvent.click(screen.getByLabelText('Go to page 2'));
+  });
+
+  expect(screen.getByText('Job Page 2')).toBeInTheDocument();
+});
+test('Displays error message on API failure', async () => {
+  axios.get.mockRejectedValue(new Error('API call failed'));
+
+  render(<JobListingsPage />);
+  await waitFor(() => {
+    expect(screen.getByText('Error fetching job listings')).toBeInTheDocument();
+  });
+});
