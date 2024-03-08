@@ -2,6 +2,7 @@
  * JobListingsPage Component
  * This file defines the JobListingsPage component, which is responsible for rendering the job listings page in the MyJobsAI application. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
  */
+// Importing setupWebVitals to monitor and log web vitals for this page.
 import React, { useState, useEffect } from 'react';
 import { setupWebVitals } from '../utils/webVitals';
 import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
