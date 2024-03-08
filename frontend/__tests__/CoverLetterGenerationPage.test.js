@@ -15,12 +15,15 @@ const mockJobListings = [
 const mockCoverLetter = 'Your application for Software Engineer has been created.';
 
 beforeEach(() => {
+"""
+Contains tests for the CoverLetterGenerationPage component, focusing on rendering, user interactions, and the integration with backend services for generating and downloading cover letters.
+"""
   axios.get.mockResolvedValue({ data: mockJobListings });
   axios.post.mockResolvedValue({ data: { coverLetter: mockCoverLetter } });
 });
 
 """
-Tests if the Cover Letter Generation Page component renders correctly without throwing any errors. It specifically checks for the presence of the 'Create Cover Letter' button and a combobox for job selection.
+Ensures that the CoverLetterGenerationPage renders successfully without throwing any errors.
 """
 test('renders without crashing', async () => {
 /**
@@ -60,6 +63,9 @@ test('fetches job listings on component mount', async () => {
   });
 });
 });
+"""
+Tests that the CoverLetterGenerationPage component fetches job listings from the backend upon mounting. It verifies that the job listings are fetched and displayed correctly.
+"""
   const { getByRole, getByDisplayValue } = render(<CoverLetterGenerationPage />);
 """
 Tests for the CoverLetterGenerationPage component.
@@ -81,6 +87,9 @@ test('clicking create cover letter displays generated letter', async () => {
 
 // Tests error handling when fetching job listings fails.
 test('download as PDF button triggers download', async () => {
+"""
+Ensures that clicking the 'Create Cover Letter' button on the CoverLetterGenerationPage displays the generated cover letter to the user.
+"""
 test('form submission generates cover letter', async () => {
   const mock = new MockAdapter(axios);
   const postData = { description: 'Software Engineer', name: 'Jane Doe', skills: 'React, Node', experience: '5 years' };
@@ -97,12 +106,18 @@ test('form submission generates cover letter', async () => {
     expect(await findByText(responseData.coverLetter)).toBeInTheDocument();
   });
 });
+"""
+Tests the functionality of the CoverLetterGenerationPage form submission, ensuring that a cover letter is generated and displayed upon form submission with valid data.
+"""
   console.log = jest.fn(); // Mock console.log for this test
   const { getByText } = render(<CoverLetterGenerationPage />);
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
   fireEvent.click(getByText('Download as PDF'));
   expect(console.log).toHaveBeenCalledWith('Downloading as PDF...');
 });
+"""
+Verifies that clicking the 'Download as PDF' button triggers the download process for the generated cover letter in PDF format.
+"""
 
 test('download as DOC button triggers download', async () => {
 test('downloadAsPDF triggers download with correct attributes', async () => {
@@ -125,6 +140,9 @@ test('downloadAsPDF triggers download with correct attributes', async () => {
 });
   console.log = jest.fn(); // Mock console.log for this test
   const { getByText } = render(<CoverLetterGenerationPage />);
+"""
+Ensures that the 'Download as PDF' functionality creates a download link with the correct attributes, including the file name and type, and triggers the download.
+"""
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
   fireEvent.click(getByText('Download as DOC'));
   expect(console.log).toHaveBeenCalledWith('Downloading as DOC...');
@@ -154,6 +172,15 @@ test('modal opens with handleSaveCoverLetter', async () => {
 });
 
 test('modal closes with handleCloseSaveModal', async () => {
+"""
+Tests that clicking the 'Save Cover Letter' button opens a modal dialog asking the user if they want to save the generated cover letter.
+"""
+  const { getByText } = render(<CoverLetterGenerationPage />);
+  fireEvent.click(getByText('Save Cover Letter'));
+  expect(getByText('Do you want to save the generated cover letter?')).toBeInTheDocument();
+});
+
+test('modal closes with handleCloseSaveModal', async () => {
   const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
   fireEvent.click(getByText('Save Cover Letter')); // Open modal first
   fireEvent.click(getByText('Cancel')); // Then close it
@@ -174,6 +201,12 @@ test('downloadAsDOC triggers download with correct attributes', async () => {
     expect(document.createElement().download).toEqual('coverLetter.doc');
     expect(document.createElement().type).toEqual('application/msword');
   });
+"""
+Tests the error handling of the CoverLetterGenerationPage when generating a cover letter fails, ensuring that an appropriate error message is displayed to the user.
+"""
+    expect(document.createElement().download).toEqual('coverLetter.doc');
+    expect(document.createElement().type).toEqual('application/msword');
+  });
 });
   await waitFor(() => expect(queryByText('Do you want to save the generated cover letter?')).not.toBeInTheDocument());
 });
@@ -185,3 +218,6 @@ test('Save button inside modal triggers save functionality', async () => {
   fireEvent.click(getByText('Save')); // Click save button
   expect(console.log).toHaveBeenCalledWith('Cover letter saved.');
 });
+"""
+Ensures that clicking the 'Save' button inside the modal dialog triggers the save functionality, simulating the saving of the generated cover letter.
+"""
