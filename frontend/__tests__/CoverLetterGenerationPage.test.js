@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import CoverLetterGenerationPage from '../pages/CoverLetterGenerationPage';
-import Modal from '../components/Modal';
 
 jest.mock('axios');
 
@@ -48,6 +49,16 @@ Description: This file contains tests for the Cover Letter Generation Page. It i
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
   expect(getByText('Download as PDF')).toBeInTheDocument();
   expect(getByText('Download as DOC')).toBeInTheDocument();
+test('fetches job listings on component mount', async () => {
+  const mock = new MockAdapter(axios);
+  const jobListingsData = [{ id: '1', title: 'Software Engineer', contactPerson: 'John Doe' }];
+  mock.onGet('/api/joblistings').reply(200, jobListingsData);
+
+  await act(async () => {
+    const { findByText } = render(<CoverLetterGenerationPage />);
+    expect(await findByText('Software Engineer')).toBeInTheDocument();
+  });
+});
 });
   const { getByRole, getByDisplayValue } = render(<CoverLetterGenerationPage />);
 """
@@ -70,6 +81,22 @@ test('clicking create cover letter displays generated letter', async () => {
 
 // Tests error handling when fetching job listings fails.
 test('download as PDF button triggers download', async () => {
+test('form submission generates cover letter', async () => {
+  const mock = new MockAdapter(axios);
+  const postData = { description: 'Software Engineer', name: 'Jane Doe', skills: 'React, Node', experience: '5 years' };
+  const responseData = { coverLetter: 'Your application for Software Engineer has been created.' };
+  mock.onPost('/api/coverletter/generate', postData).reply(200, responseData);
+
+  await act(async () => {
+    const { getByPlaceholderText, getByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: postData.description } });
+    fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: postData.name } });
+    fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: postData.skills } });
+    fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: postData.experience } });
+    fireEvent.click(getByText('Generate Cover Letter'));
+    expect(await findByText(responseData.coverLetter)).toBeInTheDocument();
+  });
+});
   console.log = jest.fn(); // Mock console.log for this test
   const { getByText } = render(<CoverLetterGenerationPage />);
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
@@ -78,6 +105,24 @@ test('download as PDF button triggers download', async () => {
 });
 
 test('download as DOC button triggers download', async () => {
+test('downloadAsPDF triggers download with correct attributes', async () => {
+  document.createElement = jest.fn().mockReturnValue({
+    href: '',
+    download: '',
+    click: jest.fn(),
+    setAttribute: jest.fn((attr, value) => {
+      this[attr] = value;
+    })
+  });
+
+  await act(async () => {
+    const { getByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.click(getByText('Download as PDF'));
+    expect(document.createElement).toHaveBeenCalledWith('a');
+    expect(document.createElement().download).toEqual('coverLetter.pdf');
+    expect(document.createElement().type).toEqual('application/pdf');
+  });
+});
   console.log = jest.fn(); // Mock console.log for this test
   const { getByText } = render(<CoverLetterGenerationPage />);
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
@@ -112,6 +157,24 @@ test('modal closes with handleCloseSaveModal', async () => {
   const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
   fireEvent.click(getByText('Save Cover Letter')); // Open modal first
   fireEvent.click(getByText('Cancel')); // Then close it
+test('downloadAsDOC triggers download with correct attributes', async () => {
+  document.createElement = jest.fn().mockReturnValue({
+    href: '',
+    download: '',
+    click: jest.fn(),
+    setAttribute: jest.fn((attr, value) => {
+      this[attr] = value;
+    })
+  });
+
+  await act(async () => {
+    const { getByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.click(getByText('Download as DOC'));
+    expect(document.createElement).toHaveBeenCalledWith('a');
+    expect(document.createElement().download).toEqual('coverLetter.doc');
+    expect(document.createElement().type).toEqual('application/msword');
+  });
+});
   await waitFor(() => expect(queryByText('Do you want to save the generated cover letter?')).not.toBeInTheDocument());
 });
 
