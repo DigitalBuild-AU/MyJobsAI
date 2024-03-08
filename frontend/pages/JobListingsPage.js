@@ -151,18 +151,11 @@ const renderPagination = () => {
 
   /**
    * Updates the filters state with new values for a given filter.
-   * This function is responsible for updating the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
+   * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
    *
    * @param {string} filterName - The name of the filter to update.
    * @param {string} filterValue - The new value for the filter.
-   * @returns void - This function does not return a value but updates the component's state directly.
    */
- /**
- * Updates the filters state with new values for a given filter.
- * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
- * @param {string} filterName - The name of the filter to update.
- * @param {string} filterValue - The new value for the filter.
- */
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
@@ -187,7 +180,6 @@ const renderPagination = () => {
  * @param {string} name - The name of the input field to validate.
  * @param {string} value - The value of the input field to validate.
  */
-
 const handleErrorState = (name, value) => {
   const isValid = validateInput(value);
   setErrorState({ ...errorState, [name]: !isValid });
