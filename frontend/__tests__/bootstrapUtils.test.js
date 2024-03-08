@@ -47,6 +47,10 @@ describe('bootstrapUtils tests', () => {
     expect(scriptTags[0]).toHaveAttribute('async', '');
   });
 });
+  /**
+   * Test Case: Ensures that the loadBootstrapScript function correctly handles scenarios where multiple identical Bootstrap script tags are present.
+   * This test simulates the presence of duplicate script tags and verifies that the function consolidates them into a single script tag, ensuring proper script loading and behavior.
+   */
   it('ensures correct behavior when multiple Bootstrap script tags are present', () => {
     document.body.innerHTML = `
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
