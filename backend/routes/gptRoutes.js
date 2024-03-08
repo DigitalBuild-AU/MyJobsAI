@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const { handleCvSuggestions, handleCoverLetter, handleCvCustomization } = require('../utils/gptRequestHandlers');
+const { handleCvSuggestions, handleCvCustomization } = require('../utils/gptRequestHandlers');
 
 dotenv.config({ path: './backend/.env' });
 
@@ -29,8 +29,12 @@ router.post('/cover_letter', async (req, res) => {
   const { jobDescription, userCV } = req.body;
   try {
     const response = await openai.chat.completions.create({
-    console.log("Cover letter analysis and feedback generated successfully."); // gpt_pilot_debugging_log
-    res.json(analysisResults);
+      console.log("Cover letter analysis and feedback generated successfully."); // Debug log
+      res.json(analysisResults);
+    } catch (error) {
+      console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
+      res.status(500).json({ error: "Failed to generate cover letter analysis." });
+    }
 });
 
 module.exports = router;
