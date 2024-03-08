@@ -13,10 +13,6 @@ console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
 
 /**
- * Generates a cover letter based on user input.
- * This function is a placeholder for future implementation.
- */
-/**
  * Sends an email with the specified details.
  * Parameters:
  * - to (string): The recipient's email address.
@@ -24,7 +20,13 @@ console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
  * - body (string): The content of the email.
  * This function performs an HTTP POST request to the backend to send the email and does not return anything.
  */
+/**
+ * Generates a cover letter based on user input.
+ * This function is a placeholder for future implementation.
+ */
 function generateCoverLetter() {
+  // Placeholder for future implementation
+}
 function sendEmail() {
   const to = document.getElementById('emailTo').value;
   const subject = document.getElementById('emailSubject').value;
