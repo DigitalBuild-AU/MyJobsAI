@@ -39,6 +39,10 @@ test('renders without crashing', async () => {
  */
 test('selecting a job updates contact person', async () => {
 test('download buttons appear after generating cover letter', async () => {
+"""
+File: CoverLetterGenerationPage.test.js
+Description: This file contains tests for the Cover Letter Generation Page. It includes tests for rendering, user interactions, and integration with backend services for generating and handling cover letters.
+"""
   const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
   expect(queryByText('Download as PDF')).not.toBeInTheDocument();
   expect(queryByText('Download as DOC')).not.toBeInTheDocument();
