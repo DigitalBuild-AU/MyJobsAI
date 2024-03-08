@@ -17,6 +17,20 @@ describe('submitInterview', () => {
   Verifies that the submitInterview function can successfully schedule an interview and update the application state accordingly.
   """
   it('successfully schedules an interview', async () => {
+  it('handles invalid job title input', async () => {
+    const updateInterviewsState = jest.fn();
+    await expect(submitInterview('', mockDate, mockNotes, updateInterviewsState)).rejects.toThrow('Invalid job title');
+  });
+
+  it('handles invalid date input', async () => {
+    const updateInterviewsState = jest.fn();
+    await expect(submitInterview(mockJobTitle, '', mockNotes, updateInterviewsState)).rejects.toThrow('Invalid date');
+  });
+
+  it('handles invalid notes input', async () => {
+    const updateInterviewsState = jest.fn();
+    await expect(submitInterview(mockJobTitle, mockDate, '', updateInterviewsState)).rejects.toThrow('Invalid notes');
+  });
     axios.post.mockResolvedValue(mockResponse);
     const updateInterviewsState = jest.fn();
     await submitInterview(mockJobTitle, mockDate, mockNotes, updateInterviewsState);
