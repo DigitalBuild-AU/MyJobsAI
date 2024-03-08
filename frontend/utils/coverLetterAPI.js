@@ -1,3 +1,9 @@
+/**
+ * coverLetterAPI.js
+ * 
+ * This file contains functions for making API calls related to cover letter management and generation.
+ * It includes functionalities such as creating, updating, fetching, and deleting cover letters associated with user job applications.
+ */
 import axios from 'axios';
 
 export const generateCoverLetter = async (jobDescription, userName, userSkills, userExperience) => {
