@@ -41,26 +41,6 @@ function InterviewForm({ setInterviews, interviews }) {
   };
 
   const handleSubmit = (e) => {
-  /**
-   * Submits interview data to the backend.
-   * 
-   * @param {string} jobTitle - The job title for the interview.
-   * @param {string} date - The date and time for the interview.
-   * @param {string} notes - Notes related to the interview.
-   * @returns {Promise} - The promise returned from the axios post call.
-   */
-  const submitInterviewData = (jobTitle, date, notes) => {
-    return axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes });
-  };
-
-  /**
-   * Resets the form fields to their default empty values.
-   */
-  const resetFormFields = () => {
-    setJobTitle('');
-    setDate('');
-    setNotes('');
-  };
     e.preventDefault();
     submitInterviewData(jobTitle, date, notes)
     .then(response => {
@@ -104,7 +84,3 @@ function InterviewForm({ setInterviews, interviews }) {
 }
 
 export default InterviewForm;
-  const [showGuide, setShowGuide] = useState(false);
-
-      <button onClick={() => setShowGuide(true)} style={{ margin: '10px 0', padding: '5px 10px' }}>Show Guide</button>
-      {showGuide && <InteractiveGuide steps={getInterviewFormGuideSteps()} />}
