@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const { handleCvSuggestions, handleCoverLetter, handleCvCustomization } = require('../utils/gptRequestHandlers');
+const { handleCvSuggestions, handleCvCustomization } = require('../utils/gptRequestHandlers');
 
 dotenv.config({ path: './backend/.env' });
 
@@ -38,15 +38,13 @@ router.post('/cover_letter', async (req, res) => {
   try {
     const response = await openai.chat.completions.create({
 
-/**
- * @fileoverview This file defines the routes for interacting with OpenAI's GPT models to generate CV suggestions, cover letters, and CV customization. It utilizes express.js for routing and includes handlers for each specific GPT-based functionality.
- */
+      console.log("Cover letter analysis and feedback generated successfully."); // Debug log
+      res.json(analysisResults);
+    } catch (error) {
+      console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
+      res.status(500).json({ error: "Failed to generate cover letter analysis." });
+    }
 
-const { logSuccess, logError } = require('../utils/logger');
-const { handleError } = require('../utils/errorHandler');
-
-    console.log("Cover letter analysis and feedback generated successfully."); // gpt_pilot_debugging_log
-    res.json(analysisResults);
 });
 
 module.exports = router;
