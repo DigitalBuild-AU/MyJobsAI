@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 /**
- * This React component offers a form interface for users to schedule interviews, including fields for job title, date, and additional notes.
+ * Interviews Component
+ * Renders a form for scheduling interviews. Users can input a job title, select an interview date, and add additional notes.
+ * Utilizes useState for managing form inputs and handles form submission to log input values or potentially save them in the future.
  */
 
 const Interviews = () => {

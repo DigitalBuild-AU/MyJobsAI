@@ -1,14 +1,23 @@
+/**
+ * Test suite for the Interviews component, focusing on the addition, update, and removal of interview entries.
+ */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Interviews from '../pages/Interviews';
 
 describe('Interviews Component', () => {
+  /**
+   * Tests that the Interviews component renders correctly and verifies its initial state.
+   */
   test('renders and verifies initial state', () => {
     render(<Interviews />);
     expect(screen.getByText('No interviews scheduled')).toBeInTheDocument();
   });
 
+  test('adds a new interview and updates state', () => {
+   * Tests that adding a new interview correctly updates the component's state.
+   */
   test('adds a new interview and updates state', () => {
     render(<Interviews />);
     fireEvent.change(screen.getByPlaceholderText('Interview Date'), { target: { value: '2023-04-15' } });
@@ -18,7 +27,9 @@ describe('Interviews Component', () => {
   });
 
   test('updates an existing interview and reflects changes', () => {
-// Tests that adding a new interview correctly updates the component's state.
+   * Tests that updating an existing interview correctly reflects the changes in the component.
+   */
+  test('updates an existing interview and reflects changes', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Edit', { selector: 'button' }));
     fireEvent.change(screen.getByPlaceholderText('Interview Date'), { target: { value: '2023-05-20' } });
@@ -27,17 +38,24 @@ describe('Interviews Component', () => {
   });
 
   test('removes an interview entry and updates state', () => {
+  test('removes an interview entry and updates state', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Delete', { selector: 'button' }));
     expect(screen.queryByText('Interview with Tech Innovations Inc. on 2023-04-15')).not.toBeInTheDocument();
   });
 
+  /**
+   * Tests that attempting to add an interview with missing details displays the appropriate error message.
+   */
   test('attempts to add an interview with missing details', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Add Interview'));
     expect(screen.getByText('Please fill out all required fields')).toBeInTheDocument();
   });
 
+  /**
+   * Tests that attempting to update a non-existent interview displays the appropriate error message.
+   */
   test('attempts to update a non-existent interview', () => {
 """
 File: Interviews.test.js

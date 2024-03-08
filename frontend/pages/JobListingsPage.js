@@ -3,29 +3,11 @@
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import JobListingCard from '../components/JobListingCard';
-import JobListingTable from '../components/JobListingTable';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
-import InteractiveGuide from '../components/InteractiveGuide';
-import { getJobListingsPageGuideSteps } from '../utils/guideSteps';
-import Sidebar from '../components/Sidebar';
-import Breadcrumbs from '../components/Breadcrumbs';
-
-/**
- * Renders the JobListingsPage component.
- * This component displays a list of job listings and provides filtering and pagination functionality.
- *
- * @returns {JSX.Element} The JobListingsPage component
- */
-const JobListingsPage = () => {
+import { useForm } from 'react-hook-form';
   const [listings, setListings] = useState([]);
-  const [view, setView] = useState('table');
-  const [modalVisible, setModalVisible] = useState(false);
-  const [filters, setFilters] = useState({status: '', company: ''});
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [errorState, setErrorState] = useState({ status: false, company: false });
-import { logError } from '../utils/logger';
+  const [filters, setFilters] = useState({ location: '', jobType: '', keywords: '' });
+  const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
  * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
