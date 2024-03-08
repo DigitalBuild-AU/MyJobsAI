@@ -96,7 +96,12 @@ const CVHelperPage = () => {
 };
 
 export default CVHelperPage;
-    // Handles the removal of existing bootstrap script tag and appends a new one
+    /**
+     * Removes any existing Bootstrap script tags and appends a new one to the document body.
+     * This ensures the page uses the latest version of Bootstrap's JavaScript bundle.
+     * No parameters.
+     * No return value.
+     */
     const handleBootstrapScript = () => {
         const scriptTags = document.getElementsByTagName('script');
         for (let i = 0; i < scriptTags.length; i++) {
