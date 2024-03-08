@@ -73,18 +73,10 @@ const CoverLetterGenerationPage = () => {
       });
   };
 
-  const downloadAsPDF = () => {
 /**
- * Generates a personalized cover letter based on the selected job and user profile.
-        <div className="cover-letter-preview">
-          <h3>Generated Cover Letter Preview</h3>
-          <p>{generatedCoverLetter}</p>
-        </div>
- * @async
- * @function createCoverLetter
- * @throws {Error} When unable to generate the cover letter.
- * @return {Promise<void>} A promise that resolves when the cover letter is generated and set in state.
+ * Downloads the generated cover letter as a PDF file.
  */
+  const downloadAsPDF = () => {
     const element = document.createElement("a");
     const file = new Blob([generatedCoverLetter], {type: 'application/pdf'});
     element.href = URL.createObjectURL(file);
