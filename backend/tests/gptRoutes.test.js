@@ -50,7 +50,11 @@ describe('/cv_customization route', () => {
     expect(response.statusCode).toBe(500);
     expect(response.body).toHaveProperty('error', 'Failed to generate CV customization suggestions.');
     expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
-  // Tests successful handling of a CV customization request.
+    /**
+     * Tests successful handling of a CV customization request.
+     * 
+     * Sends a POST request with a job description and user CV to the '/cv_customization' route and expects a 200 status code with the customization suggestions in the response body.
+     */
   });
 });
   // Tests error handling for a CV customization request.
@@ -113,9 +117,10 @@ describe('/cover_letter route', () => {
 
   test('handles errors during cover letter request', async () => {
     /**
+     /**
      * Tests successful handling of a cover letter request.
      * 
-     * Ensures that the server responds with 200 status code and the expected analysis results in the response body when a valid cover letter request is made.
+     * Sends a POST request with a job description and user CV to the '/cover_letter' route and expects a 200 status code with the personalized cover letter in the response body.
      */
     jest.mocked(openai.chat.completions.create).mockRejectedValue(new Error('Failed to generate cover letter.'));
 
