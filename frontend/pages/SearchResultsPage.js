@@ -25,25 +25,42 @@ const SearchResultsPage = () => {
     }, [query]);
 
     return (
+const renderJobs = (results) => {
+    return results.jobs.length > 0 ? (
+        results.jobs.map((job) => <JobListingCard key={job.id} listing={job} />)
+    ) : (
+        <p>No job listings found.</p>
+    );
+};
+
+const renderContacts = (results) => {
+    return results.contacts.length > 0 ? (
+        results.contacts.map((contact) => (
+            <div key={contact.id}>{contact.name}</div>
+        ))
+    ) : (
+        <p>No contacts found.</p>
+    );
+};
+
+const renderTasks = (results) => {
+    return results.tasks.length > 0 ? (
+        results.tasks.map((task) => (
+            <div key={task.id}>{task.title}</div>
+        ))
+    ) : (
+        <p>No tasks found.</p>
+    );
+};
         <div>
             <h2>Search Results for "{query}"</h2>
             <div>
                 <h3>Jobs</h3>
-                {results.jobs.length > 0 ? (
-                    results.jobs.map((job) => <JobListingCard key={job.id} listing={job} />)
-                ) : (
-                    <p>No job listings found.</p>
-                )}
+                {renderJobs(results)}
             </div>
             <div>
                 <h3>Contacts</h3>
-                {results.contacts.length > 0 ? (
-                    results.contacts.map((contact) => (
-                        <div key={contact.id}>{contact.name}</div>
-                    ))
-                ) : (
-                    <p>No contacts found.</p>
-                )}
+                {renderContacts(results)}
             </div>
 /**
  * Renders the search results page.
@@ -55,13 +72,7 @@ const SearchResultsPage = () => {
  */
             <div>
                 <h3>Tasks</h3>
-                {results.tasks.length > 0 ? (
-                    results.tasks.map((task) => (
-                        <div key={task.id}>{task.title}</div>
-                    ))
-                ) : (
-                    <p>No tasks found.</p>
-                )}
+                {renderTasks(results)}
             </div>
         </div>
     );
