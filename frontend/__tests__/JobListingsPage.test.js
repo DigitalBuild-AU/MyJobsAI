@@ -47,3 +47,54 @@ Tests that the modal on the Job Listings Page opens as expected when the 'Add Jo
 """
 Verifies that the form within the modal on the Job Listings Page correctly submits new job listings with the provided information when the 'Submit' button is clicked.
 """
+// Testing new components rendering
+describe('New Components Rendering', () => {
+  test('JobListingTable renders correctly with listings', () => {
+    const listings = [{ id: 1, title: 'Software Engineer', company: 'Tech Inc.', location: 'Remote' }];
+    render(<JobListingTable listings={listings} />);
+    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Tech Inc.')).toBeInTheDocument();
+    expect(screen.getByText('Remote')).toBeInTheDocument();
+  });
+
+  test('JobListingCard renders correctly with listing data', () => {
+    const listing = { id: 1, title: 'Software Engineer', company: 'Tech Inc.', location: 'Remote' };
+    render(<JobListingCard listing={listing} />);
+    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Tech Inc.')).toBeInTheDocument();
+    expect(screen.getByText('Remote')).toBeInTheDocument();
+  });
+});
+
+// Testing utility functions
+describe('Utility Functions', () => {
+  describe('handleViewChangeBasedOnWindowSize', () => {
+    test('sets view to "card" for window width less than 768px', () => {
+      global.innerWidth = 767;
+      const { result } = renderHook(() => useViewChange());
+      act(() => {
+        global.dispatchEvent(new Event('resize'));
+      });
+      expect(result.current.view).toBe('card');
+    });
+
+    test('sets view to "table" for window width greater than or equal to 768px', () => {
+      global.innerWidth = 768;
+      const { result } = renderHook(() => useViewChange());
+      act(() => {
+        global.dispatchEvent(new Event('resize'));
+      });
+      expect(result.current.view).toBe('table');
+    });
+  });
+
+  describe('updateFilters', () => {
+    test('updates filter state correctly', () => {
+      const { result } = renderHook(() => useFilters());
+      act(() => {
+        result.current.updateFilters('status', 'Open');
+      });
+      expect(result.current.filters.status).toBe('Open');
+    });
+  });
+});
