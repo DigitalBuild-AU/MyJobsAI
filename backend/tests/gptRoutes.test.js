@@ -36,6 +36,11 @@ describe('/cv_customization route', () => {
     expect(response.body).toHaveProperty('analysisResults', 'Your CV customization suggestions.');
     expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
   });
+/**
+ * Test Suite for '/cv_customization' Route
+ * 
+ * This suite tests the handling of CV customization requests by the '/cv_customization' route. It verifies that the application can successfully process requests and return appropriate suggestions, as well as handle errors gracefully.
+ */
 
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
