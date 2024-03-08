@@ -1,3 +1,6 @@
+/**
+ * JobListingsComponent is a React functional component that displays job listings and allows users to filter and apply to jobs within the MyJobsAI application.
+ */
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 
@@ -33,6 +36,11 @@ const JobListingsComponent = () => {
   }, []);
 
   const handleChange = (event) => {
+/**
+ * useEffect hook to dynamically load the Bootstrap script for styling purposes.
+ *
+ * @returns {void}
+ */
     const { name, value, type, checked } = event.target;
     if (type === 'checkbox') {
       this.setState({ [name]: checked });
@@ -79,6 +87,18 @@ const JobListingsComponent = () => {
             </thead>
             <tbody>
               {jobListings.map((listing, index) => (
+/**
+ * Handles changes in form inputs by updating component state.
+ *
+ * @param {Object} event - The event object from the input change.
+ * @returns {void}
+ */
+/**
+ * Submits the new job listing form, adding the listing to the state and resetting form fields.
+ *
+ * @param {Object} event - The event object from the form submission.
+ * @returns {void}
+ */
                 <tr key={index}>
                   <td>{listing.jobTitle}</td>
                   <td>{listing.company}</td>
