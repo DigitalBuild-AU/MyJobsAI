@@ -174,6 +174,29 @@ test('downloadAsDOC triggers download with correct attributes', async () => {
     expect(document.createElement().download).toEqual('coverLetter.doc');
     expect(document.createElement().type).toEqual('application/msword');
   });
+test('successfully creates a cover letter', async () => {
+  const mockPostData = { description: 'Software Engineer', name: 'John Doe', skills: 'JavaScript, React', experience: '3 years' };
+  axios.post.mockResolvedValue({ data: { coverLetter: mockCoverLetter } });
+
+  await act(async () => {
+    const { getByPlaceholderText, getByText, findByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: mockPostData.description } });
+    fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: mockPostData.name } });
+    fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: mockPostData.skills } });
+    fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: mockPostData.experience } });
+    fireEvent.click(getByText('Generate Cover Letter'));
+    expect(await findByText(mockCoverLetter)).toBeInTheDocument();
+  });
+});
+
+test('handles error when creating a cover letter fails', async () => {
+  axios.post.mockRejectedValue(new Error('Error generating cover letter'));
+  const { getByText, getByRole, findByText } = render(<CoverLetterGenerationPage />);
+  await act(async () => {
+    fireEvent.click(getByRole('button', { name: 'Generate Cover Letter' }));
+    expect(await findByText('Error generating Cover Letter.')).toBeInTheDocument();
+  });
+});
 });
   await waitFor(() => expect(queryByText('Do you want to save the generated cover letter?')).not.toBeInTheDocument());
 });
