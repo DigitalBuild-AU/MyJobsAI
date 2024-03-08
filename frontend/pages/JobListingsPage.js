@@ -77,10 +77,11 @@ const JobListingsPage = () => {
     try {
       const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
-/**
- * Handles the change in window size and updates the view state.
- * Extracted from useEffect to improve readability and maintainability.
- */
+  /**
+   * Updates the view state based on the current window size.
+   * Sets the view to 'card' if window width is less than 768px, otherwise sets to 'table'.
+   * @returns {void}
+   */
 const handleViewChangeBasedOnWindowSize = () => {
   if (window.innerWidth < 768) {
     setView('card');
