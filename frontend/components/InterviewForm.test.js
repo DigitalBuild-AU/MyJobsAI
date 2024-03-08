@@ -20,7 +20,8 @@ describe('InterviewForm Component Tests', () => {
   });
 
 /**
- * Tests that the InterviewForm component correctly updates inputs and submits form data using axios with the expected payload.
+ * Tests that the InterviewForm component correctly updates inputs and submits form data,
+ * and verifies that axios is called with the correct data upon form submission.
  */
   test('inputs are correctly updated and form submission calls axios with correct data', async () => {
     axios.post.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
@@ -67,10 +68,8 @@ describe('InterviewForm Component Tests', () => {
     expect(setInterviews).not.toHaveBeenCalled();
   });
 /**
- * Tests that the inputs are correctly updated and form submission calls axios with the correct data.
- */
-/**
- * Tests the targeting and description of interactive guide steps within the InterviewForm component.
+ * Tests the functionality and rendering of interactive guide steps within the InterviewForm component.
+ * Verifies that all guide steps are correctly targeted and described when the guide is active.
  */
   test('interactive guide steps are correctly targeted and described', () => {
 /**
@@ -86,12 +85,8 @@ describe('InterviewForm Component Tests', () => {
   });
 });
 /**
- * Tests handleSubmit function for correct handling of submission and response.
- *
- * This test simulates a successful form submission by mocking a resolved promise from submitInterviewData. It verifies that the setInterviews function is called with the correct data.
- */
-/**
- * Tests the handleSubmit function of the InterviewForm component for correct handling of form submissions and responses.
+ * Tests the handleSubmit function for correct handling of form submissions and responses in the InterviewForm component.
+ * Verifies that submitInterviewData is called with correct parameters and setInterviews updates state appropriately.
  */
   test('handleSubmit function correctly handles submission and response', async () => {
     submitInterviewData.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
