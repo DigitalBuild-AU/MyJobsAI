@@ -1,6 +1,5 @@
 """
-File: JobListingsPage.test.js
-Description: This file contains tests for the Job Listings Page. It includes tests for modal interactions for adding new job listings and ensuring the form inside the modal submits correctly.
+Contains tests for the JobListingsPage component, including modal interactions for adding new job listings and ensuring the form inside the modal submits correctly.
 """
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
@@ -13,6 +12,9 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
 describe('JobListingsPage Component', () => {
+"""
+Tests that the modal for adding new job listings opens correctly when the 'Add Job Listing' button is clicked.
+"""
   test('Modal opens when the "Add Job Listing" button is clicked', () => {
     render(<JobListingsPage />);
     fireEvent.click(screen.getByText('Add Job Listing'));
@@ -37,6 +39,12 @@ Confirms that the modal for adding new job listings on the Job Listings Page ope
     fireEvent.change(screen.getByPlaceholderText('Company'), { target: { value: 'Tech Inc.' } });
     fireEvent.change(screen.getByPlaceholderText('Location'), { target: { value: 'Remote' } });
     fireEvent.click(screen.getByText('Submit'));
+"""
+Tests that the modal closes when the "Cancel" button inside the modal is clicked.
+"""
+"""
+Tests the form inside the modal for submitting new job listings, ensuring that the provided information is submitted correctly.
+"""
     expect(mockSubmit).toHaveBeenCalledWith({
       jobTitle: 'Software Engineer',
       company: 'Tech Inc.',
@@ -62,6 +70,9 @@ describe('New Components Rendering', () => {
   });
 
   test('JobListingCard renders correctly with listing data', () => {
+"""
+Tests that the JobListingTable component renders correctly with given listings data.
+"""
     const listing = { id: 1, title: 'Software Engineer', company: 'Tech Inc.', location: 'Remote' };
     render(<JobListingCard listing={listing} />);
     expect(screen.getByText('Software Engineer')).toBeInTheDocument();
@@ -69,6 +80,9 @@ describe('New Components Rendering', () => {
     expect(screen.getByText('Remote')).toBeInTheDocument();
   });
 });
+"""
+Tests that the JobListingCard component renders correctly with specific listing data.
+"""
 
 // Testing utility functions
 describe('Utility Functions', () => {
@@ -93,6 +107,12 @@ describe('Utility Functions', () => {
   });
 
   describe('updateFilters', () => {
+"""
+Tests the handleViewChangeBasedOnWindowSize function, ensuring it sets the view mode to "card" for window widths less than 768px.
+"""
+"""
+Tests the handleViewChangeBasedOnWindowSize function, ensuring it sets the view mode to "table" for window widths greater than or equal to 768px.
+"""
     test('updates filter state correctly', () => {
       const { result } = renderHook(() => useFilters());
       act(() => {
@@ -104,6 +124,9 @@ describe('Utility Functions', () => {
 import { waitFor } from '@testing-library/react';
 
 test('Filtering job listings updates displayed listings', async () => {
+"""
+Tests the updateFilters function, verifying it updates the filter state correctly.
+"""
   axios.get.mockResolvedValue({
     data: { listings: [{ id: 1, jobTitle: 'Filtered Job', company: 'Filtered Company', location: 'Remote' }], totalPages: 1 }
   });
@@ -117,6 +140,9 @@ test('Filtering job listings updates displayed listings', async () => {
   });
 });
 test('Pagination updates displayed job listings', async () => {
+"""
+Tests the functionality of filtering job listings, ensuring that the displayed listings update based on the applied filters.
+"""
   axios.get.mockResolvedValueOnce({
     data: { listings: [{ id: 1, jobTitle: 'Job Page 1', company: 'Company 1', location: 'Remote' }], totalPages: 2 }
   }).mockResolvedValueOnce({
@@ -139,3 +165,9 @@ test('Displays error message on API failure', async () => {
 
   });
 });
+"""
+Tests the pagination functionality, ensuring that clicking on pagination controls updates the displayed job listings accordingly.
+"""
+"""
+Tests the error handling when fetching job listings fails, ensuring that an appropriate error message is displayed.
+"""
