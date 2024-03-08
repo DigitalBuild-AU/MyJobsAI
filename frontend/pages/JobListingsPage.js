@@ -1,6 +1,6 @@
 /**
  * JobListingsPage Component
- * This file defines the JobListingsPage component, which is responsible for rendering the job listings page in the MyJobsAI application. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
+ * This component is responsible for rendering the job listings page. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
  */
 // Importing setupWebVitals to monitor and log web vitals for this page.
 import React, { useState, useEffect } from 'react';
@@ -28,6 +28,7 @@ const JobListingsPage = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [errorState, setErrorState] = useState({ status: false, company: false });
+import { logError } from '../utils/logger';
 
   useEffect(() => {
 
@@ -36,6 +37,7 @@ const JobListingsPage = () => {
    * This function is triggered on window resize events.
    * @returns {void}
    */
+
  * File: JobListingsPage.js
  * Project: MyJobsAI
  * Purpose: This file defines the JobListingsPage component for the MyJobsAI application. It is responsible for rendering the job listings page, which includes features such as displaying job listings in various views (table or card), filtering listings based on user criteria, and pagination. The component leverages React hooks for state management and axios for data fetching from the server.
@@ -72,16 +74,19 @@ const JobListingsPage = () => {
    * Utilizes axios to make a GET request to the server with query parameters.
    * @returns {Promise<void>} A promise that resolves when the state is updated with fetched data.
    */
+
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
       const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
+
   /**
    * Updates the view state based on the current window size.
    * Sets the view to 'card' if window width is less than 768px, otherwise sets to 'table'.
    * @returns {void}
    */
+
 const handleViewChangeBasedOnWindowSize = () => {
   if (window.innerWidth < 768) {
     setView('card');
@@ -95,13 +100,14 @@ const handleViewChangeBasedOnWindowSize = () => {
    * Specifically, removes the 'resize' event listener from the window.
    * @returns {void}
    */
+
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
   setFilters({status: '', company: ''}); // Reset filters on component unmount
 };
       setTotalPages(response.data.totalPages);
     } catch (err) {
-      console.error('Error fetching job listings', err);
+      logError('Error fetching job listings', err);
     }
   };
   
@@ -154,11 +160,11 @@ const renderPagination = () => {
    * @param {string} filterValue - The new value for the filter.
    * @returns void - This function does not return a value but updates the component's state directly.
    */
-  /**
+ /**
  * Updates the filters state with new values for a given filter.
+ * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
  * @param {string} filterName - The name of the filter to update.
  * @param {string} filterValue - The new value for the filter.
- * @returns void - This function does not return a value but updates the component's state directly.
  */
   /**
    * Updates the filters state with new values for a given filter.
@@ -173,8 +179,9 @@ const renderPagination = () => {
   /**
    * Creates a button element for navigating to a specific page in the pagination component.
    * @param {number} pageNumber - The page number for the button.
-   * @returns {JSX.Element} A button element for pagination.
+   * @returns {JSX.Element} A button element for pagination
    */
+  
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
   );
@@ -182,6 +189,7 @@ const renderPagination = () => {
   return (
 
     <div className="job-listings-page">
+
   /**
    * Updates the error state for a given input field based on validation result.
    * Utilizes validateInput function to check the validity of the input value.
@@ -189,6 +197,7 @@ const renderPagination = () => {
    * @param {string} value - The value of the input field to validate.
    * @returns {void}
    */
+
 
 const handleErrorState = (name, value) => {
   const isValid = validateInput(value);

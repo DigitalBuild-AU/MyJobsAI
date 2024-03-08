@@ -49,3 +49,64 @@ describe('/cv_customization route', () => {
   });
 });
   // Tests error handling for a CV customization request.
+describe('/cv_suggestions route', () => {
+  test('successfully handles a CV suggestions request', async () => {
+    const mockResponse = { suggestions: 'Your CV suggestions.' };
+    jest.mocked(openai.chat.completions.create).mockResolvedValue(mockResponse);
+
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: 'Software Engineer role requiring problem-solving skills.',
+        userCV: 'Problem solver with a keen interest in software development.'
+      });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('suggestions', 'Your CV suggestions.');
+  });
+
+  test('handles errors during CV suggestions request', async () => {
+    jest.mocked(openai.chat.completions.create).mockRejectedValue(new Error('Failed to generate CV suggestions.'));
+
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: 'Software Engineer role requiring problem-solving skills.',
+        userCV: 'Problem solver with a keen interest in software development.'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate CV suggestions.');
+  });
+});
+
+describe('/cover_letter route', () => {
+  test('successfully handles a cover letter request', async () => {
+    const mockResponse = { analysisResults: 'Your personalized cover letter.' };
+    jest.mocked(openai.chat.completions.create).mockResolvedValue(mockResponse);
+
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: 'Software Engineer role with a focus on cloud computing.',
+        userCV: 'Cloud computing enthusiast with extensive experience in AWS and Azure.'
+      });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('analysisResults', 'Your personalized cover letter.');
+  });
+
+  test('handles errors during cover letter request', async () => {
+    jest.mocked(openai.chat.completions.create).mockRejectedValue(new Error('Failed to generate cover letter.'));
+
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: 'Software Engineer role with a focus on cloud computing.',
+        userCV: 'Cloud computing enthusiast with extensive experience in AWS and Azure.'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate cover letter.');
+  });
+});
