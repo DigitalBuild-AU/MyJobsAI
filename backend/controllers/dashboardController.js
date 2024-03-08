@@ -8,7 +8,8 @@ exports.getDashboardSummary = async (req, res) => {
     const offersReceived = await UserActivity.countDocuments({ activityType: 'Offer' });
     res.json({ applicationsSent: totalApplications, interviewsScheduled, offersReceived });
   } catch (error) {
-    console.error(`Dashboard summary error: ${error}`, error.stack);
+    const debugLog = require('../utils/debugLogger');
+    debugLog(`Dashboard summary error: ${error}`, error, true);
     res.status(500).send({ message: 'Error fetching dashboard summary' });
   }
 };
