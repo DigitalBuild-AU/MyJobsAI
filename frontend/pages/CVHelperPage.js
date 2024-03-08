@@ -7,11 +7,11 @@ const CVHelperPage = () => {
   const [cvSuggestions, setCvSuggestions] = useState('');
 
   /**
-   * Handles the form submission. Prevents the default form submission behavior, sends the job description and user CV to the server via a POST request,
-   * and updates the state with the CV suggestions received from the server or an error message if the request fails.
-   * 
-   * @param {Object} e - The event object.
-   */
+  * Handles the submission of job description and user CV to fetch CV suggestions.
+  * @param {Object} e - The event object.
+  * No return value.
+  */
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('/api/cv/suggestions', { jobDescription, userCV })
@@ -59,6 +59,21 @@ const CVHelperPage = () => {
     useEffect(() => {
         fetchNavbarContent();
         handleBootstrapScript();
+            if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
+                scriptTags[i].remove();
+                break;
+            }
+        }
+/**
+ * This file defines the CVHelperPage component, which provides functionality for users to get suggestions on improving their CVs
+ * based on job descriptions. Users can input a job description and their CV, and receive tailored suggestions.
+ */
+/**
+ * CVHelperPage function that renders the CV Helper page.
+ * This page allows users to input job descriptions and their CVs to fetch suggestions for CV improvement.
+ * No parameters.
+ * Returns a JSX element representing the CV Helper page.
+ */
             if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
                 scriptTags[i].remove();
                 break;
