@@ -160,6 +160,12 @@ const renderPagination = () => {
  * @param {string} filterValue - The new value for the filter.
  * @returns void - This function does not return a value but updates the component's state directly.
  */
+  /**
+   * Updates the filters state with new values for a given filter.
+   * @param {string} filterName - The name of the filter to update.
+   * @param {string} filterValue - The new value for the filter.
+   * @returns {void}
+   */
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
