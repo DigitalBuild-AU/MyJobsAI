@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
+import ApplicationsComponent from '../components/ApplicationsComponent';
 
 const ApplicationsPage = () => {
   useEffect(() => {
