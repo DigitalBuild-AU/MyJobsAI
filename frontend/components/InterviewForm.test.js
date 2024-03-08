@@ -30,8 +30,12 @@ describe('InterviewForm Component Tests', () => {
 
     fireEvent.click(screen.getByText('Schedule Interview'));
 /**
- * This file contains tests for the InterviewForm component.
- * It includes tests for rendering, user interaction, and form submission.
+/**
+ * This file contains tests for the InterviewForm component, including rendering, user interaction, form submission, and interactive guide steps.
+ */
+ * Tests that inputs are correctly updated and form submission calls axios with correct data.
+ *
+ * This test simulates user interaction with the InterviewForm component's inputs and the submission button. It verifies that axios is called with the correct data upon form submission.
  */
     await screen.findByText('Interview scheduled successfully.');
 
@@ -54,13 +58,16 @@ describe('InterviewForm Component Tests', () => {
 
     expect(axios.post).toHaveBeenCalled();
     expect(setInterviews).not.toHaveBeenCalled();
+    expect(setInterviews).not.toHaveBeenCalled();
   });
 /**
  * Tests that the inputs are correctly updated and form submission calls axios with the correct data.
  */
   test('interactive guide steps are correctly targeted and described', () => {
 /**
- * Tests the display of an error message upon form submission failure.
+ * Tests that interactive guide steps are correctly targeted and described.
+ *
+ * This test verifies that all guide steps are correctly rendered and targeted within the InterviewForm component when the guide is active.
  */
     render(<InterviewForm setInterviews={setInterviews} interviews={mockInterviews} showGuide={true} />);
 
@@ -70,7 +77,9 @@ describe('InterviewForm Component Tests', () => {
   });
 });
 /**
- * Tests that the interactive guide steps are correctly targeted and described.
+ * Tests handleSubmit function for correct handling of submission and response.
+ *
+ * This test simulates a successful form submission by mocking a resolved promise from submitInterviewData. It verifies that the setInterviews function is called with the correct data.
  */
   test('handleSubmit function correctly handles submission and response', async () => {
     submitInterviewData.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
@@ -101,3 +110,8 @@ describe('InterviewForm Component Tests', () => {
     expect(submitInterviewData).toHaveBeenCalled();
     expect(setInterviews).not.toHaveBeenCalled();
   });
+/**
+ * Tests handleSubmit function for correct handling of submission failure.
+ *
+ * This test simulates a failed form submission by mocking a rejected promise from submitInterviewData. It verifies that the setInterviews function is not called.
+ */
