@@ -19,3 +19,5 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 };
 
 export default Sidebar;
+// This component renders a sidebar navigation menu for the MyJobsAI application, which can be toggled open and closed.
+export default Sidebar;
