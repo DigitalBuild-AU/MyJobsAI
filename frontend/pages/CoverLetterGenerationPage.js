@@ -1,3 +1,6 @@
+/**
+ * This file contains the CoverLetterGenerationPage component, which facilitates the generation of personalized cover letters based on user input and selected job descriptions.
+ */
 import React, { useState, useEffect } from 'react';
 import { generateCoverLetter, handleCoverLetterResponse, handleCoverLetterError } from '../utils/coverLetterAPI';
 import './CoverLetterGenerationPage.css';
@@ -9,6 +12,10 @@ const CoverLetterGenerationPage = () => {
   const [userExperience, setUserExperience] = useState('');
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState('');
 
+  /**
+   * useEffect hook to fetch job listings on component mount.
+   * Fetches job listings from the server and updates the jobListings state.
+   */
   useEffect(() => {
     const fetchJobListings = async () => {
       try {
@@ -47,6 +54,10 @@ const CoverLetterGenerationPage = () => {
 /**
  * Generates a personalized cover letter based on the selected job and user profile.
  */
+  /**
+   * Generates a personalized cover letter based on the selected job and user profile.
+   * Sends user input to the server to generate a cover letter.
+   */
   const createCoverLetter = () => {
     generateCoverLetter(jobDescription, userName, userSkills, userExperience)
       .then(response => handleCoverLetterResponse(response))
@@ -57,6 +68,9 @@ const CoverLetterGenerationPage = () => {
 /**
  * Downloads the generated cover letter as a PDF file.
  */
+  const downloadAsPDF = () => {
+   * Creates a PDF file of the generated cover letter for download.
+   */
   const downloadAsPDF = () => {
     const element = document.createElement("a");
     const file = new Blob([generatedCoverLetter], {type: 'application/pdf'});
@@ -79,7 +93,16 @@ import Modal from '../components/Modal';
 
 const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
+/**
+ * Opens the modal to save the generated cover letter.
+ */
 const handleSaveCoverLetter = () => {
+};
+
+/**
+ * Closes the save cover letter modal.
+ */
+const handleCloseSaveModal = () => {
   setIsSaveModalOpen(true);
 };
 
@@ -100,8 +123,10 @@ const renderSaveModal = () => (
     </div>
   </Modal>
 );
+    /**
+     * Creates a DOC file of the generated cover letter for download.
+     */
     // Placeholder function for downloading the cover letter as DOC
-    console.log('Downloading as DOC...');
 
     const element = document.createElement("a");
     const file = new Blob([generatedCoverLetter], {type: 'application/msword'});
