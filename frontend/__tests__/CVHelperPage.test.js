@@ -40,6 +40,9 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
    * Tests the CVHelperPage component's response to an API request failure by ensuring that an appropriate error message is displayed.
    */
 
+  /**
+   * Tests the successful fetching of navbar content when the CVHelperPage component mounts.
+   */
   it('displays error message on API request failure', async () => {
     const jobDescription = 'Frontend Developer';
     const userCV = 'Experienced in React';
@@ -57,9 +60,6 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
     });
   });
 });
-  """
-  Tests the CVHelperPage's response to an API request failure, ensuring that an appropriate error message is displayed.
-  """
   it('successfully fetches navbar content on component mount', async () => {
     mock.onGet('navbar.html').reply(200, 'Navbar dynamically added.');
     const { getByText } = render(<CVHelperPage />);
