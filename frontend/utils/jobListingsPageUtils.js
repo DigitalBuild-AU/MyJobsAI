@@ -23,3 +23,24 @@ export const cleanupOnUnmount = (setFilters) => {
   window.removeEventListener('resize', () => handleWindowSizeChange(setFilters));
   setFilters({status: '', company: ''});
 };
+/**
+ * This file contains utility functions used by the JobListingsPage component for handling window size changes, fetching job listings, and cleanup operations.
+ */
+/**
+ * Adjusts the view state based on the window's width.
+ *
+ * @param {function} setView - The setter function for the view state.
+ */
+/**
+ * Fetches job listings from the API.
+ *
+ * @param {Object} filters - The filters to apply to the job listings.
+ * @param {number} page - The page number to fetch.
+ * @param {function} setListings - The setter function for the listings state.
+ * @param {function} setTotalPages - The setter function for the totalPages state.
+ */
+/**
+ * Removes event listeners and resets filters upon component unmount.
+ *
+ * @param {function} setFilters - The setter function for the filters state.
+ */
