@@ -75,6 +75,12 @@ const CVHelperComponent = () => {
       <div className="container mt-4">
         <h1>CV Helper | MyJobsAI</h1>
         <form onSubmit={generateCVSuggestions}>
+/**
+ * generateCVSuggestions handles the form submission for generating CV suggestions.
+ * It sends a POST request to the backend with the job description and user CV, and updates the component state with the suggestions received.
+ * 
+ * @param {Event} e - The form submission event.
+ */
           <div className="mb-3">
             <label htmlFor="jobDescriptionInput" className="form-label">Job Description</label>
             <textarea className="form-control" id="jobDescriptionInput" rows="3" value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}></textarea>
