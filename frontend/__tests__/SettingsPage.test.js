@@ -1,3 +1,6 @@
+/**
+ * Tests for the SettingsPage component. Ensures that the component renders correctly and displays the expected settings content.
+ */
 import React from 'react';
 import { render } from '@testing-library/react';
 import SettingsPage from '../pages/SettingsPage';
