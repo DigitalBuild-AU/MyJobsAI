@@ -51,6 +51,9 @@ describe('InterviewForm Component', () => {
     await screen.findByText('Failed to schedule interview.');
   });
 
+  /**
+   * Tests the validation of required fields before submission in the InterviewForm component.
+   */
   test('validates required fields before submission', async () => {
     render(<InterviewForm />);
     fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
