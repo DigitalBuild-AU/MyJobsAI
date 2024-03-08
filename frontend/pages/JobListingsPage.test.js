@@ -6,7 +6,7 @@ jest.mock('../utils/webVitals', () => ({
 """
 JobListingsPage.test.js
 
-This file serves as the test suite for the JobListingsPage component within the MyJobsAI application. It includes a series of tests aimed at ensuring the correct rendering and functionality of the JobListingsPage and its child components, such as JobListingCard and JobListingTable. The tests cover various aspects including component rendering, user interaction simulations, pagination, and filter functionality. Utilizing React and the React Testing Library, this test suite verifies the integrity and behavior of the JobListingsPage component, ensuring a seamless user experience.
+This file contains tests for the JobListingsPage component, ensuring correct rendering and functionality of the job listings page and its features. It serves as the test suite for the JobListingsPage component within the MyJobsAI application. It includes a series of tests aimed at ensuring the correct rendering and functionality of the JobListingsPage and its child components, such as JobListingCard and JobListingTable. The tests cover various aspects including component rendering, user interaction simulations, pagination, and filter functionality. Utilizing React and the React Testing Library, this test suite verifies the integrity and behavior of the JobListingsPage component, ensuring a seamless user experience.
 
 Dependencies:
 - React: A JavaScript library for building user interfaces, used here for component creation and testing.
