@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 
 const Settings = () => {
+  /**
+   * Settings component allows users to customize application settings.
+   * This includes loading and managing UI preferences and other configurable settings.
+   */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
     if (bootstrapScriptTag) {
