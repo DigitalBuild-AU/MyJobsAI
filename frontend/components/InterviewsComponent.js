@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 
+/**
+ * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
+ */
+
 const InterviewsComponent = () => {
   const [jobTitle, setJobTitle] = useState('');
   const [interviewDate, setInterviewDate] = useState('');
@@ -43,11 +47,6 @@ const InterviewsComponent = () => {
           </div>
           <div className="form-group">
             <label htmlFor="interviewDateInput">Date and Time</label>
-  /**
-   * Handles the form submission event.
-   * Prevents the default form submission behavior, logs the form data,
-   * and would typically send this data to a backend service or API.
-   * @param {Object} event - The form submission event
    * @return None
    */
 /**
