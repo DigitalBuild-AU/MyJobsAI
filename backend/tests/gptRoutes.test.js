@@ -106,6 +106,62 @@ describe('/cover_letter route', () => {
    * Sends a POST request with a job description and user CV to the '/cover_letter' route and expects a 200 status code with a personalized cover letter in the response body.
    */
   test('successfully handles a cover letter request', async () => {
+describe('generateCoverLetter function', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('successfully generates a cover letter', async () => {
+    const jobDescription = 'Software Engineer role with a focus on cloud computing.';
+    const userCV = 'Cloud computing enthusiast with extensive experience in AWS and Azure.';
+    const expectedCoverLetter = 'Your personalized cover letter.';
+    jest.mocked(openai.createCompletion).mockResolvedValue({
+      data: {
+        choices: [{ text: expectedCoverLetter }]
+      }
+    });
+
+    const coverLetter = await generateCoverLetter(jobDescription, userCV);
+
+    expect(coverLetter).toEqual(expectedCoverLetter);
+    expect(openai.createCompletion).toHaveBeenCalledWith(expect.objectContaining({
+      prompt: expect.stringContaining(jobDescription) && expect.stringContaining(userCV),
+    }));
+  });
+
+  test('handles errors during cover letter generation', async () => {
+    const error = new Error('Failed to generate cover letter.');
+    jest.mocked(openai.createCompletion).mockRejectedValue(error);
+
+    await expect(generateCoverLetter('jobDescription', 'userCV')).rejects.toThrow(error);
+  });
+});
+
+describe('logCoverLetterGeneration function', () => {
+  test('logs cover letter generation message', () => {
+    const consoleSpy = jest.spyOn(console, 'log');
+    logCoverLetterGeneration();
+    expect(consoleSpy).toHaveBeenCalledWith('Cover letter analysis and feedback generated successfully.');
+  });
+});
+
+describe('handleCoverLetterError function', () => {
+  test('handles and logs cover letter generation error', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis(),
+    };
+    const error = new Error('Test error');
+
+    handleCoverLetterError(error, mockRes);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Error processing cover letter request: Test error'));
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: 'Failed to generate cover letter analysis.' });
+  });
+});
+    const logSpy = jest.spyOn(console, 'log');
     const mockResponse = { analysisResults: 'Your personalized cover letter.' };
     jest.mocked(openai.chat.completions.create).mockResolvedValue(mockResponse);
 
@@ -121,6 +177,9 @@ describe('/cover_letter route', () => {
   });
 
   test('handles errors during cover letter request', async () => {
+    expect(logSpy).toHaveBeenCalledWith('Cover letter analysis and feedback generated successfully.');
+    const errorSpy = jest.spyOn(console, 'error');
+    const statusJsonSpy = jest.fn().mockImplementation(() => ({ status: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }));
     /**
      /**
      * Tests successful handling of a cover letter request.
@@ -145,3 +204,6 @@ describe('/cover_letter route', () => {
      * 
      * Verifies that the server responds with a 500 status code and an appropriate error message when an error occurs while processing a cover letter request.
      */
+    expect(errorSpy).toHaveBeenCalled();
+    expect(statusJsonSpy).toHaveBeenCalledWith(500);
+    expect(statusJsonSpy).toHaveBeenCalledWith({ error: 'Failed to generate cover letter.' });
