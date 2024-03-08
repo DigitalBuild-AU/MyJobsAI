@@ -1,7 +1,7 @@
 /**
- * Tests for GPT-related routes in the MyJobsAI application.
+ * Unit Tests for GPT Routes in MyJobsAI Application
  * 
- * This file contains unit tests for the GPT routes, specifically focusing on CV customization, CV suggestions, and cover letter generation functionalities. It includes tests for both successful operations and error handling scenarios.
+ * This file contains unit tests for the GPT-related routes within the MyJobsAI application. It is designed to test the functionality of CV customization, CV suggestions, and cover letter generation. The tests cover a range of scenarios, including successful responses and error handling, to ensure the reliability and robustness of the application's GPT features.
  */
 import request from 'supertest';
 import { app } from '../server'; // Assuming app is exported from server.js
@@ -36,6 +36,11 @@ describe('/cv_customization route', () => {
     expect(response.body).toHaveProperty('analysisResults', 'Your CV customization suggestions.');
     expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
   });
+/**
+ * Test Suite for '/cv_customization' Route
+ * 
+ * This suite tests the handling of CV customization requests by the '/cv_customization' route. It verifies that the application can successfully process requests and return appropriate suggestions, as well as handle errors gracefully.
+ */
 
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
@@ -106,16 +111,20 @@ describe('/cv_suggestions route', () => {
         jobDescription: 'Software Engineer role requiring problem-solving skills.',
         userCV: 'Problem solver with a keen interest in software development.'
       });
-
+/**
+ * Test Suite for '/cv_suggestions' Route
+ * 
+ * This suite tests the handling of CV suggestions requests by the '/cv_suggestions' route. It aims to ensure that the application can generate meaningful CV suggestions based on the input provided and properly manage any errors that may occur during the process.
+ */
     expect(response.statusCode).toBe(500);
     expect(response.body).toHaveProperty('error', 'Failed to generate CV suggestions.');
   });
 });
     /**
-     * Tests error handling during a CV suggestions request.
-     * 
-     * Verifies that the server responds with a 500 status code and an appropriate error message when an error occurs while processing a CV suggestions request.
-     */
+    * Test Suite for '/cover_letter' Route
+    * 
+    * This suite evaluates the '/cover_letter' route's capability to generate personalized cover letters. It tests the functionality under various scenarios, ensuring that the application can produce relevant cover letters and handle any errors encountered during the process.
+    */
 
 describe('/cover_letter route', () => {
   /**
