@@ -1,12 +1,8 @@
 import request from 'supertest';
 import { app } from '../server'; // Assuming app is exported from server.js
-import { OpenAI } from 'openai';
+import { handleCvCustomization } from '../utils/gptRequestHandlers';
 
-jest.mock('openai');
-
-beforeEach(() => {
-  OpenAI.mockClear();
-});
+jest.mock('../utils/gptRequestHandlers');
 
 describe('/cv_customization route', () => {
 /**
@@ -22,11 +18,7 @@ describe('/cv_customization route', () => {
         }
       }]
     };
-    OpenAI.prototype.chat = {
-      completions: {
-        create: jest.fn().mockResolvedValue(mockResponse)
-      }
-    };
+    handleCvCustomization.mockResolvedValue({ analysisResults: 'Your CV customization suggestions.' });
 
     const response = await request(app)
       .post('/cv_customization')
@@ -37,15 +29,11 @@ describe('/cv_customization route', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty('analysisResults', 'Your CV customization suggestions.');
-    expect(OpenAI.prototype.chat.completions.create).toHaveBeenCalled();
+    expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
   });
 
   test('handles errors during CV customization request', async () => {
-    OpenAI.prototype.chat = {
-      completions: {
-        create: jest.fn().mockRejectedValue(new Error('Failed to generate CV customization suggestions.'))
-      }
-    };
+    handleCvCustomization.mockRejectedValue(new Error('Failed to generate CV customization suggestions.'));
 
     const response = await request(app)
       .post('/cv_customization')
@@ -56,7 +44,7 @@ describe('/cv_customization route', () => {
 
     expect(response.statusCode).toBe(500);
     expect(response.body).toHaveProperty('error', 'Failed to generate CV customization suggestions.');
-    expect(OpenAI.prototype.chat.completions.create).toHaveBeenCalled();
+    expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
   // Tests successful handling of a CV customization request.
   });
 });
