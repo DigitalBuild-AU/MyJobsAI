@@ -6,6 +6,9 @@ const InterviewsComponent = () => {
   const [interviewDate, setInterviewDate] = useState('');
   const [notes, setNotes] = useState('');
 
+  /**
+  * useEffect hook to dynamically load the Bootstrap script for styling purposes.
+  */
   useEffect(() => {
     const loadBootstrapScript = () => {
       const existingScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
@@ -36,6 +39,15 @@ const InterviewsComponent = () => {
           <div className="form-group">
             <label htmlFor="jobTitleInput">Job Title</label>
             <input type="text" className="form-control" id="jobTitleInput" placeholder="Enter job title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="interviewDateInput">Date and Time</label>
+            <input type="datetime-local" className="form-control" id="interviewDateInput" value={interviewDate} onChange={(e) => setInterviewDate(e.target.value)} />
+          </div>
+          <div className="form-group">
+/**
+ * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
+ */
           </div>
           <div className="form-group">
             <label htmlFor="interviewDateInput">Date and Time</label>
