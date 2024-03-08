@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /**
- * Interviews component: Offers a form interface for users to schedule interviews, including job title, date, and additional notes.
+ * This React component offers a form interface for users to schedule interviews, including fields for job title, date, and additional notes.
  */
 
 const Interviews = () => {
@@ -33,6 +33,9 @@ const Interviews = () => {
         </div>
         <button type="submit" className="btn btn-primary">Schedule Interview</button>
       </form>
+    </div>
+  );
+};
     </div>
   );
 };

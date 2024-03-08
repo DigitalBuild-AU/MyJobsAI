@@ -5,6 +5,9 @@ import MockAdapter from 'axios-mock-adapter';
 import CVHelperPage from '../pages/CVHelperPage';
 
 describe('CVHelperPage', () => {
+"""
+Tests for the CVHelperPage component. This file includes tests for rendering the CVHelperPage, interacting with its form elements, and mocking API calls to test the component's response to various states.
+"""
   let mock;
   
   beforeEach(() => {
@@ -30,6 +33,9 @@ describe('CVHelperPage', () => {
       expect(getByText(cvSuggestions)).toBeInTheDocument();
     });
   });
+  """
+  Tests that the CVHelperPage submits the form data correctly and displays CV suggestions upon successful API response.
+  """
 
   it('displays error message on API request failure', async () => {
     const jobDescription = 'Frontend Developer';
@@ -48,3 +54,6 @@ describe('CVHelperPage', () => {
     });
   });
 });
+  """
+  Tests the CVHelperPage's response to an API request failure, ensuring that an appropriate error message is displayed.
+  """

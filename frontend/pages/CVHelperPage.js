@@ -19,6 +19,7 @@ const CVHelperPage = () => {
   };
 
   return (
+
     useEffect(() => {
         axios.get('navbar.html')
             .then(response => {
@@ -48,6 +49,7 @@ const CVHelperPage = () => {
         <textarea id="userCVInput" placeholder="Paste your CV here..." className="form-control mb-2" value={userCV} onChange={(e) => setUserCV(e.target.value)}></textarea>
         <button onClick={handleSubmit} className="btn btn-primary">Get CV Suggestions</button>
       </div>
+
       {cvSuggestions && (
         <div>
           <h2>CV Suggestions</h2>
