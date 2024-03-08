@@ -2,7 +2,7 @@
  * SettingsPage is a React functional component that renders the user settings page.
  */
 import React from 'react';
-import ResponsiveNavbar from '../components/ResponsiveNavbar';
+import Settings from '../components/Settings';
 
 const SettingsPage = () => {
   // State hooks for managing form inputs could be defined here
@@ -12,21 +12,9 @@ const SettingsPage = () => {
   // Example: const handleEmailChange = (event) => setEmail(event.target.value);
 
   return (
-    <>
-      <ResponsiveNavbar />
-      <div className="container mt-4">
-        <h1>Settings | MyJobsAI</h1>
-        <form>
-          {/* Example form field */}
-          {/* <div className="mb-3">
-            <label htmlFor="emailInput" className="form-label">Email address</label>
-            <input type="email" className="form-control" id="emailInput" value={email} onChange={handleEmailChange} />
-          </div> */}
-          {/* Additional settings form fields would go here */}
-        </form>
-        {/* Any additional settings content would go here */}
-      </div>
-    </>
+    <div className="container mt-4">
+      <Settings />
+    </div>
   );
 };
 
