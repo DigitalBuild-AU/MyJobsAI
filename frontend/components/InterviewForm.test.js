@@ -19,6 +19,9 @@ describe('InterviewForm Component Tests', () => {
     setInterviews.mockClear();
   });
 
+/**
+ * Tests that the InterviewForm component correctly updates inputs and submits form data using axios with the expected payload.
+ */
   test('inputs are correctly updated and form submission calls axios with correct data', async () => {
     axios.post.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
 
@@ -47,6 +50,9 @@ describe('InterviewForm Component Tests', () => {
     expect(setInterviews).toHaveBeenCalledWith([...mockInterviews, { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' }]);
   });
 
+/**
+ * Tests the handling of form submission failure by the InterviewForm component, ensuring an error message is displayed.
+ */
   test('form submission failure displays error message', async () => {
     axios.post.mockRejectedValue(new Error('Failed to schedule interview.'));
 
@@ -62,6 +68,9 @@ describe('InterviewForm Component Tests', () => {
   });
 /**
  * Tests that the inputs are correctly updated and form submission calls axios with the correct data.
+ */
+/**
+ * Tests the targeting and description of interactive guide steps within the InterviewForm component.
  */
   test('interactive guide steps are correctly targeted and described', () => {
 /**
@@ -81,6 +90,9 @@ describe('InterviewForm Component Tests', () => {
  *
  * This test simulates a successful form submission by mocking a resolved promise from submitInterviewData. It verifies that the setInterviews function is called with the correct data.
  */
+/**
+ * Tests the handleSubmit function of the InterviewForm component for correct handling of form submissions and responses.
+ */
   test('handleSubmit function correctly handles submission and response', async () => {
     submitInterviewData.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
 
@@ -98,6 +110,9 @@ describe('InterviewForm Component Tests', () => {
     expect(setInterviews).toHaveBeenCalledWith([...mockInterviews, { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' }]);
   });
 
+/**
+ * Tests the handleSubmit function of the InterviewForm component for correct handling of submission failures.
+ */
   test('handleSubmit function correctly handles submission failure', async () => {
     submitInterviewData.mockRejectedValue(new Error('Failed to schedule interview.'));
 
