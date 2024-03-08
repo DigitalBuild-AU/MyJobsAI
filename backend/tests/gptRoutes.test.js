@@ -37,8 +37,20 @@ describe('/cv_customization route', () => {
     expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
   });
 
-  test('handles errors during CV customization request', async () => {
-    handleCvCustomization.mockRejectedValue(new Error('Failed to generate CV customization suggestions.'));
+  test('successfully handles a CV suggestions request', async () => {
+    const mockResponse = { suggestions: 'Your CV suggestions.' };
+    handleCvSuggestions.mockResolvedValue(mockResponse);
+  
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: 'Software Engineer role requiring problem-solving skills.',
+        userCV: 'Problem solver with a keen interest in software development.'
+      });
+  
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(mockResponse);
+    expect(handleCvSuggestions).toHaveBeenCalledWith('Software Engineer role requiring problem-solving skills.', 'Problem solver with a keen interest in software development.');
 
     const response = await request(app)
       .post('/cv_customization')
@@ -75,12 +87,18 @@ describe('/cv_suggestions route', () => {
   });
 
   test('handles errors during CV suggestions request', async () => {
-    /**
-     * Tests successful handling of a CV suggestions request.
-     * 
-     * Ensures that the server responds with 200 status code and the expected suggestions in the response body when a valid CV suggestions request is made.
-     */
-    jest.mocked(openai.chat.completions.create).mockRejectedValue(new Error('Failed to generate CV suggestions.'));
+    handleCvSuggestions.mockRejectedValue(new Error('Failed to generate CV suggestions.'));
+  
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: 'Software Engineer role requiring problem-solving skills.',
+        userCV: 'Problem solver with a keen interest in software development.'
+      });
+  
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate CV suggestions.');
+    expect(handleCvSuggestions).toHaveBeenCalledWith('Software Engineer role requiring problem-solving skills.', 'Problem solver with a keen interest in software development.');
 
     const response = await request(app)
       .post('/cv_suggestions')
@@ -167,6 +185,31 @@ describe('handleCoverLetterError function', () => {
 
     const response = await request(app)
       .post('/cover_letter')
+     * 
+     * Verifies that the server responds with a 500 status code and an appropriate error message when an error occurs while processing a CV suggestions request.
+     */
+
+describe('/cover_letter route', () => {
+  /**
+   * Tests successful handling of a cover letter request.
+   * 
+   * Sends a POST request with a job description and user CV to the '/cover_letter' route and expects a 200 status code with a personalized cover letter in the response body.
+   */
+  test('successfully handles a cover letter request', async () => {
+    openai.createCompletion.mockRejectedValue(new Error('Failed to generate cover letter.'));
+  
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: 'Software Engineer role with a focus on cloud computing.',
+        userCV: 'Cloud computing enthusiast with extensive experience in AWS and Azure.'
+      });
+  
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate cover letter.');
+
+    const response = await request(app)
+      .post('/cover_letter')
       .send({
         jobDescription: 'Software Engineer role with a focus on cloud computing.',
         userCV: 'Cloud computing enthusiast with extensive experience in AWS and Azure.'
@@ -177,6 +220,7 @@ describe('handleCoverLetterError function', () => {
   });
 
   test('handles errors during cover letter request', async () => {
+
     expect(logSpy).toHaveBeenCalledWith('Cover letter analysis and feedback generated successfully.');
     const errorSpy = jest.spyOn(console, 'error');
     const statusJsonSpy = jest.fn().mockImplementation(() => ({ status: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }));
