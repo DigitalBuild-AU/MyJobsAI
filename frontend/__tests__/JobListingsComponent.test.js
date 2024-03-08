@@ -4,6 +4,10 @@ import '@testing-library/jest-dom/extend-expect';
 import JobListingsComponent from '../components/JobListingsComponent';
 
 describe('JobListingsComponent', () => {
+/**
+ * Test suite for the JobListingsComponent.
+ * This file contains tests that verify the rendering, dynamic script loading, functionality of adding and filtering job listings in the JobListingsComponent.
+ */
   afterEach(cleanup);
 
   it('renders correctly', () => {
@@ -11,11 +15,17 @@ describe('JobListingsComponent', () => {
     expect(getByText('Job Listings | MyJobsAI')).toBeInTheDocument();
   });
 
+  /**
+  * Tests if the JobListingsComponent correctly loads the Bootstrap script dynamically.
+  */
   it('loads Bootstrap script dynamically', () => {
     render(<JobListingsComponent />);
     const scripts = Array.from(document.getElementsByTagName('script'));
     const bootstrapScript = scripts.find(script => script.src.includes('bootstrap.bundle.min.js'));
     expect(bootstrapScript).not.toBeNull();
+  });
+
+  it('updates state on input change', () => {
   });
 
   it('updates state on input change', () => {
@@ -39,8 +49,20 @@ describe('JobListingsComponent', () => {
     expect(rows).toHaveLength(2); // Includes header row
     expect(rows[1]).toHaveTextContent('Software Engineer');
     expect(rows[1]).toHaveTextContent('MyJobsAI');
+/**
+ * Tests for JobListingsComponent.
+ */
+    fireEvent.change(getByPlaceholderText('Company'), { target: { value: 'MyJobsAI' } });
+    fireEvent.click(getByText('Submit'));
+    const rows = getAllByRole('row');
+    expect(rows).toHaveLength(2); // Includes header row
+    expect(rows[1]).toHaveTextContent('Software Engineer');
+    expect(rows[1]).toHaveTextContent('MyJobsAI');
   });
 
+  it('filters job listings based on input', () => {
+  * Tests if the JobListingsComponent filters job listings correctly based on input.
+  */
   it('filters job listings based on input', () => {
     const { getByPlaceholderText, getByText, getAllByRole } = render(<JobListingsComponent />);
     fireEvent.change(getByPlaceholderText('Filter Location'), { target: { value: 'Remote' } });

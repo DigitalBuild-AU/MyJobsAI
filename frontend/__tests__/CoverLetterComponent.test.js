@@ -4,6 +4,10 @@ import '@testing-library/jest-dom/extend-expect';
 import CoverLetterComponent from '../components/CoverLetterComponent';
 
 describe('CoverLetterComponent', () => {
+/**
+ * Test suite for the CoverLetterComponent.
+ * This file contains tests that verify the rendering, dynamic script loading, and functionality of generating a cover letter in the CoverLetterComponent.
+ */
   afterEach(cleanup);
 
   it('renders correctly', () => {
@@ -17,6 +21,9 @@ describe('CoverLetterComponent', () => {
   });
 
   it('loads Bootstrap script dynamically', () => {
+/**
+ * Tests if the CoverLetterComponent renders correctly with all expected inputs and the generate button.
+ */
     const appendChildMock = jest.spyOn(document.body, 'appendChild').mockImplementation(() => {});
     const querySelectorMock = jest.spyOn(document, 'querySelector').mockReturnValueOnce(null);
     render(<CoverLetterComponent />);
@@ -37,5 +44,14 @@ describe('CoverLetterComponent', () => {
     expect(getByText('Based on the job description, my skills include My Skills and my experience includes My Experience. I am excited about the opportunity to work with your team.')).toBeInTheDocument();
     expect(getByText('Sincerely,')).toBeInTheDocument();
     expect(getByText('John Doe')).toBeInTheDocument();
+/**
+ * Tests for CoverLetterComponent.
+ */
+    expect(getByText('Based on the job description, my skills include My Skills and my experience includes My Experience. I am excited about the opportunity to work with your team.')).toBeInTheDocument();
+    expect(getByText('Sincerely,')).toBeInTheDocument();
+    expect(getByText('John Doe')).toBeInTheDocument();
   });
 });
+/**
+ * Tests if the CoverLetterComponent generates a cover letter based on user inputs correctly.
+ */
