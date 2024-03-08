@@ -1,3 +1,9 @@
+/**
+ * interviewAPI.js
+ * 
+ * This file is dedicated to handling API requests for interview-related operations. 
+ * It supports operations such as scheduling interviews, retrieving interview details, and submitting interview feedback.
+ */
 import axios from 'axios';
 
 export const submitInterview = async (jobTitle, date, notes, updateInterviewsState) => {
