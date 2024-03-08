@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CoverLetterComponent from '../components/CoverLetterComponent';
 
@@ -54,4 +54,12 @@ describe('CoverLetterComponent', () => {
 });
 /**
  * Tests if the CoverLetterComponent generates a cover letter based on user inputs correctly.
+it('loads Bootstrap script on component mount', async () => {
+  jest.mock('../../utils/bootstrapUtils', () => ({
+    loadBootstrapScript: jest.fn(),
+  }));
+  const { loadBootstrapScript } = require('../../utils/bootstrapUtils');
+  render(<CoverLetterComponent />);
+  expect(loadBootstrapScript).toHaveBeenCalledTimes(1);
+});
  */
