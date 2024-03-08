@@ -39,6 +39,9 @@ describe('InterviewForm Component', () => {
     expect(mockSubmit).toHaveBeenCalledWith('http://localhost:3000/api/interviews', formData);
   });
 
+  /**
+   * Tests the display of an error message upon submission failure through the InterviewForm component.
+   */
   test('displays error message on submission failure', async () => {
     axios.post.mockRejectedValue(new Error('Error scheduling interview'));
 
