@@ -1,3 +1,8 @@
+/**
+ * This file defines the CoverLetter component, which aids users in generating personalized cover letters
+ * using their details, job description, skills, and experience.
+ */
+
 import axios from 'axios';
 import React, { useState } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
@@ -17,7 +22,10 @@ const CoverLetter = () => {
 
   const handleGenerateCoverLetter = () => {
     /**
-     * Placeholder function for generating a personalized cover letter based on state variables.
+     * Generates a personalized cover letter based on user input.
+     * Parameters: None.
+     * Returns: None.
+     * This function is a placeholder for future implementation.
      */
     // Logic to generate cover letter based on state variables
     // This is a placeholder for the actual implementation
