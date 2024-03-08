@@ -1,72 +1,52 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import App from '../app';
 import axios from 'axios';
-
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from '../app';
 jest.mock('axios');
 
-describe('App Routing', () => {
-  const routes = [
-    { path: '/', component: 'Home' },
-    { path: '/applications', component: 'Applications' },
-    { path: '/cover-letter', component: 'CoverLetterComponent' },
-    { path: '/cv-helper', component: 'CVHelperComponent' },
-    { path: '/interviews', component: 'Interviews' },
-    { path: '/job-listings', component: 'JobListings' },
-    { path: '/settings', component: 'Settings' },
-    { path: '/email', component: 'EmailComponent' },
-    { path: '/analytics', component: 'AnalyticsComponent' },
-  ];
-
-  routes.forEach(route => {
-    it(`navigates to ${route.path} and renders ${route.component}`, () => {
-      const { getByText } = render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
-
-      fireEvent.click(getByText(new RegExp(route.component, 'i')));
-      expect(getByText(route.component)).toBeInTheDocument();
+describe('App.js Tests', () => {
+  describe('generateCoverLetter Functionality', () => {
+    test('generateCoverLetter function exists and is callable', () => {
+      expect(typeof App.generateCoverLetter).toBe('function');
     });
   });
-});
 
-describe('sendEmail Function', () => {
-  beforeEach(() => {
-    axios.post.mockClear();
-  });
+  describe('sendEmail Functionality', () => {
+    beforeEach(() => {
+      document.body.innerHTML = `
+        <input id="emailTo" value="test@example.com" />
+        <input id="emailSubject" value="Test Subject" />
+        <textarea id="emailBody">Test Body</textarea>
+        <div id="emailResponse"></div>
+      `;
+    });
 
-  it('displays success message on successful email sending', async () => {
-    axios.post.mockResolvedValue({ data: { message: 'Email was sent successfully.' } });
-    const { getByText, getByLabelText } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
+    test('successfully sends an email', async () => {
+      const response = { data: { message: 'Email was sent successfully.' } };
+      axios.post.mockResolvedValue(response);
 
-    fireEvent.change(getByLabelText(/to/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText(/subject/i), { target: { value: 'Test Subject' } });
-    fireEvent.change(getByLabelText(/body/i), { target: { value: 'Test Body' } });
-    fireEvent.click(getByText(/send email/i));
+      App.sendEmail();
+      await screen.findByText('Email was sent successfully.');
 
-    await expect(getByText(/Email was sent successfully./i)).toBeInTheDocument();
-  });
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
+        to: 'test@example.com',
+        subject: 'Test Subject',
+        body: 'Test Body'
+      });
+      expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
+    });
 
-  it('displays error message when email sending fails', async () => {
-    axios.post.mockRejectedValue(new Error('Failed to send email.'));
-    const { getByText, getByLabelText } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
+    test('handles error when sending an email fails', async () => {
+      axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
-    fireEvent.change(getByLabelText(/to/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText(/subject/i), { target: { value: 'Test Subject' } });
-    fireEvent.change(getByLabelText(/body/i), { target: { value: 'Test Body' } });
-    fireEvent.click(getByText(/send email/i));
+      App.sendEmail();
+      await screen.findByText('Failed to send email.');
 
-    await expect(getByText(/Failed to send email./i)).toBeInTheDocument();
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
+        to: 'test@example.com',
+        subject: 'Test Subject',
+        body: 'Test Body'
+      });
+      expect(screen.getByText('Failed to send email.')).toBeInTheDocument();
+    });
   });
 });
