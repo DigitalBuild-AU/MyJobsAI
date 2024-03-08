@@ -38,6 +38,14 @@ router.post('/cv_suggestions', async (req, res) => {
 });
 
 // Cover Letter Route using Chat Completions
+
+/**
+ * Generates a cover letter based on the provided job description and user's CV.
+const { generateCoverLetter, logCoverLetterGeneration, handleCoverLetterError } = require('../utils/gptUtils');
+ * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
+ * @param {Object} res - The response object used to return the cover letter or an error message.
+ * @returns {void} - Sends a JSON response with the cover letter or an error status.
+ */
 router.post('/cover_letter', async (req, res) => {
 /**
  * POST /cover_letter
@@ -48,18 +56,13 @@ router.post('/cover_letter', async (req, res) => {
  */
   const { jobDescription, userCV } = req.body;
   try {
-    const response = await openai.createCompletion({
-      prompt: `Create a cover letter based on the job description: ${jobDescription} and user CV: ${userCV}`,
-      max_tokens: 1000,
-    });
-    console.log("Cover letter generated successfully.");
-    res.json({ coverLetter: response.data.choices[0].text.trim() });
+    const analysisResults = await generateCoverLetter(jobDescription, userCV);
+    logCoverLetterGeneration();
+    res.json(analysisResults);
   } catch (error) {
-    console.error(`Error processing cover letter request: ${error.message}`);
-    res.status(500).json({ error: "Failed to generate cover letter." });
-  } finally {
-    console.log("Attempted operation on /cover_letter.");
+    handleCoverLetterError(error, res);
   }
+
 });
 
 // Resume Customization Route using Chat Completions
