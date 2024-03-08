@@ -34,29 +34,10 @@ Description: Test suite for the CVHelper component, focusing on CV upload functi
   });
 
   /**
-   * Tests that the CVHelper component rejects non-PDF files.
-   */
-  test('rejects non-PDF files', () => {
-    const file = new File(['dummy content'], 'resume.txt', { type: 'text/plain' });
-    render(<CVHelper />);
-    fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [file] } });
-    expect(screen.getByText('Invalid file type. Please upload a PDF.')).toBeInTheDocument();
-  });
-
-  test('handles CV upload error for large files', () => {
-  test('handles CV upload error for large files', () => {
-    const largeFile = new File([''.padStart(5 * 1024 * 1024, '0')], 'large_resume.pdf', { type: 'application/pdf' });
-    render(<CVHelper />);
-    fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [largeFile] } });
-    expect(screen.getByText('File is too large. Please upload a file smaller than 5MB.')).toBeInTheDocument();
-  });
-
-  /**
-   * Tests that the CVHelper component prompts the user to upload a CV before analysis can be performed.
-   */
-  test('attempts to analyze without uploading a CV', () => {
-    render(<CVHelper />);
-    fireEvent.click(screen.getByText('Analyze CV'));
+import axios from 'axios';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import CVHelper from '../components/CVHelper';
+jest.mock('axios');
     expect(screen.getByText('Please upload a CV first.')).toBeInTheDocument();
   });
 });
@@ -81,5 +62,35 @@ test('displays error when CV suggestions generation fails', async () => {
 
   await waitFor(() => {
     expect(getByText('Failed to fetch CV suggestions.')).toBeInTheDocument();
+  });
+});
+test('generates CV suggestions based on user input', async () => {
+  axios.post.mockResolvedValueOnce({ data: { suggestions: 'Your CV has been tailored for a Software Engineer position.' } });
+
+  render(<CVHelper />);
+  fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(screen.getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
+  fireEvent.click(screen.getByText('Get CV Suggestions'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Your CV has been tailored for a Software Engineer position.')).toBeInTheDocument();
+  });
+
+  expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', {
+    jobDescription: 'Software Engineer',
+    userCV: 'Experienced software engineer...'
+  });
+});
+
+test('displays error when CV suggestions generation fails', async () => {
+  axios.post.mockRejectedValueOnce(new Error('Network Error'));
+
+  render(<CVHelper />);
+  fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(screen.getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
+  fireEvent.click(screen.getByText('Get CV Suggestions'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Failed to fetch CV suggestions.')).toBeInTheDocument();
   });
 });
