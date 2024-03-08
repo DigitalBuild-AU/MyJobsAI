@@ -1,3 +1,6 @@
+"""
+This file tests the interviewAPI utility functions, focusing on submitting interview details, handling successful interview scheduling, and error management.
+"""
 import axios from 'axios';
 import { submitInterview, handleInterviewResponse, handleInterviewError } from '../utils/interviewAPI';
 
