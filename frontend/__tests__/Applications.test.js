@@ -3,11 +3,13 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import Applications from '../pages/Applications';
 
 describe('Applications Component', () => {
+  // Tests that the Applications component renders correctly and verifies its initial state.
   test('renders and verifies initial state', () => {
     render(<Applications />);
     expect(screen.getByText('No applications added yet')).toBeInTheDocument();
   });
 
+  // Tests that submitting a new application correctly updates the component's state.
   test('submits a new application and updates state', () => {
     const { getByLabelText, getByText } = render(<Applications />);
     fireEvent.change(getByLabelText('Job Title'), { target: { value: 'Software Engineer' } });
@@ -16,7 +18,15 @@ describe('Applications Component', () => {
     expect(screen.getByText('Software Engineer at Tech Innovations Inc.')).toBeInTheDocument();
   });
 
+  // Tests that updating an existing application correctly reflects the changes in the component.
   test('updates an existing application and reflects changes', () => {
+"""
+File: Applications.test.js
+Description: Test suite for the Applications component, covering rendering, state updates, and interaction behaviors.
+"""
+// Tests that deleting an application correctly updates the component's state.
+// Tests that submitting an application with incomplete information displays the appropriate error message.
+// Tests that attempting to delete a non-existent application displays the appropriate error message.
     const { getByLabelText, getByText } = render(<Applications />);
     // Assuming the component has a way to select an existing application for editing
     fireEvent.click(screen.getByText('Edit', { selector: 'button' }));
