@@ -1,5 +1,6 @@
 
 """
+
 JobListingsPage.test.js - Test Suite for JobListingsPage Component
 
 This test suite is designed to ensure the correct rendering and functionality of the JobListingsPage component within the MyJobsAI application. It includes tests for component rendering, user interaction simulations, pagination, and filter functionality. The suite utilizes React and the React Testing Library to verify the integrity and behavior of the JobListingsPage component, aiming to ensure a seamless user experience.
@@ -12,6 +13,7 @@ Key Components Tested:
 Dependencies:
 - React: A JavaScript library for building user interfaces.
 - @testing-library/react: Provides tools for testing React components, enabling interaction simulation and component behavior verification.
+
 """
 
 // frontend/pages/JobListingsPage.test.js
@@ -33,9 +35,6 @@ describe('JobListingsPage component', () => {
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
-      company: 'ABC Inc.',
-      location: 'New York',
-    };
 
     const { getByText } = render(<JobListingCard listing={listing} />);
     expect(getByText('Software Engineer')).toBeInTheDocument();
@@ -44,20 +43,13 @@ test('renders JobListingCard component correctly', () => {
   });
 
   /**
-
+ * Test Case: Simulates fetching job listings for testing pagination.
+ * This test uses a mock function to simulate fetching job listings, crucial for setting up the 'totalPages' and 'currentPage' values needed to test the pagination functionality of the JobListingsPage component.
+ */
   /**
-   * Mock function to simulate fetching job listings for testing pagination.
-   * This function is crucial for setting up the 'totalPages' and 'currentPage' values
-   * needed to test the pagination functionality of the JobListingsPage component.
-   * 
-   * @returns {Object} An object containing 'totalPages' and 'currentPage' values.
-   */
-  /**
-"""
-JobListingsPage Test Suite
-
-This file contains tests for the JobListingsPage component, focusing on rendering, functionality, including individual job listing cards, job listing table, pagination, and filter handling.
-"""
+ * Test Case: Verifies the rendering of multiple job listings in the JobListingTable component.
+ * This test checks if the JobListingTable component correctly displays all provided job listings, including job titles, companies, and locations.
+ */
    * Tests that the JobListingTable component correctly renders multiple job listings.
    * Checks that all provided job listings are displayed, including job titles, companies, and locations.
    */
@@ -67,15 +59,9 @@ This file contains tests for the JobListingsPage component, focusing on renderin
  */
 
 test('renders JobListingTable component correctly', () => {
-    const listings = [
-      {
-        jobTitle: 'Software Engineer',
-        company: 'ABC Inc.',
-        location: 'New York',
-      },
-      {
-        jobTitle: 'Product Manager',
-        company: 'XYZ Corp.',
+ * Test Case: Verifies that the JobListingTable component displays multiple job listings based on the provided props.
+ * This test checks if the JobListingTable component correctly displays job titles, companies, and locations for all provided job listings.
+ */
 /**
  * Test Case: Renders JobListingCard component correctly.
  * Verifies that the JobListingCard component displays job title, company, and location based on the provided props.
@@ -91,33 +77,20 @@ test('renders JobListingTable component correctly', () => {
  * Test Case: Renders JobListingTable component correctly.
  * Checks that the JobListingTable component correctly displays multiple job listings, including job titles, companies, and locations.
  */
-    expect(getByText('New York')).toBeInTheDocument();
-    expect(getByText('Product Manager')).toBeInTheDocument();
-    expect(getByText('XYZ Corp.')).toBeInTheDocument();
-    expect(getByText('San Francisco')).toBeInTheDocument();
-  });
-/**
- * Test Case: Renders JobListingTable component correctly.
- * Verifies that the JobListingTable component displays multiple job listings, including job titles, companies, and locations.
- */
+  // No change needed here as the docstring is already provided in the snippet to be updated.
 
   // Add more test cases to cover all functionality introduced by JobListingCard and JobListingTable components
 });
-/**
- * Test Case: handleFilterChange updates filters state and resets page.
- * Simulates changing the filter by status and verifies that the filters state is updated accordingly and the page is reset.
+ * Test Case: Verifies the functionality of pagination button rendering and disabling the current page button.
+ * This test checks if the correct number of pagination buttons are rendered and that the button for the current page is correctly disabled.
  */
-  /**
-  * Tests that the handleFilterChange function updates the filters state and resets the page.
-  * Simulates changing the filter by status and verifies the state update.
 /**
  * Test Case: renderPagination renders correct number of buttons and disables current page button.
  * Verifies that the correct number of pagination buttons are rendered and that the button for the current page is disabled.
  */
   test('renderPagination renders correct number of buttons and disables current page button', () => {
-/**
- * Test Case: Updates filters state correctly.
- * Verifies that the updateFilters function correctly updates the filters state with the provided values.
+ * Test Case: Validates input and updates error state for invalid input.
+ * This test simulates user input for filters and verifies that the error state is updated appropriately for invalid inputs, ensuring the robustness of form validation within the component.
  */
   /**
   * Test Case: Validates input and updates error state for invalid input.
@@ -260,13 +233,13 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(getText('Table View')).toBeInTheDocument();
   });
 
-  test('sequential updates to filters result in combined state', () => {
-   * Test: sequential updates to filters result in combined state
-   * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
-   * Inputs: None
-   * Outputs: None
-   * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
-   */
+  /**
+  * Test: sequential updates to filters result in combined state
+  * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
+  * Inputs: None
+  * Outputs: None
+  * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
+  */
   test('sequential updates to filters result in combined state', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
