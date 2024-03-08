@@ -45,7 +45,9 @@ Description: Test suite for the CVHelper component, focusing on CV upload functi
     expect(screen.getByText('File is too large. Please upload a file smaller than 5MB.')).toBeInTheDocument();
   });
 
-  // Tests that the CVHelper component prompts the user to upload a CV before analysis can be performed.
+  /**
+   * Tests that the CVHelper component prompts the user to upload a CV before analysis can be performed.
+   */
   test('attempts to analyze without uploading a CV', () => {
     render(<CVHelper />);
     fireEvent.click(screen.getByText('Analyze CV'));
