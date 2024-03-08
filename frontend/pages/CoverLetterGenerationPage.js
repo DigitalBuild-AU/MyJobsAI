@@ -21,6 +21,10 @@ const CoverLetterGenerationPage = () => {
     fetchJobListings();
   }, []);
 
+/**
+ * Handles the selection of a job from the dropdown, updating the state with the selected job's details.
+ * @param {Event} e - The event object from the job selection.
+ */
   const handleJobSelection = (e) => {
 /**
  * useEffect hook to fetch job listings on component mount.
