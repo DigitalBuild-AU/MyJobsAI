@@ -11,6 +11,10 @@ export const renderWithMockData = (listings) => {
   return render(<JobListingsPage listings={listings} />);
 };
 
+/**
+   * Simulates a window size change event to test responsiveness.
+   * @param {number} newWidth - The new width value for the window.
+   */
 export const simulateWindowSizeChange = (newWidth) => {
   Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: newWidth });
   window.dispatchEvent(new Event('resize'));
