@@ -12,8 +12,11 @@ const router = express.Router();
 const openai = new OpenAI();
 
 // CV Suggestions Route using Chat Completions
-router.post('/cv_suggestions', async (req, res) => {
 /**
+ * POST route for generating CV suggestions.
+ * Accepts a job description and user's CV in the request body and returns a list of suggestions for CV improvement.
+ */
+router.post('/cv_suggestions', async (req, res) => {
  * Handles the generation of CV suggestions based on a given job description and user's CV.
  * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
  * @param {Object} res - The response object used to return the suggestions or an error message.
