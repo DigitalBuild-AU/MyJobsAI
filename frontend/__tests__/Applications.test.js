@@ -11,7 +11,9 @@ describe('Applications Component', () => {
     expect(screen.getByText('No applications added yet')).toBeInTheDocument();
   });
 
-  // Tests that submitting a new application correctly updates the component's state.
+  /**
+   * Tests that submitting a new application correctly updates the component's state.
+   */
   test('submits a new application and updates state', () => {
     const { getByLabelText, getByText } = render(<Applications />);
     fireEvent.change(getByLabelText('Job Title'), { target: { value: 'Software Engineer' } });
