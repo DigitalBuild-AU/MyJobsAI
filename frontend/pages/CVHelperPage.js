@@ -111,7 +111,12 @@ const CVHelperPage = () => {
 };
 
 export default CVHelperPage;
-    // Handles the removal of existing bootstrap script tag and appends a new one
+    /**
+     * Removes any existing Bootstrap script tags and appends a new one to the document body.
+     * This ensures the page uses the latest version of Bootstrap's JavaScript bundle.
+     * No parameters.
+     * No return value.
+     */
     const handleBootstrapScript = () => {
         const scriptTags = document.getElementsByTagName('script');
         for (let i = 0; i < scriptTags.length; i++) {
@@ -125,3 +130,15 @@ export default CVHelperPage;
         newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
         document.body.appendChild(newBootstrapScript);
     };
+/**
+ * Fetches the navbar content from a static HTML file and sets it in the state.
+ * Utilizes Axios for the HTTP GET request. Logs the success or error in the console.
+ * No parameters.
+ * No return value.
+ */
+/**
+ * Removes any existing bootstrap script tags from the document and appends a new one for the latest version.
+ * This ensures the page uses the most up-to-date version of Bootstrap.
+ * No parameters.
+ * No return value.
+ */
