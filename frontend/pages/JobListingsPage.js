@@ -28,6 +28,7 @@ const JobListingsPage = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [errorState, setErrorState] = useState({ status: false, company: false });
+import { logError } from '../utils/logger';
 
   useEffect(() => {
 
@@ -103,7 +104,7 @@ const cleanupOnUnmount = () => {
 };
       setTotalPages(response.data.totalPages);
     } catch (err) {
-      console.error('Error fetching job listings', err);
+      logError('Error fetching job listings', err);
     }
   };
   
