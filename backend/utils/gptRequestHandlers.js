@@ -1,6 +1,16 @@
+/**
+ * Utility functions for handling requests to OpenAI's GPT models.
+ * Includes functions for generating CV suggestions, cover letters, and CV customization based on user inputs.
+ */
 const { OpenAI } = require('openai');
 const openai = new OpenAI();
 
+/**
+ * Generates suggestions for CV improvement based on a job description and user's CV.
+ * @param {string} jobDescription - The job description.
+ * @param {string} userCV - The user's CV.
+ * @returns {Object} An object containing CV suggestions.
+ */
 async function handleCvSuggestions(jobDescription, userCV) {
   try {
     const response = await openai.chat.completions.create({
@@ -59,9 +69,21 @@ async function handleCvCustomization(jobDescription, userCV) {
       model: "gpt-3.5-turbo",
     });
     return { analysisResults: response.choices[0].message.content.trim() };
+/**
+ * Generates a cover letter based on a job description and user's CV.
+ * @param {string} jobDescription - The job description.
+ * @param {string} userCV - The user's CV.
+ * @returns {Object} An object containing the generated cover letter.
+ */
   } catch (error) {
     throw new Error("Failed to generate CV customization suggestions.");
   }
 }
 
 module.exports = { handleCvSuggestions, handleCoverLetter, handleCvCustomization };
+/**
+ * Provides CV customization suggestions based on a job description and user's CV.
+ * @param {string} jobDescription - The job description.
+ * @param {string} userCV - The user's CV.
+ * @returns {Object} An object containing customization suggestions.
+ */
