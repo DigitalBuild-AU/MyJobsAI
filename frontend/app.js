@@ -11,8 +11,14 @@ import AnalyticsComponent from './components/AnalyticsComponent';
 
 console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
-function generateCVSuggestions() {
+
 function generateCoverLetter() {
+function sendEmail() {
+  const to = document.getElementById('emailTo').value;
+  const subject = document.getElementById('emailSubject').value;
+  const body = document.getElementById('emailBody').value;
+  console.log('Attempting to send email.'); // Log for debugging
+  axios.post('http://localhost:3000/api/email/send', { to, subject, body })
     .then(function(response) {
       console.log('Email was sent successfully.'); // Success log
       document.getElementById('emailResponse').innerText = response.data.message;
