@@ -66,6 +66,9 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
   });
 
   it('handles failure when fetching navbar content on component mount', async () => {
+  /**
+   * Tests the CVHelperPage's ability to successfully fetch navbar content on component mount and verify its presence in the document.
+   */
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     mock.onGet('navbar.html').networkError();
     render(<CVHelperPage />);
@@ -84,3 +87,6 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
       expect(scriptTags[0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
     });
   });
+  /**
+   * Verifies the CVHelperPage's behavior when there is a failure in fetching navbar content on component mount, ensuring error handling is correctly implemented.
+   */
