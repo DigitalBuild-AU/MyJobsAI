@@ -64,13 +64,9 @@ describe('App.js Tests', () => {
 
     test('handles error when sending an email fails', async () => {
     /**
-     * Tests the successful sending of an email.
-     * 
-     * This test simulates sending an email using the App component's sendEmail function,
-     * asserting that the email is sent successfully. It mocks an axios post request and
-     * checks for the presence of a success message in the document. The inputs are
-     * predefined email details, and the output is a success message displayed to the user.
-     * There are no side effects.
+     * Tests the sendEmail function for an unsuccessful email send scenario.
+     * Checks that the axios.post method is called with the correct parameters and
+     * that the error message is displayed to the user upon failure.
      */
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
