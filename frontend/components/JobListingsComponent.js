@@ -25,9 +25,7 @@ const JobListingsComponent = () => {
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
     loadBootstrapScript();
-  }, []);
-
-  const handleChange = (event) => {
+import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 /**
  * useEffect hook to dynamically load the Bootstrap script for styling purposes.
  *
