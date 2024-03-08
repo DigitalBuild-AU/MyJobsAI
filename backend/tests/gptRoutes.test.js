@@ -100,6 +100,11 @@ describe('/cv_suggestions route', () => {
      */
 
 describe('/cover_letter route', () => {
+  /**
+   * Tests successful handling of a cover letter request.
+   * 
+   * Sends a POST request with a job description and user CV to the '/cover_letter' route and expects a 200 status code with a personalized cover letter in the response body.
+   */
   test('successfully handles a cover letter request', async () => {
     const mockResponse = { analysisResults: 'Your personalized cover letter.' };
     jest.mocked(openai.chat.completions.create).mockResolvedValue(mockResponse);
