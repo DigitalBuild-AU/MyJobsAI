@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 
-/**
- * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
- */
-
 const InterviewsComponent = () => {
+  /**
+   * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
+   */
   const [jobTitle, setJobTitle] = useState('');
   const [interviewDate, setInterviewDate] = useState('');
   const [notes, setNotes] = useState('');
