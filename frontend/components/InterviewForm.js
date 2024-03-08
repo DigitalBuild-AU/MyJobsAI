@@ -40,21 +40,18 @@ function InterviewForm({ setInterviews, interviews }) {
     onNotesChange(value);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
-      .then(response => {
-        alert('Interview scheduled successfully.');
-        setInterviews([...interviews, response.data]);
-        setJobTitle('');
-        setDate('');
-        setNotes('');
-      })
-      .catch(error => {
-        console.error('Error scheduling interview:', error);
-        alert('Failed to schedule interview.');
-      });
+    submitInterviewData(jobTitle, date, notes)
+    .then(response => {
+      alert('Interview scheduled successfully.');
+      setInterviews([...interviews, response.data]);
+      resetFormFields();
+    })
+    .catch(error => {
+      console.error('Error scheduling interview:', error);
+      alert('Failed to schedule interview.');
+    });
   };
 
   return (
@@ -93,7 +90,3 @@ function InterviewForm({ setInterviews, interviews }) {
 }
 
 export default InterviewForm;
-  const [showGuide, setShowGuide] = useState(false);
-
-      <button onClick={() => setShowGuide(true)} style={{ margin: '10px 0', padding: '5px 10px' }}>Show Guide</button>
-      {showGuide && <InteractiveGuide steps={getInterviewFormGuideSteps()} />}

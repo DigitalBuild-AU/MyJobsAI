@@ -19,7 +19,7 @@ beforeEach(() => {
 });
 
 """
-Tests if the Cover Letter Generation Page renders without crashing. It checks for the presence of the 'Create Cover Letter' text and a combobox.
+Tests if the Cover Letter Generation Page component renders correctly without throwing any errors. It specifically checks for the presence of the 'Create Cover Letter' button and a combobox for job selection.
 """
 test('renders without crashing', async () => {
 /**

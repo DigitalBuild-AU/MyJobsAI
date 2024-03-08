@@ -70,6 +70,25 @@ export { postCoverLetter, postEmploymentHistory, postResumeCustomization, postSk
  * @param {string} jobDescription - The job description to customize the CV for.
  * @param {string} userCV - The user's current CV.
  * @returns {Promise<Object>} The response object containing the customized CV.
+/**
+ * Submits interview data to the backend.
+ * 
+ * @param {string} jobTitle - The job title for the interview.
+ * @param {string} date - The date and time for the interview.
+ * @param {string} notes - Notes related to the interview.
+ * @returns {Promise} - The promise returned from the axios post call.
+ */
+async function submitInterviewData(jobTitle, date, notes) {
+  try {
+    const response = await axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes });
+    return response.data;
+  } catch (error) {
+    console.error('Error scheduling interview:', error);
+    throw error;
+  }
+}
+
+export { postCoverLetter, postEmploymentHistory, postResumeCustomization, postSkills, submitInterviewData };
  */
 /**
  * Sends a request to save the user's skills.

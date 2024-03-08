@@ -13,6 +13,9 @@ describe('DashboardPage Modal Logic', () => {
   """
 Tests that the modal on the Dashboard Page opens with the correct content when the 'Add Entry' button is clicked.
 """
+"""
+Verifies that the modal for adding new job application entries on the Dashboard Page opens correctly with the expected content when the 'Add Entry' button is clicked.
+"""
 test('Modal opens with correct content when handleOpenModal is called', () => {
     render(<DashboardPage />);
     fireEvent.click(screen.getByText('Add Entry'));
