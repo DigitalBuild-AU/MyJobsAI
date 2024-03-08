@@ -22,6 +22,9 @@ describe('InterviewForm Component', () => {
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
 
+  /**
+   * Tests the correct submission of form data through the InterviewForm component.
+   */
   test('submits form data correctly', async () => {
     const mockSubmit = axios.post.mockResolvedValue({ data: {} });
     const formData = { jobTitle: 'Frontend Developer', date: '2023-05-01', notes: 'Technical interview' };
