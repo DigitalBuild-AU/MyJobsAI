@@ -1,3 +1,7 @@
+"""
+File: DashboardPage.test.js
+Description: This file contains tests for the Dashboard Page. It tests the modal logic for adding new job application entries and ensures the modal opens and closes as expected.
+"""
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
