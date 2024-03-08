@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * Returns the configuration steps for the InteractiveGuide on the JobListingsPage.
+ * 
+ * @returns {Array} An array of step objects for the JobListingsPage guide.
+ */
 export const getJobListingsPageGuideSteps = () => [
   {
     target: 'select[name="view"]',
@@ -32,6 +37,15 @@ export const getInterviewFormGuideSteps = () => [
     target: '#notesInput',
     content: 'Add any notes related to the interview here. This could include topics to discuss, questions to ask, or any other relevant information.',
   },
+  {
+    target: 'button[type="submit"]',
+    content: 'Once you have filled out all the fields, click here to schedule the interview. You will be notified once the interview is successfully scheduled.',
+  }
+];
+/**
+ * guideSteps Utility
+ * This utility file contains functions that return step configurations for the InteractiveGuide component used across different pages of the application. Each function returns an array of step objects that define the target elements and content for the guide.
+ */
   {
     target: 'button[type="submit"]',
     content: 'Once you have filled out all the fields, click here to schedule the interview. You will be notified once the interview is successfully scheduled.',
