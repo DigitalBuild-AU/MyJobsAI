@@ -96,3 +96,15 @@ it('loads Bootstrap script on component mount', async () => {
    * Test case: Loads Bootstrap script on component mount.
    * Verifies that the Bootstrap script is loaded when the component mounts.
    */
+  it('updates component state correctly on handleChange', () => {
+    const { getByLabelText, getByPlaceholderText } = render(<JobListingsComponent />);
+    // Simulate text input change
+    fireEvent.change(getByPlaceholderText('Job Title'), { target: { name: 'jobTitle', value: 'Frontend Developer' } });
+    expect(getByPlaceholderText('Job Title').value).toBe('Frontend Developer');
+    // Simulate checkbox input change
+    const includesSuperCheckbox = getByLabelText('Includes Super');
+    fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: true } });
+    expect(includesSuperCheckbox.checked).toBe(true);
+    fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
+    expect(includesSuperCheckbox.checked).toBe(false);
+  });
