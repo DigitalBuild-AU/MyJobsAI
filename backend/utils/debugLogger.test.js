@@ -43,6 +43,9 @@ describe('debugLogger tests', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message with non-error object');
   });
   test('should not throw error when undefined is passed as error', () => {
+  /**
+   * Tests that messages are logged correctly without any errors.
+   */
     const consoleLogSpy = jest.spyOn(console, 'log');
     expect(() => debugLog('Test message with undefined error', undefined)).not.toThrow();
     expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message with undefined error');
