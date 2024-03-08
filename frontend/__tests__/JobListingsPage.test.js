@@ -38,3 +38,6 @@ describe('JobListingsPage Component', () => {
     });
   });
 });
+"""
+Tests that the modal on the Job Listings Page opens as expected when the 'Add Job Listing' button is clicked.
+"""
