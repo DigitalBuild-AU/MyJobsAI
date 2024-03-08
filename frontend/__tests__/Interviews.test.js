@@ -7,6 +7,9 @@ import '@testing-library/jest-dom';
 import Interviews from '../pages/Interviews';
 
 describe('Interviews Component', () => {
+  /**
+   * Tests that the Interviews component renders correctly and verifies its initial state.
+   */
   test('renders and verifies initial state', () => {
     render(<Interviews />);
     expect(screen.getByText('No interviews scheduled')).toBeInTheDocument();
@@ -41,12 +44,18 @@ describe('Interviews Component', () => {
     expect(screen.queryByText('Interview with Tech Innovations Inc. on 2023-04-15')).not.toBeInTheDocument();
   });
 
+  /**
+   * Tests that attempting to add an interview with missing details displays the appropriate error message.
+   */
   test('attempts to add an interview with missing details', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Add Interview'));
     expect(screen.getByText('Please fill out all required fields')).toBeInTheDocument();
   });
 
+  /**
+   * Tests that attempting to update a non-existent interview displays the appropriate error message.
+   */
   test('attempts to update a non-existent interview', () => {
 """
 File: Interviews.test.js
