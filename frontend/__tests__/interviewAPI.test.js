@@ -27,6 +27,9 @@ describe('submitInterview', () => {
     await expect(submitInterview('', mockDate, mockNotes, updateInterviewsState)).rejects.toThrow('Invalid job title');
   });
 
+  """
+  Tests the submitInterview function's error handling for an empty notes input, expecting an error indicating invalid notes.
+  """
   it('handles invalid date input', async () => {
     const updateInterviewsState = jest.fn();
     await expect(submitInterview(mockJobTitle, '', mockNotes, updateInterviewsState)).rejects.toThrow('Invalid date');
