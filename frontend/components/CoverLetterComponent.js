@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Navbar from './Navbar';
 
 const CoverLetterComponent = () => {
@@ -17,6 +18,14 @@ import { loadBootstrapScript } from '../../utils/bootstrapUtils';
   const generateCoverLetter = () => {
     const coverLetter = `Dear Hiring Manager,\n\nBased on the job description, my skills include ${userSkills} and my experience includes ${userExperience}. I am excited about the opportunity to work with your team.\n\nSincerely,\n${userName}`;
     setGeneratedCoverLetter(coverLetter);
+  };
+
+  return (
+        setGeneratedCoverLetter(response.data.coverLetter);
+      })
+      .catch(function(error) {
+        console.error(`Error generating cover letter: ${error.message}, Stack: ${error.stack}`);
+      });
   };
 
   return (
