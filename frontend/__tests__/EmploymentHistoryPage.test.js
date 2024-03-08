@@ -1,3 +1,8 @@
+"""
+File: EmploymentHistoryPage.test.js
+Description: This file tests the Employment History Page, focusing on rendering, fetching, displaying, and submitting employment history, along with error handling and modal interactions.
+"""
+
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
