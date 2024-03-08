@@ -16,28 +16,10 @@ export const initializeTestMocks = () => {
   const setErrorStateMock = jest.fn();
   const initialState = { status: false, company: false };
 
+mockUseState(initialState, setFiltersMock, setErrorStateMock);
+};
+export const mockUseState = (initialState, setFiltersMock, setErrorStateMock) => {
   jest.spyOn(React, 'useState')
     .mockImplementationOnce(() => [initialState, setFiltersMock])
     .mockImplementationOnce(() => [initialState, setErrorStateMock]);
-
-  return { setFiltersMock, setErrorStateMock, initialState };
-};
-/**
- * This file provides utility functions for testing the JobListingsPage component, including rendering with mock data and simulating window size changes.
- */
-  jest.spyOn(React, 'useState')
-    .mockImplementationOnce(() => [initialState, setFiltersMock])
-    .mockImplementationOnce(() => [initialState, setErrorStateMock]);
-
-  return { setFiltersMock, setErrorStateMock, initialState };
-};
-    .mockImplementationOnce(() => [initialState, setFiltersMock])
-    .mockImplementationOnce(() => [initialState, setErrorStateMock]);
-
-  return { setFiltersMock, setErrorStateMock, initialState };
-};
-    .mockImplementationOnce(() => [initialState, setFiltersMock])
-    .mockImplementationOnce(() => [initialState, setErrorStateMock]);
-
-  return { setFiltersMock, setErrorStateMock, initialState };
 };
