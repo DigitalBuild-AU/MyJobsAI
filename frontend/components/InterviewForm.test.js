@@ -23,6 +23,10 @@ describe('InterviewForm Component Tests', () => {
  * Tests that the InterviewForm component correctly updates inputs and submits form data,
  * and verifies that axios is called with the correct data upon form submission.
  */
+/**
+ * Tests that the inputs in the InterviewForm are correctly updated and the form submission
+ * triggers an axios call with the correct data.
+ */
   test('inputs are correctly updated and form submission calls axios with correct data', async () => {
     axios.post.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
 
@@ -41,6 +45,10 @@ describe('InterviewForm Component Tests', () => {
  *
  * This test simulates user interaction with the InterviewForm component's inputs and the submission button. It verifies that axios is called with the correct data upon form submission.
  */
+/**
+ * Tests user interaction with the InterviewForm component's inputs and the submission button.
+ * Verifies that axios is correctly called with the expected data upon form submission.
+ */
     await screen.findByText('Interview scheduled successfully.');
 
     expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/interviews', {
@@ -53,6 +61,10 @@ describe('InterviewForm Component Tests', () => {
 
 /**
  * Tests the handling of form submission failure by the InterviewForm component, ensuring an error message is displayed.
+ */
+/**
+ * Tests the handling of form submission failure by the InterviewForm component,
+ * ensuring an error message is displayed to the user.
  */
   test('form submission failure displays error message', async () => {
     axios.post.mockRejectedValue(new Error('Failed to schedule interview.'));
@@ -71,6 +83,10 @@ describe('InterviewForm Component Tests', () => {
  * Tests the functionality and rendering of interactive guide steps within the InterviewForm component.
  * Verifies that all guide steps are correctly targeted and described when the guide is active.
  */
+/**
+ * Tests the correct targeting and description of interactive guide steps within
+ * the InterviewForm component when the guide feature is active.
+ */
   test('interactive guide steps are correctly targeted and described', () => {
 /**
  * Tests that interactive guide steps are correctly targeted and described.
@@ -87,6 +103,11 @@ describe('InterviewForm Component Tests', () => {
 /**
  * Tests the handleSubmit function for correct handling of form submissions and responses in the InterviewForm component.
  * Verifies that submitInterviewData is called with correct parameters and setInterviews updates state appropriately.
+ */
+/**
+ * Tests the handleSubmit function for its correct handling of form submission
+ * and response processing within the InterviewForm.
+ * Ensures that submitInterviewData is appropriately called and state is updated.
  */
   test('handleSubmit function correctly handles submission and response', async () => {
     submitInterviewData.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
@@ -107,6 +128,10 @@ describe('InterviewForm Component Tests', () => {
 
 /**
  * Tests the handleSubmit function of the InterviewForm component for correct handling of submission failures.
+ */
+/**
+ * Tests the handleSubmit function for its correct handling of submission failures,
+ * specifically ensuring that errors are correctly handled and users are informed.
  */
   test('handleSubmit function correctly handles submission failure', async () => {
     submitInterviewData.mockRejectedValue(new Error('Failed to schedule interview.'));
