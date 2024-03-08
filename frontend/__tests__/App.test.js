@@ -41,6 +41,11 @@ describe('App.js Tests', () => {
  * This file contains tests for the App component, focusing on its functionality
  * such as generating cover letters and sending emails. It uses Jest and
  * @testing-library/react for rendering components and asserting on their behavior.
+    /**
+     * Tests for the sendEmail functionality within the App component.
+     * This suite checks both the successful and unsuccessful sending of emails,
+     * ensuring the correct behavior under various conditions.
+     */
  */
     /**
      * Tests if the generateCoverLetter function exists and is callable.
