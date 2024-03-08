@@ -1,6 +1,5 @@
 /**
- * JobListingsPage Component
- * This component is responsible for rendering the job listings page. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
+ * This file defines the React component for the Job Listings Page, showcasing job listings with filtering, pagination, and different view options.
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -29,32 +28,6 @@ const JobListingsPage = () => {
 import { logError } from '../utils/logger';
 
   useEffect(() => {
-
-    /**
-   * Adjusts the view state between 'card' and 'table' layouts based on the window's width.
-   * This function is triggered on window resize events.
-   * @returns {void}
-   */
-
- * File: JobListingsPage.js
- * Project: MyJobsAI
- * Purpose: This file defines the JobListingsPage component for the MyJobsAI application. It is responsible for rendering the job listings page, which includes features such as displaying job listings in various views (table or card), filtering listings based on user criteria, and pagination. The component leverages React hooks for state management and axios for data fetching from the server.
- * Components:
- *  - JobListingsPage: Main component for displaying job listings.
- *  - Table/List View: Renders job listings in a table or list format.
- *  - Filter: Allows users to filter job listings based on various criteria.
- *  - Pagination: Provides pagination functionality for navigating through listings.
-  setupWebVitals();
-  const [showGuide, setShowGuide] = useState(false);
- * Author: Contributors
- * Created: [Creation Date]
- */
-     */
-    const handleWindowSizeChange = () => handleViewChangeBasedOnWindowSize();
-    
-/**
- * Updates the error state for a given field based on whether its value is empty.
- * 
  * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
  *
  * @param {string} name - The name of the field to update the error state for.
