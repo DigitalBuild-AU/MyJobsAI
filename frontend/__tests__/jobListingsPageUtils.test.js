@@ -122,4 +122,12 @@ describe('jobListingsPageUtils', () => {
  * This function performs cleanup operations, such as removing event listeners and resetting filters, when the component unmounts.
  * 
  * @param {Function} setFilters - A function to reset the filters state.
+  /**
+   * Tests for the cleanupOnUnmount function.
+   * This test verifies that cleanupOnUnmount correctly removes the resize event listener and resets filters to their default values.
+   */
+  /**
+   * Confirms that cleanupOnUnmount removes the resize event listener from the window and resets the filters state using the provided function.
+   * Mocks the window.removeEventListener function and a setFilters function to verify their correct usage.
+   */
  */
