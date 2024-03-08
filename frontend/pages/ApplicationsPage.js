@@ -1,5 +1,6 @@
 /**
- * ApplicationsPage is a React functional component that renders the applications page.
+ * ApplicationsPage is a React component that serves as the page for viewing and managing job applications within the MyJobsAI application.
+ * It utilizes the ApplicationsComponent to render the main content.
  */
 import React, { useEffect } from 'react';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
