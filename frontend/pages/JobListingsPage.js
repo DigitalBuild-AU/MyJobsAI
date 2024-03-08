@@ -154,12 +154,12 @@ const renderPagination = () => {
 
   /**
    * Updates the filters state with new values for a given filter.
-   * This function is responsible for updating the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
+   * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
    *
    * @param {string} filterName - The name of the filter to update.
    * @param {string} filterValue - The new value for the filter.
-   * @returns void - This function does not return a value but updates the component's state directly.
    */
+
  /**
  * Updates the filters state with new values for a given filter.
  * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
@@ -172,14 +172,17 @@ const renderPagination = () => {
    * @param {string} filterValue - The new value for the filter.
    * @returns {void}
    */
+
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
   /**
-   * Creates a button element for navigating to a specific page in the pagination component.
+   * Creates a button element for a given page number in the pagination component.
+   * This function generates a button for navigating to a specific page. The button is labeled with the page number.
+   *
    * @param {number} pageNumber - The page number for the button.
-   * @returns {JSX.Element} A button element for pagination
+   * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page
    */
   
   const createPaginationButton = (pageNumber) => (
@@ -190,14 +193,13 @@ const renderPagination = () => {
 
     <div className="job-listings-page">
 
-  /**
-   * Updates the error state for a given input field based on validation result.
-   * Utilizes validateInput function to check the validity of the input value.
-   * @param {string} name - The name of the input field to validate.
-   * @param {string} value - The value of the input field to validate.
-   * @returns {void}
-   */
-
+/**
+ * Updates the error state for a given field based on whether its value is empty.
+ * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
+ *
+ * @param {string} name - The name of the field to update the error state for.
+ * @param {string} value - The new value of the field.
+ */
 
 const handleErrorState = (name, value) => {
   const isValid = validateInput(value);
