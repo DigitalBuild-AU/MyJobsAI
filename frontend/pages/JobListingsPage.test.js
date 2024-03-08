@@ -5,13 +5,18 @@ jest.mock('../utils/webVitals', () => ({
 
 """
 
-JobListingsPage.test.js
+JobListingsPage.test.js - Test Suite for JobListingsPage Component
 
-This file contains tests for the JobListingsPage component, ensuring correct rendering and functionality of the job listings page and its features. It serves as the test suite for the JobListingsPage component within the MyJobsAI application. It includes a series of tests aimed at ensuring the correct rendering and functionality of the JobListingsPage and its child components, such as JobListingCard and JobListingTable. The tests cover various aspects including component rendering, user interaction simulations, pagination, and filter functionality. Utilizing React and the React Testing Library, this test suite verifies the integrity and behavior of the JobListingsPage component, ensuring a seamless user experience.
+This test suite is designed to ensure the correct rendering and functionality of the JobListingsPage component within the MyJobsAI application. It includes tests for component rendering, user interaction simulations, pagination, and filter functionality. The suite utilizes React and the React Testing Library to verify the integrity and behavior of the JobListingsPage component, aiming to ensure a seamless user experience.
+
+Key Components Tested:
+- JobListingsPage: Main component for displaying job listings.
+- JobListingCard: Child component representing individual job listings.
+- JobListingTable: Child component for displaying job listings in a tabular format.
 
 Dependencies:
-- React: A JavaScript library for building user interfaces, used here for component creation and testing.
-- @testing-library/react: Provides a set of tools to facilitate testing React components, enabling interaction simulation and component behavior verification.
+- React: A JavaScript library for building user interfaces.
+- @testing-library/react: Provides tools for testing React components, enabling interaction simulation and component behavior verification.
 
 """
 
