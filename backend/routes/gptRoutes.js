@@ -1,6 +1,7 @@
 /**
- * Routes for generating CV suggestions, cover letters, and CV customization based on user input and job descriptions.
- * Utilizes OpenAI's GPT models for content generation and analysis.
+ * gptRoutes.js
+ * This file contains Express routes for interacting with GPT models to generate CV suggestions, cover letters, and CV customizations.
+ * It utilizes the OpenAI API to process user inputs and generate relevant outputs for job application materials.
  */
 const express = require('express');
 const dotenv = require('dotenv');
@@ -15,10 +16,12 @@ const router = express.Router();
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // CV Suggestions Route using Chat Completions
-
 /**
- * POST route for generating CV suggestions.
- * Accepts a job description and user's CV in the request body and returns a list of suggestions for CV improvement.
+ * POST /cv_suggestions
+ * Generates CV suggestions based on a job description and user's CV.
+ * Inputs: jobDescription (String), userCV (String)
+ * Output: JSON object containing CV suggestions
+ * Exceptions: Returns a 500 status code with an error message if the request fails.
  */
 router.post('/cv_suggestions', async (req, res) => {
  * Handles the generation of CV suggestions based on a given job description and user's CV.
@@ -46,6 +49,13 @@ router.post('/cv_suggestions', async (req, res) => {
 
  */
 router.post('/cover_letter', async (req, res) => {
+/**
+ * POST /cover_letter
+ * Generates a cover letter based on a job description and user's CV.
+ * Inputs: jobDescription (String), userCV (String)
+ * Output: JSON object containing the generated cover letter
+ * Exceptions: Returns a 500 status code with an error message if the request fails.
+ */
   const { jobDescription, userCV } = req.body;
   try {
     const analysisResults = await generateCoverLetter(jobDescription, userCV);
@@ -83,4 +93,11 @@ router.post('/cv_customization', async (req, res) => {
  * Receives a job description and user's CV in the request body and provides suggestions for customizing the CV accordingly.
  */
 
-module.exports = router;
+/**
+ * POST /cv_customization
+ * Generates CV customization suggestions based on a job description and user's CV.
+ * Inputs: jobDescription (String), userCV (String)
+ * Output: JSON object containing CV customization suggestions
+ * Exceptions: Returns a 500 status code with an error message if the request fails.
+ */
+router.post('/cv_customization', async (req, res) => {
