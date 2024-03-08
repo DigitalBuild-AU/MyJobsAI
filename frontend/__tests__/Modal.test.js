@@ -8,6 +8,9 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import Modal from '../components/Modal';
 
 describe('Modal Component', () => {
+  """
+  Tests that the Modal component renders correctly when its 'isOpen' prop is set to true.
+  """
   test('renders correctly when isOpen is true', () => {
     render(<Modal isOpen={true} content="Test Content" actions={<button>Action</button>} />);
     expect(screen.getByText('Test Content')).toBeInTheDocument();
