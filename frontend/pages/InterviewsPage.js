@@ -32,6 +32,14 @@ function InterviewsPage() {
       .catch(error => handleInterviewError(error));
   };
 
+/**
+ * Fetches interviews from the server on component mount and updates the state accordingly.
+ */
+/**
+ * The InterviewsPage component manages the scheduling and display of interviews. It uses state to manage interviews, job title, date, and notes.
+ * The component fetches existing interviews from the server on mount using the useEffect hook and updates the state.
+ */
+
 export default function InterviewsPage() {
   const [interviews, setInterviews] = useState([]);
   const [jobTitle, setJobTitle] = useState('');
@@ -49,7 +57,8 @@ export default function InterviewsPage() {
   }, []);
 
   /**
-  * Handles the submission of the interview form, scheduling a new interview.
+  * Prevents the default form submission behavior, sends the interview details to the server,
+  * and updates the state based on the server's response or an error.
   * @param {Event} e - The event object from the form submission.
   */
   const handleSubmit = (e) => {

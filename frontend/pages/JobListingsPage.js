@@ -24,6 +24,12 @@ import { useForm } from 'react-hook-form';
   }, [filters, page]);
 
   /**
+/**
+ * useEffect hook that performs two main functions:
+ * 1. Adds a 'resize' event listener to adjust the view state between 'card' and 'table' layouts based on the window's width.
+ * 2. Fetches job listings from the server based on the current filters and page number.
+ * It also includes a cleanup function to remove the event listener and reset filters on component unmount.
+ */
   * Fetches job listings from the server based on the current filters and page number.
   */
 
@@ -54,6 +60,15 @@ const handleViewChangeBasedOnWindowSize = () => {
   * Cleans up event listeners and resets filters state on component unmount.
   */
   /**
+/**
+ * Fetches job listings from the server based on the current filters and page number.
+ * It updates the listings state with the fetched data and sets the total pages for pagination.
+ * In case of an error, it logs the error message.
+ * 
+ * @async
+ * @function fetchListings
+ * @returns {Promise<void>} A promise that resolves when the listings have been fetched and state has been updated.
+ */
   * Cleans up event listeners and resets filters state on component unmount.
   * Specifically, removes the 'resize' event listener from the window.
   * @returns {void}
@@ -85,6 +100,13 @@ const cleanupOnUnmount = () => {
 // No changes required as the requested modifications have already been implemented.
 
   /**
+/**
+ * Cleans up event listeners and resets filters state on component unmount.
+ * Specifically, removes the 'resize' event listener from the window and resets the filters state to its initial values.
+ * 
+ * @function cleanupOnUnmount
+ * @returns {void}
+ */
    * Generates the pagination component by creating buttons for each page.
    * The button corresponding to the current page is disabled to indicate the active page. This function does not take any parameters and returns a JSX.Element containing the pagination buttons.
    *
@@ -156,6 +178,15 @@ const renderPagination = () => {
  * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
  *
  * @param {string} name - The name of the field to update the error state for.
+/**
+ * Updates the filters state with new values for a given filter.
+ * This function is responsible for updating the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
+ * 
+ * @function updateFilters
+ * @param {string} filterName - The name of the filter to update.
+ * @param {string} filterValue - The new value for the filter.
+ * @returns {void}
+ */
  * @param {string} value - The new value of the field.
  */
 
@@ -164,6 +195,16 @@ const handleErrorState = (name, value) => {
   setErrorState({ ...errorState, [name]: !isValid });
 };
     <div className="job-listings-page">
+/**
+ * Updates the error state for a given field based on whether its value is empty.
+ * This function checks if the new value of an input field is an empty string and updates the errorState object accordingly.
+ * If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
+ * 
+ * @function handleErrorState
+ * @param {string} name - The name of the field to update the error state for.
+ * @param {string} value - The new value of the field.
+ * @returns {void}
+ */
       <select name="view" onChange={(e) => handleViewChange(e.target.value)}>
         <option value="table">Table View</option>
         <option value="card">Card View</option>
@@ -199,6 +240,14 @@ const handleErrorState = (name, value) => {
             <option value="Applied">Applied</option>
             <option value="Interviewed">Interviewed</option>
             <option value="Closed">Closed</option>
+/**
+ * Handles the view change event by updating the view state.
+ * This function updates the view state ('card' or 'table') based on user selection from the dropdown menu.
+ * 
+ * @function handleViewChange
+ * @param {string} newView - The new view state to set.
+ * @returns {void}
+ */
             <option value="Offer">Offer</option>
           </select>
           <textarea name="description" placeholder="Description"></textarea>
