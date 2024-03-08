@@ -1,3 +1,7 @@
+/**
+ * Tests for the SearchResultsPage component.
+ * This file includes tests for verifying the correct rendering and functionality of the SearchResultsPage component, based on different sets of search results.
+ */
 import React from 'react';
 import { render, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -31,6 +35,7 @@ describe('SearchResultsPage', () => {
   });
 
   test('correctly renders job listings when data is returned from the API', async () => {
+  // Tests that the search query is correctly displayed on the page.
     render(<SearchResultsPage />);
     await waitFor(() => {
       expect(screen.getByText('Software Engineer')).toBeInTheDocument();
@@ -40,6 +45,7 @@ describe('SearchResultsPage', () => {
   });
 
   test('displays appropriate message when no job listings are found', async () => {
+  // Verifies that job listings are rendered correctly when data is returned from the API.
     axios.get.mockResolvedValue({ data: { jobs: [], contacts: mockData.contacts, tasks: mockData.tasks } });
     render(<SearchResultsPage />);
     await waitFor(() => {
@@ -55,6 +61,8 @@ describe('SearchResultsPage', () => {
   });
 
   test('displays appropriate message when no contacts are found', async () => {
+  // Checks that an appropriate message is displayed when no job listings are found.
+  // Verifies that contacts are rendered correctly when data is returned from the API.
     axios.get.mockResolvedValue({ data: { jobs: mockData.jobs, contacts: [], tasks: mockData.tasks } });
     render(<SearchResultsPage />);
     await waitFor(() => {
@@ -70,6 +78,8 @@ describe('SearchResultsPage', () => {
   });
 
   test('displays appropriate message when no tasks are found', async () => {
+  // Checks that an appropriate message is displayed when no contacts are found.
+  // Verifies that tasks are rendered correctly when data is returned from the API.
     axios.get.mockResolvedValue({ data: { jobs: mockData.jobs, contacts: mockData.contacts, tasks: [] } });
     render(<SearchResultsPage />);
     await waitFor(() => {
@@ -77,3 +87,4 @@ describe('SearchResultsPage', () => {
     });
   });
 });
+  // Checks that an appropriate message is displayed when no tasks are found.
