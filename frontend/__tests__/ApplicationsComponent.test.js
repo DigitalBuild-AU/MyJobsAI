@@ -19,3 +19,16 @@ describe('ApplicationsComponent', () => {
     expect(document.body.appendChild.mock.calls[0][0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js');
   });
 });
+/**
+ * Test suite for the ApplicationsComponent.
+ * This file contains tests that verify the rendering and functionality of the ApplicationsComponent.
+ */
+/**
+ * Tests for ApplicationsComponent.
+ */
+    document.querySelector = jest.fn().mockReturnValueOnce(null);
+    render(<ApplicationsComponent />);
+    expect(document.body.appendChild).toHaveBeenCalled();
+    expect(document.body.appendChild.mock.calls[0][0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js');
+  });
+});

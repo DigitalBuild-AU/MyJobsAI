@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
+/**
+ * CVHelperComponent is a React functional component designed to assist users in creating and optimizing their CVs within the MyJobsAI application.
+ */
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 
 const CVHelperComponent = () => {
@@ -92,6 +95,7 @@ const CVHelperComponent = () => {
 };
 
 export default CVHelperComponent;
+
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 // Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
