@@ -56,6 +56,9 @@ describe('debugLogger tests', () => {
  * functions as expected under various conditions.
  */
   /**
+  /**
+   * Tests that messages and error stack traces are logged correctly when an error object is provided.
+   */
    * Mocks the global Date object to ensure consistent timestamps in tests.
    */
   /**
