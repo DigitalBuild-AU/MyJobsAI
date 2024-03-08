@@ -1,3 +1,7 @@
+  /**
+   * Test case: Removes existing bootstrap script tag and appends a new one.
+   * Verifies that if a Bootstrap script tag already exists, it is replaced with a new one, ensuring only one script tag is present.
+   */
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { loadBootstrapScript } from '../utils/bootstrapUtils';
@@ -18,6 +22,10 @@ describe('bootstrapUtils tests', () => {
     expect(scriptTags[0]).toHaveAttribute('async', '');
   });
 
+  /**
+   * Test case: Appends a bootstrap script tag when none exists.
+   * Verifies that a Bootstrap script tag is correctly appended to the document body when no such tag exists beforehand.
+   */
   it('appends bootstrap script tag when none exists', () => {
   /**
    * Test: Ensures that an existing Bootstrap script tag is removed and a new one is appended correctly.

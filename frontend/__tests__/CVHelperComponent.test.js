@@ -29,12 +29,20 @@ describe('CVHelperComponent', () => {
     expect(getByText('CV Helper | MyJobsAI')).toBeInTheDocument();
   });
 
+  /**
+   * Test case: Dynamically loads the Bootstrap script for CVHelperComponent.
+   * Verifies that the Bootstrap script is appended to the document body when the CVHelperComponent is rendered.
+   */
   it('loads Bootstrap script dynamically', () => {
     document.body.appendChild = jest.fn();
     document.querySelector = jest.fn().mockReturnValueOnce(null);
     render(<CVHelperComponent />);
     expect(document.body.appendChild).toHaveBeenCalled();
     expect(document.body.appendChild.mock.calls[0][0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+  });
+});
+
+  it('triggers API call with correct data on form submission', async () => {
   });
 });
 
@@ -73,6 +81,22 @@ it('loads Bootstrap script on component mount', async () => {
     const { getByText, getByLabelText } = render(<CVHelperComponent />);
     fireEvent.change(getByLabelText('Job Description'), { target: { value: 'Software Engineer' } });
     fireEvent.change(getByLabelText('Your CV'), { target: { value: 'My CV content' } });
+    fireEvent.click(getByText('Generate Suggestions'));
+    await waitFor(() => expect(getByText(mockSuggestions)).toBeInTheDocument());
+  });
+
+  /**
+   * Test case: Handles errors correctly if the API call fails in CVHelperComponent.
+   * Verifies that an error message is displayed if the API call to generate CV suggestions fails.
+   */
+  it('handles errors correctly if API call fails', async () => {
+    axios.post.mockRejectedValue(new Error('Failed to generate CV suggestions.'));
+    const { getByText, getByLabelText } = render(<CVHelperComponent />);
+    fireEvent.change(getByLabelText('Job Description'), { target: { value: 'Software Engineer' } });
+    fireEvent.change(getByLabelText('Your CV'), { target: { value: 'My CV content' } });
+    fireEvent.click(getByText('Generate Suggestions'));
+    await waitFor(() => expect(getByText('Error fetching CV suggestions: Failed to generate CV suggestions., Stack: undefined')).toBeInTheDocument());
+  });
     fireEvent.click(getByText('Generate Suggestions'));
     await waitFor(() => expect(getByText(mockSuggestions)).toBeInTheDocument());
   });
