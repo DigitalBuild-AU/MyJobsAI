@@ -158,23 +158,11 @@ test('Filter functionality with different inputs updates displayed listings corr
 
   expect(screen.getByText('Job Page 2')).toBeInTheDocument();
 });
-test('Displays error message on API failure', async () => {
-  axios.get.mockRejectedValue(new Error('API call failed'));
-
-  render(<JobListingsPage />);
-test('Filter functionality with different inputs updates displayed listings correctly', async () => {
-  axios.get.mockResolvedValueOnce({
-    data: { listings: [{ id: 3, jobTitle: 'Frontend Developer', company: 'Innovatech', location: 'Remote' }], totalPages: 1 }
-  });
-
-  render(<JobListingsPage />);
-  userEvent.type(screen.getByPlaceholderText('Filter by status'), 'Open');
-  userEvent.type(screen.getByPlaceholderText('Filter by company'), 'Innovatech');
-
-  await waitFor(() => {
-    expect(screen.getByText('Frontend Developer')).toBeInTheDocument();
-  });
-});
+  """
+  Test case: Verifies that an error message is displayed when fetching filtered job listings fails.
+  Simulation: Mocks a get request to return an error.
+  Expected Outcome: An error message indicating the failure to fetch job listings is displayed.
+  """
 test('Error message displayed when fetching filtered job listings fails', async () => {
   axios.get.mockRejectedValue(new Error('Failed to fetch filtered listings'));
 
