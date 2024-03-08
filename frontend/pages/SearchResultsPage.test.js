@@ -56,6 +56,83 @@ describe('SearchResultsPage', () => {
 
   test('correctly renders contacts when data is returned from the API', async () => {
     render(<SearchResultsPage />);
+describe('renderJobs function', () => {
+  test('correctly renders job listings with non-empty data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: mockData.jobs, contacts: [], tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    });
+  });
+
+  test('displays "No job listings found." message with empty data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: [], tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('No job listings found.')).toBeInTheDocument();
+    });
+  });
+
+  test('displays "No job listings found." message with null data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: null, contacts: [], tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('No job listings found.')).toBeInTheDocument();
+    });
+  });
+});
+
+describe('renderContacts function', () => {
+  test('correctly renders contacts with non-empty data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: mockData.contacts, tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+    });
+  });
+
+  test('displays "No contacts found." message with empty data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: [], tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('No contacts found.')).toBeInTheDocument();
+    });
+  });
+
+  test('displays "No contacts found." message with null data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: null, tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('No contacts found.')).toBeInTheDocument();
+    });
+  });
+});
+
+describe('renderTasks function', () => {
+  test('correctly renders tasks with non-empty data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: [], tasks: mockData.tasks } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('Follow up with HR')).toBeInTheDocument();
+    });
+  });
+
+  test('displays "No tasks found." message with empty data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: [], tasks: [] } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('No tasks found.')).toBeInTheDocument();
+    });
+  });
+
+  test('displays "No tasks found." message with null data', async () => {
+    axios.get.mockResolvedValue({ data: { jobs: [], contacts: [], tasks: null } });
+    render(<SearchResultsPage />);
+    await waitFor(() => {
+      expect(screen.getByText('No tasks found.')).toBeInTheDocument();
+    });
+  });
+});
     render(<SearchResultsPage />);
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
