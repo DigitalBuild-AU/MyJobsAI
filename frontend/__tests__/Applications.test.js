@@ -1,3 +1,7 @@
+/**
+ * @file Applications.test.js
+ * @description Test suite for the Applications component, covering rendering, state updates, and interaction behaviors.
+ */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import Applications from '../pages/Applications';
@@ -15,6 +19,9 @@ describe('Applications Component', () => {
    * Tests that submitting a new application correctly updates the component's state.
    */
   test('submits a new application and updates state', () => {
+  * Tests that submitting a new application correctly updates the component's state.
+  */
+  test('submits a new application and updates state', () => {
     const { getByLabelText, getByText } = render(<Applications />);
     fireEvent.change(getByLabelText('Job Title'), { target: { value: 'Software Engineer' } });
     fireEvent.change(getByLabelText('Company Name'), { target: { value: 'Tech Innovations Inc.' } });
@@ -28,10 +35,9 @@ describe('Applications Component', () => {
   test('updates an existing application and reflects changes', () => {
    */
   test('updates an existing application and reflects changes', () => {
-"""
-File: Applications.test.js
-Description: Test suite for the Applications component, covering rendering, state updates, and interaction behaviors.
-"""
+ * Tests that updating an existing application correctly reflects the changes.
+ */
+  test('updates an existing application and reflects changes', () => {
 /**
  * Tests that deleting an application correctly updates the component's state.
  */
@@ -98,3 +104,6 @@ describe('App.js Routing', () => {
     expect(screen.getByText('Total Applications:')).toBeInTheDocument();
   });
 });
+/**
+ * Tests that the Applications component correctly navigates to different components via routing.
+ */
