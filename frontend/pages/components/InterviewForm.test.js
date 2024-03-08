@@ -1,3 +1,7 @@
+/**
+ * Tests for the InterviewForm component.
+ * This file includes tests for rendering the form, submitting form data, error handling, and field validation.
+ */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
