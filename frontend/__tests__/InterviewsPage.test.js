@@ -4,6 +4,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import InterviewsPage from '../pages/InterviewsPage';
 import { act } from 'react-dom/test-utils';
+import { submitInterview, handleInterviewResponse, handleInterviewError } from '../utils/interviewAPI';
+jest.mock('../utils/interviewAPI');
 
 describe('InterviewsPage', () => {
 """
@@ -64,3 +66,41 @@ Tests for the InterviewsPage component, covering the functionality of fetching a
   """
   Verifies the error handling in the InterviewsPage component when an attempt to schedule an interview fails. It checks that an appropriate error message is displayed.
   """
+  
+  it('integrates with submitInterview successfully', async () => {
+    const mockData = { jobTitle: 'Developer', date: '2023-04-01', notes: 'First round' };
+    const mockResponse = { data: { message: 'Interview scheduled successfully' } };
+    submitInterview.mockResolvedValue(mockResponse);
+    handleInterviewResponse.mockImplementation(data => data);
+
+    const { getByLabelText, getByText } = render(<InterviewsPage />);
+    fireEvent.change(getByLabelText(/Job Title/i), { target: { value: mockData.jobTitle } });
+    fireEvent.change(getByLabelText(/Date and Time/i), { target: { value: mockData.date } });
+    fireEvent.change(getByLabelText(/Notes/i), { target: { value: mockData.notes } });
+    await act(async () => {
+      fireEvent.click(getByText(/Schedule Interview/i));
+    });
+
+    await waitFor(() => {
+      expect(handleInterviewResponse).toHaveBeenCalledWith(mockResponse);
+    });
+  });
+
+  it('integrates with submitInterview with an error', async () => {
+    const mockData = { jobTitle: 'Developer', date: '2023-04-01', notes: 'First round' };
+    const mockError = new Error('Network error');
+    submitInterview.mockRejectedValue(mockError);
+    handleInterviewError.mockImplementation(() => {});
+
+    const { getByLabelText, getByText } = render(<InterviewsPage />);
+    fireEvent.change(getByLabelText(/Job Title/i), { target: { value: mockData.jobTitle } });
+    fireEvent.change(getByLabelText(/Date and Time/i), { target: { value: mockData.date } });
+    fireEvent.change(getByLabelText(/Notes/i), { target: { value: mockData.notes } });
+    await act(async () => {
+      fireEvent.click(getByText(/Schedule Interview/i));
+    });
+
+    await waitFor(() => {
+      expect(handleInterviewError).toHaveBeenCalledWith(mockError);
+    });
+  });
