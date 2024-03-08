@@ -41,6 +41,11 @@ function logCoverLetterGeneration() {
   console.log("Cover letter analysis and feedback generated successfully.");
 }
 
+/**
+ * Handles errors that occur during the cover letter generation process by logging the error and sending a response to the client.
+ * @param {Error} error - The error object that occurred.
+ * @param {Response} res - The Express response object to send the error message to the client.
+ */
 function handleCoverLetterError(error, res) {
   console.error(`Error processing cover letter request: ${error.message}, Stack: ${error.stack}`);
   res.status(500).json({ error: "Failed to generate cover letter analysis." });
