@@ -47,6 +47,20 @@ Tests for the InterviewsPage component, covering the functionality of fetching a
   """
 
   it('handles error when scheduling interview fails', async () => {
+it('handleSubmit with valid inputs schedules interview and updates state', async () => {
+  const formData = { jobTitle: 'UI Designer', date: '2023-05-01T12:00', notes: 'Second round' };
+  mock.onPost('/api/interviews', formData).reply(200, { id: '2', ...formData });
+
+  const { getByLabelText, getByText, findByText } = render(<InterviewsPage />);
+  fireEvent.change(getByLabelText(/Job Title/i), { target: { value: formData.jobTitle } });
+  fireEvent.change(getByLabelText(/Date and Time/i), { target: { value: formData.date } });
+  fireEvent.change(getByLabelText(/Notes/i), { target: { value: formData.notes } });
+  fireEvent.click(getByText(/Schedule Interview/i));
+
+  await waitFor(() => {
+    expect(findByText('UI Designer')).toBeInTheDocument();
+  });
+});
     const formData = { jobTitle: 'Developer', date: '2023-04-01', notes: 'First round' };
     mock.onPost('/api/interviews', formData).networkError();
 
@@ -64,3 +78,17 @@ Tests for the InterviewsPage component, covering the functionality of fetching a
   """
   Verifies the error handling in the InterviewsPage component when an attempt to schedule an interview fails. It checks that an appropriate error message is displayed.
   """
+it('handleSubmit error scenario displays error message', async () => {
+  const formData = { jobTitle: 'Backend Developer', date: '2023-05-02T15:00', notes: 'Technical round' };
+  mock.onPost('/api/interviews', formData).reply(500);
+
+  const { getByLabelText, getByText, findByText } = render(<InterviewsPage />);
+  fireEvent.change(getByLabelText(/Job Title/i), { target: { value: formData.jobTitle } });
+  fireEvent.change(getByLabelText(/Date and Time/i), { target: { value: formData.date } });
+  fireEvent.change(getByLabelText(/Notes/i), { target: { value: formData.notes } });
+  fireEvent.click(getByText(/Schedule Interview/i));
+
+  await waitFor(() => {
+    expect(findByText(/Failed to schedule interview./)).toBeInTheDocument();
+  });
+});
