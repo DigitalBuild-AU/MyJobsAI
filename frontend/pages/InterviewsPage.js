@@ -56,7 +56,13 @@ export default function InterviewsPage() {
     handleFormSubmit(jobTitle, date, notes);
   };
 
-  function handleFormSubmit(jobTitle, date, notes) {
+/**
+ * Submits the interview details to the server to schedule a new interview.
+ * @param {string} jobTitle - The title of the job.
+ * @param {string} date - The date of the interview.
+ * @param {string} notes - Additional notes for the interview.
+ */
+function handleFormSubmit(jobTitle, date, notes) {
     axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes })
       .then(response => {
         alert('Interview scheduled successfully.');
