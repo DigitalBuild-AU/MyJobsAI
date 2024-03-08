@@ -24,6 +24,9 @@ describe('JobListingsPage Component', () => {
   });
 
   test('Form inside the modal correctly submits new job listings', () => {
+"""
+Confirms that the modal for adding new job listings on the Job Listings Page opens when the 'Add Job Listing' button is clicked, and ensures that the modal closes as expected when the 'Cancel' button is clicked.
+"""
     const mockSubmit = jest.fn();
     render(<JobListingsPage submitFunction={mockSubmit} />);
     fireEvent.click(screen.getByText('Add Job Listing'));
@@ -40,4 +43,7 @@ describe('JobListingsPage Component', () => {
 });
 """
 Tests that the modal on the Job Listings Page opens as expected when the 'Add Job Listing' button is clicked.
+"""
+"""
+Verifies that the form within the modal on the Job Listings Page correctly submits new job listings with the provided information when the 'Submit' button is clicked.
 """

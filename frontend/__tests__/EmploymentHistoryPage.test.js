@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 """
-Tests if the Employment History Page renders without crashing. It checks for the presence of placeholders and buttons related to employment history.
+Ensures that the Employment History Page renders successfully and displays placeholders and buttons related to employment history management.
 """
 test('renders without crashing', async () => {
 /**
