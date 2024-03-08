@@ -1,3 +1,7 @@
+"""
+This file contains tests for the InterviewsPage component, covering functionalities such as fetching and displaying interviews, scheduling new interviews, and handling errors.
+"""
+
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
