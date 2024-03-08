@@ -34,6 +34,9 @@ async function generateCoverLetter(jobDescription, userCV) {
   return response.data.choices[0].text.trim();
 }
 
+/**
+ * Logs a message indicating successful generation of a cover letter analysis and feedback.
+ */
 function logCoverLetterGeneration() {
   console.log("Cover letter analysis and feedback generated successfully.");
 }
