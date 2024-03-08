@@ -19,7 +19,7 @@ import React from 'react';
 import JobListingsPage from '../../pages/JobListingsPage';
 import JobListingCard from '../../components/JobListingCard';
 import JobListingTable from '../../components/JobListingTable';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 
 /**
  * Test suite for JobListingsPage component
@@ -242,6 +242,13 @@ test('Sidebar integration in JobListingsPage', () => {
  * Test Case: Responsive design renders correct components based on screen size.
  * Checks that the correct view (Card View or Table View) is rendered based on the window's inner width.
  */
+  /**
+   * Test: handleWindowSizeChange updates view state based on window size
+   * Purpose: This test verifies that the view state of the JobListingsPage component updates correctly when the window size changes. It simulates changing the window size to a small screen and then to a large screen, and checks if the component renders the appropriate view ('Card View' for small screens and 'Table View' for large screens).
+   * Inputs: None
+   * Outputs: None
+   * Side Effects: The document body will contain text 'Card View' or 'Table View' depending on the simulated window size.
+   */
   test('handleWindowSizeChange updates view state based on window size', () => {
     jest.spyOn(window, 'innerWidth', 'get').mockImplementation(() => 500); // Simulate small screen
     const { getByText } = render(<JobListingsPage />);
@@ -252,6 +259,13 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(getText('Table View')).toBeInTheDocument();
   });
 
+  test('sequential updates to filters result in combined state', () => {
+   * Test: sequential updates to filters result in combined state
+   * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
+   * Inputs: None
+   * Outputs: None
+   * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
+   */
   test('sequential updates to filters result in combined state', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
@@ -409,6 +423,10 @@ describe('handleErrorState function tests', () => {
   beforeEach(() => {
     setErrorStateMock = jest.fn();
     initialState = { status: false, company: false };
+  /**
+   * Test: handles window resize to switch to card view correctly
+   * Purpose: This test verifies that the JobListingsPage component correctly switches to 'Card View' when the window is resized to a width indicative of a smaller screen (e.g., mobile devices). It simulates a window resize event to a width of 500px and checks if the 'Card View' text is rendered, indicating the UI has correctly adjusted.
+   */
   test('handles window resize to switch to card view correctly', () => {
     act(() => {
       global.innerWidth = 500;
@@ -418,9 +436,29 @@ describe('handleErrorState function tests', () => {
     expect(getByText('Card View')).toBeInTheDocument();
   });
 
+
+  /**
+   * Test: handles window resize to switch to table view correctly
+   * Purpose: This test ensures that the JobListingsPage component transitions to 'Table View' when the window is resized to a width typical of larger screens (e.g., desktops). By dispatching a resize event with a width of 1024px, the test checks for the presence of 'Table View' text, confirming the UI's adaptability to screen size changes.
+   */
+  test('handles window resize to switch to table view correctly', () => {
+    act(() => {
+      global.innerWidth = 1024;
+      global.dispatchEvent(new Event('resize'));
+    });
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Table View')).toBeInTheDocument();
+  });
+  // Tests the 'handleWindowSizeChange' method of the JobListingsPage component to verify it correctly updates the component's view state based on the window size.
+  test('handleWindowSizeChange updates view state based on window size', () => {
+    global.innerWidth = 500; // Simulate small screen
+    const { getByText } = render(<JobListingsPage />);
+    expect(getByText('Card View')).toBeInTheDocument();
+
 describe('handleErrorState function tests', () => {
   let setErrorStateMock;
   let initialState;
+
 
   beforeEach(() => {
     setErrorStateMock = jest.fn();
@@ -479,6 +517,10 @@ describe('handleErrorState function tests', () => {
   afterEach(() => {
 /**
  * Test Case: Creates a pagination button with the correct page number.
+ * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
+ */
+    jest.clearAllMocks();
+  });
  * Verifies that the createPaginationButton function creates a button with the correct page number and properties.
  */
     jest.clearAllMocks();
