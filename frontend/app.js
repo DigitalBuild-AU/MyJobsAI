@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Applications from './components/Applications';
-import CoverLetter from './components/CoverLetter';
-import CVHelper from './components/CVHelper';
+import CoverLetterComponent from './components/CoverLetterComponent';
+import CVHelperComponent from './components/CVHelperComponent';
 import Interviews from './components/Interviews';
 import JobListings from './components/JobListings';
 import Settings from './components/Settings';
+import EmailComponent from './components/EmailComponent';
+import AnalyticsComponent from './components/AnalyticsComponent';
 
 console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
