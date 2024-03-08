@@ -3,11 +3,13 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import CVHelper from '../pages/CVHelper';
 
 describe('CVHelper Component', () => {
+  // Tests that the CVHelper component renders correctly.
   test('renders correctly', () => {
     render(<CVHelper />);
     expect(screen.getByText('Upload your CV')).toBeInTheDocument();
   });
 
+  // Tests that the CVHelper component handles CV upload successfully.
   test('handles CV upload successfully', () => {
     const file = new File(['dummy content'], 'resume.pdf', { type: 'application/pdf' });
     render(<CVHelper />);
@@ -16,12 +18,18 @@ describe('CVHelper Component', () => {
   });
 
   test('analyzes CV and provides suggestions', async () => {
+"""
+File: CVHelper.test.js
+Description: Test suite for the CVHelper component, focusing on CV upload functionality, file type validation, and CV analysis suggestions.
+"""
+  test('analyzes CV and provides suggestions', async () => {
     render(<CVHelper />);
     fireEvent.click(screen.getByText('Analyze CV'));
     await screen.findByText('Suggestions for improvement');
     expect(screen.getByText('Consider using more action verbs')).toBeInTheDocument();
   });
 
+  // Tests that the CVHelper component rejects non-PDF files.
   test('rejects non-PDF files', () => {
     const file = new File(['dummy content'], 'resume.txt', { type: 'text/plain' });
     render(<CVHelper />);
@@ -30,12 +38,14 @@ describe('CVHelper Component', () => {
   });
 
   test('handles CV upload error for large files', () => {
+  test('handles CV upload error for large files', () => {
     const largeFile = new File([''.padStart(5 * 1024 * 1024, '0')], 'large_resume.pdf', { type: 'application/pdf' });
     render(<CVHelper />);
     fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [largeFile] } });
     expect(screen.getByText('File is too large. Please upload a file smaller than 5MB.')).toBeInTheDocument();
   });
 
+  // Tests that the CVHelper component prompts the user to upload a CV before analysis can be performed.
   test('attempts to analyze without uploading a CV', () => {
     render(<CVHelper />);
     fireEvent.click(screen.getByText('Analyze CV'));
