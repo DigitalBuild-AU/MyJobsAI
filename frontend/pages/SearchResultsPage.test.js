@@ -27,6 +27,7 @@ describe('SearchResultsPage', () => {
     axios.get.mockResolvedValue({ data: mockData });
   });
 
+  // Verifies that the search query is displayed correctly on the page.
   test('displays the search query', async () => {
     render(<SearchResultsPage />);
     await waitFor(() => {
@@ -55,6 +56,7 @@ describe('SearchResultsPage', () => {
 
   test('correctly renders contacts when data is returned from the API', async () => {
     render(<SearchResultsPage />);
+    render(<SearchResultsPage />);
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
     });
@@ -80,6 +82,7 @@ describe('SearchResultsPage', () => {
   test('displays appropriate message when no tasks are found', async () => {
   // Checks that an appropriate message is displayed when no contacts are found.
   // Verifies that tasks are rendered correctly when data is returned from the API.
+    axios.get.mockResolvedValue({ data: { jobs: mockData.jobs, contacts: mockData.contacts, tasks: [] } });
     axios.get.mockResolvedValue({ data: { jobs: mockData.jobs, contacts: mockData.contacts, tasks: [] } });
     render(<SearchResultsPage />);
     await waitFor(() => {
