@@ -58,6 +58,9 @@ describe('sendEmail Function', () => {
     fireEvent.click(getByText(/send email/i));
 
     await expect(getByText(/Email was sent successfully./i)).toBeInTheDocument();
+/**
+ * Test suite for the sendEmail function in the App component. Verifies that the correct success or error message is displayed based on the outcome of the email sending process.
+ */
   });
 
   it('displays error message when email sending fails', async () => {
