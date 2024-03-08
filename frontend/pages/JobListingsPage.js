@@ -78,6 +78,9 @@ import { logError } from '../utils/logger';
       setListings(response.data.listings);
 
   /**
+  * Adjusts the view state between 'card' and 'table' layouts based on the window's width.
+  */
+  /**
    * Updates the view state based on the current window size.
    * Sets the view to 'card' if window width is less than 768px, otherwise sets to 'table'.
    * @returns {void}
