@@ -6,6 +6,22 @@ import '@testing-library/jest-dom/extend-expect';
 jest.mock('axios');
 
 describe('CVHelperComponent', () => {
+/**
+ * @file CVHelperComponent.test.js
+ * @description Test suite for the CVHelperComponent, focusing on rendering, dynamic script loading, API interactions, and error handling.
+ */
+ * Test suite for the CVHelperComponent.
+ * This suite tests rendering correctness, dynamic script loading, and general component behavior.
+ */
+describe('CVHelperComponent', () => {
+  /**
+   * Tests if the CVHelperComponent renders correctly.
+   */
+  it('renders correctly', () => {
+  /**
+   * Tests if the CVHelperComponent correctly loads the Bootstrap script dynamically.
+   */
+  it('loads Bootstrap script dynamically', () => {
   afterEach(cleanup);
 
   it('renders correctly', () => {
@@ -40,7 +56,14 @@ describe('CVHelperComponent', () => {
   });
 
 });
+/**
+ * Tests the dynamic loading of the Bootstrap script on component mount.
+ */
 it('loads Bootstrap script on component mount', async () => {
+  /**
+   * Tests the component's state update with CV suggestions upon a successful API call.
+   */
+  it('updates component state with CV suggestions upon successful API call', async () => {
   jest.mock('../../utils/bootstrapUtils', () => ({
     loadBootstrapScript: jest.fn(),
   }));
@@ -50,6 +73,9 @@ it('loads Bootstrap script on component mount', async () => {
 });
 
   it('updates component state with CV suggestions upon successful API call', async () => {
+   * Tests handling of errors correctly if the API call fails.
+   */
+  it('handles errors correctly if API call fails', async () => {
     const mockSuggestions = 'Consider highlighting your teamwork skills.';
     axios.post.mockResolvedValue({ data: { suggestions: mockSuggestions } });
     const { getByText, getByLabelText } = render(<CVHelperComponent />);
