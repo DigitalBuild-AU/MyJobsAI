@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, act } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import CVHelperPage from '../pages/CVHelperPage';
@@ -57,3 +57,30 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
   """
   Tests the CVHelperPage's response to an API request failure, ensuring that an appropriate error message is displayed.
   """
+  it('successfully fetches navbar content on component mount', async () => {
+    mock.onGet('navbar.html').reply(200, 'Navbar dynamically added.');
+    const { getByText } = render(<CVHelperPage />);
+    await waitFor(() => {
+      expect(getByText('Navbar dynamically added.')).toBeInTheDocument();
+    });
+  });
+
+  it('handles failure when fetching navbar content on component mount', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mock.onGet('navbar.html').networkError();
+    render(<CVHelperPage />);
+    await waitFor(() => {
+      expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Failed to load navbar:'));
+    });
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('correctly handles the bootstrap script tag on component mount', () => {
+    document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>';
+    render(<CVHelperPage />);
+    act(() => {
+      const scriptTags = document.querySelectorAll('script[src*="bootstrap.bundle.min.js"]');
+      expect(scriptTags.length).toBe(1);
+      expect(scriptTags[0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+    });
+  });

@@ -1,3 +1,6 @@
+/**
+ * SettingsPage is a React functional component that renders the user settings page.
+ */
 import React from 'react';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
 
