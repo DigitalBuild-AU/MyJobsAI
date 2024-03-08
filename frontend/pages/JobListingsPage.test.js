@@ -228,13 +228,13 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(getText('Table View')).toBeInTheDocument();
   });
 
-  test('sequential updates to filters result in combined state', () => {
-   * Test: sequential updates to filters result in combined state
-   * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
-   * Inputs: None
-   * Outputs: None
-   * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
-   */
+  /**
+  * Test: sequential updates to filters result in combined state
+  * Purpose: This test verifies that sequential updates to the filters in the JobListingsPage component result in a combined state that reflects all changes. It simulates updating different filters sequentially and checks if the final state correctly represents all the updates.
+  * Inputs: None
+  * Outputs: None
+  * Side Effects: The internal state of the JobListingsPage component is updated to reflect the combined effects of all filter updates.
+  */
   test('sequential updates to filters result in combined state', () => {
     const setFiltersMock = jest.fn();
     JobListingsPage.prototype.setFilters = setFiltersMock; // Mock setFilters function
