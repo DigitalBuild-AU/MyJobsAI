@@ -123,3 +123,7 @@ export default App;
         <p>Offers Received: ${data.offersReceived}</p>
         <p>Average Response Time (days): ${data.avgResponseTime ? data.avgResponseTime.toFixed(2) : 'No data'}</p>
       `;
+/**
+ * Fetches analytics data from the backend and displays it in the UI.
+ * This function performs an HTTP GET request to retrieve analytics data and updates the DOM to display this data.
+ */
