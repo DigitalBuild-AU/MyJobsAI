@@ -329,4 +329,9 @@ test('generateCoverLetter error scenario displays error message', async () => {
    * It mocks the axios.post call to simulate a failed API response and verifies that an appropriate error message
    * is displayed to the user.
    */
+  /**
+   * Test case: Verifies that the cover letter generation with valid inputs correctly displays the generated letter.
+   * Inputs: Mock data for job description ('Software Engineer role'), user name ('John Doe'), skills ('JavaScript, React'), and experience ('3 years').
+   * Expected Outcome: A success message indicating the cover letter has been created is displayed.
+   */
 
