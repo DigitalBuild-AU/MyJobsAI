@@ -1,3 +1,8 @@
+/**
+ * This file defines the CoverLetter component, which aids users in generating personalized cover letters
+ * using their details, job description, skills, and experience.
+ */
+
 import axios from 'axios';
 import React, { useState } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
