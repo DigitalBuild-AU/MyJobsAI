@@ -3,9 +3,10 @@ import { postCoverLetter } from '../utils/apiHelpers';
 import './CoverLetterGenerationPage.css';
 
 const CoverLetterGenerationPage = () => {
-  const [jobListings, setJobListings] = useState([]);
-  const [selectedJob, setSelectedJob] = useState('');
-  const [contactPerson, setContactPerson] = useState('');
+  const [jobDescription, setJobDescription] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userSkills, setUserSkills] = useState('');
+  const [userExperience, setUserExperience] = useState('');
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState('');
 
   useEffect(() => {
@@ -41,9 +42,13 @@ const CoverLetterGenerationPage = () => {
     postCoverLetter(selectedJob.description, 'User Name', 'User Skills', 'User Experience')
       .then(data => {
         setGeneratedCoverLetter(data.coverLetter);
+      .then(function(response) {
+        setGeneratedCoverLetter(response.data.coverLetter);
+        console.log('Cover Letter generated.');
       })
-      .catch(error => {
-        console.error('Error generating cover letter:', error);
+      .catch(function(error) {
+        console.error('Failed to generate Cover Letter:', error);
+        setGeneratedCoverLetter('Error generating Cover Letter.');
       });
   };
 
@@ -117,13 +122,13 @@ const renderSaveModal = () => (
   return (
     <div className="cover-letter-generation-page">
       <Card>
-        <select onChange={handleJobSelection} value={selectedJob.id}>
-          {jobListings.map(job => (
-            <option key={job.id} value={job.id}>{job.title}</option>
-          ))}
-        </select>
-        <input type="text" value={contactPerson} readOnly />
-        <button onClick={createCoverLetter}>Create Cover Letter</button>
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="Job Description" value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} />
+          <input type="text" placeholder="Your Name" value={userName} onChange={(e) => setUserName(e.target.value)} />
+          <input type="text" placeholder="Your Skills" value={userSkills} onChange={(e) => setUserSkills(e.target.value)} />
+          <input type="text" placeholder="Your Experience" value={userExperience} onChange={(e) => setUserExperience(e.target.value)} />
+          <button type="submit">Generate Cover Letter</button>
+        </form>
       </Card>
       {generatedCoverLetter && (
         <Card>
@@ -149,3 +154,7 @@ export default CoverLetterGenerationPage;
  * Placeholder function for downloading the generated cover letter as a DOC.
  * @function downloadAsDOC
  */
+        <div className="cover-letter-output">
+          <h3>Generated Cover Letter</h3>
+          <p>{generatedCoverLetter}</p>
+        </div>
