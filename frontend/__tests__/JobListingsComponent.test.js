@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import JobListingsComponent from '../components/JobListingsComponent';
 
@@ -71,4 +71,12 @@ describe('JobListingsComponent', () => {
     expect(rows).toHaveLength(2); // Includes header row and one filtered result
     expect(rows[1]).toHaveTextContent('Remote');
   });
+});
+it('loads Bootstrap script on component mount', async () => {
+  jest.mock('../../utils/bootstrapUtils', () => ({
+    loadBootstrapScript: jest.fn(),
+  }));
+  const { loadBootstrapScript } = require('../../utils/bootstrapUtils');
+  render(<JobListingsComponent />);
+  expect(loadBootstrapScript).toHaveBeenCalledTimes(1);
 });
