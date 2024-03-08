@@ -16,6 +16,9 @@ describe('debugLogger tests', () => {
     jest.restoreAllMocks();
   });
 
+  /**
+   * Tests that the debugLog function logs messages correctly without any errors.
+   */
   test('should log messages correctly without error', () => {
     const consoleLogSpy = jest.spyOn(console, 'log');
     debugLog('Test message');
@@ -43,10 +46,16 @@ describe('debugLogger tests', () => {
   test('should handle non-Error objects gracefully', () => {
     const consoleLogSpy = jest.spyOn(console, 'log');
     debugLog('Test message with non-error object', { some: 'object' });
+  test('should handle non-Error objects gracefully', () => {
+    const consoleLogSpy = jest.spyOn(console, 'log');
+    debugLog('Test message with non-error object', { some: 'object' });
     expect(consoleLogSpy).toHaveBeenCalledWith('[2023-04-01T00:00:00.000Z] DEBUG: Test message with non-error object');
   });
   /**
    * Tests that no error is thrown and messages are logged correctly when undefined is passed as the error parameter.
+   */
+  test('should not throw error when undefined is passed as error', () => {
+   * Tests that the debugLog function does not throw an error when undefined is passed as the error parameter.
    */
   test('should not throw error when undefined is passed as error', () => {
   /**
