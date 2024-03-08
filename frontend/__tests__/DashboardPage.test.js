@@ -10,7 +10,10 @@ import Modal from '../components/Modal';
 jest.mock('axios');
 
 describe('DashboardPage Modal Logic', () => {
-  test('Modal opens with correct content when handleOpenModal is called', () => {
+  """
+Tests that the modal on the Dashboard Page opens with the correct content when the 'Add Entry' button is clicked.
+"""
+test('Modal opens with correct content when handleOpenModal is called', () => {
     render(<DashboardPage />);
     fireEvent.click(screen.getByText('Add Entry'));
     expect(screen.getByText('Job Application Summary')).toBeInTheDocument();
