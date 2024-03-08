@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
 const CoverLetterComponent = () => {
   const [userName, setUserName] = useState('');
@@ -12,7 +13,6 @@ const CoverLetterComponent = () => {
   useEffect(() => {
     
 // Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
 /**
  * CoverLetterComponent is a React functional component that provides users with tools to generate cover letters based on their job application data in MyJobsAI.
