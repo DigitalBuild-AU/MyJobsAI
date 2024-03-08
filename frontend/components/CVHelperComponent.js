@@ -1,3 +1,6 @@
+/**
+ * CVHelperComponent is a React functional component designed to assist users in creating and optimizing their CVs within the MyJobsAI application.
+ */
 import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 
@@ -29,6 +32,9 @@ const CVHelperComponent = () => {
       </div>
     </>
   );
+};
+
+export default CVHelperComponent;
 };
 
 export default CVHelperComponent;
