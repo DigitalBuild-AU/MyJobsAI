@@ -67,6 +67,9 @@ describe('handleCoverLetterError', () => {
     expect(response).toEqual(mockResponse);
   });
 
+  """
+  Tests the generateCoverLetter function with a very long list of skills, ensuring that the function can process a large number of skills without error.
+  """
   it('successfully generates a cover letter with a very long list of skills', async () => {
     axios.post.mockResolvedValue(mockResponse);
     const longSkills = 'JavaScript, React, Node.js, Express, MongoDB, SQL, Python, Django, Flask, RESTful API design';
