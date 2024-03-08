@@ -12,7 +12,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes'); // Analytics routes
 const fetchJobInfoRoutes = require('./routes/fetchJobInfoRoutes'); // Import Fetch Job Info routes
 const { debugLog } = require('./utils/debugLogger');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Import Dashboard routes
-const errorLogger = require('../middleware/errorLogger');
+const errorLogger = require('./middleware/errorLogger');
 
 app.use(express.json());
 
