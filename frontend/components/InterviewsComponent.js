@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 
+/**
+ * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
+ */
+
 const InterviewsComponent = () => {
   const [jobTitle, setJobTitle] = useState('');
   const [interviewDate, setInterviewDate] = useState('');
@@ -35,30 +39,6 @@ const InterviewsComponent = () => {
           <div className="form-group">
             <label htmlFor="interviewDateInput">Date and Time</label>
             <input type="datetime-local" className="form-control" id="interviewDateInput" value={interviewDate} onChange={(e) => setInterviewDate(e.target.value)} />
-          </div>
-          <div className="form-group">
-/**
- * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
- */
-          </div>
-          <div className="form-group">
-            <label htmlFor="interviewDateInput">Date and Time</label>
-  /**
-   * Handles the form submission event.
-   * Prevents the default form submission behavior, logs the form data,
-   * and would typically send this data to a backend service or API.
-   * @param {Object} event - The form submission event
-   * @return None
-   */
-/**
- * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
- */
-          </div>
-          <div className="form-group">
-            <label htmlFor="interviewDateInput">Date and Time</label>
-/**
- * InterviewsComponent is a React functional component for scheduling and managing job interviews within the MyJobsAI application.
- */
           </div>
           <button type="submit" className="btn btn-primary">Schedule Interview</button>
         </form>
