@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import InteractiveGuide from '../components/InteractiveGuide';
+import { getInterviewFormGuideSteps } from '../utils/guideSteps';
 import axios from 'axios';
 /**
  * Renders a form for scheduling an interview. Allows users to input job title, date, and notes for the interview.
@@ -65,3 +67,7 @@ function InterviewForm({ setInterviews, interviews }) {
 }
 
 export default InterviewForm;
+  const [showGuide, setShowGuide] = useState(false);
+
+      <button onClick={() => setShowGuide(true)} style={{ margin: '10px 0', padding: '5px 10px' }}>Show Guide</button>
+      {showGuide && <InteractiveGuide steps={getInterviewFormGuideSteps()} />}
