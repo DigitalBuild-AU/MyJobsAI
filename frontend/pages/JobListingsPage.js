@@ -1,6 +1,6 @@
 /**
  * JobListingsPage Component
- * This file defines the JobListingsPage component, which is responsible for rendering the job listings page in the MyJobsAI application. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
+ * This component is responsible for rendering the job listings page. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
  */
 // Importing setupWebVitals to monitor and log web vitals for this page.
 import React, { useState, useEffect } from 'react';
@@ -28,16 +28,14 @@ const JobListingsPage = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [errorState, setErrorState] = useState({ status: false, company: false });
+import { logError } from '../utils/logger';
 
   useEffect(() => {
 
     /**
+ /**
  * Handles changes in window size and updates the view state accordingly.
- * This function is triggered on window resize events and adjusts the view
- * between 'card' and 'table' layouts based on the window's width.
- *
- * @param none
- * @returns void
+ * This function is triggered on window resize events and adjusts the view between 'card' and 'table' layouts based on the window's width.
  */
  * File: JobListingsPage.js
  * Project: MyJobsAI
@@ -74,16 +72,15 @@ const JobListingsPage = () => {
  /**
  * Fetches job listings from the server based on the current filters and page.
  * This function uses axios to make a GET request to the server with query parameters for filtering based on the current state of filters and page. It updates the listings and totalPages state with the data received from the response.
- * @returns void - This function does not return a value but performs asynchronous operations to update the component's state.
-  */
+ */
   const fetchListings = async () => {
     console.log(`Fetching listings with filters: ${JSON.stringify(filters)}, page: ${page}`);
     try {
       const response = await fetchListingsFromAPI(filters, page);
       setListings(response.data.listings);
 /**
- * Handles the change in window size and updates the view state.
- * Extracted from useEffect to improve readability and maintainability.
+ * Handles the change in window size and updates the view state accordingly.
+ * Extracted from useEffect to improve readability and maintainability. This function checks the window's width and updates the view state to either 'card' or 'table'.
  */
 const handleViewChangeBasedOnWindowSize = () => {
   if (window.innerWidth < 768) {
@@ -98,18 +95,16 @@ const handleViewChangeBasedOnWindowSize = () => {
  * Extracted from useEffect to improve readability and maintainability.
  */
 /**
-* Encapsulates the cleanup logic to be called on component unmount.
-* Specifically, it removes the 'resize' event listener from the window object, ensuring no memory leaks occur.
-* @param none - This function does not take any parameters.
-* @returns void - This function does not return a value.
-*/
+ * Encapsulates the cleanup logic to be called on component unmount.
+ * Specifically, it removes the 'resize' event listener from the window object, ensuring no memory leaks occur. This function is called when the component is unmounted to prevent memory leaks.
+ */
 const cleanupOnUnmount = () => {
   window.removeEventListener('resize', handleWindowSizeChange);
   setFilters({status: '', company: ''}); // Reset filters on component unmount
 };
       setTotalPages(response.data.totalPages);
     } catch (err) {
-      console.error('Error fetching job listings', err);
+      logError('Error fetching job listings', err);
     }
   };
   
@@ -162,23 +157,22 @@ const renderPagination = () => {
    * @param {string} filterValue - The new value for the filter.
    * @returns void - This function does not return a value but updates the component's state directly.
    */
-  /**
+ /**
  * Updates the filters state with new values for a given filter.
+ * This function updates the state of filters based on user input, ensuring that the listings are filtered according to the specified criteria.
  * @param {string} filterName - The name of the filter to update.
  * @param {string} filterValue - The new value for the filter.
- * @returns void - This function does not return a value but updates the component's state directly.
  */
   const updateFilters = (filterName, filterValue) => {
     setFilters({ ...filters, [filterName]: filterValue });
   };
 
   /**
-   /**
-    * Creates a button element for a given page number.
-    * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
-    * @param {number} pageNumber - The page number for the button.
-    * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
-    */
+  * Creates a button element for a given page number.
+  * This function generates a button for navigating to a specific page in the pagination component. The button is disabled if it corresponds to the current page, indicating the active page to the user.
+  * @param {number} pageNumber - The page number for the button.
+  * @returns {JSX.Element} - A button element for pagination, enabling navigation to the specified page.
+  */
    */
   const createPaginationButton = (pageNumber) => (
     <button key={pageNumber} aria-label={`Go to page ${pageNumber + 1}`}>{pageNumber + 1}</button>
@@ -188,16 +182,10 @@ const renderPagination = () => {
 
     <div className="job-listings-page">
 /**
- * handleErrorState Function
- * Refactored to use validateInput from jobListingsUtils for input validation.
  * Updates the error state for a given input field based on the validation result.
- * 
- * Parameters:
- * - name (string): The name of the input field to validate.
- * - value (string): The value of the input field to validate.
- * 
- * Returns:
- * - void: This function does not return a value but updates the component's state directly.
+ * This function uses validateInput from jobListingsUtils for input validation and updates the error state accordingly.
+ * @param {string} name - The name of the input field to validate.
+ * @param {string} value - The value of the input field to validate.
  */
 
 const handleErrorState = (name, value) => {
