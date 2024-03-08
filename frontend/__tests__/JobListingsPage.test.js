@@ -1,3 +1,7 @@
+"""
+File: JobListingsPage.test.js
+Description: This file contains tests for the Job Listings Page. It includes tests for modal interactions for adding new job listings and ensuring the form inside the modal submits correctly.
+"""
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -34,3 +38,6 @@ describe('JobListingsPage Component', () => {
     });
   });
 });
+"""
+Tests that the modal on the Job Listings Page opens as expected when the 'Add Job Listing' button is clicked.
+"""
