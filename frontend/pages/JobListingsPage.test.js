@@ -1,4 +1,8 @@
 
+/**
+ * This file contains tests for the JobListingsPage component.
+ * It focuses on component rendering, pagination, filtering, and user interactions.
+ */
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
 jest.mock('web-vitals', () => ({
@@ -54,7 +58,9 @@ test('renders JobListingCard component correctly', () => {
       jobTitle: 'Software Engineer',
 test('filters listings based on user input', async () => {
 /**
+
  * Test case for ensuring the JobListingCard component renders with the correct job title, company, and location based on provided props.
+
  */
   const mockListings = [
     { id: 1, jobTitle: 'Software Engineer', company: 'Tech Corp', location: 'San Francisco' },
@@ -68,8 +74,10 @@ test('filters listings based on user input', async () => {
 
   await waitFor(() => {
 /**
+
  * Test case for filtering job listings based on user input.
  * Verifies that the JobListingsPage component correctly filters listings based on user-provided status and company filters.
+ 
  */
     expect(screen.getByText('Software Engineer')).toBeInTheDocument();
     expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
@@ -89,8 +97,10 @@ test('view changes between table and card based on window size', () => {
   expect(getByText('Table View')).toBeInTheDocument();
 });
 /**
+
  * Test case for responsive design functionality.
  * Verifies that the JobListingsPage component correctly switches between table and card views based on window size.
+
  */
 
 test('pagination component renders and navigates correctly', async () => {
@@ -138,6 +148,9 @@ test('pagination component renders and navigates correctly', async () => {
   /**
  * Test Case: Simulates fetching job listings for testing pagination.
  * This test uses a mock function to simulate fetching job listings, crucial for setting up the 'totalPages' and 'currentPage' values needed to test the pagination functionality of the JobListingsPage component.
+/**
+ * Tests the rendering and navigation functionality of the pagination component.
+ */
  */
   /**
  * Test Case: Verifies the rendering of multiple job listings in the JobListingTable component.
@@ -400,6 +413,9 @@ test('Sidebar integration in JobListingsPage', () => {
   test('createPaginationButton disables button for current page', () => {
 /**
  * Test Case: Creates pagination buttons with the correct number of buttons.
+/**
+ * Tests that sequential updates to filters result in a combined state that reflects all changes.
+ */
  * Verifies that the createPaginationButton function renders the correct number of buttons, including 'Next' and 'Previous' buttons.
  */
     const totalPages = 5;
@@ -452,6 +468,9 @@ test('Sidebar integration in JobListingsPage', () => {
     expect(buttons.length).toBe(totalPages + 2); // Including next and previous page buttons
     expect(buttons[currentPage + 1].disabled).toBeTruthy(); // +1 to account for previous page button
   });
+/**
+ * Tests that error messages are displayed inline with form inputs upon validation failure.
+ */
 test('Breadcrumbs component renders correct navigational path', () => {
   const pathElements = [
     { label: 'Home', link: '/' },
@@ -559,6 +578,9 @@ describe('handleErrorState function tests', () => {
 
 
   /**
+/**
+ * Tests the functionality of the component to switch to card view correctly upon window resize.
+ */
    * Test: handles window resize to switch to table view correctly
    * Purpose: This test ensures that the JobListingsPage component transitions to 'Table View' when the window is resized to a width typical of larger screens (e.g., desktops). By dispatching a resize event with a width of 1024px, the test checks for the presence of 'Table View' text, confirming the UI's adaptability to screen size changes.
    */
@@ -583,6 +605,9 @@ describe('handleErrorState function tests', () => {
 
   beforeEach(() => {
     setErrorStateMock = jest.fn();
+/**
+ * Tests the functionality of the component to switch to table view correctly upon window resize.
+ */
     initialState = { status: false, company: false };
     // Mocking useState for errorState
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [initialState, setErrorStateMock]);
@@ -634,6 +659,9 @@ describe('handleErrorState function tests', () => {
     expect(setErrorStateMock).toHaveBeenCalledWith({ ...initialState, [name]: true });
   });
 });
+/**
+ * Tests that the error state is correctly updated for non-empty input values.
+ */
 
   afterEach(() => {
 /**

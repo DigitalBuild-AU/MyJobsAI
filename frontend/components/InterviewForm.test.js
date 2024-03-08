@@ -27,7 +27,10 @@ describe('InterviewForm Component Tests', () => {
     fireEvent.change(screen.getByLabelText('Notes'), { target: { value: 'Test notes' } });
 
     fireEvent.click(screen.getByText('Schedule Interview'));
-
+/**
+ * This file contains tests for the InterviewForm component.
+ * It includes tests for rendering, user interaction, and form submission.
+ */
     await screen.findByText('Interview scheduled successfully.');
 
     expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/interviews', {
@@ -50,8 +53,13 @@ describe('InterviewForm Component Tests', () => {
     expect(axios.post).toHaveBeenCalled();
     expect(setInterviews).not.toHaveBeenCalled();
   });
-
+/**
+ * Tests that the inputs are correctly updated and form submission calls axios with the correct data.
+ */
   test('interactive guide steps are correctly targeted and described', () => {
+/**
+ * Tests the display of an error message upon form submission failure.
+ */
     render(<InterviewForm setInterviews={setInterviews} interviews={mockInterviews} showGuide={true} />);
 
     mockGuideSteps.forEach(step => {
@@ -59,3 +67,6 @@ describe('InterviewForm Component Tests', () => {
     });
   });
 });
+/**
+ * Tests that the interactive guide steps are correctly targeted and described.
+ */
