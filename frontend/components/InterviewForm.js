@@ -39,6 +39,13 @@ function InterviewForm({ setInterviews, interviews }) {
     setNotes(value);
     onNotesChange(value);
   };
+  
+  /**
+   * Handles the submission of the interview form.
+   * This function prevents the default form submission event, gathers the form data, and uses the submitInterviewData utility function to send the data to the server. Upon successful submission, it updates the UI with the new interview data and resets the form fields. In case of an error, it logs the error and notifies the user.
+   * 
+   * @param {Event} e - The form submission event.
+   */
 
   const handleSubmit = (e) => {
     e.preventDefault();
