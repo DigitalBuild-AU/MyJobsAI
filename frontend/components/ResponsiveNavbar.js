@@ -23,17 +23,25 @@ const ResponsiveNavbar = () => {
           </button>
           {menuOpen && (
             <div>
-              <Link to="/dashboard" tabIndex="0">Dashboard</Link>
+              <Link to="/" tabIndex="0">Dashboard</Link>
               <Link to="/jobListings" tabIndex="0">Job Listings</Link>
               <Link to="/applications" tabIndex="0">Applications</Link>
+              <Link to="/cvHelper" tabIndex="0">CV Helper</Link>
+              <Link to="/coverLetter" tabIndex="0">Cover Letter</Link>
+              <Link to="/interviews" tabIndex="0">Interviews</Link>
+              <Link to="/settings" tabIndex="0">Settings</Link>
             </div>
           )}
         </div>
       ) : (
         <div>
-          <Link to="/dashboard" tabIndex="0">Dashboard</Link>
+          <Link to="/" tabIndex="0">Dashboard</Link>
           <Link to="/jobListings" tabIndex="0">Job Listings</Link>
           <Link to="/applications" tabIndex="0">Applications</Link>
+          <Link to="/cvHelper" tabIndex="0">CV Helper</Link>
+          <Link to="/coverLetter" tabIndex="0">Cover Letter</Link>
+          <Link to="/interviews" tabIndex="0">Interviews</Link>
+          <Link to="/settings" tabIndex="0">Settings</Link>
         </div>
 // This component provides a responsive navigation bar for the MyJobsAI application, adjusting its layout based on the screen size.
           <Link to="/dashboard" tabIndex="0">Dashboard</Link>
