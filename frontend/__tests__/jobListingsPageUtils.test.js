@@ -50,6 +50,12 @@ describe('jobListingsPageUtils', () => {
      * Tests that fetchListings calls setListings and setTotalPages with correct data on successful API fetch.
      */
     it('calls setListings and setTotalPages with correct data on successful fetch', async () => {
+  /**
+   * Tests for the fetchListings function.
+   * These tests verify the behavior of fetchListings when it successfully fetches data from the API and when it encounters a fetch failure.
+   * - The first test ensures that on a successful fetch, the correct data is passed to setListings and setTotalPages functions.
+   * - The second test checks that an error is logged when the fetch operation fails.
+   */
       const mockData = { listings: [{ id: 1, title: 'Test Job' }], totalPages: 3 };
       fetchListingsFromAPI.mockResolvedValue({ data: mockData });
       const setListingsMock = jest.fn();
@@ -65,6 +71,10 @@ describe('jobListingsPageUtils', () => {
      * Tests that fetchListings logs an error to the console on fetch failure.
      */
     it('logs error on fetch failure', async () => {
+  /**
+   * Verifies that fetchListings calls setListings and setTotalPages with the correct data on a successful API fetch.
+   * Mocks the API response and checks the arguments passed to the mock functions.
+   */
       const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     it('logs error on fetch failure', async () => {
@@ -99,6 +109,10 @@ describe('jobListingsPageUtils', () => {
  * @param {number} page - The current page number.
  * @param {Function} setListings - A function to set the listings state.
  * @param {Function} setTotalPages - A function to set the total pages state.
+  /**
+   * Ensures that fetchListings logs an appropriate error message to the console when the API fetch operation fails.
+   * Mocks a fetch failure and verifies that console.error is called with the expected arguments.
+   */
  */
     });
   });
@@ -108,4 +122,12 @@ describe('jobListingsPageUtils', () => {
  * This function performs cleanup operations, such as removing event listeners and resetting filters, when the component unmounts.
  * 
  * @param {Function} setFilters - A function to reset the filters state.
+  /**
+   * Tests for the cleanupOnUnmount function.
+   * This test verifies that cleanupOnUnmount correctly removes the resize event listener and resets filters to their default values.
+   */
+  /**
+   * Confirms that cleanupOnUnmount removes the resize event listener from the window and resets the filters state using the provided function.
+   * Mocks the window.removeEventListener function and a setFilters function to verify their correct usage.
+   */
  */
