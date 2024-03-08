@@ -3,6 +3,8 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import InterviewForm from './InterviewForm';
 import axios from 'axios';
+import { submitInterviewData } from '../utils/apiHelpers';
+jest.mock('../utils/apiHelpers');
 import { getInterviewFormGuideSteps } from '../utils/guideSteps';
 
 jest.mock('axios');
@@ -70,3 +72,32 @@ describe('InterviewForm Component Tests', () => {
 /**
  * Tests that the interactive guide steps are correctly targeted and described.
  */
+  test('handleSubmit function correctly handles submission and response', async () => {
+    submitInterviewData.mockResolvedValue({ data: { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' } });
+
+    render(<InterviewForm setInterviews={setInterviews} interviews={mockInterviews} />);
+
+    fireEvent.change(screen.getByLabelText('Job Title'), { target: { value: 'Developer' } });
+    fireEvent.change(screen.getByLabelText('Date and Time'), { target: { value: '2023-01-01' } });
+    fireEvent.change(screen.getByLabelText('Notes'), { target: { value: 'Test notes' } });
+
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await screen.findByText('Interview scheduled successfully.');
+
+    expect(submitInterviewData).toHaveBeenCalledWith('Developer', '2023-01-01', 'Test notes');
+    expect(setInterviews).toHaveBeenCalledWith([...mockInterviews, { id: 1, jobTitle: 'Developer', date: '2023-01-01', notes: 'Test notes' }]);
+  });
+
+  test('handleSubmit function correctly handles submission failure', async () => {
+    submitInterviewData.mockRejectedValue(new Error('Failed to schedule interview.'));
+
+    render(<InterviewForm setInterviews={setInterviews} interviews={mockInterviews} />);
+
+    fireEvent.click(screen.getByText('Schedule Interview'));
+
+    await screen.findByText('Failed to schedule interview.');
+
+    expect(submitInterviewData).toHaveBeenCalled();
+    expect(setInterviews).not.toHaveBeenCalled();
+  });
