@@ -68,7 +68,7 @@ Tests for the InterviewsPage component, covering the functionality of fetching a
   });
 });
   """
-  Verifies the error handling in the InterviewsPage component when an attempt to schedule an interview fails. It checks that an appropriate error message is displayed.
+  Tests the integration of the InterviewsPage with the submitInterview function to ensure that interviews are scheduled successfully.
   """
   
   it('integrates with submitInterview successfully', async () => {
