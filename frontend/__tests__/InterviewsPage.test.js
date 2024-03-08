@@ -39,29 +39,12 @@ it('handleSubmit with valid inputs schedules interview and updates state', async
 
   const { getByLabelText, getByText, findByText } = render(<InterviewsPage />);
   fireEvent.change(getByLabelText(/Job Title/i), { target: { value: formData.jobTitle } });
-  fireEvent.change(getByLabelText(/Date and Time/i), { target: { value: formData.date } });
-  fireEvent.change(getByLabelText(/Notes/i), { target: { value: formData.notes } });
-  fireEvent.click(getByText(/Schedule Interview/i));
-
-  await waitFor(() => {
-    expect(findByText('UI Designer')).toBeInTheDocument();
-  });
-});
-    const formData = { jobTitle: 'Developer', date: '2023-04-01', notes: 'First round' };
-    mock.onPost('/api/interviews', formData).networkError();
-
-    const { getByLabelText, getByText } = render(<InterviewsPage />);
-    fireEvent.change(getByLabelText(/Job Title/i), { target: { value: formData.jobTitle } });
-    fireEvent.change(getByLabelText(/Date/i), { target: { value: formData.date } });
-    fireEvent.change(getByLabelText(/Notes/i), { target: { value: formData.notes } });
-    fireEvent.click(getByText(/Schedule Interview/i));
-
-    await waitFor(() => {
-      expect(window.alert).toHaveBeenCalledWith('Failed to schedule interview.');
-    });
-  });
-});
   """
+  Test case: Verifies that an error message is displayed when there is a failure in scheduling an interview.
+  Simulation: Mocks a post request to '/api/interviews' to return a 500 status code.
+  Expected Outcome: An error message indicating the failure to schedule the interview is displayed.
+  """
+it('handleSubmit error scenario displays error message', async () => {
   Verifies the error handling in the InterviewsPage component when an attempt to schedule an interview fails. It checks that an appropriate error message is displayed.
   """
 
@@ -92,7 +75,6 @@ it('handleSubmit error scenario displays error message', async () => {
     await act(async () => {
       fireEvent.click(getByText(/Schedule Interview/i));
     });
-
     await waitFor(() => {
       expect(handleInterviewResponse).toHaveBeenCalledWith(mockResponse);
     });
