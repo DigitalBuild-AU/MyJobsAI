@@ -175,10 +175,11 @@ const renderPagination = () => {
 
     <div className="job-listings-page">
 /**
- * Updates the error state for a given input field based on the validation result.
- * This function uses validateInput from jobListingsUtils for input validation and updates the error state accordingly.
- * @param {string} name - The name of the input field to validate.
- * @param {string} value - The value of the input field to validate.
+ * Updates the error state for a given field based on whether its value is empty.
+ * This function is called when the value of an input field changes. It checks if the new value is an empty string and updates the errorState object accordingly. If the value is empty, the error state for the specified field is set to true, indicating an error. Otherwise, it is set to false.
+ *
+ * @param {string} name - The name of the field to update the error state for.
+ * @param {string} value - The new value of the field.
  */
 const handleErrorState = (name, value) => {
   const isValid = validateInput(value);
