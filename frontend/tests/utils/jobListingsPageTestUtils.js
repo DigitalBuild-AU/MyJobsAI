@@ -2,6 +2,11 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import JobListingsPage from '../../pages/JobListingsPage';
 
+/**
+   * Renders the JobListingsPage component with provided mock listings data.
+   * @param {Array} listings - Mock data for job listings to be rendered.
+   * @returns Rendered component with mock data for testing.
+   */
 export const renderWithMockData = (listings) => {
   return render(<JobListingsPage listings={listings} />);
 };
