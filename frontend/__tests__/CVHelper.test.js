@@ -60,3 +60,26 @@ Description: Test suite for the CVHelper component, focusing on CV upload functi
     expect(screen.getByText('Please upload a CV first.')).toBeInTheDocument();
   });
 });
+test('generates CV suggestions based on user input', async () => {
+  const { getByPlaceholderText, getByText } = render(<CVHelper />);
+  fireEvent.change(getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
+  fireEvent.click(getByText('Get CV Suggestions'));
+
+  await waitFor(() => {
+    expect(getByText('Your CV has been tailored for a Software Engineer position.')).toBeInTheDocument();
+  });
+});
+
+test('displays error when CV suggestions generation fails', async () => {
+  axios.post.mockRejectedValueOnce(new Error('Network Error'));
+
+  const { getByPlaceholderText, getByText } = render(<CVHelper />);
+  fireEvent.change(getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
+  fireEvent.click(getByText('Get CV Suggestions'));
+
+  await waitFor(() => {
+    expect(getByText('Failed to fetch CV suggestions.')).toBeInTheDocument();
+  });
+});
