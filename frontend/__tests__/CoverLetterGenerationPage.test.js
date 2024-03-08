@@ -105,6 +105,9 @@ test('clicking create cover letter displays generated letter', async () => {
 });
 
 // Tests error handling when fetching job listings fails.
+"""
+Tests that clicking the 'Download as PDF' button triggers the downloading process of the generated cover letter in PDF format.
+"""
 test('download as PDF button triggers download', async () => {
 """
 Ensures that clicking the 'Create Cover Letter' button on the CoverLetterGenerationPage displays the generated cover letter to the user.
