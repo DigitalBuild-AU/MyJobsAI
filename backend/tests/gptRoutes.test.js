@@ -55,6 +55,10 @@ describe('/cv_customization route', () => {
   
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockResponse);
+  /**
+   * Test: Successfully handles a CV customization request.
+   * Description: This test verifies that the CV customization endpoint correctly processes a request by returning a 200 status code and the expected response body. It mocks the `handleCvCustomization` function to simulate a successful response and checks that the function is called with the correct arguments.
+   */
     expect(handleCvSuggestions).toHaveBeenCalledWith('Software Engineer role requiring problem-solving skills.', 'Problem solver with a keen interest in software development.');
 
     const response = await request(app)
