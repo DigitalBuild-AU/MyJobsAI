@@ -10,33 +10,35 @@ const emailRoutes = require('./routes/emailRoutes'); // Import Email routes
 const interviewRoutes = require('./routes/interviewRoutes'); // Import Interview routes
 const analyticsRoutes = require('./routes/analyticsRoutes'); // Analytics routes import
 const fetchJobInfoRoutes = require('./routes/fetchJobInfoRoutes'); // Import Fetch Job Info routes
+const { debugLog } = require('./utils/debugLogger');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Import Dashboard routes
 
 app.use(express.json());
 
-console.log('Setting up middleware.'); // gpt_pilot_debugging_log
+debugLog('Setting up middleware.');
 app.use((req, res, next) => {
-  console.log(`Request for static file detected: ${req.path}`); // gpt_pilot_debugging_log
+  debugLog(`Request for static file detected: ${req.path}`);
   next();
 });
 
 // Serve frontend static files
 app.use(express.static('frontend'));
-console.log('Static files middleware for frontend setup completed.'); // gpt_pilot_debugging_log
+debugLog('Static files middleware for frontend setup completed.');
 
 // Serve static files like 'quotes.json' from the 'public' directory
 app.use(express.static('public'));
-console.log('Static files middleware for public directory setup completed.'); // gpt_pilot_debugging_log
+debugLog('Static files middleware for public directory setup completed.');
 
-console.log('Connecting to MongoDB at URI:', process.env.MONGO_URI); // gpt_pilot_debugging_log
+debugLog('Connecting to MongoDB at URI: ' + process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected')) // gpt_pilot_debugging_log
+  .then(() => debugLog('MongoDB Connected'))
   .catch(err => {
-    console.error('MongoDB connection error:', err.stack); // Ensure detailed logging
+    debugLog('MongoDB connection error:', err, true); // Ensure detailed logging
     process.exit(1); // Ensure the process exits on database connection failure
   });
 
 app.get('/', (req, res) => {
+  debugLog('Welcome to MyJobsAI');
   res.send('Welcome to MyJobsAI'); // gpt_pilot_debugging_log
 });
 
@@ -50,7 +52,7 @@ app.use('/api/fetch-job-info', fetchJobInfoRoutes); // Setup Fetch Job Info rout
 app.use('/api/dashboard', dashboardRoutes); // Setup Dashboard routes
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`); // gpt_pilot_debugging_log
+  debugLog(`Server is running on port ${PORT}`);
 }).on('error', (err) => {
-  console.error(`Server start-up error: ${err}, Stack: ${err.stack}`); // Ensure detailed logging for server start-up errors
+  debugLog(`Server start-up error: ${err}, Stack: ${err.stack}`, err, true); // Ensure detailed logging for server start-up errors
 });
