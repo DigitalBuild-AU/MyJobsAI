@@ -49,7 +49,8 @@ export default function InterviewsPage() {
   }, []);
 
   /**
-  * Handles the submission of the interview form, scheduling a new interview.
+  * Prevents the default form submission behavior, sends the interview details to the server,
+  * and updates the state based on the server's response or an error.
   * @param {Event} e - The event object from the form submission.
   */
   const handleSubmit = (e) => {
