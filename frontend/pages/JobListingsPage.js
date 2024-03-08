@@ -2,10 +2,8 @@
  * JobListingsPage Component
  * This component is responsible for rendering the job listings page. It includes functionality for displaying job listings in either a table or card view, filtering listings based on user input, and pagination. The component utilizes React hooks for state management and axios for fetching data from the server.
  */
-// Importing setupWebVitals to monitor and log web vitals for this page.
 import React, { useState, useEffect } from 'react';
-import { setupWebVitals } from '../utils/webVitals';
-import { fetchListingsFromAPI, validateInput } from '../utils/jobListingsUtils';
+import axios from 'axios';
 import JobListingCard from '../components/JobListingCard';
 import JobListingTable from '../components/JobListingTable';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
@@ -221,55 +219,35 @@ const handleErrorState = (name, value) => {
       </div>
 
       {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
-      <button onClick={toggleModal}>Add Job Listing</button>
-      {modalVisible && (
-        <div className="modal">
-          <form onSubmit={handleAddListing}>
-            <input name="jobTitle" placeholder="Job Title" required />
-            <input name="company" placeholder="Company" required />
-            <input name="salary" placeholder="Salary" />
-            <input name="location" placeholder="Location" required />
-            <select name="jobType" required>
-              <option value="">Select Job Type</option>
-              <option value="Full-Time">Full-Time</option>
-              <option value="Part-Time">Part-Time</option>
-              <option value="Casual">Casual</option>
-              <option value="Temp">Temp</option>
-              <option value="Contract">Contract</option>
-            </select>
-            <input name="contactPerson" placeholder="Contact Person" />
-            <select name="status" required>
-              <option value="">Select Status</option>
-              <option value="New">New</option>
-              <option value="Applied">Applied</option>
-              <option value="Interviewed">Interviewed</option>
-              <option value="Closed">Closed</option>
-              <option value="Offer">Offer</option>
-            </select>
-            <textarea name="description" placeholder="Description"></textarea>
-            <input name="jobUrl" placeholder="Job URL" />
-            <button type="submit">Add Listing</button>
-            <button type="button" onClick={toggleModal}>Cancel</button>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input name="jobTitle" placeholder="Job Title" required />
+          <input name="company" placeholder="Company" required />
+          <input name="salary" placeholder="Salary" />
+          <input name="location" placeholder="Location" required />
+          <select name="jobType" required>
+            <option value="">Select Job Type</option>
+            <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+            <option value="Casual">Casual</option>
+            <option value="Temp">Temp</option>
+            <option value="Contract">Contract</option>
+          </select>
+          <input name="contactPerson" placeholder="Contact Person" />
+            <option value="">Select Status</option>
+            <option value="New">New</option>
+            <option value="Applied">Applied</option>
+            <option value="Interviewed">Interviewed</option>
+            <option value="Closed">Closed</option>
+            <option value="Offer">Offer</option>
+          </select>
+          <textarea name="description" placeholder="Description"></textarea>
+          <input name="jobUrl" placeholder="Job URL" />
+          <button type="submit">Add Listing</button>
           </form>
-        </div>
-      )}
-        <button onClick={() => setView('table')}>Table View</button>
-        <button onClick={() => setView('card')}>Card View</button>
-      </div>
-      {view === 'table' ? <JobListingTable listings={listings} /> : <div className="card-view">{listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}</div>}
-      {renderPagination()}
+          </div>
+      {/* Pagination can be added here */}
     </div>
-  );
-  
-/**
- * Updates the filters state with a new value for a given filter.
- * @param {string} filterName - The name of the filter to update.
- * @param {string} filterValue - The new value for the filter.
- * Creates and returns a pagination button React component for a given page number.
- * @param {number} pageNumber - The page number for which the pagination button is created.
- * @returns {ReactElement} - A React button element for navigating to the specified page number.
-
- */
 };
 
 export default JobListingsPage;
@@ -278,7 +256,6 @@ import { Link } from 'react-router-dom';
       <div className="navigation-links">
         <Link to="/employmentHistory">Employment History</Link>
 import { useState } from 'react';
-
 const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
