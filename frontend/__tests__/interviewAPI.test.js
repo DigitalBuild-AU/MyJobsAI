@@ -20,7 +20,9 @@ describe('submitInterview', () => {
   """
   Tests the submitInterview function's error handling for an empty job title input, expecting an error indicating invalid job title.
   """
-  it('handles invalid job title input', async () => {
+  Tests the submitInterview function's error handling for an empty date input, expecting an error indicating invalid date.
+  """
+  it('handles invalid date input', async () => {
     const updateInterviewsState = jest.fn();
     await expect(submitInterview('', mockDate, mockNotes, updateInterviewsState)).rejects.toThrow('Invalid job title');
   });
@@ -62,7 +64,8 @@ describe('handleInterviewError', () => {
   beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
-
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
   afterEach(() => {
     jest.clearAllMocks();
   });
