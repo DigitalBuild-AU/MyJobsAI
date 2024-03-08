@@ -1,6 +1,4 @@
-/**
- * This React component assists users in generating a personalized cover letter based on their name, skills, and experience.
- */
+import axios from 'axios';
 import React, { useState } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
 
@@ -25,6 +23,17 @@ const CoverLetter = () => {
     // This is a placeholder for the actual implementation
     console.log(userName, jobDescriptionInput, userSkills, userExperience);
   };
+        console.log('Personalized cover letter was successfully generated.'); // Success log
+        setCoverLetter(response.data.coverLetter);
+        setError('');
+      })
+      .catch(function(error) {
+        console.error(`Error generating cover letter: ${error.message}, Stack: ${error.stack}`);
+        setError('Failed to generate cover letter.');
+        setCoverLetter('');
+      });
+    };
+  };
 
   return (
     <>
@@ -46,3 +55,5 @@ const CoverLetter = () => {
 
 export default CoverLetter;
 import { Link } from 'react-router-dom';
+        <div id="coverLetterOutput">{coverLetter}</div>
+        {error && <div className="error">{error}</div>}
