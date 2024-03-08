@@ -5,6 +5,12 @@
 const { OpenAI } = require('openai');
 const openai = new OpenAI();
 
+/**
+ * Generates suggestions for CV improvement based on a job description and user's CV.
+ * @param {string} jobDescription - The job description.
+ * @param {string} userCV - The user's CV.
+ * @returns {Object} An object containing CV suggestions.
+ */
 async function handleCvSuggestions(jobDescription, userCV) {
   try {
     const response = await openai.chat.completions.create({
