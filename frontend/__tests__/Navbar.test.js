@@ -35,6 +35,8 @@ describe('Navbar Component Tests', () => {
   });
 
   it('renders CV Helper link', () => {
+    const { getByText } = render(<Navbar />);
+    expect(getByText('CV Helper')).toBeInTheDocument();
   });
 
   it('renders CV Helper link', () => {
@@ -54,27 +56,6 @@ describe('Navbar Component Tests', () => {
 
   it('renders Settings link', () => {
     const { getByText } = render(<Navbar />);
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
-    expect(getByText('Settings')).toBeInTheDocument();
-  });
-});
     expect(getByText('Settings')).toBeInTheDocument();
   });
 });
