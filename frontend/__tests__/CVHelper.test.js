@@ -3,7 +3,9 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import CVHelper from '../pages/CVHelper';
 
 describe('CVHelper Component', () => {
-  // Tests that the CVHelper component renders correctly.
+  /**
+   * Tests that the CVHelper component renders correctly.
+   */
   test('renders correctly', () => {
     render(<CVHelper />);
     expect(screen.getByText('Upload your CV')).toBeInTheDocument();
@@ -11,6 +13,8 @@ describe('CVHelper Component', () => {
 
   // Tests that the CVHelper component handles CV upload successfully.
   test('handles CV upload successfully', () => {
+   * Tests that the CVHelper component handles CV upload successfully.
+   */
     const file = new File(['dummy content'], 'resume.pdf', { type: 'application/pdf' });
     render(<CVHelper />);
     fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [file] } });
@@ -29,7 +33,9 @@ Description: Test suite for the CVHelper component, focusing on CV upload functi
     expect(screen.getByText('Consider using more action verbs')).toBeInTheDocument();
   });
 
-  // Tests that the CVHelper component rejects non-PDF files.
+  /**
+   * Tests that the CVHelper component rejects non-PDF files.
+   */
   test('rejects non-PDF files', () => {
     const file = new File(['dummy content'], 'resume.txt', { type: 'text/plain' });
     render(<CVHelper />);
@@ -45,7 +51,9 @@ Description: Test suite for the CVHelper component, focusing on CV upload functi
     expect(screen.getByText('File is too large. Please upload a file smaller than 5MB.')).toBeInTheDocument();
   });
 
-  // Tests that the CVHelper component prompts the user to upload a CV before analysis can be performed.
+  /**
+   * Tests that the CVHelper component prompts the user to upload a CV before analysis can be performed.
+   */
   test('attempts to analyze without uploading a CV', () => {
     render(<CVHelper />);
     fireEvent.click(screen.getByText('Analyze CV'));

@@ -4,14 +4,23 @@ import '@testing-library/jest-dom';
 import CoverLetter from '../pages/CoverLetter';
 
 describe('CoverLetter Component', () => {
-  // Tests that the CoverLetter component renders correctly and verifies its initial display.
+  /**
+   * Tests that the CoverLetter component renders correctly and verifies its initial display.
+   */
   test('renders and verifies initial display', () => {
     render(<CoverLetter />);
     expect(screen.getByText('Your Cover Letters')).toBeInTheDocument();
   });
 
-  // Tests that creating a new cover letter correctly updates the UI.
+  /**
+   * Tests that creating a new cover letter correctly updates the UI.
+   */
   test('creates a new cover letter and updates UI', () => {
+/**
+ * Test suite for the CoverLetter component, covering creation, editing, deletion, and validation of cover letters.
+ */
+   * Tests that creating a new cover letter correctly updates the UI.
+   */
     render(<CoverLetter />);
     fireEvent.change(screen.getByPlaceholderText('Cover Letter Title'), { target: { value: 'My Cover Letter' } });
     fireEvent.change(screen.getByPlaceholderText('Cover Letter Content'), { target: { value: 'This is the content of my cover letter.' } });
@@ -33,7 +42,9 @@ Description: Test suite for the CoverLetter component, covering creation, editin
   });
 
   // Tests that deleting a cover letter correctly updates the UI.
-  test('deletes a cover letter and updates UI', () => {
+  /**
+   * Tests that deleting a cover letter correctly updates the UI.
+   */
     render(<CoverLetter />);
     fireEvent.click(screen.getByText('Delete', { selector: 'button' }));
     expect(screen.queryByText('My Cover Letter')).not.toBeInTheDocument();
@@ -46,7 +57,9 @@ Description: Test suite for the CoverLetter component, covering creation, editin
     expect(screen.getByText('Please provide both a title and content for your cover letter.')).toBeInTheDocument();
   });
 
-  // Tests that attempting to delete a non-existent cover letter displays the appropriate error message.
+  /**
+   * Tests that attempting to delete a non-existent cover letter displays the appropriate error message.
+   */
   test('attempts to delete a non-existent cover letter', () => {
     render(<CoverLetter />);
     fireEvent.click(screen.getByText('Delete', { selector: 'button[data-id="nonexistent"]' }));
