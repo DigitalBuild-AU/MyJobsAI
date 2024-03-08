@@ -12,6 +12,18 @@ import AnalyticsComponent from './components/AnalyticsComponent';
 console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
 
+/**
+ * Generates a cover letter based on user input.
+ * This function is a placeholder for future implementation.
+ */
+/**
+ * Sends an email with the provided details.
+ * Parameters:
+ * - to (string): The recipient's email address.
+ * - subject (string): The email's subject.
+ * - body (string): The email's body content.
+ * Returns: None.
+ */
 function generateCoverLetter() {
 function sendEmail() {
   const to = document.getElementById('emailTo').value;
@@ -34,6 +46,78 @@ function fetchAndDisplayAnalytics() {
     .then(function(response) {
       const data = response.data;
       document.getElementById('analyticsContent').innerHTML = `
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/applications">Applications</Link>
+            </li>
+            <li>
+              <Link to="/cover-letter">Cover Letter</Link>
+            </li>
+            <li>
+              <Link to="/cv-helper">CV Helper</Link>
+            </li>
+            <li>
+              <Link to="/interviews">Interviews</Link>
+            </li>
+            <li>
+              <Link to="/job-listings">Job Listings</Link>
+            </li>
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
+            <li>
+              <Link to="/email">Email</Link>
+            </li>
+            <li>
+              <Link to="/analytics">Analytics</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/applications">
+            <Applications />
+          </Route>
+          <Route path="/cover-letter">
+            <CoverLetterComponent />
+          </Route>
+          <Route path="/cv-helper">
+            <CVHelperComponent />
+          </Route>
+          <Route path="/interviews">
+            <Interviews />
+          </Route>
+          <Route path="/job-listings">
+            <JobListings />
+          </Route>
+          <Route path="/settings">
+            <Settings />
+          </Route>
+          <Route path="/email">
+            <EmailComponent />
+          </Route>
+          <Route path="/analytics">
+            <AnalyticsComponent />
+          </Route>
+          <Route path="/" exact>
+            {/* Home component or redirect can be placed here */}
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
         <p>Total Applications: ${data.totalApplications}</p>
         <p>Interviews Scheduled: ${data.interviewsScheduled}</p>
         <p>Offers Received: ${data.offersReceived}</p>

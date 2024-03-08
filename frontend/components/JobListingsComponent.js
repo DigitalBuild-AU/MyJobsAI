@@ -29,6 +29,7 @@ import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
   const handleChange = (event) => {
+
 /**
  * useEffect hook to dynamically load the Bootstrap script for styling purposes.
  *

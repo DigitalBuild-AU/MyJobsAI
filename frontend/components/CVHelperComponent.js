@@ -26,10 +26,13 @@ const CVHelperComponent = () => {
           </div>
           <button type="submit" className="btn btn-primary">Generate Suggestions</button>
         </form>
+
 /**
  * CVHelperComponent.js
  * This component provides an interface for users to input their job description and CV, and receive AI-generated suggestions for improving their CV.
  */
+import { loadBootstrapScript } from '../../utils/bootstrapUtils';
+// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
         <div className="mt-3">
           <h3>CV Suggestions:</h3>
           <p id="cvSuggestionsOutput">{cvSuggestionsOutput}</p>
@@ -79,10 +82,12 @@ const CVHelperComponent = () => {
       <div className="container mt-4">
         <h1>CV Helper | MyJobsAI</h1>
         <form onSubmit={generateCVSuggestions}>
+
   /**
    * Generates CV suggestions based on the user's job description and CV.
    * @param {Event} e - The event object from the form submission.
    */
+
           <div className="mb-3">
             <label htmlFor="jobDescriptionInput" className="form-label">Job Description</label>
             <textarea className="form-control" id="jobDescriptionInput" rows="3" value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}></textarea>

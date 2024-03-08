@@ -34,7 +34,7 @@ const DashboardLayout = () => {
                   <Link className='nav-link' to='/cvhelper'>CV Helper</Link>
                 </li>
                 <li className='nav-item'>
-                  <Link className='nav-link' to='/coverletter'>Cover Letter</Link>
+                  <Link className='nav-link' to='/cover-letter'>Cover Letter</Link>
                 </li>
                 <li className='nav-item'>
                   <Link className='nav-link' to='/interviews'>Interviews</Link>

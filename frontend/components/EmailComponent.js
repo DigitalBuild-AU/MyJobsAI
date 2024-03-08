@@ -7,7 +7,13 @@ const EmailComponent = () => {
   const [body, setBody] = useState('');
   const [emailResponse, setEmailResponse] = useState('');
 
-  const sendEmail = (e) => {
+  /**
+ * sendEmail handles the form submission for sending an email.
+ * It sends a POST request to the backend with the email details (to, subject, body) and updates the component state with the response message received.
+ * 
+ * @param {Event} e - The form submission event.
+ */
+const sendEmail = (e) => {
     e.preventDefault();
     axios.post('http://localhost:3000/api/email/send', { to, subject, body })
       .then(response => {

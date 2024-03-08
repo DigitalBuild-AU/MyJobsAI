@@ -12,6 +12,10 @@ const JobListings = () => {
   const [filterKeywords, setFilterKeywords] = useState('');
   const [jobListings, setJobListings] = useState([]);
 
+  /**
+   * useEffect hook for loading and cleaning up the Bootstrap script.
+   * It runs once after the component mounts and removes the script when the component unmounts.
+   */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
     if (bootstrapScriptTag) {
@@ -54,6 +58,10 @@ const JobListings = () => {
               <option value="">Any</option>
               <option value="Full-Time">Full-Time</option>
               <option value="Contract">Contract</option>
+  /**
+   * useEffect hook for fetching analytics data.
+   * It runs once after the component mounts to fetch and display analytics.
+   */
   useEffect(() => {
     axios.get('http://localhost:3000/api/analytics')
       .then(function(response) {
