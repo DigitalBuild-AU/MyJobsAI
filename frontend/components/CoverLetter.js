@@ -1,5 +1,5 @@
 /**
- * CoverLetter component: Assists users in generating a personalized cover letter using their name, skills, and experience.
+ * This React component assists users in generating a personalized cover letter based on their name, skills, and experience.
  */
 import React, { useState } from 'react';
 import Navbar from './Navbar'; // Assuming a Navbar component exists
@@ -18,6 +18,9 @@ const CoverLetter = () => {
   const [userExperience, setUserExperience] = useState('');
 
   const handleGenerateCoverLetter = () => {
+    /**
+     * Placeholder function for generating a personalized cover letter based on state variables.
+     */
     // Logic to generate cover letter based on state variables
     // This is a placeholder for the actual implementation
     console.log(userName, jobDescriptionInput, userSkills, userExperience);
@@ -40,8 +43,6 @@ const CoverLetter = () => {
   );
 };
 
-export default CoverLetter;
-import { Link } from 'react-router-dom';
 
 export default CoverLetter;
 import { Link } from 'react-router-dom';
