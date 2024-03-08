@@ -15,6 +15,8 @@ import { act } from 'react-dom/test-utils';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import CoverLetterGenerationPage from '../pages/CoverLetterGenerationPage';
+import { generateCoverLetter, handleCoverLetterResponse, handleCoverLetterError } from '../utils/coverLetterAPI';
+jest.mock('../utils/coverLetterAPI');
 
 jest.mock('axios');
 
@@ -72,6 +74,20 @@ test('fetches job listings on component mount', async () => {
     const { findByText } = render(<CoverLetterGenerationPage />);
     expect(await findByText('Software Engineer')).toBeInTheDocument();
   });
+test('generateCoverLetter integration with successful API call', async () => {
+  const mockCoverLetterData = { jobDescription: 'Software Engineer', userName: 'John Doe', userSkills: 'JavaScript, React', userExperience: '5 years' };
+  const mockResponse = { data: { coverLetter: 'Your personalized cover letter' } };
+  generateCoverLetter.mockResolvedValue(mockResponse);
+  const { getByText, getByPlaceholderText } = render(<CoverLetterGenerationPage />);
+  fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: mockCoverLetterData.jobDescription } });
+  fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: mockCoverLetterData.userName } });
+  fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: mockCoverLetterData.userSkills } });
+  fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: mockCoverLetterData.userExperience } });
+  await act(async () => {
+    fireEvent.click(getByText('Generate Cover Letter'));
+  });
+  await waitFor(() => expect(getByText('Your personalized cover letter')).toBeInTheDocument());
+});
 });
 });
 """
@@ -171,6 +187,21 @@ test('handles error fetching job listings gracefully', async () => {
  */
 // Tests error handling when generating a cover letter fails.
 test('handles error generating cover letter gracefully', async () => {
+test('generateCoverLetter integration with failed API call', async () => {
+  const mockError = new Error('Failed to generate cover letter');
+  generateCoverLetter.mockRejectedValue(mockError);
+  handleCoverLetterError.mockImplementation(() => {});
+  const { getByText, getByPlaceholderText, queryByText } = render(<CoverLetterGenerationPage />);
+  fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: 'John Doe' } });
+  fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: 'JavaScript, React' } });
+  fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: '5 years' } });
+  await act(async () => {
+    fireEvent.click(getByText('Generate Cover Letter'));
+  });
+  await waitFor(() => expect(queryByText('Your personalized cover letter')).not.toBeInTheDocument());
+  expect(handleCoverLetterError).toHaveBeenCalledWith(mockError);
+});
   axios.post.mockRejectedValue(new Error('Error generating cover letter'));
   const { getByText, getByRole } = render(<CoverLetterGenerationPage />);
   fireEvent.click(getByRole('button', { name: 'Create Cover Letter' }));
