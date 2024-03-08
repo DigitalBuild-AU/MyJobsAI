@@ -97,6 +97,10 @@ describe('loadBootstrapScript utility function', () => {
 /**
  * Describes the suite of tests for bootstrap utility functions.
  */
+  /**
+   * Test Case: Simulates network delays or errors when loading the Bootstrap script using the loadBootstrapScript function.
+   * This test mocks a network error scenario to verify the function's error handling capabilities, such as retrying the script loading or logging an error message, ensuring robustness in adverse conditions.
+   */
   it('simulates network delays or errors when loading the Bootstrap script', () => {
     jest.spyOn(document, 'createElement').mockImplementation(() => {
       const script = document.createElement('script');
