@@ -27,6 +27,11 @@ const CoverLetterPreview = ({ generatedCoverLetter }) => (
   </div>
 );
 
+/**
+ * `DownloadButtons` provides options to download the cover letter as PDF or DOC, and to save it.
+ * Props:
+ * - generatedCoverLetter: The generated cover letter text to use for download.
+ */
 const DownloadButtons = ({ generatedCoverLetter }) => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
