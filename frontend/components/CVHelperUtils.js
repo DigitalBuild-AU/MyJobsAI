@@ -41,6 +41,11 @@ function processCVResponse(response, setCvSuggestions, setError) {
     setCvSuggestions('');
   }
 }
+"""
+CVHelperUtils.js
+
+This file contains utility functions for the CV Helper component. It includes functions to send CV analysis requests to the backend and process the responses. These utilities are used to enhance the user's CV based on job descriptions, providing suggestions for improvement.
+"""
 
 // Corrected to ensure only one export statement exists at the file end, exporting both functions.
 // Removed duplicated code and docstrings to streamline the file.
