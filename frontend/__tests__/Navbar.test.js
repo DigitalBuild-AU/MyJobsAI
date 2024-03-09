@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import Navbar from '../components/Navbar';
 
 describe('Navbar Component Tests', () => {
@@ -83,3 +83,14 @@ describe('Navbar Component Tests', () => {
     const { getByTestId } = render(<Navbar />);
     expect(getByTestId('nav-links')).toBeInTheDocument();
   });
+  /**
+   * Test case to verify that clicking on a toggle button correctly expands or collapses the mobile navigation menu.
+   */
+  it('toggles mobile navigation menu on click', () => {
+    render(<Navbar />);
+    fireEvent.click(screen.getByLabelText('menu-toggle'));
+    expect(screen.getByTestId('nav-menu')).toHaveClass('visible');
+    fireEvent.click(screen.getByLabelText('menu-toggle'));
+    expect(screen.getByTestId('nav-menu')).not.totoHaveClass('visible');
+  });
+  
