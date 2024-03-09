@@ -24,6 +24,7 @@ self.addEventListener('install', event => {
 });
 
 registerRoute(
+// This event listener handles the installation of the service worker. It caches essential assets for offline use.
   ({ request }) => request.destination === 'image',
   new CacheFirst({
     cacheName: 'image-cache',
@@ -60,3 +61,4 @@ self.addEventListener('activate', event => {
     })
   );
 });
+// This event listener is responsible for activating the service worker and managing cache cleanup.
