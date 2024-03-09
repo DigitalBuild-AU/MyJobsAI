@@ -69,7 +69,7 @@ describe('App Routing', () => {
       const response = { data: { message: 'Email was sent successfully.' } };
       axios.post.mockResolvedValue(response);
 
-      App.sendEmail();
+      fireEvent.click(screen.getByTestId('sendEmailButton'));
       await screen.findByText('Email was sent successfully.');
 
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
@@ -109,7 +109,7 @@ describe('App Routing', () => {
    */
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
-      App.sendEmail();
+      fireEvent.click(screen.getByTestId('sendEmailButton'));
       await screen.findByText('Failed to send email.');
 
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
