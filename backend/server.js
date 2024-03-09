@@ -1,3 +1,4 @@
+// Main server file for the MyJobsAI backend. This file sets up the express server, connects to MongoDB, and initializes all route handlers and middleware.
 const express = require('express');
 require('dotenv').config({ path: './backend/.env' }); // Ensure the correct path to your .env file
 const mongoose = require('mongoose');
@@ -20,6 +21,7 @@ const errorLogger = require('./middleware/errorLogger');
 
 app.use(express.json());
 
+// Logs the request path for static file requests.
 debugLog('Setting up middleware.');
 app.use((req, res, next) => {
   debugLog(`Request for static file detected: ${req.path}`);
@@ -33,11 +35,9 @@ debugLog('Static files middleware for frontend setup completed.');
 // Serve static files like 'quotes.json' from the 'public' directory
 app.use(express.static('public'));
 debugLog('Static files middleware for public directory setup completed.');
-/**
- * Main server file for MyJobsAI backend.
- * This file sets up the express server, connects to MongoDB, and initializes all route handlers.
- */
+// This comment has been integrated into the file header at the beginning of the file.
 debugLog('Connecting to MongoDB at URI: ' + process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => debugLog('MongoDB Connected'))
   .catch(err => {
@@ -66,6 +66,7 @@ const sslOptions = {
   key: fs.readFileSync(process.env.SSL_KEY_PATH),
   cert: fs.readFileSync(process.env.SSL_CERT_PATH)
 };
+// Creates and starts the HTTPS server, listening on the specified PORT. Logs server start-up status.
 https.createServer(sslOptions, app).listen(PORT, () => {
   debugLog(`Server is running on port ${PORT}`);
 }).on('error', (err) => {
