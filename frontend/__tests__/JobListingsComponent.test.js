@@ -1,3 +1,8 @@
+/**
+ * This file contains tests for the JobListingsComponent.
+ * It verifies the functionality of job listing filtering, state updates on input changes, and other related features.
+ * These tests ensure that the JobListingsComponent behaves as expected under various conditions and user interactions.
+ */
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
