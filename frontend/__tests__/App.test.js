@@ -36,6 +36,10 @@ describe('App Routing', () => {
    * Tests navigation to a specific route and verifies that the correct component is rendered.
    */
   routes.forEach(route => {
+import { act } from 'react-dom/test-utils';
+import EmailComponent from '../components/EmailComponent';
+import useEmailSender from '../src/useEmailSender';
+jest.mock('../src/useEmailSender');
     it(`navigates to ${route.path} and renders ${route.component}`, () => {
       const { getByText } = render(
         <BrowserRouter>
@@ -123,6 +127,38 @@ describe('generateCoverLetter Functionality', () => {
     const expectedResponse = 'Please provide a valid userName.';
     expect(generateCoverLetter(null, jobTitle, companyName)).toEqual(expectedResponse);
   });
+    test('useEmailSender hook integration with EmailComponent', async () => {
+      // Mock the useEmailSender hook for success scenario
+      useEmailSender.mockImplementation(() => jest.fn(async () => 'Email sent successfully'));
+      const { getByText, rerender } = render(
+        <BrowserRouter>
+          <EmailComponent sendEmail={useEmailSender()} />
+        </BrowserRouter>
+      );
+      await act(async () => {
+        fireEvent.click(getByText('Send Email'));
+      });
+      expect(getByText('Email sent successfully')).toBeInTheDocument();
+
+      // Mock the useEmailSender hook for failure scenario
+      useEmailSender.mockImplementation(() => jest.fn(async () => { throw new Error('Failed to send email'); }));
+      rerender(
+        <BrowserRouter>
+          <EmailComponent sendEmail={useEmailSender()} />
+        </BrowserRouter>
+      );
+      await act(async () => {
+        fireEvent.click(getByText('Send Email'));
+      });
+      expect(getByText('Failed to send email')).toBeInTheDocument();
+
+      // Test with invalid email address
+      document.getElementById('emailTo').value = 'invalidemail';
+      await act(async () => {
+        fireEvent.click(getByText('Send Email'));
+      });
+      expect(getByText('Please enter a valid email address')).toBeInTheDocument();
+    });
 
   test('should handle missing jobTitle gracefully', () => {
     const userName = 'John Doe';
