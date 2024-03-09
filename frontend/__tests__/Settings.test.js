@@ -4,6 +4,11 @@ import Settings from '../components/Settings';
 import { SettingsContext } from '../contexts/SettingsContext';
 
 describe('Settings Component', () => {
+/**
+ * Test suite for the Settings component.
+ * Tests include loading and applying settings from SettingsContext,
+ * and updating settings within the SettingsContext.
+ */
   test('loads and applies settings from SettingsContext', () => {
     const defaultSettings = { theme: 'light', notifications: true };
     const wrapper = ({ children }) => <SettingsContext.Provider value={{ settings: defaultSettings }}>{children}</SettingsContext.Provider>;
@@ -15,6 +20,10 @@ describe('Settings Component', () => {
   });
 
   test('updates settings within SettingsContext', () => {
+  /**
+   * Tests that the Settings component correctly loads and displays settings from SettingsContext,
+   * including the theme and notifications settings.
+   */
     let settings = { theme: 'light', notifications: true };
     const updateSettings = jest.fn(updatedSettings => settings = { ...settings, ...updatedSettings });
     const wrapper = ({ children }) => <SettingsContext.Provider value={{ settings, updateSettings }}>{children}</SettingsContext.Provider>;
@@ -30,3 +39,7 @@ describe('Settings Component', () => {
     expect(getByText('Notifications: Off')).toBeInTheDocument();
   });
 });
+  /**
+   * Tests the functionality of updating settings within the SettingsContext through the Settings component,
+   * verifying the changes in theme and notifications settings.
+   */

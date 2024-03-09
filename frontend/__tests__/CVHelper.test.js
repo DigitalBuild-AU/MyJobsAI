@@ -36,6 +36,16 @@ test('handles various file formats and sizes for CV upload', () => {
 
   // Large PDF upload
   fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [largePDF] } });
+/**
+ * Test suite for the CVHelper component.
+ * This suite tests rendering, CV upload functionality, file format and size validation,
+ * CV analysis suggestions, and error handling for network issues and unsupported file formats.
+ */
+  fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [largePDF] } });
+  fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [largePDF] } });
+
+  // Large PDF upload
+  fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [largePDF] } });
   expect(screen.getByText('File size should not exceed 5MB')).toBeInTheDocument();
 
   // Word document upload
@@ -56,8 +66,11 @@ Description: Test suite for the CVHelper component, focusing on CV upload functi
     await screen.findByText('Suggestions for improvement');
     expect(screen.getByText('Consider using more action verbs')).toBeInTheDocument();
   });
-// Additional scenario: Providing different CV content and job descriptions
-test('analyzes CV with different content and job descriptions', async () => {
+  /**
+   * Tests the CV analysis with different CV content and job descriptions,
+   * verifying tailored suggestions based on the input.
+   */
+  test('analyzes CV with different content and job descriptions', async () => {
   render(<CVHelper />);
   fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Data Scientist' } });
   fireEvent.change(screen.getByPlaceholderText('Paste your CV here...'), { target: { value: 'Data analysis and machine learning...' } });
@@ -75,7 +88,11 @@ jest.mock('axios');
     expect(screen.getByText('Please upload a CV first.')).toBeInTheDocument();
   });
 });
-test('generates CV suggestions based on user input', async () => {
+  /**
+   * Tests the generation of CV suggestions based on user input,
+   * verifying the response for a Software Engineer position.
+   */
+  test('generates CV suggestions based on user input', async () => {
   const { getByPlaceholderText, getByText } = render(<CVHelper />);
   fireEvent.change(getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
   fireEvent.change(getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
@@ -86,7 +103,11 @@ test('generates CV suggestions based on user input', async () => {
   });
 });
 
-test('displays error when CV suggestions generation fails', async () => {
+  /**
+   * Tests the error handling when the generation of CV suggestions fails,
+   * simulating a network error scenario.
+   */
+  test('displays error when CV suggestions generation fails', async () => {
   axios.post.mockRejectedValueOnce(new Error('Network Error'));
 
   const { getByPlaceholderText, getByText } = render(<CVHelper />);
@@ -94,6 +115,10 @@ test('displays error when CV suggestions generation fails', async () => {
   fireEvent.change(getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
   fireEvent.click(getByText('Get CV Suggestions'));
 test('displays error for unsupported file format during CV upload', async () => {
+   * Tests the error message display for unsupported file formats during CV upload,
+   * verifying that the user is informed about the acceptable formats.
+   */
+  test('displays error for unsupported file format during CV upload', async () => {
   const unsupportedFile = new File(['dummy content'], 'resume.txt', { type: 'text/plain' });
   render(<CVHelper />);
   fireEvent.change(screen.getByLabelText('Upload CV'), { target: { files: [unsupportedFile] } });
@@ -104,6 +129,10 @@ test('displays error for unsupported file format during CV upload', async () => 
 });
 
 test('displays error for network issues during CV analysis', async () => {
+   * Tests the error handling for network issues during CV analysis,
+   * ensuring that users are informed about the failure to analyze the CV.
+   */
+  test('displays error for network issues during CV analysis', async () => {
   axios.post.mockRejectedValueOnce(new Error('Network Error'));
   render(<CVHelper />);
   fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
@@ -118,7 +147,11 @@ test('displays error for network issues during CV analysis', async () => {
     expect(getByText('Failed to fetch CV suggestions.')).toBeInTheDocument();
   });
 });
-test('generates CV suggestions based on user input', async () => {
+  /**
+   * Tests the successful fetching of CV suggestions based on user input for a second scenario,
+   * verifying the tailored suggestions for a different position.
+   */
+  test('generates CV suggestions based on user input', async () => {
   axios.post.mockResolvedValueOnce({ data: { suggestions: 'Your CV has been tailored for a Software Engineer position.' } });
 
   render(<CVHelper />);
@@ -136,7 +169,11 @@ test('generates CV suggestions based on user input', async () => {
   });
 });
 
-test('displays error when CV suggestions generation fails', async () => {
+  /**
+   * Tests the error handling for a second scenario when CV suggestions generation fails,
+   * simulating a different network error condition.
+   */
+  test('displays error when CV suggestions generation fails', async () => {
   axios.post.mockRejectedValueOnce(new Error('Network Error'));
 
   render(<CVHelper />);
@@ -148,7 +185,11 @@ test('displays error when CV suggestions generation fails', async () => {
     expect(screen.getByText('Failed to fetch CV suggestions.')).toBeInTheDocument();
   });
 });
-test('verifies CV suggestions are fetched successfully', async () => {
+  /**
+   * Tests the successful retrieval of CV suggestions,
+   * verifying that the suggestions are appropriate for a Software Engineer position.
+   */
+  test('verifies CV suggestions are fetched successfully', async () => {
   render(<CVHelper />);
   fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
   fireEvent.change(screen.getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
@@ -158,7 +199,11 @@ test('verifies CV suggestions are fetched successfully', async () => {
     expect(screen.getByText('Your CV has been tailored for a Software Engineer position.')).toBeInTheDocument();
   });
 });
-test('handles error when fetching CV suggestions fails', async () => {
+  /**
+   * Tests the error handling when fetching CV suggestions fails,
+   * ensuring that users are notified of the failure.
+   */
+  test('handles error when fetching CV suggestions fails', async () => {
   axios.post.mockRejectedValueOnce(new Error('Network Error'));
 
   render(<CVHelper />);
