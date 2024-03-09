@@ -40,6 +40,11 @@ const QuoteWidget = () => {
     </div>
   );
 };
+/**
+ * `EmailForm` provides a form for sending an email.
+ * Contains input fields for recipient's email, subject, and message.
+ * The form submission is handled by `handleSubmit`.
+ */
 const EmailForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
