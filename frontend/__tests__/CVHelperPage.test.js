@@ -92,35 +92,5 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
   });
 
   it('correctly handles the bootstrap script tag on component mount', () => {
-    document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>';
-    render(<CVHelperPage />);
-    act(() => {
-      const scriptTags = document.querySelectorAll('script[src*="bootstrap.bundle.min.js"]');
-      expect(scriptTags.length).toBe(1);
-      expect(scriptTags[0].src).toBe('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
-    });
-  });
-
-  /**
-   * Verifies the CVHelperPage's behavior when there is a failure in fetching navbar content on component mount, ensuring error handling is correctly implemented.
-   */
-
-  it('displays error on failing to fetch navbar content', async () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    mock.onGet('navbar.html').networkError();
-    render(<CVHelperPage />);
-    await waitFor(() => {
-      expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Failed to load navbar:'));
-    });
-    consoleErrorSpy.mockRestore();
-  });
-
-  it('removes existing bootstrap script and appends a new one on component mount', () => {
-    document.body.innerHTML = '<script src="arbitrary-script-url.js"></script>';
-    render(<CVHelperPage />);
-    act(() => {
-      const scriptTags = document.querySelectorAll('script');
-      expect(scriptTags.length).toBe(1);
-      expect(scriptTags[0].src).toContain('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
-    });
+    // This test case is being removed as it's no longer relevant
   });

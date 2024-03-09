@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import CVHelper from '../pages/CVHelper';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import CVHelper from '../components/CVHelper';
 
 describe('CVHelper Component', () => {
   /**
@@ -142,6 +142,26 @@ test('displays error when CV suggestions generation fails', async () => {
   render(<CVHelper />);
   fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
   fireEvent.change(screen.getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
+  fireEvent.click(screen.getByText('Get CV Suggestions'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Failed to fetch CV suggestions.')).toBeInTheDocument();
+  });
+});
+test('verifies CV suggestions are fetched successfully', async () => {
+  render(<CVHelper />);
+  fireEvent.change(screen.getByPlaceholderText('Paste the job description here...'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(screen.getByPlaceholderText('Paste your CV here...'), { target: { value: 'Experienced software engineer...' } });
+  fireEvent.click(screen.getByText('Get CV Suggestions'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Your CV has been tailored for a Software Engineer position.')).toBeInTheDocument();
+  });
+});
+test('handles error when fetching CV suggestions fails', async () => {
+  axios.post.mockRejectedValueOnce(new Error('Network Error'));
+
+  render(<CVHelper />);
   fireEvent.click(screen.getByText('Get CV Suggestions'));
 
   await waitFor(() => {
