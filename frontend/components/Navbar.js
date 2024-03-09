@@ -1,3 +1,9 @@
+/**
+ * Navbar function returns a navigation bar component.
+ * It allows users to navigate between different sections of the application.
+ * No parameters.
+ * Returns a JSX element representing the navigation bar.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -31,11 +37,9 @@ const Navbar = () => {
               <li className='nav-item'>
 import NavLinks from './NavLinks';
 /**
- * This file defines the Navbar component used across the MyJobsAI application.
- * It renders the main navigation bar allowing users to navigate between different sections of the application.
- */
-/**
- * Navbar function that returns a navigation bar component.
+ * Navbar function returns a navigation bar component.
+ * It allows users to navigate between different sections of the application.
+ * Utilizes React state to manage active navigation links.
  * No parameters.
  * Returns a JSX element representing the navigation bar.
  */
@@ -64,7 +68,34 @@ const Navbar = () => {
           <span className='navbar-toggler-icon'></span>
       </button>
       <div className='collapse navbar-collapse' id='navbarNav'>
-          <NavLinks activeLink={activeLink} setActiveLink={handleSetActiveLink} />
+          <ul className='navbar-nav'>
+              <li className={`nav-item ${activeLink === 'dashboard' ? 'active' : ''}`}>
+                  <Link className='nav-link' to='/' onClick={() => handleSetActiveLink('dashboard')}>Dashboard</Link>
+              </li>
+              <li className={`nav-item ${activeLink === 'jobListings' ? 'active' : ''}`}>
+                  <Link className='nav-link' to='/jobListings' onClick={() => handleSetActiveLink('jobListings')}>Job Listings</Link>
+              </li>
+              <li className={`nav-item ${activeLink === 'applications' ? 'active' : ''}`}>
+                  <Link className='nav-link' to='/applications' onClick={() => handleSetActiveLink('applications')}>Applications</Link>
+              </li>
+              <li className={`nav-item ${activeLink === 'cvHelper' ? 'active' : ''}`}>
+                  <Link className='nav-link' to='/cvHelper' onClick={() => handleSetActiveLink('cvHelper')}>CV Helper</Link>
+              </li>
+              <li className={`nav-item ${activeLink === 'coverLetter' ? 'active' : ''}`}>
+                  <Link className='nav-link' to='/coverLetter' onClick={() => handleSetActiveLink('coverLetter')}>Cover Letter</Link>
+              </li>
+              <li className={`nav-item ${activeLink === 'interviews' ? 'active' : ''}`}>
+                  <Link className='nav-link' to='/interviews' onClick={() => handleSetActiveLink('interviews')}>Interviews</Link>
+              </li>
+              <li className={`nav-item ${activeLink === 'settings' ? 'active' : ''}`}>
+/**
+ * handleSetActiveLink function updates the active navigation link state.
+ * @param {string} link - The link to set as active.
+ * No return value.
+ */
+                  <Link className='nav-link' to='/settings' onClick={() => handleSetActiveLink('settings')}>Settings</Link>
+              </li>
+          </ul>
       </div>
     </nav>
   );
