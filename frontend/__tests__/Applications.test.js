@@ -36,6 +36,19 @@ describe('Applications Component', () => {
    */
   test('updates an existing application and reflects changes', () => {
  * Tests that updating an existing application correctly reflects the changes.
+test('dynamically loads Bootstrap script', async () => {
+  render(<Applications />);
+  await waitFor(() => expect(document.querySelector('script[src*="bootstrap.bundle.min.js"]')).toBeInTheDocument());
+  expect(console.log).toHaveBeenCalledWith('Bootstrap 5 script loaded successfully.');
+});
+test('includes Navbar in the rendering', () => {
+  const { getByText } = render(<Applications />);
+  expect(getByText(/Dynamic Navbar Inclusion is handled by the Navbar component/i)).toBeInTheDocument();
+});
+test('renders migrated content from applications.html', () => {
+  const { getByText } = render(<Applications />);
+  expect(getByText(/Additional page content can be added here/i)).toBeInTheDocument();
+});
  */
   test('updates an existing application and reflects changes', () => {
     // Additional scenario: Updating the company name of an existing application
