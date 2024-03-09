@@ -6,10 +6,6 @@ import { sendCVRequest, processCVResponse } from './CVHelperUtils';
 import React, { useState } from 'react';
 
 const CVHelper = () => {
-  /**
-   * CVHelper component assists users by generating CV suggestions.
-   * It takes user input for job descriptions and CV content to provide tailored advice.
-   */
   const [jobDescriptionInput, setJobDescriptionInput] = useState('');
   const [userCVInput, setUserCVInput] = useState('');
 
@@ -22,7 +18,8 @@ const CVHelper = () => {
    * Returns: None.
    */
   const handleGenerateCVSuggestions = () => {
-   * Handles the generation of CV suggestions by sending user inputs to the backend.
+   * handleGenerateCVSuggestions
+   * This function is triggered when the user requests CV suggestions. It sends a POST request to the backend with the user's job description and CV content. Upon success, it updates the state with the received CV suggestions; on failure, it sets an error message.
    * Parameters: None.
    * Returns: None. Updates the state with CV suggestions or an error message.
    */
