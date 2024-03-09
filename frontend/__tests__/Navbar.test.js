@@ -31,6 +31,10 @@ describe('Navbar Component Tests', () => {
    * Test case: Display of the brand name in the Navbar.
    * Ensures that the Navbar component correctly renders the brand name 'MyJobsAI'.
    */
+  /**
+   * Test case: Rendering of the Dashboard link in the Navbar.
+   * Verifies that the Navbar includes a link to the Dashboard, ensuring it is accessible to the user.
+   */
   it('displays the brand name MyJobsAI', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('MyJobsAI')).toBeInTheDocument();
