@@ -39,7 +39,9 @@ const JobListings = () => {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    // Placeholder for filter logic
+    axios.get('/api/jobListings', { params: { location: filterLocation, jobType: filterJobType, keywords: filterKeywords } })
+      .then(response => setJobListings(response.data))
+      .catch(error => console.error('Error fetching filtered job listings:', error));
   };
 
   const handleAddJobListing = (e) => {
