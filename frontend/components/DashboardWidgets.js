@@ -16,6 +16,10 @@ const SummaryWidget = ({ summary }) => (
   </div>
 );
 
+/**
+ * `QuoteWidget` fetches and displays a random quote.
+ * Uses state to manage the fetched quote and performs the fetch on component mount.
+ */
 const QuoteWidget = () => {
   const [quote, setQuote] = useState('');
 
