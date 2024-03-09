@@ -86,6 +86,11 @@ it('updates component state correctly on handleChange', () => {
    * This test simulates user interactions with both text and checkbox inputs and verifies that the component's state updates accordingly.
    * It checks for the correct handling of text input for job titles and the toggle state of a checkbox input.
    */
+  /**
+   * Test case: Filters job listings based on input using mock data.
+   * This test provides a set of mock job listings and simulates user input to filter these listings by company name.
+   * It verifies that the component correctly filters and displays only the listings that match the input criteria.
+   */
 it('filters job listings based on input', () => {
     const mockListings = [
       { id: 1, title: 'Software Engineer', company: 'Tech Innovations', location: 'Remote' },
