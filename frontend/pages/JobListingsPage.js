@@ -2,6 +2,11 @@
  * JobListingsPage is a React functional component that renders the job listings page,
  * allowing users to view and filter job listings.
  */
+/**
+ * JobListingsPage.js
+ * This file implements the JobListingsPage component, which acts as the container for the job listings components.
+ * It integrates various functionalities related to job listings, providing a comprehensive view for users to explore and interact with job opportunities.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
