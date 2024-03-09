@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+/**
+ * `SummaryWidget` displays a summary of the user's job application activities.
+ * Props:
+ * - summary: An object containing the counts of applications sent, interviews scheduled, and offers received.
+ */
+
 const SummaryWidget = ({ summary }) => (
   <div className="summary-widget">
     <h2>Summary</h2>
@@ -10,6 +16,10 @@ const SummaryWidget = ({ summary }) => (
   </div>
 );
 
+/**
+ * `QuoteWidget` fetches and displays a random quote.
+ * Uses state to manage the fetched quote and performs the fetch on component mount.
+ */
 const QuoteWidget = () => {
   const [quote, setQuote] = useState('');
 
@@ -30,7 +40,11 @@ const QuoteWidget = () => {
     </div>
   );
 };
-
+/**
+ * `EmailForm` provides a form for sending an email.
+ * Contains input fields for recipient's email, subject, and message.
+ * The form submission is handled by `handleSubmit`.
+ */
 const EmailForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();

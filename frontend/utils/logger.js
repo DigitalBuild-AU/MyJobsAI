@@ -1,3 +1,8 @@
+/**
+ * logger.js
+ * Purpose: Provides logging functionalities for the application.
+ * It supports console logging and external logging services, with the ability to toggle external logging.
+ */
 // Configuration for external logging service
 const externalLoggingEnabled = false; // Toggle this to enable/disable external logging
 const externalLogger = {
