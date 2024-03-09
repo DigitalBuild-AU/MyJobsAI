@@ -19,6 +19,21 @@ describe('addJobListing', () => {
 
   test('returns error message on save failure', async () => {
     JobListing.prototype.save.mockRejectedValue(new Error('Error saving job listing'));
+  });
+
+  test('successfully adds a new job listing', async () => {
+    const jobListingData = { jobTitle: 'Software Developer', company: 'Tech Corp', location: 'Remote' };
+    JobListing.prototype.save.mockResolvedValue(jobListingData);
+    const result = await addJobListing(jobListingData);
+    expect(result).toHaveProperty('jobTitle', jobListingData.jobTitle);
+    expect(result.company).toBe('Tech Corp');
+    expect(result.location).toBe('Remote');
+  });
+
+  test('fails to add a job listing with missing required fields', async () => {
+    JobListing.prototype.save.mockRejectedValue(new Error('Validation failed'));
+    const result = await addJobListing({ company: 'Tech Corp' });
+    expect(result).toEqual({ error: 'Error adding job listing: Validation failed' });
     const result = await addJobListing({});
     expect(result).toEqual({ error: 'Error adding job listing: Error saving job listing' });
   });
