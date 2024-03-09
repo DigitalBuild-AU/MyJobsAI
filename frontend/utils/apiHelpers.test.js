@@ -24,8 +24,19 @@ describe('submitInterviewData', () => {
 
   it('correctly handles a failed POST request', async () => {
 /**
- * Tests that the submitInterviewData function sends a POST request with the correct parameters and successfully returns the expected response.
+ * Tests for the `submitInterviewData` function in apiHelpers.
+ * This suite checks the functionality of submitting interview data through a POST request,
+ * including successful data submission and error handling for failed requests.
  */
+  /**
+   * Tests successful POST request submission with correct parameters.
+   * Ensures the axios.post method is called with the expected URL and data,
+   * and that the function returns the correct response.
+   */
+  /**
+   * Tests error handling for a failed POST request.
+   * Ensures that the function throws an error with the expected message when the request fails.
+   */
     const errorMessage = 'Network Error';
     axios.post.mockRejectedValue(new Error(errorMessage));
 
