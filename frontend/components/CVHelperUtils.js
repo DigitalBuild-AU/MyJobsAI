@@ -1,3 +1,13 @@
+"""
+Processes the response from the CV analysis request.
+
+Parameters:
+- response (object): The response object from the backend.
+- setCvSuggestions (function): Function to update the CV suggestions state.
+- setError (function): Function to update the error state.
+
+This function updates the CV suggestions state if the response contains suggestions, otherwise, it updates the error state.
+"""
 import axios from 'axios';
 
 """
