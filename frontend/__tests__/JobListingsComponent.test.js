@@ -34,6 +34,10 @@ describe('JobListingsComponent', () => {
     expect(bootstrapScriptExists).toBeTruthy();
   });
 
+    /**
+   * Test case: Verifies that the component state updates correctly when input fields are changed.
+   * This test should simulate changes to input fields and assert that the component's state reflects these changes accurately.
+   */
   it('updates state on input change', () => {
   });
 
