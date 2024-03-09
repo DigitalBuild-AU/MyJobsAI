@@ -113,6 +113,12 @@ Description: This file contains unit tests for the GPT-related routes within the
    * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
    * Expected Output: HTTP status 200 with property 'suggestions' containing 'Your CV suggestions.'
    */
+  /**
+   * Test Case: Successfully Handles a CV Suggestions Request with Mocked OpenAI Call
+   * Purpose: Verifies that the CV suggestions endpoint can successfully process a request and return CV suggestions, using a mocked OpenAI API call to simulate the backend interaction.
+   * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
+   * Expected Output: HTTP status 200 with property 'suggestions' containing 'Your CV suggestions.'
+   */
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
     handleCvSuggestions.mockResolvedValue(mockResponse);
