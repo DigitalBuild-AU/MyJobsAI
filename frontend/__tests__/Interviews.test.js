@@ -25,10 +25,9 @@ describe('Interviews Component', () => {
     expect(screen.getByText('Schedule Interview')).toBeInTheDocument();
   });
 
-  test('adds a new interview and updates state', () => {
-   * Tests that adding a new interview correctly updates the component's state.
-   * Test to verify that adding a new interview entry correctly updates the component's state
-   * and displays the added interview details.
+  /**
+   * Test to verify that adding a new interview through the form updates the component's state
+   * and displays the newly added interview information correctly.
    */
   test('adds a new interview and updates state', () => {
     render(<Interviews />);
