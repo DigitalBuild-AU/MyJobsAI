@@ -8,7 +8,11 @@
 const { Configuration, OpenAIApi } = require("openai");
 const dotenv = require("dotenv");
 
-dotenv.config();
+if (process.env.CI) {
+  process.env.OPENAI_API_KEY = process.env.OPENAI_API_KEY_SECRET;
+} else {
+  dotenv.config();
+}
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,

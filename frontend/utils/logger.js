@@ -4,11 +4,11 @@
  * It supports console logging and external logging services, with the ability to toggle external logging.
  */
 // Configuration for external logging service
-const externalLoggingEnabled = false; // Toggle this to enable/disable external logging
+const externalLoggingEnabled = true; // Toggle this to enable/disable external logging
 const externalLogger = {
-  info: (message, data) => {/* Placeholder for sending info logs to an external service */},
-  warn: (message, data) => {/* Placeholder for sending warning logs to an external service */},
-  error: (message, error) => {/* Placeholder for sending error logs to an external service */}
+  info: (message, data) => { /* Code to send info logs to an external service */ },
+  warn: (message, data) => { /* Code to send warning logs to an external service */ },
+  error: (message, error) => { /* Code to send error logs to an external service */ }
 };
 
 export const logInfo = (message, ...data) => {

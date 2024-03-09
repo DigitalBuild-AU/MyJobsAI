@@ -49,7 +49,11 @@ To run the test suite with Jest, use the following command:
 npm test
 ```
 
-This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Ensure you have all dependencies installed before running tests.
+This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Additionally, to ensure tests related to the database run successfully, set up a local test database and configure the appropriate environment variables based on the `.env.example` provided.
+
+Ensure you have all dependencies installed before running tests. For tests involving external APIs, ensure the corresponding API mock services are running.
+
+If any new dependencies were introduced as part of the GitHub Actions fixes, please run `npm install` again to update your local environment.
 
 As part of our ongoing efforts to streamline the development process and adhere to best practices, we have consolidated the `app.js` and `App.js` files into a single `App.js` file. This change was made to eliminate confusion and potential errors arising from having two similarly named entry point files, especially on case-sensitive file systems.
 
@@ -79,6 +83,7 @@ In keeping with modern React development practices, we've also taken steps to re
 In our effort to align with the best practices of modern web development, we have restructured our project's folder layout to mirror that of a Create React App (CRA) standard setup. This change aims to enhance the maintainability and scalability of our application by organizing files into clear, purpose-driven directories.
 
 #### Key Changes Include:
+Additionally, our Continuous Integration (CI) pipeline is configured to automatically run tests on push and pull requests to the main branch, as defined in the `.github/workflows/ci.yml` file. Developers can view the results of these tests directly in their pull requests or under the "Actions" tab in the GitHub repository, which aids in diagnosing and resolving failures.
 - **`src/components`**: This directory houses all React components, facilitating easier navigation and management of UI elements.
 - **`src/assets`**: A dedicated place for static assets such as images, stylesheets, and fonts. This separation ensures that assets are easily accessible and not intermingled with component logic.
 - **`src/tests`**: Contains all test files. Aligning with CRA standards, placing tests alongside their corresponding components promotes a more integrated development and testing workflow.
