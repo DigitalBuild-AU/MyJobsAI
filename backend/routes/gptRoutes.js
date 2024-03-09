@@ -20,11 +20,12 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // CV Suggestions Route using Chat Completions
 /**
- * POST /cv_suggestions
- * Generates CV suggestions based on a job description and user's CV.
- * Inputs: jobDescription (String), userCV (String)
- * Output: JSON object containing CV suggestions
- * Exceptions: Returns a 500 status code with an error message if the request fails.
+ * Handles POST requests to generate CV suggestions based on a job description and user's CV.
+ * @description This route processes POST requests to dynamically generate CV suggestions tailored to the user's CV and the job description provided.
+ * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
+ * @param {Object} res - The response object used to return the suggestions or an error message.
+ * @returns {void} - Sends a JSON response with CV suggestions or an error status.
+ * @throws {Error} - Returns a 500 status code with an error message if the request fails.
  */
 router.post('/cv_suggestions', async (req, res) => {
  * Handles the generation of CV suggestions based on a given job description and user's CV.
