@@ -4,6 +4,10 @@ This file contains tests for utility functions used in the Job Listings Page. It
 import { getMockJobListings, getMockFilters, assertListingsMatchFilters } from './jobListingsPageTestUtils';
 import { describe, it, expect } from '@jest/globals';
 
+/**
+ * Generates a mock array of job listings for testing purposes.
+ * - Returns: Array of mock job listings, each containing an id, title, company, and status.
+ */
 describe('getMockJobListings tests', () => {
   it('should return the expected array of job listings', () => {
     const expectedListings = [
