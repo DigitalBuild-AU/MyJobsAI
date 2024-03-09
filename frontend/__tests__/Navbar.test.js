@@ -49,6 +49,10 @@ describe('Navbar Component Tests', () => {
     const { getByText } = render(<Navbar />);
     const applicationsLink = getByText('Applications');
   /**
+   * Test case: Dynamic active link update within NavLinks.
+   * Verifies that clicking on different links updates the active class appropriately, ensuring only the clicked link is marked active.
+   */
+  /**
    * Test case: Ensure the Navbar component renders without any errors.
    * This test verifies that the Navbar component can be rendered into the DOM without throwing exceptions.
    */
