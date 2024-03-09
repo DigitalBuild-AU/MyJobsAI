@@ -147,3 +147,9 @@ describe('loadBootstrapScript utility function', () => {
    * Test Case: Simulates network delays or errors when loading the Bootstrap script.
    * This test verifies the robustness of the loadBootstrapScript function in handling network issues, ensuring that error handling mechanisms are properly implemented.
    */
+  /**
+   * Test Case: Simulates network delays or errors when loading the Bootstrap script.
+   * Purpose: This test verifies the application's resilience and error handling when the Bootstrap script cannot be loaded due to network issues.
+   * Setup: Mocks the document.createElement function to simulate the creation of a script element that triggers an error after a delay.
+   * Expected Outcome: The application should attempt to handle the error appropriately, which could include retrying the loading process or logging an error message for debugging purposes.
+   */
