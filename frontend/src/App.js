@@ -1,3 +1,6 @@
+/**
+ * App.js serves as the entry point for the MyJobsAI React application. It sets up the router and defines routes for different components of the application, facilitating navigation and rendering of different pages.
+ */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
