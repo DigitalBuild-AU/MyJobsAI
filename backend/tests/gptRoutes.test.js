@@ -98,6 +98,10 @@ describe('/cv_customization route', () => {
         jobDescription: 'Software Engineer role requiring problem-solving skills.',
         userCV: 'Problem solver with a keen interest in software development.'
 
+  /**
+   * Test to verify that the createCompletion method of the OpenAI API is called with the correct parameters
+   * when a CV customization request is made. This includes checking the model, prompt, max_tokens, n, stop, and temperature parameters.
+   */
   test('verifies createCompletion method call with correct parameters', async () => {
     const mockCreateCompletion = jest.spyOn(openai, 'createCompletion').mockResolvedValue({
       data: {
