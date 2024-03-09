@@ -14,8 +14,8 @@ jest.mock('../utils/coverLetterAPI');
 jest.mock('axios');
 
 const mockJobListings = [
-  { id: '1', title: 'Software Engineer', contact: 'John Doe' },
-  { id: '2', title: 'Product Manager', contact: 'Jane Smith' }
+  { id: '1', title: 'Software Engineer', contact: 'John Doe', template: 'modern' },
+  { id: '2', title: 'Product Manager', contact: 'Jane Smith', template: 'classic' }
 ];
 
 const mockCoverLetter = 'Your application for Software Engineer has been created.';
@@ -38,7 +38,10 @@ test('renders without crashing', async () => {
  */
 test('renders without crashing', async () => {
   const { getByText, getByRole } = render(<CoverLetterGenerationPage />);
-  await waitFor(() => expect(getByText('Create Cover Letter')).toBeInTheDocument());
+  await waitFor(() => {
+    expect(getByText('Create Cover Letter')).toBeInTheDocument();
+    expect(getByText('Select Template')).toBeInTheDocument();
+  });
   expect(getByRole('combobox')).toBeInTheDocument();
 });
 
@@ -53,7 +56,7 @@ Description: This file contains tests for the Cover Letter Generation Page. It i
 """
   const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
   expect(queryByText('Download as PDF')).not.toBeInTheDocument();
-  expect(queryByText('Download as DOC')).not.toBeInTheDocument();
+  expect(queryByText('Download as DOCX')).not.toBeInTheDocument();
   await waitFor(() => fireEvent.click(getByText('Create Cover Letter')));
   expect(getByText('Download as PDF')).toBeInTheDocument();
   expect(getByText('Download as DOC')).toBeInTheDocument();
@@ -77,6 +80,7 @@ test('generateCoverLetter integration with successful API call', async () => {
   fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: mockCoverLetterData.userExperience } });
   await act(async () => {
     fireEvent.click(getByText('Generate Cover Letter'));
+  });
   });
   await waitFor(() => expect(getByText('Your personalized cover letter')).toBeInTheDocument());
 });
@@ -114,7 +118,7 @@ Ensures that clicking the 'Create Cover Letter' button on the CoverLetterGenerat
 """
 test('form submission generates cover letter', async () => {
   const mock = new MockAdapter(axios);
-  const postData = { description: 'Software Engineer', name: 'Jane Doe', skills: 'React, Node', experience: '5 years' };
+  const postData = { description: 'Software Engineer', name: 'Jane Doe', skills: 'React, Node', experience: '5 years', template: 'modern' };
   const responseData = { coverLetter: 'Your application for Software Engineer has been created.' };
   mock.onPost('/api/coverletter/generate', postData).reply(200, responseData);
 
@@ -124,6 +128,7 @@ test('form submission generates cover letter', async () => {
     fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: postData.name } });
     fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: postData.skills } });
     fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: postData.experience } });
+    fireEvent.change(getByRole('combobox', { name: 'Select Template' }), { target: { value: postData.template } });
     fireEvent.click(getByText('Generate Cover Letter'));
     expect(await findByText(responseData.coverLetter)).toBeInTheDocument();
   });
@@ -156,7 +161,7 @@ test('downloadAsPDF triggers download with correct attributes', async () => {
     const { getByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as PDF'));
     expect(document.createElement).toHaveBeenCalledWith('a');
-    expect(document.createElement().download).toEqual('coverLetter.pdf');
+    expect(document.createElement().download).toEqual('coverLetter-modern.pdf');
     expect(document.createElement().type).toEqual('application/pdf');
   });
 });
@@ -235,8 +240,8 @@ test('downloadAsDOC triggers download with correct attributes', async () => {
     const { getByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as DOC'));
     expect(document.createElement).toHaveBeenCalledWith('a');
-    expect(document.createElement().download).toEqual('coverLetter.doc');
-    expect(document.createElement().type).toEqual('application/msword');
+    expect(document.createElement().download).toEqual('coverLetter-modern.docx');
+    expect(document.createElement().type).toEqual('application/vnd.openxmlformats-officedocument.wordprocessingml.document');
   });
 
 """
@@ -274,7 +279,7 @@ test('downloadAsPDF triggers download with correct attributes', async () => {
     const { getByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as PDF'));
     expect(document.createElement).toHaveBeenCalledWith('a');
-    expect(document.createElement().download).toEqual('coverLetter.pdf');
+    expect(document.createElement().download).toEqual('coverLetter-modern.pdf');
     expect(document.createElement().type).toEqual('application/pdf');
   });
 });
@@ -293,8 +298,8 @@ test('downloadAsDOC triggers download with correct attributes', async () => {
     const { getByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as DOC'));
     expect(document.createElement).toHaveBeenCalledWith('a');
-    expect(document.createElement().download).toEqual('coverLetter.doc');
-    expect(document.createElement().type).toEqual('application/msword');
+    expect(document.createElement().download).toEqual('coverLetter-modern.docx');
+    expect(document.createElement().type).toEqual('application/vnd.openxmlformats-officedocument.wordprocessingml.document');
   });
 });
 test('simulate download failure for PDF', async () => {
@@ -305,7 +310,7 @@ test('simulate download failure for PDF', async () => {
   await act(async () => {
     const { getByText, findByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as PDF'));
-    expect(await findByText('Failed to download cover letter as PDF.')).toBeInTheDocument();
+    expect(await findByText('Failed to download cover letter as PDF. Please try again.')).toBeInTheDocument();
   });
 });
 
@@ -317,7 +322,7 @@ test('simulate download failure for DOC', async () => {
   await act(async () => {
     const { getByText, findByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as DOC'));
-    expect(await findByText('Failed to download cover letter as DOC.')).toBeInTheDocument();
+    expect(await findByText('Failed to download cover letter as DOCX. Please try again.')).toBeInTheDocument();
   });
 });
 
