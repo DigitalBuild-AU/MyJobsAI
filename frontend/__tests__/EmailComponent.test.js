@@ -34,6 +34,36 @@ describe('EmailComponent', () => {
   test('form submission triggers API call with correct data', async () => {
     const { toInput, subjectInput, bodyTextarea, sendButton } = setup();
     const mockData = { to: 'test@example.com', subject: 'Test Subject', body: 'Test Body' };
+import { screen } from '@testing-library/react';
+
+test('renders correctly with different props', () => {
+  const { rerender } = render(<EmailComponent to="test@example.com" subject="Greetings" body="Hello, World!" />);
+  expect(screen.getByLabelText('To:').value).toBe('test@example.com');
+  expect(screen.getByLabelText('Subject:').value).toBe('Greetings');
+  expect(screen.getByLabelText('Body:').value).toBe('Hello, World!');
+
+  // Testing with different props
+  rerender(<EmailComponent to="another@example.com" subject="Updated Subject" body="Updated body content" />);
+  expect(screen.getByLabelText('To:').value).toBe('another@example.com');
+  expect(screen.getByLabelText('Subject:').value).toBe('Updated Subject');
+  expect(screen.getByLabelText('Body:').value).toBe('Updated body content');
+});
+
+test('user interactions with input fields and send button', async () => {
+  const { toInput, subjectInput, bodyTextarea, sendButton } = setup();
+  fireEvent.change(toInput, { target: { value: 'user@example.com' } });
+  fireEvent.change(subjectInput, { target: { value: 'User Subject' } });
+  fireEvent.change(bodyTextarea, { target: { value: 'User message body' } });
+  fireEvent.click(sendButton);
+
+  await waitFor(() => {
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
+      to: 'user@example.com',
+      subject: 'User Subject',
+      body: 'User message body'
+    });
+  });
+});
     fireEvent.change(toInput, { target: { value: mockData.to } });
     fireEvent.change(subjectInput, { target: { value: mockData.subject } });
     fireEvent.change(bodyTextarea, { target: { value: mockData.body } });
