@@ -1,1 +1,0 @@
-// Functionality migrated to React components.
