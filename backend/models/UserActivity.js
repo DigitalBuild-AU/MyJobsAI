@@ -24,3 +24,5 @@ userActivitySchema.methods.logActivity = function() {
 };
 
 module.exports = mongoose.model('UserActivity', userActivitySchema);
+userActivitySchema.index({ activityType: 1 });
+userActivitySchema.index({ date: 1 });
