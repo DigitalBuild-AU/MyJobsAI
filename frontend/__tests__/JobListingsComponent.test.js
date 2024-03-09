@@ -1,3 +1,8 @@
+/**
+ * This file contains tests for the JobListingsComponent.
+ * It verifies the functionality of job listing filtering, state updates on input changes, and other related features.
+ * These tests ensure that the JobListingsComponent behaves as expected under various conditions and user interactions.
+ */
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -25,8 +30,8 @@ describe('JobListingsComponent', () => {
   it('loads Bootstrap script dynamically', () => {
     render(<JobListingsComponent />);
     const scripts = Array.from(document.getElementsByTagName('script'));
-    const bootstrapScript = scripts.find(script => script.src.includes('bootstrap.bundle.min.js'));
-    expect(bootstrapScript).not.toBeNull();
+    const bootstrapScriptExists = scripts.some(script => script.src.includes('bootstrap.bundle.min.js'));
+    expect(bootstrapScriptExists).toBeTruthy();
   });
 
   it('updates state on input change', () => {
@@ -98,6 +103,18 @@ it('updates component state correctly on handleChange', () => {
     const includesSuperCheckbox = getByLabelText('Includes Super');
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: true } });
     expect(includesSuperCheckbox.checked).toBe(true);
+it('filters job listings based on input', () => {
+    const mockListings = [
+      { id: 1, title: 'Software Engineer', company: 'Tech Innovations', location: 'Remote' },
+      { id: 2, title: 'Project Manager', company: 'Creative Solutions', location: 'New York' },
+      { id: 3, title: 'Web Developer', company: 'Web Works', location: 'San Francisco' }
+    ];
+    const { getByPlaceholderText, getAllByText } = render(<JobListingsComponent listings={mockListings} />);
+    fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech' } });
+    expect(getAllByText('Software Engineer')).toHaveLength(1);
+    expect(screen.queryByText('Project Manager')).toBeNull();
+    expect(screen.queryByText('Web Developer')).toBeNull();
+  });
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
     expect(includesSuperCheckbox.checked).toBe(false);
   });
