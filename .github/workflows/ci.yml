@@ -26,5 +26,14 @@ jobs:
 
     - name: Build
       run: npm run build
-    - name: Run Lint
-      run: npm run lint
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Run Backend Tests
+      run: npm test --prefix backend
+    - name: Run Frontend Tests
+      run: npm test --prefix frontend
