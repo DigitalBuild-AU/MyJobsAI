@@ -116,3 +116,30 @@ it('updates state on filter input change', () => {
   expect(getByPlaceholderText('Company').value).toBe('Innovative Tech');
   expect(getByPlaceholderText('Location').value).toBe('San Francisco');
 });
+it('updates state on salary amount input change', () => {
+  const { getByPlaceholderText } = render(<JobListingsComponent />);
+  fireEvent.change(getByPlaceholderText('Salary Amount'), { target: { value: '50000' } });
+  expect(getByPlaceholderText('Salary Amount').value).toBe('50000');
+  fireEvent.change(getByPlaceholderText('Salary Amount'), { target: { value: '' } });
+  expect(getByPlaceholderText('Salary Amount').value).toBe('');
+});
+
+it('updates state on salary period selection', () => {
+  const { getByTestId } = render(<JobListingsComponent />);
+  fireEvent.change(getByTestId('salary-period-select'), { target: { value: 'Annual' } });
+  expect(getByTestId('salary-period-select').value).toBe('Annual');
+  fireEvent.change(getByTestId('salary-period-select'), { target: { value: 'Monthly' } });
+  expect(getByTestId('salary-period-select').value).toBe('Monthly');
+  fireEvent.change(getByTestId('salary-period-select'), { target: { value: 'Hourly' } });
+  expect(getByTestId('salary-period-select').value).toBe('Hourly');
+});
+
+it('updates state on job status change', () => {
+  const { getByLabelText } = render(<JobListingsComponent />);
+  fireEvent.click(getByLabelText('Open'));
+  expect(getByLabelText('Open').checked).toBe(true);
+  fireEvent.click(getByLabelText('Closed'));
+  expect(getByLabelText('Closed').checked).toBe(true);
+  fireEvent.click(getByLabelText('Pending'));
+  expect(getByLabelText('Pending').checked).toBe(true);
+});
