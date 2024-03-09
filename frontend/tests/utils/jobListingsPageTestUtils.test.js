@@ -1,6 +1,13 @@
+/*
+This file contains tests for utility functions used in the Job Listings Page. It includes tests for generating mock job listings, mock filters, and asserting that listings match given filters. These utilities are crucial for ensuring the Job Listings Page functions as expected under various conditions.
+*/
 import { getMockJobListings, getMockFilters, assertListingsMatchFilters } from './jobListingsPageTestUtils';
 import { describe, it, expect } from '@jest/globals';
 
+/**
+ * Generates a mock array of job listings for testing purposes.
+ * - Returns: Array of mock job listings, each containing an id, title, company, and status.
+ */
 describe('getMockJobListings tests', () => {
   it('should return the expected array of job listings', () => {
     const expectedListings = [
@@ -12,6 +19,10 @@ describe('getMockJobListings tests', () => {
   });
 });
 
+/**
+ * Generates a mock filter object for testing the filtering functionality.
+ * - Returns: A mock filter object containing keys and values to filter job listings by.
+ */
 describe('getMockFilters tests', () => {
   it('should return the expected filter object', () => {
     const expectedFilters = { status: 'open', company: 'Tech Corp' };
@@ -40,6 +51,13 @@ describe('assertListingsMatchFilters tests', () => {
     const listings = [
       { id: 3, title: 'UX Designer', company: 'Design Studio', status: 'open' }
     ];
+/**
+ * Asserts that a given array of job listings matches specified filter criteria.
+ * - Inputs: 
+ *   - listings: Array of job listings to be tested.
+ *   - filters: Filter criteria to be applied to the listings.
+ * - Behavior: Throws an error if any listing does not match the filter criteria.
+ */
     const filters = {};
     expect(() => assertListingsMatchFilters(listings, filters)).not.toThrow();
   });
