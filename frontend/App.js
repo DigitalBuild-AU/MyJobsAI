@@ -9,6 +9,12 @@ import CoverLetterGenerationPage from './pages/CoverLetterGenerationPage';
 import InterviewsPage from './pages/InterviewsPage';
 import SettingsPage from './pages/SettingsPage';
 
+/**
+ * App function serves as the root component of the React application.
+ * It sets up the router and defines the routes for the application's pages.
+ * No parameters.
+ * Returns the Router component wrapped around the application's routes.
+ */
 function App() {
   return (
     <Router>
