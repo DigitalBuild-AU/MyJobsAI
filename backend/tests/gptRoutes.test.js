@@ -107,6 +107,12 @@ Description: This file contains unit tests for the GPT-related routes within the
    * Test: Successfully handles a CV suggestions request.
    * Description: This test ensures that the CV suggestions endpoint properly handles a request, returning a 200 status code and the expected suggestions in the response body. It mocks the `handleCvSuggestions` function to return a predefined response and verifies that the function is called with the specified arguments.
    */
+  /**
+   * Test Case: Successfully Handles a CV Suggestions Request
+   * Purpose: This test verifies that the CV suggestions endpoint can process a request successfully, resulting in a 200 status code and the expected suggestions in the response body.
+   * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
+   * Expected Output: HTTP status 200 with property 'suggestions' containing 'Your CV suggestions.'
+   */
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
     handleCvSuggestions.mockResolvedValue(mockResponse);
