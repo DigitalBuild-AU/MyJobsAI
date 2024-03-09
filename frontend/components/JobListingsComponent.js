@@ -1,6 +1,7 @@
 /**
  * JobListingsComponent.js
- * Displays job listings and allows users to filter and apply to jobs. Users can also add new job listings.
+ * This file defines the JobListingsComponent, which displays job listings and provides functionalities for users to filter, apply, and add new job listings.
+ * It serves as a key component in the application's job search and application process.
  */
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
