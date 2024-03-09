@@ -1,3 +1,6 @@
+/*
+This file contains tests for utility functions used in the Job Listings Page. It includes tests for generating mock job listings, mock filters, and asserting that listings match given filters. These utilities are crucial for ensuring the Job Listings Page functions as expected under various conditions.
+*/
 import { getMockJobListings, getMockFilters, assertListingsMatchFilters } from './jobListingsPageTestUtils';
 import { describe, it, expect } from '@jest/globals';
 
