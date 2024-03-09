@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --config jest.config.js",
     "start": "node backend/server.js",
-    "build": "webpack --mode production"
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
