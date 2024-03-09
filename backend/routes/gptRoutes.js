@@ -12,6 +12,8 @@ dotenv.config({ path: './backend/.env' });
 
 const router = express.Router();
 
+module.exports = router;
+
 // Assuming you have initialized OpenAI with API key somewhere
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
