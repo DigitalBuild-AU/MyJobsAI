@@ -45,3 +45,11 @@ describe('JobListings Component', () => {
     expect(screen.getByText('Error adding job listing')).toBeInTheDocument();
   });
 });
+test('filters job listings based on user input', () => {
+  render(<JobListings />);
+  fireEvent.change(screen.getByPlaceholderText('Enter location'), { target: { value: 'San Francisco' } });
+  fireEvent.change(screen.getByPlaceholderText('Enter job type'), { target: { value: 'Full-Time' } });
+  fireEvent.change(screen.getByPlaceholderText('Enter keywords'), { target: { value: 'Engineer' } });
+  fireEvent.click(screen.getByText('Apply Filters'));
+  expect(screen.getByText('Filtered job listings displayed')).toBeInTheDocument();
+});
