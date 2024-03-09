@@ -10,6 +10,7 @@ const User = require('../models/User'); // User model for database interaction
  * @throws {Error} If authentication fails.
  */
 const auth = async (req, res, next) => {
+const { handleError } = require('../middleware/middlewareUtils');
   try {
     // Extract token from Authorization header by removing 'Bearer '
     const token = req.header('Authorization').replace('Bearer ', '');
@@ -27,7 +28,7 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).send({ error: 'Please authenticate.' });
+    handleError(res, 'Please authenticate.', 401);
   }
 };
 
