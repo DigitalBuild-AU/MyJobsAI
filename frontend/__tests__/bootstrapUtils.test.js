@@ -29,6 +29,11 @@ describe('bootstrapUtils tests', () => {
     loadBootstrapScript();
     const scriptTags = document.querySelectorAll('script');
 /**
+ * Tests for bootstrapUtils.js
+ * This file contains tests for the utility functions defined in bootstrapUtils.js, specifically focusing on the dynamic loading of the Bootstrap script.
+ * It ensures that the functions for adding and removing the Bootstrap script tag work as expected.
+ */
+/**
  * Tests for bootstrapUtils.js utility functions.
  * 
  * This suite contains tests that verify the functionality of the utility functions defined in bootstrapUtils.js,
