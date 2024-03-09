@@ -67,8 +67,8 @@ test('fetches job listings on component mount', async () => {
     expect(await findByText('Software Engineer')).toBeInTheDocument();
   });
 test('generateCoverLetter integration with successful API call', async () => {
-  const mockCoverLetterData = { jobDescription: 'Software Engineer', userName: 'John Doe', userSkills: 'JavaScript, React', userExperience: '5 years' };
-  const mockResponse = { data: { coverLetter: 'Your personalized cover letter' } };
+  const mockCoverLetterData = { jobDescription: 'Software Engineer', userName: 'John Doe', userSkills: 'JavaScript, React, Node.js', userExperience: '5 years', customizationOptions: { template: 'modern', tone: 'professional' } };
+  const mockResponse = { data: { coverLetter: 'Your personalized and professionally toned cover letter using the modern template' } };
   generateCoverLetter.mockResolvedValue(mockResponse);
   const { getByText, getByPlaceholderText } = render(<CoverLetterGenerationPage />);
   fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: mockCoverLetterData.jobDescription } });
@@ -258,6 +258,66 @@ test('successfully creates a cover letter', async () => {
     fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: mockPostData.experience } });
     fireEvent.click(getByText('Generate Cover Letter'));
     expect(await findByText(mockCoverLetter)).toBeInTheDocument();
+  });
+});
+test('downloadAsPDF triggers download with correct attributes', async () => {
+  document.createElement = jest.fn().mockReturnValue({
+    href: '',
+    download: '',
+    click: jest.fn(),
+    setAttribute: jest.fn((attr, value) => {
+      this[attr] = value;
+    })
+  });
+
+  await act(async () => {
+    const { getByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.click(getByText('Download as PDF'));
+    expect(document.createElement).toHaveBeenCalledWith('a');
+    expect(document.createElement().download).toEqual('coverLetter.pdf');
+    expect(document.createElement().type).toEqual('application/pdf');
+  });
+});
+
+test('downloadAsDOC triggers download with correct attributes', async () => {
+  document.createElement = jest.fn().mockReturnValue({
+    href: '',
+    download: '',
+    click: jest.fn(),
+    setAttribute: jest.fn((attr, value) => {
+      this[attr] = value;
+    })
+  });
+
+  await act(async () => {
+    const { getByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.click(getByText('Download as DOC'));
+    expect(document.createElement).toHaveBeenCalledWith('a');
+    expect(document.createElement().download).toEqual('coverLetter.doc');
+    expect(document.createElement().type).toEqual('application/msword');
+  });
+});
+test('simulate download failure for PDF', async () => {
+  jest.spyOn(document, 'createElement').mockImplementation(() => {
+    throw new Error('Download failed');
+  });
+
+  await act(async () => {
+    const { getByText, findByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.click(getByText('Download as PDF'));
+    expect(await findByText('Failed to download cover letter as PDF.')).toBeInTheDocument();
+  });
+});
+
+test('simulate download failure for DOC', async () => {
+  jest.spyOn(document, 'createElement').mockImplementation(() => {
+    throw new Error('Download failed');
+  });
+
+  await act(async () => {
+    const { getByText, findByText } = render(<CoverLetterGenerationPage />);
+    fireEvent.click(getByText('Download as DOC'));
+    expect(await findByText('Failed to download cover letter as DOC.')).toBeInTheDocument();
   });
 });
 
