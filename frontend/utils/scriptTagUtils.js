@@ -1,3 +1,8 @@
+/**
+ * This file contains utility functions for dynamically adding or removing the Bootstrap script tag.
+ * These functions are used to manage the inclusion of Bootstrap's JavaScript dynamically in the application.
+ */
+
 const removeBootstrapScriptTag = () => {
     const scriptTags = document.getElementsByTagName('script');
     for (let i = 0; i < scriptTags.length; i++) {
