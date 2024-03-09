@@ -1,3 +1,7 @@
+/**
+ * CVHelper.js
+ * This file contains the CVHelper component, which is responsible for providing users with CV suggestions based on their job description and CV inputs. It interacts with the backend to fetch tailored advice to improve the user's CV for specific job applications.
+ */
 import axios from 'axios';
 import React, { useState } from 'react';
 
@@ -12,12 +16,16 @@ const CVHelper = () => {
   const [cvSuggestions, setCvSuggestions] = useState('');
   const [error, setError] = useState('');
   /**
-   * Handles the generation of CV suggestions.
-   * Fetches suggestions based on the user's job description and CV input.
+   * handleGenerateCVSuggestions
+   * This function is triggered when the user requests CV suggestions. It sends a POST request to the backend with the user's job description and CV content. Upon success, it updates the state with the received CV suggestions; on failure, it sets an error message.
    * Parameters: None.
    * Returns: None.
    */
   const handleGenerateCVSuggestions = () => {
+   * Handles the generation of CV suggestions by sending user inputs to the backend.
+   * Parameters: None.
+   * Returns: None. Updates the state with CV suggestions or an error message.
+   */
   const handleGenerateCVSuggestions = () => {
     console.log('Sending request to generate CV suggestions.'); // Log for debugging
     axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: jobDescriptionInput, userCV: userCVInput })
