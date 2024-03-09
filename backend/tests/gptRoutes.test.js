@@ -509,3 +509,9 @@ describe('/cover_letter route', () => {
     expect(errorSpy).toHaveBeenCalled();
     expect(statusJsonSpy).toHaveBeenCalledWith(500);
     expect(statusJsonSpy).toHaveBeenCalledWith({ error: 'Failed to generate cover letter.' });
+  /**
+   * Test Case: Handles Error When OpenAI API Call Fails for CV Customization
+   * Purpose: Ensures that the CV customization endpoint correctly responds with a 500 status code and an appropriate error message when the OpenAI API call fails.
+   * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
+   * Expected Output: HTTP status 500 with error message 'Failed to generate CV customization suggestions.'
+   */
