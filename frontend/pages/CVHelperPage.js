@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { removeBootstrapScriptTag, appendBootstrapScriptTag } from '../utils/scriptTagUtils';
 
 const CVHelperPage = () => {
   const [jobDescription, setJobDescription] = useState('');
@@ -113,18 +114,9 @@ const CVHelperPage = () => {
    * @returns {void} Modifies the global document state by altering script tags.
    */
 const handleBootstrapScript = () => {
-        const scriptTags = document.getElementsByTagName('script');
-        for (let i = 0; i < scriptTags.length; i++) {
-            if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
-                scriptTags[i].remove();
-                break;
-            }
-        }
-
-        const newBootstrapScript = document.createElement('script');
-        newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
-        document.body.appendChild(newBootstrapScript);
-    };
+    removeBootstrapScriptTag();
+    appendBootstrapScriptTag();
+};
 /**
  * Fetches the navbar content from a static HTML file and sets it in the state.
  * Utilizes Axios for the HTTP GET request. Logs the success or error in the console.
