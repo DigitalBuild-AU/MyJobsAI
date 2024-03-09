@@ -4,9 +4,7 @@
  */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SummaryChart from '../components/SummaryChart';
-import GlobalSearchBar from '../components/GlobalSearchBar';
-import Card from '../components/Card';
+import { SummaryWidget, QuoteWidget, EmailForm } from '../components/DashboardWidgets';
 import Modal from '../components/Modal';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
 
@@ -25,32 +23,7 @@ const DashboardPage = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        /**
-         * Fetches and sets the summary of job applications, interviews, and offers from the server.
-         */
-        /**
-         * Fetches and sets a random quote from the local quotes.json file.
-         */
-        const fetchQuote = () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/dashboard/summary');
-                console.log('Fetching summary data from /api/dashboard/summary'); // gpt_pilot_debugging_log
-                setSummary(response.data);
-            } catch (err) {
-                console.error(`Error fetching summary data: ${err}`, err.stack); // gpt_pilot_debugging_log
-                setError('Failed to fetch dashboard summary. Please try again later.');
-            }
-        };
-        
-        const fetchQuote = () => {
-            axios.get('/quotes.json')
-                .then(res => {
-                    const quotes = res.data.quotes;
-                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)].text;
-                    setQuote(randomQuote);
-                    console.log('Quote of the day fetched successfully.'); // gpt_pilot_debugging_log
-                })
-                .catch(error => {
+        // Removed specific fetching logic for summary and quote as they are now handled within the imported widgets.
 /**
  * Opens the modal with the provided content.
  * @param {string} content - The content to display in the modal.
@@ -99,13 +72,9 @@ const renderAddEditModal = () => (
                 {/* Analytics data will be dynamically injected here */}
               </div>
             </div>
-            <div id="emailForm">
-              <h2>Send an Email</h2>
-              <input type="text" id="emailTo" placeholder="Recipient's email" />
-              <input type="text" id="emailSubject" placeholder="Subject" />
-              <textarea id="emailBody" placeholder="Your message here"></textarea>
-              <button onClick={() => {/* Function to send email */}}>Send Email</button>
-            </div>
+            <SummaryWidget summary={summary} />
+            <QuoteWidget />
+            <EmailForm />
             <div id="emailResponse"></div>
           </div>
         </>
