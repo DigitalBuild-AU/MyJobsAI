@@ -1,3 +1,7 @@
+/**
+ * This is the main application file for MyJobsAI. It imports and uses various components to build the app's UI,
+ * including routing and global styles. It also contains utility functions for sending emails and fetching analytics.
+ */
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Applications from './components/Applications';
