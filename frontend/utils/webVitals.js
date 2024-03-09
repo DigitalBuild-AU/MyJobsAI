@@ -1,6 +1,6 @@
 /**
- * This function sets up web vitals by logging them to the console.
- * It does not take any parameters and does not return any value.
+ * Logs web vitals metrics to the console.
+ * @param {Object} metric - The metric object containing web vitals data.
  */
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
