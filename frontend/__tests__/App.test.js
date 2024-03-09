@@ -128,7 +128,7 @@ describe('generateCoverLetter Functionality', () => {
     expect(generateCoverLetter(null, jobTitle, companyName)).toEqual(expectedResponse);
   });
     test('useEmailSender hook integration with EmailComponent', async () => {
-      // Mock the useEmailSender hook for success scenario
+    test('useEmailSender hook success scenario', async () => {
       useEmailSender.mockImplementation(() => jest.fn(async () => 'Email sent successfully'));
       const { getByText, rerender } = render(
         <BrowserRouter>
@@ -139,8 +139,9 @@ describe('generateCoverLetter Functionality', () => {
         fireEvent.click(getByText('Send Email'));
       });
       expect(getByText('Email sent successfully')).toBeInTheDocument();
+    });
 
-      // Mock the useEmailSender hook for failure scenario
+    test('useEmailSender hook failure scenario', async () => {
       useEmailSender.mockImplementation(() => jest.fn(async () => { throw new Error('Failed to send email'); }));
       rerender(
         <BrowserRouter>
@@ -151,16 +152,20 @@ describe('generateCoverLetter Functionality', () => {
         fireEvent.click(getByText('Send Email'));
       });
       expect(getByText('Failed to send email')).toBeInTheDocument();
+    });
 
-      // Test with invalid email address
+    test('useEmailSender hook invalid email scenario', async () => {
       document.getElementById('emailTo').value = 'invalidemail';
+      const { getByText } = render(
+        <BrowserRouter>
+          <EmailComponent />
+        </BrowserRouter>
+      );
       await act(async () => {
         fireEvent.click(getByText('Send Email'));
       });
       expect(getByText('Please enter a valid email address')).toBeInTheDocument();
     });
-
-  test('should handle missing jobTitle gracefully', () => {
     const userName = 'John Doe';
     const companyName = 'Tech Innovations Inc.';
     // Assuming the function returns a generic message or handles the missing jobTitle gracefully
