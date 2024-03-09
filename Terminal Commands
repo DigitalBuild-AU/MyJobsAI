@@ -1,0 +1,12 @@
+
+## Step 2: Remove All .DS_Store Files
+After listing all .DS_Store files, you can remove them by running:
+```
+find . -name '.DS_Store' -type f -delete
+```
+
+## Step 3: Commit the Changes
+Once all .DS_Store files have been removed, commit these changes to the repository with the following command:
+```
+git add .
+git commit -m "Remove .DS_Store files and update .gitignore"
