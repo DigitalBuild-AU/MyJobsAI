@@ -15,6 +15,10 @@ describe('/cv_customization route', () => {
     jest.clearAllMocks();
   });
   
+  /**
+   * Test to ensure that the CV customization endpoint correctly handles and responds with a 400 status code
+   * when provided with invalid input data, such as empty job descriptions and user CVs.
+   */
   test('handles invalid input data for CV customization request', async () => {
     const response = await request(app)
       .post('/cv_customization')
@@ -94,6 +98,10 @@ describe('/cv_customization route', () => {
         jobDescription: 'Software Engineer role requiring problem-solving skills.',
         userCV: 'Problem solver with a keen interest in software development.'
 
+  /**
+   * Test to verify that the createCompletion method of the OpenAI API is called with the correct parameters
+   * when a CV customization request is made. This includes checking the model, prompt, max_tokens, n, stop, and temperature parameters.
+   */
   test('verifies createCompletion method call with correct parameters', async () => {
     const mockCreateCompletion = jest.spyOn(openai, 'createCompletion').mockResolvedValue({
       data: {
@@ -174,6 +182,10 @@ describe('/cv_suggestions route', () => {
     const response = await request(app)
       .post('/cv_suggestions')
       .send({
+  /**
+   * Test to ensure that the CV customization endpoint correctly handles errors and responds with a 500 status code
+   * when the OpenAI API call fails. This simulates scenarios where the external API is unavailable or returns an error.
+   */
   test('handles error when OpenAI API call fails for CV customization', async () => {
     jest.spyOn(openai, 'createCompletion').mockRejectedValue(new Error('OpenAI API error'));
 
