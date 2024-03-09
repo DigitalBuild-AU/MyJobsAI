@@ -91,6 +91,18 @@ Tests for the CVHelperPage component. This file includes tests for rendering the
     consoleErrorSpy.mockRestore();
   });
 
-  it('correctly handles the bootstrap script tag on component mount', () => {
-    // This test case is being removed as it's no longer relevant
+  it('correctly handles dynamic script loading on component mount', async () => {
+    document.createElement = jest.fn().mockImplementation(() => {
+      return {
+        setAttribute: jest.fn(),
+        onload: null
+      };
+    });
+
+    mock.onGet('/js/bootstrap.min.js').reply(200, 'Bootstrap script loaded.');
+    render(<CVHelperPage />);
+    await waitFor(() => {
+      expect(document.createElement).toHaveBeenCalledWith('script');
+      expect(document.createElement.mock.calls[0][0].onload).not.toBeNull();
+    });
   });
