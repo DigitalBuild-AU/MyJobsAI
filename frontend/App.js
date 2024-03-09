@@ -21,12 +21,19 @@ function App() {
       <div>
         <Navbar />
         <Switch>
-          <Route path="/" exact component={Dashboard} />
-          <Route path="/jobListings" component={JobListingsPage} />
-          <Route path="/applications" component={ApplicationsPage} />
-          <Route path="/cvHelper" component={CVHelperPage} />
-          <Route path="/coverLetter" component={CoverLetterGenerationPage} />
-          <Route path="/interviews" component={InterviewsPage} />
+          <Route path="/"> {/* Home component or redirect can be placed here */} </Route>
+          <Route path="/applications" component={Applications} />
+          <Route path="/cover-letter" component={CoverLetterComponent} />
+          <Route path="/cv-helper" component={CVHelperComponent} />
+          <Route path="/interviews" component={Interviews} />
+          <Route path="/job-listings" component={JobListings} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/email" component={EmailComponent} />
+          <Route path="/analytics" component={AnalyticsComponent} />
+          {/* Integrating pages from section A */}
+          <Route path="/applicationsPage" component={ApplicationsPage} />
+          <Route path="/cvHelperPage" component={CVHelperPage} />
+          <Route path="/coverLet...iews" component={InterviewsPage} />
           <Route path="/settings" component={SettingsPage} />
         </Switch>
       </div>
