@@ -143,3 +143,17 @@ describe('processCVResponse', () => {
     expect(setCvSuggestions).toHaveBeenCalledWith('');
   });
 });
+  it('sends a request with correct URL and payload', async () => {
+    axios.post.mockResolvedValue({ data: { success: true } });
+    const jobDescription = 'Software Engineer';
+    const userCV = 'My CV content';
+    await sendCVRequest(jobDescription, userCV);
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
+  });
+
+  it('handles network or server error appropriately', async () => {
+    axios.post.mockRejectedValue(new Error('Network error'));
+    const jobDescription = 'Software Engineer';
+    const userCV = 'My CV content';
+    await expect(sendCVRequest(jobDescription, userCV)).rejects.toThrow('Network error');
+  });
