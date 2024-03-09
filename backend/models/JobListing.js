@@ -37,3 +37,5 @@ jobListingSchema.post('save', function(err, doc, next) {
 });
 
 module.exports = mongoose.model('JobListing', jobListingSchema);
+jobListingSchema.index({ company: 1 });
+jobListingSchema.index({ status: 1 });
