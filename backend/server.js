@@ -11,8 +11,7 @@ const emailRoutes = require('./routes/emailRoutes'); // Import Email routes
 const interviewRoutes = require('./routes/interviewRoutes'); // Import Interview routes
 const analyticsRoutes = require('./routes/analyticsRoutes'); // Analytics routes import
 const fetchJobInfoRoutes = require('./routes/fetchJobInfoRoutes'); // Import Fetch Job Info routes
-const https = require('https');
-const fs = require('fs');
+const { startSecureServer } = require('./utils/startSecureServer');
 const { setupSecurity } = require('./middleware/securityConfig');
 const { errorHandler } = require('./middleware/errorHandlingMiddleware');
 const { debugLog } = require('./utils/debugLogger');
@@ -31,7 +30,6 @@ app.use((req, res, next) => {
 // Serve frontend static files
 app.use(express.static('frontend'));
 debugLog('Static files middleware for frontend setup completed.');
-
 // Serve static files like 'quotes.json' from the 'public' directory
 app.use(express.static('public'));
 debugLog('Static files middleware for public directory setup completed.');

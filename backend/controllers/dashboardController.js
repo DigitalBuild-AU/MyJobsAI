@@ -14,8 +14,24 @@ exports.getDashboardSummary = async (req, res) => {
     const offersReceived = await UserActivity.countDocuments({ activityType: 'Offer' });
     res.json({ applicationsSent: totalApplications, interviewsScheduled, offersReceived });
   } catch (error) {
-    const debugLog = require('../utils/debugLogger');
-    debugLog(`Dashboard summary error: ${error}`, error, true);
+    const { logError } = require('../utils/logger');
+    logError(error);
+    res.status(500).send({ message: 'Error fetching dashboard summary' });
+  }
+};
+const fetchDashboardData = async () => {
+  const totalApplications = await UserActivity.countDocuments({ activityType: 'Application' });
+  const interviewsScheduled = await UserActivity.countDocuments({ activityType: 'Interview' });
+  const offersReceived = await UserActivity.countDocuments({ activityType: 'Offer' });
+  return { totalApplications, interviewsScheduled, offersReceived };
+};
+
+exports.getDashboardSummary = async (req, res) => {
+  try {
+    const { totalApplications, interviewsScheduled, offersReceived } = await fetchDashboardData();
+    res.json({ applicationsSent: totalApplications, interviewsScheduled, offersReceived });
+  } catch (error) {
+    logError(error);
     res.status(500).send({ message: 'Error fetching dashboard summary' });
   }
 };
