@@ -19,6 +19,10 @@ describe('getMockJobListings tests', () => {
   });
 });
 
+/**
+ * Generates a mock filter object for testing the filtering functionality.
+ * - Returns: A mock filter object containing keys and values to filter job listings by.
+ */
 describe('getMockFilters tests', () => {
   it('should return the expected filter object', () => {
     const expectedFilters = { status: 'open', company: 'Tech Corp' };
