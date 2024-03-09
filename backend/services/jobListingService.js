@@ -78,6 +78,12 @@ const deleteJobListingById = async (id) => {
     }
 };
 
+/**
+ * Calculates analytics based on user activities.
+ * This function aggregates data from the UserActivity model to calculate the total number of job applications submitted, interviews scheduled, offers received, and the average response time in days from application to interview.
+ * It does not take any parameters.
+ * @returns {Object} An object containing the calculated analytics data: totalApplications, interviewsScheduled, offersReceived, and avgResponseTime (average response time in days, formatted to two decimal places or null if not applicable).
+ */
 const calculateAnalytics = async () => {
   try {
     const totalApplications = await UserActivity.countDocuments({ activityType: 'Application' });
