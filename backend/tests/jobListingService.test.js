@@ -96,3 +96,6 @@ describe('calculateAnalytics', () => {
 /**
  * Tests for deleteJobListingById function. Confirms that job listings can be deleted using their ID and errors are managed as expected.
  */
+/**
+ * Tests for calculateAnalytics function. Verifies the analytics calculation for job applications, including total applications, interviews scheduled, and offers received, along with average response time.
+ */
