@@ -141,6 +141,14 @@ describe('sendCVRequest', () => {
  * @param {string} userCV - The CV content input by the user.
  * @returns {Promise<Object>} A promise that resolves with the API response containing CV suggestions or rejects with an error.
  */
+/**
+ * Test suite for processCVResponse function
+ * This suite tests the processCVResponse function, which processes the response from the API call made by sendCVRequest. It checks if the function correctly updates the component state with CV suggestions or an error message based on the response.
+ * @param {Object} response - The response object from the API call, containing either CV suggestions or an error.
+ * @param {Function} setCvSuggestions - The state setter function for updating CV suggestions.
+ * @param {Function} setError - The state setter function for updating the error message.
+ * @returns {void} Does not return anything but updates the component state based on the response.
+ */
 describe('processCVResponse', () => {
   it('processes a response with suggestions correctly', () => {
     const mockResponse = { data: { suggestions: 'Test suggestion' } };
