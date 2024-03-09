@@ -8,6 +8,8 @@
     "start": "node backend/server.js",
     "build": "react-scripts build",
     "webpack-build": "webpack --mode production"
+    "webpack-build": "webpack --mode production",
+    "webpack-build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -40,5 +42,11 @@
   "devDependencies": {
       "build": "webpack --mode production"
     },
+
+"react-dom": "^17.0.2",
+"react-scripts": "4.0.3"
+"react-dom": "^17.0.2",
+"react-scripts": "4.0.3"
+"react-scripts": "4.0.3"
 
 
