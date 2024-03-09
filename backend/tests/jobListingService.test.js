@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Test suite for the jobListingService.js functions. This includes tests for adding, finding, updating, and deleting job listings, as well as calculating analytics related to job applications.
+ */
 const jest = require('jest');
 const JobListing = require('../models/JobListing');
 const UserActivity = require('../models/UserActivity');
