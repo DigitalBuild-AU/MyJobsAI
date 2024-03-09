@@ -106,3 +106,13 @@ it('filters job listings based on input', () => {
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
     expect(includesSuperCheckbox.checked).toBe(false);
   });
+it('updates state on filter input change', () => {
+  const { getByPlaceholderText } = render(<JobListingsComponent />);
+  fireEvent.change(getByPlaceholderText('Job Title'), { target: { value: 'Developer' } });
+  fireEvent.change(getByPlaceholderText('Company'), { target: { value: 'Innovative Tech' } });
+  fireEvent.change(getByPlaceholderText('Location'), { target: { value: 'San Francisco' } });
+  // Since the component's state isn't directly accessible, we check if the input's value reflects the expected state change
+  expect(getByPlaceholderText('Job Title').value).toBe('Developer');
+  expect(getByPlaceholderText('Company').value).toBe('Innovative Tech');
+  expect(getByPlaceholderText('Location').value).toBe('San Francisco');
+});
