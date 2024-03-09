@@ -12,13 +12,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 jest.mock('axios');
 
-/**
- * Test suite for App component routing. Ensures that navigation to each route renders the correct component.
- */
-/**
- * Test suite for verifying the routing functionality of the App component.
- * Ensures that navigation to each defined route renders the expected component.
- */
 describe('App Routing', () => {
   const routes = [
     { path: '/', component: 'Home' },
