@@ -40,6 +40,11 @@ const DownloadButtons = ({ generatedCoverLetter }) => {
   };
 
   const downloadAsDOC = () => {
+/**
+ * `CoverLetterPreview` displays the generated cover letter.
+ * Props:
+ * - generatedCoverLetter: The generated cover letter text to display.
+ */
     const element = document.createElement("a");
     const file = new Blob([generatedCoverLetter], {type: 'application/msword'});
     element.href = URL.createObjectURL(file);
