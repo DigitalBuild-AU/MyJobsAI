@@ -10,7 +10,7 @@ describe('CoverLetterComponent', () => {
  */
   afterEach(cleanup);
 
-  it('renders correctly', () => {
+  it('renders correctly with all elements transferred from HTML', () => {
     const { getByText, getByPlaceholderText } = render(<CoverLetterComponent />);
     expect(getByText('Cover Letter | MyJobsAI')).toBeInTheDocument();
     expect(getByPlaceholderText('Your Name')).toBeInTheDocument();
@@ -18,6 +18,9 @@ describe('CoverLetterComponent', () => {
     expect(getByPlaceholderText('Your Skills...')).toBeInTheDocument();
     expect(getByPlaceholderText('Your Experience...')).toBeInTheDocument();
     expect(getByText('Generate Cover Letter')).toBeInTheDocument();
+    // Verify template selection option
+    expect(getByText('Select Template')).toBeInTheDocument();
+    expect(getByRole('combobox')).toBeInTheDocument();
   });
 
   /**
@@ -37,12 +40,13 @@ describe('CoverLetterComponent', () => {
     querySelectorMock.mockRestore();
   });
 
-  it('generates a cover letter based on user inputs', () => {
-    const { getByText, getByPlaceholderText } = render(<CoverLetterComponent />);
+  it('generates a cover letter based on user inputs, including template selection', () => {
+    const { getByText, getByPlaceholderText, getByRole } = render(<CoverLetterComponent />);
     fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: 'John Doe' } });
     fireEvent.change(getByPlaceholderText('Paste the job description here...'), { target: { value: 'Job Description' } });
     fireEvent.change(getByPlaceholderText('Your Skills...'), { target: { value: 'My Skills' } });
     fireEvent.change(getByPlaceholderText('Your Experience...'), { target: { value: 'My Experience' } });
+    fireEvent.change(getByRole('combobox', { name: 'Select Template' }), { target: { value: 'modern' } });
     fireEvent.click(getByText('Generate Cover Letter'));
     expect(getByText('Dear Hiring Manager,')).toBeInTheDocument();
   /**

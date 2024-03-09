@@ -9,6 +9,7 @@ import { postCoverLetter } from '../utils/apiHelpers';
 import axios from 'axios'; // Assuming axios is used for HTTP requests
 import './CoverLetterGenerationPage.css';
 import { CoverLetterForm, CoverLetterPreview, DownloadButtons } from '../components/CoverLetterSubComponents';
+import CoverLetter from '../components/CoverLetter';
 
 const CoverLetterGenerationPage = () => {
   const [jobDescription, setJobDescription] = useState('');
