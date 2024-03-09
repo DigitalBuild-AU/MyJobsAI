@@ -2,6 +2,8 @@ import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import CVHelperComponent from '../components/CVHelperComponent';
 import '@testing-library/jest-dom/extend-expect';
+import axios from 'axios';
+import { sendCVRequest, processCVResponse } from '../components/CVHelperUtils';
 
 jest.mock('axios');
 
@@ -108,3 +110,36 @@ it('loads Bootstrap script on component mount', async () => {
     fireEvent.click(getByText('Generate Suggestions'));
     await waitFor(() => expect(getByText('Error fetching CV suggestions: Failed to generate CV suggestions., Stack: undefined')).toBeInTheDocument());
   });
+describe('sendCVRequest', () => {
+  it('successfully makes an API call', async () => {
+    const mockResponse = { data: { suggestions: 'Test suggestion' } };
+    axios.post.mockResolvedValue(mockResponse);
+    const response = await sendCVRequest('Software Engineer', 'My CV content');
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: 'Software Engineer', userCV: 'My CV content' });
+    expect(response).toEqual(mockResponse);
+  });
+
+  it('handles failure in API call', async () => {
+    axios.post.mockRejectedValue(new Error('API call failed'));
+    await expect(sendCVRequest('Software Engineer', 'My CV content')).rejects.toThrow('API call failed');
+  });
+});
+describe('processCVResponse', () => {
+  it('processes a response with suggestions correctly', () => {
+    const mockResponse = { data: { suggestions: 'Test suggestion' } };
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setCvSuggestions).toHaveBeenCalledWith('Test suggestion');
+    expect(setError).toHaveBeenCalledWith('');
+  });
+
+  it('handles a response without suggestions (error case)', () => {
+    const mockResponse = {};
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+});
