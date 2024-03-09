@@ -62,6 +62,18 @@ describe('JobListings Component', () => {
     expect(screen.getByText('Error adding job listing')).toBeInTheDocument();
   });
 });
+
+test('fetches job information correctly', () => {
+  render(<JobListings />);
+  const jobURLInput = screen.getByPlaceholderText('Job URL');
+  fireEvent.change(jobURLInput, { target: { value: 'http://example.com/job/123' } });
+  fireEvent.click(screen.getByText('Fetch Job Info'));
+  await expect(screen.getByPlaceholderText('Job Title')).toHaveValue('Mocked Job Title');
+  await expect(screen.getByPlaceholderText('Company')).toHaveValue('Mocked Company');
+  await expect(screen.getByPlaceholderText('Location')).toHaveValue('Mocked Location');
+  await expect(screen.getByPlaceholderText('Job Description')).toHaveValue('Mocked Job Description');
+  console.log('Job information fetched successfully');
+});
 test('filters job listings based on user input', () => {
   render(<JobListings />);
   fireEvent.change(screen.getByPlaceholderText('Enter location'), { target: { value: 'San Francisco' } });
