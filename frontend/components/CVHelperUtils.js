@@ -92,14 +92,14 @@ export function processCVResponse(response, setCvSuggestions, setError) {
  */
 
 """
-This module contains utility functions for the CV Helper component in the MyJobsAI application. It includes functions to send CV analysis requests to the backend and process the responses. The `sendCVRequest` function uses Axios to make HTTP POST requests, sending the user's job description and CV details to the backend for analysis. The `processCVResponse` function then processes the backend's response, updating the application's state with CV suggestions or error messages as appropriate.
 
-Functions:
-- sendCVRequest: Sends a CV analysis request to the backend.
-- processCVResponse: Processes the response from the backend, updating the application's state with CV suggestions or error messages.
+Utility functions for processing CV responses within the MyJobsAI application.
+This module includes functions to handle and parse responses from CV analysis services,
+providing suggestions for CV improvement or error handling as necessary.
+"""
+"""
+This module contains utility functions for handling CV-related requests and responses within the MyJobsAI application. It includes functions to send CV analysis requests to the backend and process the responses for CV suggestions.
 
-Dependencies:
-- Axios: Used for making HTTP requests in the `sendCVRequest` function.
 """
 import axios from 'axios';
     setError('Failed to fetch CV suggestions. Please try again.');
