@@ -5,6 +5,7 @@
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { loadBootstrapScript } from '../utils/bootstrapUtils';
+import { removeBootstrapScriptTag, appendBootstrapScriptTag } from '../utils/scriptTagUtils';
 
 describe('bootstrapUtils tests', () => {
   beforeEach(() => {
@@ -79,6 +80,19 @@ describe('loadBootstrapScript utility function', () => {
     loadBootstrapScript();
     const scriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
     expect(scriptTag).toBeInTheDocument();
+  it('successfully removes an existing bootstrap script tag', () => {
+    document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>';
+    removeBootstrapScriptTag();
+    const scriptTags = document.querySelectorAll('script[src*="bootstrap.bundle.min.js"]');
+    expect(scriptTags.length).toBe(0);
+  });
+  it('successfully appends a new bootstrap script tag when none exists', () => {
+    document.body.innerHTML = '';
+    appendBootstrapScriptTag();
+    const scriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
+    expect(scriptTag).toBeInTheDocument();
+    expect(scriptTag).toHaveAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
+  });
     expect(scriptTag).toHaveAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
     expect(scriptTag).toHaveAttribute('async', true);
     expect(document.body).toContainElement(scriptTag);
