@@ -23,6 +23,7 @@ self.addEventListener('install', event => {
   );
 });
 
+// Handles API requests with a NetworkFirst strategy, caching responses for quick retrieval while ensuring fresh data is fetched when possible.
 registerRoute(
 // This event listener handles the installation of the service worker. It caches essential assets for offline use.
   ({ request }) => request.destination === 'image',
