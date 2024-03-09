@@ -147,9 +147,3 @@ describe('sendCVRequest', () => {
     expect(setCvSuggestions).toHaveBeenCalledWith('');
   });
 });
-/**
- * Processes the response from the API call for CV suggestions.
- * @param {Object} response - The response object from the API call.
- * @param {function} setCvSuggestions - Function to set the CV suggestions state.
- * @param {function} setError - Function to set the error state.
- */
