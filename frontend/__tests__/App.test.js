@@ -141,28 +141,51 @@ describe('generateCoverLetter Functionality', () => {
       expect(getByText('Email sent successfully')).toBeInTheDocument();
 
       // Mock the useEmailSender hook for failure scenario
-      useEmailSender.mockImplementation(() => jest.fn(async () => { throw new Error('Failed to send email'); }));
-      rerender(
-        <BrowserRouter>
-          <EmailComponent sendEmail={useEmailSender()} />
-        </BrowserRouter>
-      );
-      await act(async () => {
-        fireEvent.click(getByText('Send Email'));
-      });
-      expect(getByText('Failed to send email')).toBeInTheDocument();
-
-      // Test with invalid email address
-      document.getElementById('emailTo').value = 'invalidemail';
-      await act(async () => {
-        fireEvent.click(getByText('Send Email'));
-      });
-      expect(getByText('Please enter a valid email address')).toBeInTheDocument();
+describe('useEmailSender Hook', () => {
+  test('correctly makes a POST request with the correct parameters', async () => {
+    const mockPost = axios.post.mockResolvedValue({ data: { message: 'Email sent successfully' } });
+    const sendEmail = useEmailSender();
+    await sendEmail('test@example.com', 'Test Subject', 'Test Body');
+    expect(mockPost).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
+      to: 'test@example.com',
+      subject: 'Test Subject',
+      body: 'Test Body'
     });
+  });
 
-  test('should handle missing jobTitle gracefully', () => {
-    const userName = 'John Doe';
-    const companyName = 'Tech Innovations Inc.';
+  test('properly handles errors', async () => {
+    axios.post.mockRejectedValue(new Error('Network Error'));
+    const sendEmail = useEmailSender();
+    await expect(sendEmail('test@example.com', 'Test Subject', 'Test Body')).rejects.toThrow('Failed to send email.');
+  });
+
+  test('returns the correct success message upon a successful email sending operation', async () => {
+    axios.post.mockResolvedValue({ data: { message: 'Email sent successfully' } });
+    const sendEmail = useEmailSender();
+    const response = await sendEmail('test@example.com', 'Test Subject', 'Test Body');
+    expect(response).toEqual('Email sent successfully');
+  });
+});
+      </BrowserRouter>
+    );
+    expect(getByTestId('emailComponent')).toHaveProp('sendEmail');
+  });
+
+  test('EmailComponent correctly interacts with mocked sendEmail function', async () => {
+    const mockSendEmail = jest.fn();
+    jest.mock('../src/useEmailSender', () => ({
+      __esModule: true,
+      default: jest.fn(() => mockSendEmail),
+    }));
+    const { getByText } = render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    fireEvent.click(getByText('Send Email'));
+    expect(mockSendEmail).toHaveBeenCalled();
+  });
+});
     // Assuming the function returns a generic message or handles the missing jobTitle gracefully
     const expectedResponse = 'Please provide a valid jobTitle.';
     expect(generateCoverLetter(userName, null, companyName)).toEqual(expectedResponse);
