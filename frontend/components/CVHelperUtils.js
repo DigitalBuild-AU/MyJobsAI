@@ -21,6 +21,16 @@ This function checks the server's response for CV suggestions. If suggestions ar
 """
 Sends a CV suggestion request to the server.
 
+@swagger
+/endpoint: '/api/gpt/cv_suggestions' (POST)
+@tags ['CV Suggestions']
+@description Sends a CV suggestion request to the server with the job description and user CV.
+@parameter {string} jobDescription - The job description provided by the user in the request body.
+@parameter {string} userCV - The user's CV in a suitable format in the request body.
+@response 200 {object} - Successfully fetched CV suggestions with an array of suggestion strings.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+
 This function sends a POST request to the '/api/gpt/cv_suggestions' endpoint with the job description and user CV. It awaits and returns the server's response.
 
 @param {string} jobDescription - The job description provided by the user.
