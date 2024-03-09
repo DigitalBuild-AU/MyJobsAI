@@ -4,19 +4,20 @@
  * This file contains functions for making API calls related to cover letter management and generation.
  * It includes functionalities such as creating, updating, fetching, and deleting cover letters associated with user job applications.
  */
-import axios from 'axios';
+import httpClient from './httpClient';
 
 export const generateCoverLetter = async (jobDescription, userName, userSkills, userExperience) => {
   try {
-    const response = await axios.post('/api/coverletter', {
+    const response = await httpClient.post('/coverletter', {
       jobDescription,
       userName,
       userSkills,
       userExperience
     });
-    return response;
+    return response.data;
   } catch (error) {
-    throw error;
+    console.error(`Failed to generate Cover Letter: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
   }
 };
 

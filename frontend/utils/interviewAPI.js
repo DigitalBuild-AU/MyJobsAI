@@ -4,7 +4,7 @@
  * This file is dedicated to handling API requests for interview-related operations. 
  * It supports operations such as scheduling interviews, retrieving interview details, and submitting interview feedback.
  */
-import axios from 'axios';
+import httpClient from './httpClient';
 
 /**
  * Submits interview details to the server and updates the interviews state.
@@ -33,7 +33,7 @@ export const handleInterviewResponse = (response) => {
 };
 
 export const handleInterviewError = (error) => {
-  console.error('Error submitting interview:', error);
+  console.error(`Error submitting interview: ${error.response.status} ${error.response.statusText}`, error);
 };
 /**
  * This file provides functions for interacting with the backend API for interview scheduling.
