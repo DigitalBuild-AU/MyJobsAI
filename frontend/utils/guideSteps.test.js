@@ -41,3 +41,6 @@ describe('GuideSteps Utility Functions', () => {
 /**
  * Tests that getInterviewFormGuideSteps returns a correctly structured array of guide steps for the InterviewForm.
  */
+  /**
+   * Tests the getInterviewFormGuideSteps function to ensure it returns a correctly structured array of guide steps for the InterviewForm. This test verifies the length and content of the returned array, ensuring each step targets the correct form element and provides relevant guidance.
+   */
