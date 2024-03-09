@@ -15,7 +15,7 @@ const router = express.Router();
 
 module.exports = router;
 
-// Assuming you have initialized OpenAI with API key somewhere
+// Initialize OpenAI with API key securely from environment variables
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // CV Suggestions Route using Chat Completions
