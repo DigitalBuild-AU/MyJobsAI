@@ -227,6 +227,9 @@ describe('useEmailSender Hook', () => {
     // Assuming the function returns a generic message or handles the missing companyName gracefully
     const expectedResponse = 'Please provide a valid companyName.';
     expect(generateCoverLetter(userName, jobTitle, null)).toEqual(expectedResponse);
+/**
+ * Tests the interaction between the EmailComponent and the mocked sendEmail function. It ensures that the component correctly triggers the sendEmail function upon user interaction.
+ */
   });
 
   test('should handle non-string parameters gracefully', () => {
