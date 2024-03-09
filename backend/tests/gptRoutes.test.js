@@ -10,6 +10,9 @@ import { handleCvCustomization } from '../utils/gptRequestHandlers';
 jest.mock('../utils/gptRequestHandlers');
 
 describe('/cv_customization route', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   test('handles invalid input data for CV customization request', async () => {
     const response = await request(app)
       .post('/cv_customization')
@@ -80,6 +83,41 @@ describe('/cv_customization route', () => {
       .send({
         jobDescription: 'Software Engineer role requiring problem-solving skills.',
         userCV: 'Problem solver with a keen interest in software development.'
+  test('verifies createCompletion method call with correct parameters', async () => {
+    const mockCreateCompletion = jest.spyOn(openai, 'createCompletion').mockResolvedValue({
+      data: {
+        choices: [{ text: 'Customized CV content.' }]
+      }
+    });
+
+    await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: 'Software Engineer role requiring extensive experience in full-stack development.',
+        userCV: 'Experienced full-stack developer with a strong background in JavaScript and Python.'
+      });
+
+    expect(mockCreateCompletion).toHaveBeenCalledWith({
+      model: "gpt-3.5-turbo",
+      prompt: expect.stringContaining('Software Engineer role requiring extensive experience in full-stack development.') && expect.stringContaining('Experienced full-stack developer with a strong background in JavaScript and Python.'),
+      max_tokens: 1024,
+      n: 1,
+      stop: null,
+      temperature: 0.5,
+    });
+  });
+
+  test('handles invalid input data for CV customization request', async () => {
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
       });
   
     expect(response.statusCode).toBe(200);
@@ -121,6 +159,19 @@ describe('/cv_suggestions route', () => {
     const response = await request(app)
       .post('/cv_suggestions')
       .send({
+  test('handles error when OpenAI API call fails for CV customization', async () => {
+    jest.spyOn(openai, 'createCompletion').mockRejectedValue(new Error('OpenAI API error'));
+
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate CV customization suggestions.');
+  });
         jobDescription: '', // Empty job description
         userCV: '' // Empty user CV
       });
