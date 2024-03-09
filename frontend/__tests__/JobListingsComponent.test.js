@@ -129,6 +129,11 @@ it('updates state on salary amount input change', () => {
   expect(getByPlaceholderText('Salary Amount').value).toBe('');
 });
 
+  /**
+   * Test Case: updates state on salary period selection
+   * This test checks if the component's state updates correctly upon selecting different salary periods (Annual, Monthly, Hourly).
+   * It simulates user interactions for selecting each of these options and verifies that the state reflects the selected salary period accurately.
+   */
 it('updates state on salary period selection', () => {
   const { getByTestId } = render(<JobListingsComponent />);
   fireEvent.change(getByTestId('salary-period-select'), { target: { value: 'Annual' } });
