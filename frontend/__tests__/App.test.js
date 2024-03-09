@@ -179,6 +179,9 @@ describe('useEmailSender Hook', () => {
   test('returns the correct success message upon a successful email sending operation', async () => {
     axios.post.mockResolvedValue({ data: { message: 'Email sent successfully' } });
     const sendEmail = useEmailSender();
+  /**
+   * Tests the useEmailSender hook's functionality. It includes tests for making POST requests with correct parameters, handling errors, and verifying the success message upon email sending operation.
+   */
     const response = await sendEmail('test@example.com', 'Test Subject', 'Test Body');
     expect(response).toEqual('Email sent successfully');
   });
