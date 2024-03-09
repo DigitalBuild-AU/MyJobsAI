@@ -37,14 +37,15 @@ test('does not render when isOpen is false', () => {
   test('calls onClose when the backdrop is clicked', () => {
     const onCloseMock = jest.fn();
     render(<Modal isOpen={true} onClose={onCloseMock} content="Test Content" actions={<button>Action</button>} />);
-    fireEvent.click(screen.getByClassName('modal-backdrop'));
+    fireEvent.click(screen.getByTestId('modal-backdrop'));
     expect(onCloseMock).toHaveBeenCalled();
   });
 
   test('prevents onClose from being called when the modal content is clicked', () => {
     const onCloseMock = jest.fn();
     render(<Modal isOpen={true} onClose={onCloseMock} content="Test Content" actions={<button>Action</button>} />);
-    fireEvent.click(screen.getByClassName('modal-content'));
+    fireEvent.click(screen.getByTestId('modal-content'));
     expect(onCloseMock).not.toHaveBeenCalled();
   });
 });
+<<<<<<< APPEND (index=0)

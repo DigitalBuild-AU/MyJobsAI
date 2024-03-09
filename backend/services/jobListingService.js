@@ -80,6 +80,37 @@ const deleteJobListingById = async (id) => {
 
 /**
  * Calculates analytics based on user activities.
+ * This function aggregates data from the UserActivity model to calculate the total number of job applications submitted, interviews scheduled, offers received, and the average response time in days from application to interview.
+ * It does not take any parameters.
+ * @returns {Object} An object containing the calculated analytics data: totalApplications, interviewsScheduled, offersReceived, and avgResponseTime (average response time in days, formatted to two decimal places or null if not applicable).
+ */
+const calculateAnalytics = async () => {
+  try {
+    const totalApplications = await UserActivity.countDocuments({ activityType: 'Application' });
+    const interviewsScheduled = await UserActivity.countDocuments({ activityType: 'Interview' });
+    const offersReceived = await UserActivity.countDocuments({ activityType: 'Offer' });
+
+    const avgResponseTime = await UserActivity.aggregate([
+      { $match: { activityType: 'Interview' } },
+      { $hint: 'activityType_1' },
+      { $group: {
+          _id: null,
+          avgResponse: { $avg: { $subtract: ["$date", "$createdAt"] } }
+      }},
+      { $project: {
+          _id: 0,
+          avgResponseInDays: { $divide: ["$avgResponse", 1000*60*60*24] }
+      }}
+    ]);
+
+    console.log('Analytics calculated successfully.');
+    return {
+
+    return {
+      totalApplications,
+      interviewsScheduled,
+/**
+ * Calculates analytics based on user activities.
  * @returns {Object} An object containing analytics data or an error object if the operation fails.
  */
     console.log('Analytics calculated successfully.');

@@ -1,8 +1,7 @@
-import { generateCoverLetter } from '../app';
 /**
- * Tests for the App component. This includes routing tests to ensure navigation works as expected
- * and tests for application functionality such as the sendEmail function.
+ * This file contains tests for the App component, including routing functionality, sendEmail functionality, and the generateCoverLetter function.
  */
+import { generateCoverLetter } from '../app';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,6 +13,10 @@ jest.mock('axios');
 
 /**
  * Test suite for App component routing. Ensures that navigation to each route renders the correct component.
+ */
+/**
+ * Test suite for verifying the routing functionality of the App component.
+ * Ensures that navigation to each defined route renders the expected component.
  */
 /**
  * Test suite for verifying the routing functionality of the App component.
@@ -51,6 +54,10 @@ jest.mock('../src/useEmailSender');
     });
   });
 
+/**
+ * Test suite for verifying the sendEmail function in the App component.
+ * Checks the function's ability to successfully send an email and handle errors.
+ */
   describe('sendEmail Functionality', () => {
     beforeEach(() => {
       document.body.innerHTML = `
@@ -111,6 +118,10 @@ jest.mock('../src/useEmailSender');
   /**
    * Tests error handling in the sendEmail function when email sending fails.
    */
+/**
+ * Test suite for verifying the generateCoverLetter function within the App component.
+ * Ensures the function returns a correct cover letter based on provided parameters and handles missing parameters gracefully.
+ */
 describe('generateCoverLetter Functionality', () => {
   test('should return a correct cover letter when all parameters are valid', () => {
     const userName = 'John Doe';
@@ -129,6 +140,10 @@ describe('generateCoverLetter Functionality', () => {
   });
     // Tests the integration of the useEmailSender hook with the EmailComponent. This includes mocking the hook for both successful and failed email sending scenarios and verifying the expected outcomes are rendered correctly in the component.
     test('useEmailSender hook integration with EmailComponent', async () => {
+/**
+ * This test verifies the success scenario of the useEmailSender hook.
+ * It mocks the useEmailSender hook to return a success message and checks if the message is displayed correctly.
+ */
     test('useEmailSender hook success scenario', async () => {
       useEmailSender.mockImplementation(() => jest.fn(async () => 'Email sent successfully'));
       const { getByText, rerender } = render(
