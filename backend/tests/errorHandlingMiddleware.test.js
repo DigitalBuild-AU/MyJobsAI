@@ -5,6 +5,10 @@
 const errorHandler = require('../middleware/errorHandlingMiddleware');
 const httpMocks = require('node-mocks-http');
 
+/**
+ * Tests for the errorHandler middleware.
+ * Ensures proper status code and error message are returned, and that errors are logged.
+ */
 describe('errorHandler Middleware', () => {
   let mockRequest;
   let mockResponse;
