@@ -1,4 +1,8 @@
 /**
+ * Tests for the App component in the MyJobsAI application. This file includes tests for routing, application functionality such as generating cover letters, sending emails, and ensuring that components interact correctly with hooks and other components.
+ */
+import { generateCoverLetter } from '../app';
+/**
  * This file contains tests for the App component, including routing and application functionality such as email sending.
  */
 import { generateCoverLetter } from '../app';
@@ -133,6 +137,18 @@ describe('generateCoverLetter Functionality', () => {
       });
       expect(getByText('Email sent successfully')).toBeInTheDocument();
     });
+  /**
+   * Tests the functionality of the generateCoverLetter function. It checks for correct cover letter generation with valid parameters and handles missing parameters gracefully.
+   */
+/**
+ * Test suite for the generateCoverLetter functionality within the App component.
+ * This suite verifies the correct generation of cover letters based on provided parameters.
+ * 
+ * @param {string} userName - The name of the user.
+ * @param {string} jobTitle - The title of the job being applied for.
+ * @param {string} companyName - The name of the company receiving the application.
+ * @returns {string} The generated cover letter.
+ */
 
       // Mock the useEmailSender hook for failure scenario
 describe('useEmailSender Hook', () => {
@@ -156,6 +172,9 @@ describe('useEmailSender Hook', () => {
   test('returns the correct success message upon a successful email sending operation', async () => {
     axios.post.mockResolvedValue({ data: { message: 'Email sent successfully' } });
     const sendEmail = useEmailSender();
+  /**
+   * Tests the useEmailSender hook's functionality. It includes tests for making POST requests with correct parameters, handling errors, and verifying the success message upon email sending operation.
+   */
     const response = await sendEmail('test@example.com', 'Test Subject', 'Test Body');
     expect(response).toEqual('Email sent successfully');
   });
@@ -168,6 +187,15 @@ describe('useEmailSender Hook', () => {
   test('EmailComponent correctly interacts with mocked sendEmail function', async () => {
     const mockSendEmail = jest.fn();
     jest.mock('../src/useEmailSender', () => ({
+/**
+ * Test suite for the useEmailSender custom hook.
+ * This suite verifies that emails can be sent successfully, handles errors correctly, and returns appropriate success messages.
+ * 
+ * @param {string} to - The recipient's email address.
+ * @param {string} subject - The subject of the email.
+ * @param {string} body - The body content of the email.
+ * @returns {Promise<string>} A promise that resolves to a success message upon successful email sending.
+ */
       __esModule: true,
       default: jest.fn(() => mockSendEmail),
     }));
@@ -192,6 +220,9 @@ describe('useEmailSender Hook', () => {
     // Assuming the function returns a generic message or handles the missing companyName gracefully
     const expectedResponse = 'Please provide a valid companyName.';
     expect(generateCoverLetter(userName, jobTitle, null)).toEqual(expectedResponse);
+/**
+ * Tests the interaction between the EmailComponent and the mocked sendEmail function. It ensures that the component correctly triggers the sendEmail function upon user interaction.
+ */
   });
 
   test('should handle non-string parameters gracefully', () => {
@@ -199,7 +230,11 @@ describe('useEmailSender Hook', () => {
     const jobTitle = ['Software Engineer']; // Non-string parameter
     const companyName = { name: 'Tech Innovations Inc.' }; // Non-string parameter
     // Assuming the function checks for string type and returns a generic error message for non-string inputs
-    const expectedResponse = 'Error: All parameters must be of type string.';
+    const expectedResponse = 'Invalid input types. Please provide strings for all parameters.';
+/**
+ * Test case for verifying that the EmailComponent correctly interacts with the mocked sendEmail function.
+ * This test ensures that when the 'Send Email' button is clicked, the mocked sendEmail function is called as expected.
+ */
     expect(generateCoverLetter(userName, jobTitle, companyName)).toEqual(expectedResponse);
   });
 });
