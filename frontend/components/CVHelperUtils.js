@@ -25,6 +25,13 @@ async function sendCVRequest(jobDescription, userCV) {
   return response;
 }
 
+/**
+ * Processes the backend's response containing CV suggestions.
+ * @param {Object} response - The backend's response.
+ * @param {Function} setCvSuggestions - State setter function for CV suggestions.
+ * @param {Function} setError - State setter function for handling errors.
+ * @returns {void} - This function does not return a value but updates the component's state.
+ */
 function processCVResponse(response, setCvSuggestions, setError) {
   if (response && response.data && response.data.suggestions) {
     setCvSuggestions(response.data.suggestions);
@@ -36,6 +43,22 @@ function processCVResponse(response, setCvSuggestions, setError) {
 }
 
 export { sendCVRequest, processCVResponse };
+
+/**
+ * Sends a POST request to the backend with the user's job description and CV details.
+ * @param {String} jobDescription - The job description input by the user.
+ * @param {String} userCV - The CV details input by the user.
+ * @returns {Promise} - A promise that resolves to the backend's response containing CV suggestions.
+ * @throws {Error} - Throws an error if the request to the backend fails.
+ */
+/**
+ * Processes the response from the backend after sending a CV request.
+ * @param {Object} response - The response object from the backend.
+ * @param {Function} setCvSuggestions - Function to set the CV suggestions state.
+ * @param {Function} setError - Function to set the error state.
+ * @effects Updates the CV suggestions or error state based on the response.
+ */
+
 """
 This module contains utility functions for handling CV-related requests and responses within the MyJobsAI application. It includes functions to send CV analysis requests to the backend and process the responses for CV suggestions.
 """
@@ -52,3 +75,4 @@ export { sendCVRequest, processCVResponse };
 }
 
 export { sendCVRequest, processCVResponse };
+
