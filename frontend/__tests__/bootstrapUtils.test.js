@@ -138,6 +138,40 @@ describe('loadBootstrapScript utility function', () => {
     // For example, checking if a retry occurs or if an error message is logged
   });
   /**
+describe('removeBootstrapScriptTag function tests', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('successfully removes an existing bootstrap script tag', () => {
+    document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>';
+    removeBootstrapScriptTag();
+    const scriptTags = document.querySelectorAll('script[src*="bootstrap.bundle.min.js"]');
+    expect(scriptTags.length).toBe(0);
+  });
+
+  it('does nothing when no bootstrap script tag is present', () => {
+    // Ensuring the document body does not contain any script tags initially
+    expect(document.querySelectorAll('script').length).toBe(0);
+    removeBootstrapScriptTag();
+    // Asserting that the document body still contains no script tags afterward
+    expect(document.querySelectorAll('script').length).toBe(0);
+  });
+
+  it('removes only the first bootstrap script tag when multiple are present', () => {
+    document.body.innerHTML = `
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>`;
+    removeBootstrapScriptTag();
+    const scriptTags = document.querySelectorAll('script[src*="bootstrap.bundle.min.js"]');
+    // Verifying that one less Bootstrap script tag exists afterward
+    expect(scriptTags.length).toBe(1);
+  });
+});
   it('does not append a duplicate bootstrap script tag if one already exists', () => {
     document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>';
     appendBootstrapScriptTag();
