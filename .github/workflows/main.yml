@@ -1,0 +1,50 @@
+name: CI Workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Backend Dependencies
+      run: |
+        cd backend
+        npm install
+    - name: Install Frontend Dependencies
+      run: |
+        cd frontend
+        npm install
+    - name: Prepare Backend Environment Variables
+      run: |
+        cd backend
+        cp .env.example .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+    - name: Run Lint Checks
+      run: |
+        npx eslint . --ext .js,.jsx
+    - name: Run Backend Tests
+      run: |
+        cd backend
+        npm test
+    - name: Run Frontend Tests
+      run: |
+        cd frontend
+        npm test
+    - name: Cleanup .DS_Store Files
+      run: find . -name '.DS_Store' -type f -delete
+    - name: Build and Deploy
+      run: |
+        # Add build or deployment commands here
+        # Example for a Node.js project:
+        cd frontend
+        npm run build
+        # Deployment command or script
+      continue-on-error: true
