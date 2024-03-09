@@ -46,6 +46,13 @@ const JobListings = () => {
     };
   }, []);
 
+  /**
+   * Handles Filter Submission
+   * 
+   * This function is triggered upon submitting the filter form. It sends a GET request to the '/api/jobListings' endpoint with filter parameters (location, jobType, keywords) and updates the job listings state with the response data.
+   * 
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   */
   const handleFilterSubmit = (e) => {
     e.preventDefault();
     axios.get('/api/jobListings', { params: { location: filterLocation, jobType: filterJobType, keywords: filterKeywords } })
