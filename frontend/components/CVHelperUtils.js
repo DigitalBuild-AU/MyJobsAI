@@ -14,11 +14,13 @@ This function updates the CV suggestions state if the response contains suggesti
 Sends a CV analysis request to the backend.
 
 Parameters:
-- jobDescription (string): The job description to analyze.
-- userCV (string): The user's CV content.
+- jobDescription (string): The job description text to analyze.
+- userCV (string): The content of the user's CV.
 
 Returns:
-- Promise: A promise that resolves with the response from the backend.
+- Promise: A promise that resolves with the backend's response object.
+
+This function constructs and sends a POST request to the backend with the job description and CV content. It returns a promise that resolves with the response from the backend, which can include CV suggestions or error information.
 """
 async function sendCVRequest(jobDescription, userCV) {
   const response = await axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
