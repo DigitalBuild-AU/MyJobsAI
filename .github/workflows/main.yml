@@ -1,0 +1,47 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Lint Backend
+      run: |
+        cd backend
+        npm install eslint --save-dev
+        ./node_modules/.bin/eslint . --ext .js
+
+    - name: Lint Frontend
+      run: |
+        cd frontend
+        npm install eslint --save-dev
+        ./node_modules/.bin/eslint . --ext .js
+
+    - name: Check for Outdated Dependencies
+      run: npm outdated || true
+
+    - name: Run Backend Tests
+      run: |
+        cd backend
+        npm test
+
+    - name: Run Frontend Tests
+      run: |
+        cd frontend
+        npm test
