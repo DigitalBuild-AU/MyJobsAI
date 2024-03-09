@@ -1,3 +1,7 @@
+/**
+ * This file defines global styles for the MyJobsAI application using styled-components. It includes styles for body,
+ * code elements, and custom CSS variables for consistent theming across the app.
+ */
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle\`
