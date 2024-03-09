@@ -44,6 +44,11 @@ const JobListings = () => {
       .catch(error => console.error('Error fetching filtered job listings:', error));
   };
 
+  /**
+   * Handles the submission of the add job listing form.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but triggers a POST request to add a new job listing.
+   */
   const handleAddJobListing = (e) => {
     e.preventDefault();
     const jobTitle = document.getElementById('jobTitle').value;
@@ -65,6 +70,11 @@ const JobListings = () => {
       <div id="filterSidebar" style={{ float: 'left', width: '200px', marginRight: '20px' }}>
         <h3>Filter Listings</h3>
 // Filter form code extracted to JobFilterForm component
+  /**
+   * Submits the filter form data to fetch filtered job listings.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value.
+   */
         <JobFilterForm
           filterLocation={filterLocation}
           setFilterLocation={setFilterLocation}

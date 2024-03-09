@@ -74,6 +74,11 @@ const JobListingsComponent = () => {
             <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
             <textarea value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="Job Description"></textarea>
             <input type="text" value={jobType} onChange={(e) => setJobType(e.target.value)} placeholder="Job Type" />
+  /**
+   * Handles the submission of the new job listing form, adding the listing to the state and resetting form fields.
+   * @param {Event} event - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but updates the component's state.
+   */
             <input type="number" value={salaryAmount} onChange={(e) => setSalaryAmount(e.target.value)} placeholder="Salary Amount" />
             <select value={salaryPeriod} onChange={(e) => setSalaryPeriod(e.target.value)}>
               <option value="">Select Salary Period</option>
