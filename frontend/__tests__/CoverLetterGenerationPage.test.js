@@ -70,8 +70,8 @@ test('fetches job listings on component mount', async () => {
     expect(await findByText('Software Engineer')).toBeInTheDocument();
   });
 test('generateCoverLetter integration with successful API call', async () => {
-  const mockCoverLetterData = { jobDescription: 'Software Engineer', userName: 'John Doe', userSkills: 'JavaScript, React, Node.js', userExperience: '5 years', customizationOptions: { template: 'modern', tone: 'professional' } };
-  const mockResponse = { data: { coverLetter: 'Your personalized and professionally toned cover letter using the modern template' } };
+  const mockCoverLetterData = { jobDescription: 'Software Engineer', userName: 'John Doe', userSkills: 'JavaScript, React, Node.js', userExperience: '5 years', coverLetterTemplate: 'Modern', coverLetterTone: 'Professional' };
+  const mockResponse = { data: { coverLetter: 'Your personalized and professionally toned cover letter using the Modern template' } };
   generateCoverLetter.mockResolvedValue(mockResponse);
   const { getByText, getByPlaceholderText } = render(<CoverLetterGenerationPage />);
   fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: mockCoverLetterData.jobDescription } });
@@ -96,6 +96,22 @@ Tests for the CoverLetterGenerationPage component.
 This file contains tests that ensure the functionality of the Cover Letter Generation Page within the MyJobsAI application. It includes tests for component rendering, user interaction, and integration with other services like axios for data fetching.
 """
   await waitFor(() => fireEvent.change(getByRole('combobox'), { target: { value: '1' } }));
+test('cover letter generation with template and tone selection', async () => {
+  const mockCoverLetterData = { jobDescription: 'Software Engineer', userName: 'John Doe', userSkills: 'JavaScript, React, Node.js', userExperience: '5 years', coverLetterTemplate: 'Creative', coverLetterTone: 'Friendly' };
+  const mockResponse = { data: { coverLetter: 'Your personalized and friendly toned cover letter using the Creative template' } };
+  generateCoverLetter.mockResolvedValue(mockResponse);
+  const { getByText, getByPlaceholderText, getByLabelText } = render(<CoverLetterGenerationPage />);
+  fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: mockCoverLetterData.jobDescription } });
+  fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: mockCoverLetterData.userName } });
+  fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: mockCoverLetterData.userSkills } });
+  fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: mockCoverLetterData.userExperience } });
+  fireEvent.change(getByLabelText('Select Template'), { target: { value: mockCoverLetterData.coverLetterTemplate } });
+  fireEvent.change(getByLabelText('Select Tone'), { target: { value: mockCoverLetterData.coverLetterTone } });
+  await act(async () => {
+    fireEvent.click(getByText('Generate Cover Letter'));
+  });
+  await waitFor(() => expect(getByText(`Your personalized and friendly toned cover letter using the Creative template`)).toBeInTheDocument());
+});
   expect(getByDisplayValue('John Doe')).toBeInTheDocument();
 });
 
@@ -118,8 +134,8 @@ Ensures that clicking the 'Create Cover Letter' button on the CoverLetterGenerat
 """
 test('form submission generates cover letter', async () => {
   const mock = new MockAdapter(axios);
-  const postData = { description: 'Software Engineer', name: 'Jane Doe', skills: 'React, Node', experience: '5 years', template: 'modern' };
-  const responseData = { coverLetter: 'Your application for Software Engineer has been created.' };
+  const postData = { description: 'Software Engineer', name: 'Jane Doe', skills: 'React, Node', experience: '5 years', template: 'Modern', tone: 'Professional' };
+  const responseData = { coverLetter: 'Your application for Software Engineer has been created with a Modern template and Professional tone.' };
   mock.onPost('/api/coverletter/generate', postData).reply(200, responseData);
 
   await act(async () => {
@@ -128,7 +144,8 @@ test('form submission generates cover letter', async () => {
     fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: postData.name } });
     fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: postData.skills } });
     fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: postData.experience } });
-    fireEvent.change(getByRole('combobox', { name: 'Select Template' }), { target: { value: postData.template } });
+    fireEvent.change(getByLabelText('Select Template'), { target: { value: postData.template } });
+    fireEvent.change(getByLabelText('Select Tone'), { target: { value: postData.tone } });
     fireEvent.click(getByText('Generate Cover Letter'));
     expect(await findByText(responseData.coverLetter)).toBeInTheDocument();
   });
@@ -161,7 +178,7 @@ test('downloadAsPDF triggers download with correct attributes', async () => {
     const { getByText } = render(<CoverLetterGenerationPage />);
     fireEvent.click(getByText('Download as PDF'));
     expect(document.createElement).toHaveBeenCalledWith('a');
-    expect(document.createElement().download).toEqual('coverLetter-modern.pdf');
+    expect(document.createElement().download).toEqual('coverLetter-Modern.pdf');
     expect(document.createElement().type).toEqual('application/pdf');
   });
 });
@@ -188,9 +205,9 @@ test('handles error fetching job listings gracefully', async () => {
 // Tests error handling when generating a cover letter fails.
 test('handles error generating cover letter gracefully', async () => {
 test('generateCoverLetter integration with failed API call', async () => {
-  const mockError = new Error('Failed to generate cover letter');
+  const mockError = { response: { data: { message: 'Failed to generate cover letter due to invalid template selection' } } };
   generateCoverLetter.mockRejectedValue(mockError);
-  handleCoverLetterError.mockImplementation(() => {});
+  handleCoverLetterError.mockImplementation(() => 'Failed to generate cover letter due to invalid template selection');
   const { getByText, getByPlaceholderText, queryByText } = render(<CoverLetterGenerationPage />);
   fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: 'Software Engineer' } });
   fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: 'John Doe' } });
@@ -217,6 +234,20 @@ test('modal closes with handleCloseSaveModal', async () => {
 """
 Tests that clicking the 'Save Cover Letter' button opens a modal dialog asking the user if they want to save the generated cover letter.
 """
+test('generateCoverLetter error handling with invalid template selection', async () => {
+  const mockError = { response: { data: { message: 'Invalid template selection' } } };
+  generateCoverLetter.mockRejectedValue(mockError);
+  const { getByText, getByPlaceholderText, queryByText } = render(<CoverLetterGenerationPage />);
+  fireEvent.change(getByPlaceholderText('Job Description'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(getByPlaceholderText('Your Name'), { target: { value: 'John Doe' } });
+  fireEvent.change(getByPlaceholderText('Your Skills'), { target: { value: 'JavaScript, React' } });
+  fireEvent.change(getByPlaceholderText('Your Experience'), { target: { value: '5 years' } });
+  fireEvent.change(getByLabelText('Select Template'), { target: { value: 'InvalidTemplate' } });
+  await act(async () => {
+    fireEvent.click(getByText('Generate Cover Letter'));
+  });
+  await waitFor(() => expect(queryByText('Invalid template selection')).toBeInTheDocument());
+});
   const { getByText } = render(<CoverLetterGenerationPage />);
   fireEvent.click(getByText('Save Cover Letter'));
   expect(getByText('Do you want to save the generated cover letter?')).toBeInTheDocument();
