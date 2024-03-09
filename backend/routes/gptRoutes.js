@@ -1,7 +1,8 @@
 /**
  * gptRoutes.js
- * This file contains Express routes for interacting with GPT models to generate CV suggestions, cover letters, and CV customizations.
- * It utilizes the OpenAI API to process user inputs and generate relevant outputs for job application materials.
+ * This file defines the Express routes for interacting with GPT models to generate CV suggestions, cover letters, and CV customizations for the MyJobsAI application.
+ * It utilizes the OpenAI API to process user inputs and generate relevant outputs.
+ * This file depends on the express, dotenv, and openai-api packages for its functionality. It also uses utility functions from '../utils/gptRequestHandlers' for handling specific GPT requests.
  */
 const express = require('express');
 const dotenv = require('dotenv');
@@ -19,11 +20,12 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // CV Suggestions Route using Chat Completions
 /**
- * POST /cv_suggestions
- * Generates CV suggestions based on a job description and user's CV.
- * Inputs: jobDescription (String), userCV (String)
- * Output: JSON object containing CV suggestions
- * Exceptions: Returns a 500 status code with an error message if the request fails.
+ * Handles POST requests to generate CV suggestions based on a job description and user's CV.
+ * @description This route processes POST requests to dynamically generate CV suggestions tailored to the user's CV and the job description provided.
+ * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
+ * @param {Object} res - The response object used to return the suggestions or an error message.
+ * @returns {void} - Sends a JSON response with CV suggestions or an error status.
+ * @throws {Error} - Returns a 500 status code with an error message if the request fails.
  */
 router.post('/cv_suggestions', async (req, res) => {
  * Handles the generation of CV suggestions based on a given job description and user's CV.
@@ -47,7 +49,14 @@ router.post('/cv_suggestions', async (req, res) => {
 
 /**
  * POST route for generating a cover letter.
- * Takes a job description and user's CV from the request body and returns a customized cover letter.
+/**
+ * Handles POST requests to generate a customized cover letter based on a job description and user's CV.
+ * @description This route processes POST requests to generate a cover letter that is customized based on the user's CV and the job description provided.
+ * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
+ * @param {Object} res - The response object used to return the generated cover letter or an error message.
+ * @returns {void} - Sends a JSON response containing the generated cover letter.
+ * @throws {Error} - Returns a 500 status code with an error message if the request fails.
+ */
 
  */
 router.post('/cover_letter', async (req, res) => {
@@ -69,14 +78,24 @@ router.post('/cover_letter', async (req, res) => {
 
 });
 
-// Resume Customization Route using Chat Completions
+/**
+ * Handles POST requests to generate CV customization suggestions based on a job description and user's CV.
+ * @description This route processes POST requests to generate CV customization suggestions, leveraging the OpenAI API's `createCompletion` method to tailor suggestions to the user's CV and the job description provided.
+ * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
+ * @param {Object} res - The response object used to return the CV customization suggestions or an error message.
+ * @returns {void} - Sends a JSON response containing CV customization suggestions.
+ * @throws {Error} - Returns a 500 status code with an error message if the request fails.
+ */
 router.post('/cv_customization', async (req, res) => {
   const { jobDescription, userCV } = req.body;
   try {
-    // Correct your async call here with proper parameters
     const response = await openai.createCompletion({
-      // Assuming 'createCompletion' is the correct method you intended to use
-      // Include your intended parameters here
+      model: "gpt-3.5-turbo",
+      prompt: `Customize CV based on job description: ${jobDescription} and user's CV: ${userCV}`,
+      max_tokens: 1024,
+      n: 1,
+      stop: null,
+      temperature: 0.5,
     });
     console.log("CV customization suggestions generated successfully.");
     res.json({ analysisResults: response.data.choices[0].text.trim() });
@@ -86,10 +105,6 @@ router.post('/cv_customization', async (req, res) => {
   } finally {
     console.log("Attempted operation on /cv_customization.");
   }
-
-      model: "gpt-3.5-turbo",
-
-    });
 /**
  * POST route for CV customization suggestions.
  * Receives a job description and user's CV in the request body and provides suggestions for customizing the CV accordingly.
