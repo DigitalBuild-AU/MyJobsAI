@@ -1,3 +1,10 @@
+"""
+/**
+ * Tests for CVHelperUtils component functionalities.
+ * This file includes tests for processing CV responses and sending CV requests,
+ * utilizing Jest for mocking and axios for handling HTTP requests.
+ */
+"""
 import React from 'react';
 import axios from 'axios';
 import { processCVResponse } from '../components/CVHelperUtils';
@@ -64,7 +71,19 @@ describe('sendCVRequest Functionality Tests', () => {
     jest.clearAllMocks();
   });
 
-  test('sendCVRequest with successful response', async () => {
+  /**
+   * Test 'sendCVRequest' with a successful response.
+   * Simulates sending a CV and job description to the backend and expects a successful response
+   * with CV suggestions. Utilizes axios mock for simulating the HTTP request.
+   */
+  });
+
+  /**
+   * Test 'sendCVRequest' with an error response.
+   * Simulates a network error during the CV request process and verifies that the error is
+   * handled appropriately. Axios mock is used to simulate the HTTP request and force an error response.
+   */
+  test('sendCVRequest with error response', async () => {
     // Mocking axios post method to simulate a successful response
     jest.mock('axios');
     axios.post = jest.fn().mockResolvedValue({
