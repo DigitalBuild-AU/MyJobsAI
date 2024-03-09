@@ -134,6 +134,13 @@ describe('sendCVRequest', () => {
  * @param {string} userCV - The CV content input by the user.
  * @returns {Promise<Object>} The response from the API containing CV suggestions.
  */
+/**
+ * Test suite for sendCVRequest function
+ * This suite tests the sendCVRequest function, which is responsible for making an API call to the backend with the user's job description and CV content. It checks if the function correctly handles both successful responses and errors.
+ * @param {string} jobDescription - The job description input by the user.
+ * @param {string} userCV - The CV content input by the user.
+ * @returns {Promise<Object>} A promise that resolves with the API response containing CV suggestions or rejects with an error.
+ */
 describe('processCVResponse', () => {
   it('processes a response with suggestions correctly', () => {
     const mockResponse = { data: { suggestions: 'Test suggestion' } };
