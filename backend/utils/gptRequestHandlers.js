@@ -31,6 +31,16 @@ async function handleCvSuggestions(jobDescription, userCV) {
     throw new Error("Failed to generate CV suggestions.");
   }
 }
+const { validateTextInput, sanitizeTextInput } = require('./inputValidator');
+const { debugLog } = require('./debugLogger');
+
+  // Validate and sanitize inputs
+  if (!validateTextInput(jobDescription) || !validateTextInput(userCV)) {
+    debugLog('Validation Error: Invalid characters in input');
+    throw new Error("Validation Error: Invalid characters in input");
+  }
+  jobDescription = sanitizeTextInput(jobDescription);
+  userCV = sanitizeTextInput(userCV);
 
 async function handleCoverLetter(jobDescription, userCV) {
   try {
@@ -49,6 +59,16 @@ async function handleCoverLetter(jobDescription, userCV) {
     });
     return { analysisResults: response.choices[0].message.content.trim() };
   } catch (error) {
+const { validateTextInput, sanitizeTextInput } = require('./inputValidator');
+const { debugLog } = require('./debugLogger');
+
+  // Validate and sanitize inputs
+  if (!validateTextInput(jobDescription) || !validateTextInput(userCV)) {
+    debugLog('Validation Error: Invalid characters in input');
+    throw new Error("Validation Error: Invalid characters in input");
+  }
+  jobDescription = sanitizeTextInput(jobDescription);
+  userCV = sanitizeTextInput(userCV);
     throw new Error("Error customizing cover letter.");
   }
 }
@@ -87,3 +107,13 @@ module.exports = { handleCvSuggestions, handleCoverLetter, handleCvCustomization
  * @param {string} userCV - The user's CV.
  * @returns {Object} An object containing customization suggestions.
  */
+const { validateTextInput, sanitizeTextInput } = require('./inputValidator');
+const { debugLog } = require('./debugLogger');
+
+  // Validate and sanitize inputs
+  if (!validateTextInput(jobDescription) || !validateTextInput(userCV)) {
+    debugLog('Validation Error: Invalid characters in input');
+    throw new Error("Validation Error: Invalid characters in input");
+  }
+  jobDescription = sanitizeTextInput(jobDescription);
+  userCV = sanitizeTextInput(userCV);
