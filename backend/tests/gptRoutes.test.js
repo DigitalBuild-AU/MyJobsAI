@@ -33,6 +33,7 @@ describe('/cv_customization route', () => {
         jobDescription: '', // Empty job description
         userCV: '' // Empty user CV
       });
+
 describe('OpenAI API Key Initialization', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -103,6 +104,38 @@ Description: This file contains unit tests for the GPT-related routes within the
       .send({
         jobDescription: 'Valid Job Description',
         userCV: 'Valid user CV'
+test('handles malformed JSON in CV customization request', async () => {
+  const response = await request(app)
+    .post('/cv_customization')
+    .send('This is not valid JSON');
+
+  expect(response.statusCode).toBe(400);
+  expect(response.body).toHaveProperty('error', 'Malformed JSON payload.');
+});
+
+test('handles large payload in CV customization request', async () => {
+  const largePayload = { jobDescription: 'a'.repeat(10000), userCV: 'b'.repeat(10000) };
+  const response = await request(app)
+    .post('/cv_customization')
+    .send(largePayload);
+
+  expect(response.statusCode).toBe(413);
+  expect(response.body).toHaveProperty('error', 'Payload too large.');
+});
+
+test('simulates network failure in CV customization request', async () => {
+  jest.spyOn(openai, 'createCompletion').mockRejectedValue(new Error('Network failure'));
+
+  const response = await request(app)
+    .post('/cv_customization')
+    .send({
+      jobDescription: 'Valid Job Description',
+      userCV: 'Valid user CV'
+    });
+
+  expect(response.statusCode).toBe(503);
+  expect(response.body).toHaveProperty('error', 'Service unavailable due to network failure.');
+});
       });
 
     expect(response.statusCode).toBe(500);
@@ -199,6 +232,38 @@ Description: This file contains unit tests for the GPT-related routes within the
 
     expect(mockCreateCompletion).toHaveBeenCalledWith({
       model: "gpt-3.5-turbo",
+test('handles malformed JSON in CV suggestions request', async () => {
+  const response = await request(app)
+    .post('/cv_suggestions')
+    .send('This is not valid JSON');
+
+  expect(response.statusCode).toBe(400);
+  expect(response.body).toHaveProperty('error', 'Malformed JSON payload.');
+});
+
+test('handles large payload in CV suggestions request', async () => {
+  const largePayload = { jobDescription: 'x'.repeat(10000), userCV: 'y'.repeat(10000) };
+  const response = await request(app)
+    .post('/cv_suggestions')
+    .send(largePayload);
+
+  expect(response.statusCode).toBe(413);
+  expect(response.body).toHaveProperty('error', 'Payload too large.');
+});
+
+test('simulates network failure in CV suggestions request', async () => {
+  jest.spyOn(openai, 'createCompletion').mockRejectedValue(new Error('Network failure'));
+
+  const response = await request(app)
+    .post('/cv_suggestions')
+    .send({
+      jobDescription: 'Valid Job Description',
+      userCV: 'Valid user CV'
+    });
+
+  expect(response.statusCode).toBe(503);
+  expect(response.body).toHaveProperty('error', 'Service unavailable due to network failure.');
+});
       prompt: expect.stringContaining('Software Engineer role requiring extensive experience in full-stack development.') && expect.stringContaining('Experienced full-stack developer with a strong background in JavaScript and Python.'),
       max_tokens: 1024,
       n: 1,
@@ -577,3 +642,33 @@ describe('/cover_letter route', () => {
    * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
    * Expected Output: HTTP status 500 with error message 'Failed to process CV suggestions due to a server error.'
    */
+test('verifies HTTP status code and response body for successful CV suggestions request', async () => {
+  const mockResponse = { suggestions: 'Your CV suggestions.' };
+  handleCvSuggestions.mockResolvedValue(mockResponse);
+
+  const response = await request(app)
+    .post('/cv_suggestions')
+    .send({
+      jobDescription: 'Software Engineer role requiring problem-solving skills.',
+      userCV: 'Problem solver with a keen interest in software development.'
+    });
+
+  expect(response.statusCode).toBe(200);
+  expect(response.body).toEqual(mockResponse);
+  expect(handleCvSuggestions).toHaveBeenCalledWith('Software Engineer role requiring problem-solving skills.', 'Problem solver with a keen interest in software development.');
+});
+test('verifies HTTP status code and response body for successful CV customization request', async () => {
+  const mockResponse = { analysisResults: 'Your CV customization suggestions.' };
+  handleCvCustomization.mockResolvedValue(mockResponse);
+
+  const response = await request(app)
+    .post('/cv_customization')
+    .send({
+      jobDescription: 'Software Engineer role requiring extensive experience in full-stack development.',
+      userCV: 'Experienced full-stack developer with a strong background in JavaScript and Python.'
+    });
+
+  expect(response.statusCode).toBe(200);
+  expect(response.body).toEqual(mockResponse);
+  expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
+});
