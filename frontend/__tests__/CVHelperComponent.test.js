@@ -157,27 +157,6 @@ describe('sendCVRequest', () => {
   });
 });
 /**
- * Initiates an API call to get CV suggestions based on the job description and user's CV.
- * @param {string} jobDescription - The job description input by the user.
- * @param {string} userCV - The CV content input by the user.
- * @returns {Promise<Object>} The response from the API containing CV suggestions.
- */
-/**
- * Test suite for sendCVRequest function
- * This suite tests the sendCVRequest function, which is responsible for making an API call to the backend with the user's job description and CV content. It checks if the function correctly handles both successful responses and errors.
- * @param {string} jobDescription - The job description input by the user.
- * @param {string} userCV - The CV content input by the user.
- * @returns {Promise<Object>} A promise that resolves with the API response containing CV suggestions or rejects with an error.
- */
-/**
- * Test suite for processCVResponse function
- * This suite tests the processCVResponse function, which processes the response from the API call made by sendCVRequest. It checks if the function correctly updates the component state with CV suggestions or an error message based on the response.
- * @param {Object} response - The response object from the API call, containing either CV suggestions or an error.
- * @param {Function} setCvSuggestions - The state setter function for updating CV suggestions.
- * @param {Function} setError - The state setter function for updating the error message.
- * @returns {void} Does not return anything but updates the component state based on the response.
- */
-describe('processCVResponse', () => {
   it('processes a response with suggestions correctly', () => {
     const mockResponse = { data: { suggestions: 'Test suggestion' } };
     const setCvSuggestions = jest.fn();
@@ -196,18 +175,3 @@ describe('processCVResponse', () => {
     expect(setCvSuggestions).toHaveBeenCalledWith('');
   });
 });
-
-  it('sends a request with correct URL and payload', async () => {
-    axios.post.mockResolvedValue({ data: { success: true } });
-    const jobDescription = 'Software Engineer';
-    const userCV = 'My CV content';
-    await sendCVRequest(jobDescription, userCV);
-    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
-  });
-
-  it('handles network or server error appropriately', async () => {
-    axios.post.mockRejectedValue(new Error('Network error'));
-    const jobDescription = 'Software Engineer';
-    const userCV = 'My CV content';
-    await expect(sendCVRequest(jobDescription, userCV)).rejects.toThrow('Network error');
-  });
