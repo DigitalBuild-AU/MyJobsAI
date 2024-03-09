@@ -56,7 +56,7 @@ describe('JobListingsPage component', () => {
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
-test('filters listings based on user input', async () => {
+test('filters listings based on various user inputs and edge cases', async () => {
 /**
 
  * Test case for ensuring the JobListingCard component renders with the correct job title, company, and location based on provided props.
@@ -71,6 +71,31 @@ test('filters listings based on user input', async () => {
   render(<JobListingsPage />);
   fireEvent.change(screen.getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
   fireEvent.change(screen.getByPlaceholderText('Filter by company'), { target: { value: 'Tech Corp', name: 'company' } });
+// Test filtering with valid inputs that match listings
+await waitFor(() => {
+  expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+  expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
+});
+
+// Test filtering with an empty status filter (should show all listings as status filter is ignored)
+fireEvent.change(screen.getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
+fireEvent.submit(screen.getByText('Apply Filters'));
+await waitFor(() => {
+  expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+  expect(screen.getByText('Product Manager')).toBeInTheDocument();
+});
+
+// Test filtering with a company filter that matches no listings
+fireEvent.change(screen.getByPlaceholderText('Filter by company'), { target: { value: 'Nonexistent Corp', name: 'company' } });
+fireEvent.submit(screen.getByText('Apply Filters'));
+await waitFor(() => {
+  expect(screen.queryByText('Software Engineer')).not.toBeInTheDocument();
+  expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
+  expect(screen.getByText('No listings match your filters.')).toBeInTheDocument();
+});
+
+// Reset mock for further tests
+fetchListingsFromAPI.mockResolvedValue({ data: { listings: mockListings, totalPages: 1 } });
 
   await waitFor(() => {
 /**
@@ -103,14 +128,41 @@ test('view changes between table and card based on window size', () => {
 
  */
 
-test('pagination component renders and navigates correctly', async () => {
+test('pagination component updates correctly with listing changes', async () => {
+  // Initial state with 2 pages of listings
   const mockListingsPage1 = [
     { id: 1, jobTitle: 'Software Engineer', company: 'Tech Corp', location: 'San Francisco' },
     { id: 2, jobTitle: 'Product Manager', company: 'Innovate LLC', location: 'New York' }
   ];
+  // Simulate adding a new job listing, increasing total pages
   const mockListingsPage2 = [
-    { id: 3, jobTitle: 'Designer', company: 'Creative Inc', location: 'Los Angeles' }
+    { id: 3, jobTitle: 'Designer', company: 'Creative Inc', location: 'Los Angeles' },
+    { id: 4, jobTitle: 'Backend Developer', company: 'DevOps Ltd.', location: 'Remote' }
   ];
+  fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 1 } }) // Initial state with 1 page of listings
+                      .mockResolvedValueOnce({ data: { listings: mockListingsPage2, totalPages: 2 } }) // After adding, 2 pages
+                      .mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 1 } }); // After removing, back to 1 page
+
+  // Verify initial pagination with 1 page
+  expect(await screen.findByText('1')).toBeInTheDocument();
+  expect(screen.queryByText('2')).not.toBeInTheDocument();
+
+  // Simulate user navigating to add job listing form and submitting a new job
+  fireEvent.click(getByText('Add Listing'));
+
+  // Verify pagination after adding a job listing
+  await waitFor(() => {
+    expect(screen.getByText('2')).toBeInTheDocument();
+  });
+
+  // Simulate removing a job listing
+  fireEvent.click(screen.getByText('Remove Last Listing'));
+
+  // Verify pagination after removing a job listing
+  await waitFor(() => {
+    expect(screen.queryByText('2')).not.toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+  });
   fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 2 } })
                       .mockResolvedValueOnce({ data: { listings: mockListingsPage2, totalPages: 2 } });
 
@@ -537,7 +589,33 @@ test('ResponsiveNavbar accessibility features', () => {
   global.innerWidth = 500; // Mobile view
   const { getByLabelText } = render(<ResponsiveNavbar />);
   expect(getByLabelText('Toggle menu')).toBeInTheDocument(); // Hamburger menu button should be accessible
-});
+);
+
+test('adds new job listing through the form submission', async () => {
+  const mockNewListing = {
+    jobTitle: 'UI Designer',
+    company: 'Design Innovate',
+    location: 'Remote',
+    jobType: 'Contract',
+    status: 'New'
+  };
+  fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: [mockNewListing], totalPages: 1 } });
+
+  const { getByPlaceholderText, getByText } = render(<JobListingsPage />);
+  fireEvent.change(getByPlaceholderText('Job Title'), { target: { value: mockNewListing.jobTitle } });
+  fireEvent.change(getByPlaceholderText('Company'), { target: { value: mockNewListing.company } });
+  fireEvent.change(getByPlaceholderText('Location'), { target: { value: mockNewListing.location } });
+  fireEvent.change(getByPlaceholderText('Job Type'), { target: { value: mockNewListing.jobType } });
+
+  fireEvent.submit(getByText('Add Listing'));
+
+  await waitFor(() => {
+    expect(getByText(mockNewListing.jobTitle)).toBeInTheDocument();
+    expect(getByText(mockNewListing.company)).toBeInTheDocument();
+    expect(getByText(mockNewListing.location)).toBeInTheDocument();
+    expect(getByText(mockNewListing.jobType)).toBeInTheDocument();
+  });
+})
 
 test('Sidebar accessibility features', () => {
   const { getByText } = render(<Sidebar isOpen={true} />);
