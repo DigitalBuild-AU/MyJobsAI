@@ -48,6 +48,10 @@ describe('Navbar Component Tests', () => {
   it('renders Applications link and verifies active state on click', () => {
     const { getByText } = render(<Navbar />);
     const applicationsLink = getByText('Applications');
+  /**
+   * Test case: Ensure the Navbar component renders without any errors.
+   * This test verifies that the Navbar component can be rendered into the DOM without throwing exceptions.
+   */
     expect(applicationsLink).toBeInTheDocument();
     fireEvent.click(applicationsLink);
     expect(applicationsLink.parentNode).toHaveClass('active');
