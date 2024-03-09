@@ -77,28 +77,10 @@ describe('App Routing', () => {
         to: 'test@example.com',
         subject: 'Test Subject',
         body: 'Test Body'
-/**
- * Tests for the generateCoverLetter functionality within the App component.
- * Ensures that the generateCoverLetter function exists and is callable.
- */
-/**
- * App.test.js
- * 
- * This file contains tests for the App component, focusing on its functionality
- * such as generating cover letters and sending emails. It uses Jest and
- * @testing-library/react for rendering components and asserting on their behavior.
-    /**
-     * Tests for the sendEmail functionality within the App component.
-     * This suite checks both the successful and unsuccessful sending of emails,
-     * ensuring the correct behavior under various conditions.
-     */
- */
-    /**
-     * Tests if the generateCoverLetter function exists and is callable.
-     * 
-     * This test verifies the presence and type of the generateCoverLetter function
-     * within the App component. It does not have inputs, outputs, or side effects.
-     */
+  /**
+   * Test for verifying the existence and callability of the generateCoverLetter function within the App component.
+   * This test ensures that the generateCoverLetter function is properly defined and can be invoked.
+   */
       });
       expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
     });
