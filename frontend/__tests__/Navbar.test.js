@@ -45,6 +45,10 @@ describe('Navbar Component Tests', () => {
     expect(getByText('Dashboard')).toBeInTheDocument();
   });
 
+  /**
+   * Test case: Rendering of the Job Listings link in the Navbar.
+   * Checks that the Navbar component contains a link to the Job Listings page, facilitating user navigation.
+   */
   it('renders Job Listings link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('Job Listings')).toBeInTheDocument();
@@ -75,25 +79,36 @@ describe('Navbar Component Tests', () => {
    * Test if the Navbar component renders the 'CV Helper' link correctly.
    */
 
+  /**
+   * Test case: Rendering of the CV Helper link in the Navbar.
+   * Verifies that the Navbar component contains a 'CV Helper' link, making it accessible for the user.
+   */
   it('renders CV Helper link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('CV Helper')).toBeInTheDocument();
   });
 
+  /**
+   * Test case: Rendering of the Cover Letter link in the Navbar.
+   * Confirms the presence of a 'Cover Letter' link in the Navbar, enabling users to easily navigate to it.
+   */
   it('renders Cover Letter link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('Cover Letter')).toBeInTheDocument();
   });
 
+  /**
+   * Test case: Rendering of the Interviews link in the Navbar.
+   * Ensures that the Navbar displays an 'Interviews' link, providing quick access for users.
+   */
   it('renders Interviews link', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('Interviews')).toBeInTheDocument();
   });
 
   /**
-   * Test if the Navbar component renders the 'Settings' link correctly.
-   * This test verifies that the Navbar component includes a link for 'Settings',
-   * ensuring that users can navigate to the Settings page from the Navbar.
+   * Test case: Rendering of the Settings link in the Navbar.
+   * Determines if the Navbar component includes a 'Settings' link, facilitating user access to account settings.
    */
   it('renders Settings link', () => {
     const { getByText } = render(<Navbar />);
@@ -101,12 +116,20 @@ describe('Navbar Component Tests', () => {
   });
 });
   // Test to ensure NavLinks component is rendered within Navbar
+  /**
+   * Test case: Verifying the rendering of the NavLinks component within the Navbar.
+   * Ensures that the NavLinks component is present within the Navbar, indicating proper composition and integration.
+   */
   it('renders NavLinks component within Navbar', () => {
     const { getByTestId } = render(<Navbar />);
     expect(getByTestId('nav-links')).toBeInTheDocument();
   });
   /**
    * Test case to verify that clicking on a toggle button correctly expands or collapses the mobile navigation menu.
+   */
+  /**
+   * Test case: Toggle functionality of the mobile navigation menu.
+   * Assesses the behavior of the mobile menu toggle, ensuring that it correctly shows or hides the navigation menu on click.
    */
   it('toggles mobile navigation menu on click', () => {
     render(<Navbar />);
