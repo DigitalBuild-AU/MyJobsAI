@@ -175,6 +175,12 @@ Description: This file contains unit tests for the GPT-related routes within the
     expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
   });
       });
+  /**
+   * Test Case: Handles Errors During CV Suggestions Request
+   * Purpose: Verifies that the CV suggestions endpoint correctly responds with a 500 status code and an appropriate error message when an error occurs during processing.
+   * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
+   * Expected Output: HTTP status 500 with error message 'Failed to generate CV suggestions.'
+   */
   
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockResponse);
