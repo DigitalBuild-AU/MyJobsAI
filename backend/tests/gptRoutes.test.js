@@ -515,3 +515,9 @@ describe('/cover_letter route', () => {
    * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
    * Expected Output: HTTP status 500 with error message 'Failed to generate CV customization suggestions.'
    */
+  /**
+   * Test Case: Handles Database Error During CV Suggestions Request
+   * Purpose: Ensures that the CV suggestions endpoint correctly responds with a 500 status code and an appropriate error message when a database error occurs.
+   * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
+   * Expected Output: HTTP status 500 with error message 'Failed to process CV suggestions due to a server error.'
+   */
