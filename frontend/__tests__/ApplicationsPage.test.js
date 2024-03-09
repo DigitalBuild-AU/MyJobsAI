@@ -1,3 +1,6 @@
+/**
+ * Tests for the ApplicationsPage component. Ensures that the component renders correctly and displays the expected content.
+ */
 import React from 'react';
 import { render } from '@testing-library/react';
 import ApplicationsPage from '../pages/ApplicationsPage';

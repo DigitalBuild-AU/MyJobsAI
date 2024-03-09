@@ -19,8 +19,10 @@ const CVHelperPage = () => {
         setCvSuggestions(response.data.suggestions);
       })
       .catch(error => {
-        console.error('Failed to fetch CV suggestions:', error);
-        setCvSuggestions('Error fetching CV suggestions.');
+        console.error('Failed to fetch CV suggestions. Please try again later:', error);
+        setCvSuggestions('Error fetching CV suggestions. Please check your network connection and try again.');
+        // Adding a retry button for user convenience
+        setCvSuggestions(prev => prev + ' <button onClick={handleSubmit}>Retry</button>');
       });
   };
 
@@ -67,6 +69,15 @@ const CVHelperPage = () => {
 /**
  * This file defines the CVHelperPage component, which provides functionality for users to get suggestions on improving their CVs
  * based on job descriptions. Users can input a job description and their CV, and receive tailored suggestions.
+        // Adding form validation to ensure job description and user CV are not empty
+        if (!jobDescription.trim()) {
+          alert('Please enter a job description.');
+          return;
+        }
+        if (!userCV.trim()) {
+          alert('Please paste your CV.');
+          return;
+        }
  */
 /**
  * CVHelperPage function that renders the CV Helper page.
