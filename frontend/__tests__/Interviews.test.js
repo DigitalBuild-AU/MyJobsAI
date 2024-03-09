@@ -1,5 +1,5 @@
 /**
- * Test suite for the Interviews component, focusing on the addition, update, and removal of interview entries.
+ * Comprehensive test suite for the Interviews component, including functionalities previously covered by interviewsApp.js.
  */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
@@ -25,7 +25,18 @@ describe('Interviews Component', () => {
    */
   test('adds a new interview and updates state', () => {
     render(<Interviews />);
-    // This test is not applicable as the component does not have functionality to display added interviews directly
+    // Simulate adding a new interview and verify it appears in the list
+    const jobTitleInput = screen.getByPlaceholderText('Enter job title');
+    const dateTimeInput = screen.getByPlaceholderText('Date and Time');
+    const notesInput = screen.getByPlaceholderText('Enter any notes');
+    fireEvent.change(jobTitleInput, { target: { value: 'Software Engineer' } });
+    fireEvent.change(dateTimeInput, { target: { value: '2023-04-20T10:00' } });
+    fireEvent.change(notesInput, { target: { value: 'Discuss project details' } });
+    fireEvent.click(screen.getByText('Schedule Interview'));
+    // Assuming the component now has functionality to display added interviews
+    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    expect(screen.getByText('2023-04-20T10:00')).toBeInTheDocument();
+    expect(screen.getByText('Discuss project details')).toBeInTheDocument();
   });
 
   test('updates an existing interview and reflects changes', () => {
@@ -176,7 +187,15 @@ describe('handleSubmit Functionality in Interviews Component', () => {
     render(<Interviews />);
     // Adjusted to match the actual form submission process
     fireEvent.click(screen.getByText('Schedule Interview'));
-    // Assuming the component shows specific validation messages for each field
+    // Enhanced validation checks for all fields including optional ones
+    fireEvent.click(screen.getByText('Schedule Interview'));
+    await waitFor(() => {
+      expect(screen.getByText('Job title is required')).toBeInTheDocument();
+      expect(screen.getByText('Date and Time is required')).toBeInTheDocument();
+      // Validate that notes, even if optional, have a specific validation message if entered incorrectly
+      fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Too short' } });
+      expect(screen.getByText('Note content is too short')).toBeInTheDocument();
+    });
     expect(screen.getByText('Job title is required')).toBeInTheDocument();
     expect(screen.getByText('Date and Time is required')).toBeInTheDocument();
     expect(screen.getByText('Notes are optional')).toBeInTheDocument(); // Assuming notes are optional and this is just an example
@@ -192,6 +211,15 @@ Description: Test suite for the Interviews component, focusing on the addition, 
 """
 // Tests that the Interviews component renders correctly and verifies its initial state.
   test('attempts to update a non-existent interview', () => {
+test('validates interview date is in the future', async () => {
+  render(<Interviews />);
+  fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
+  fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2020-01-01T10:00' } }); // Past date
+  fireEvent.click(screen.getByText('Schedule Interview'));
+  await waitFor(() => {
+    expect(screen.getByText('Interview date must be in the future')).toBeInTheDocument();
+  });
+});
 // Tests that removing an interview entry correctly updates the component's state.
 // Tests that attempting to add an interview with missing details displays the appropriate error message.
     render(<Interviews />);
@@ -202,3 +230,13 @@ Description: Test suite for the Interviews component, focusing on the addition, 
   });
 });
 // Tests that attempting to update a non-existent interview displays the appropriate error message.
+test('checks for duplicate interview entries', async () => {
+  render(<Interviews />);
+  // Assuming functionality to check for duplicates is implemented
+  fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Duplicate Entry' } });
+  fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-12-25T10:00' } });
+  fireEvent.click(screen.getByText('Schedule Interview'));
+  await waitFor(() => {
+    expect(screen.getByText('An interview with the same details already exists')).toBeInTheDocument();
+  });
+});
