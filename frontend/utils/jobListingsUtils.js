@@ -1,4 +1,9 @@
 /**
+ * jobListingsUtils.js
+ * Purpose: Contains utility functions for fetching job listings from an API, validating input values, and caching responses.
+ * It includes functions for API interaction and input validation to support the job listings feature.
+ */
+/**
  * Utility functions for fetching job listings from an API and validating input values.
  * Contains functions to interact with the job listings API endpoint and to ensure input values meet certain criteria.
  */
