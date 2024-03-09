@@ -24,6 +24,9 @@ describe('addJobListing', () => {
   });
 });
 
+/**
+ * Tests for findAllJobListings function. Verifies that all job listings can be retrieved and properly handles retrieval errors.
+ */
 describe('findAllJobListings', () => {
   beforeEach(() => {
     JobListing.find.mockClear();
