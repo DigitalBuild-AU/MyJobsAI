@@ -1,6 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Renders the navigation links for the application.
+ * 
+ * This function takes two parameters: `activeLink` which indicates the currently active navigation link,
+ * and `setActiveLink` which is a function to update the state of the active link. It maps through a list
+ * of link objects, creating a list item for each link with appropriate styling and functionality.
+ * 
+ * @param {string} activeLink - The name of the currently active link.
+ * @param {Function} setActiveLink - Function to set the active link.
+ * @returns {JSX.Element} A JSX element representing the list of navigation links.
+ */
+
 const NavLinks = ({ activeLink, setActiveLink }) => {
   const links = [
     { name: 'dashboard', path: '/' },
