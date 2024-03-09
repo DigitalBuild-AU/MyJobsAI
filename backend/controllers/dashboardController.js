@@ -35,3 +35,8 @@ exports.getDashboardSummary = async (req, res) => {
     res.status(500).send({ message: 'Error fetching dashboard summary' });
   }
 };
+/**
+ * Fetches dashboard data including total applications, interviews scheduled, and offers received.
+ * @returns {Object} An object containing counts of total applications, interviews scheduled, and offers received.
+ */
+const fetchDashboardData = async () => {

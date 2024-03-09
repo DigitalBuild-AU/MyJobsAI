@@ -1,3 +1,7 @@
+/**
+ * This file contains tests for the server configuration.
+ * It tests the inclusion of middleware functions and HTTPS setup in the server configuration.
+ */
 const request = require('supertest');
 const express = require('express');
 const https = require('https');
@@ -38,3 +42,7 @@ describe('Server Configuration', () => {
     expect(https.createServer).toHaveBeenCalledWith(sslOptions, expect.any(Function));
   });
 });
+/**
+ * Tests for the server configuration.
+ * Ensures middleware functions are included and that HTTPS is correctly configured.
+ */
