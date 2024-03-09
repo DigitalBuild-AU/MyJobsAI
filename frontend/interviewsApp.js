@@ -1,5 +1,1 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import InterviewsPage from './pages/InterviewsPage';
-
-ReactDOM.render(<InterviewsPage />, document.getElementById('root'));
+// This section was removed as part of the project's codebase streamlining, following the migration and redundancy assessment of interviewsApp.js
