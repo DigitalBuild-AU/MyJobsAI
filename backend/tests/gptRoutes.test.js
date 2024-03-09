@@ -6,6 +6,7 @@
 import request from 'supertest';
 import { app } from '../server'; // Assuming app is exported from server.js
 import { handleCvCustomization } from '../utils/gptRequestHandlers';
+import jest from 'jest-mock';
 
 jest.mock('../utils/gptRequestHandlers');
 
@@ -32,8 +33,50 @@ describe('/cv_customization route', () => {
         jobDescription: '', // Empty job description
         userCV: '' // Empty user CV
       });
- * 
- * In addition to unit tests, this update introduces integration tests that simulate real user interactions with the GPT routes. These tests aim to cover a wider range of scenarios, including malformed requests, handling large payloads, and simulating network failures or delays in response from the OpenAI API. The goal is to ensure robustness and reliability of the GPT features under various conditions.
+
+describe('OpenAI API Key Initialization', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test('correctly initializes OpenAI with a valid API key from environment variables', async () => {
+    jest.mock('dotenv', () => ({
+      config: jest.fn().mockImplementation(() => {
+        process.env.OPENAI_API_KEY = 'valid_api_key';
+      }),
+    }));
+    const OpenAISpy = jest.spyOn(OpenAI.prototype, 'constructor');
+    require('../routes/gptRoutes'); // Re-import to apply the mock
+    expect(OpenAISpy).toHaveBeenCalledWith('valid_api_key');
+  });
+
+  test('throws an error when OpenAI API key is missing', async () => {
+    jest.mock('dotenv', () => ({
+      config: jest.fn().mockImplementation(() => {
+        delete process.env.OPENAI_API_KEY;
+      }),
+    }));
+    let error;
+    try {
+      require('../routes/gptRoutes'); // Re-import to apply the mock
+    } catch (e) {
+      error = e;
+    }
+    expect(error).toBeDefined();
+    expect(error.message).toContain('OpenAI API key is missing');
+  });
+
+  test('handles invalid OpenAI API key gracefully', async () => {
+    jest.mock('dotenv', () => ({
+      config: jest.fn().mockImplementation(() => {
+        process.env.OPENAI_API_KEY = 'invalid_api_key';
+      }),
+    }));
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    require('../routes/gptRoutes'); // Re-import to apply the mock
+    expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid OpenAI API key'));
+  });
+})
 
     expect(response.statusCode).toBe(400);
     expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
