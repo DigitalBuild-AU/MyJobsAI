@@ -13,6 +13,10 @@ const removeBootstrapScriptTag = () => {
     }
 };
 
+/**
+ * Appends a new Bootstrap script tag to the document.
+ * This function creates a new script tag with the src attribute set to the Bootstrap's JavaScript bundle and appends it to the document body.
+ */
 const appendBootstrapScriptTag = () => {
     const newBootstrapScript = document.createElement('script');
     newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
