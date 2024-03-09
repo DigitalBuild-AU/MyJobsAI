@@ -47,3 +47,8 @@ function App() {
 }
 
 export default App;
+/**
+ * The App component is a functional component that sets up the application's routing using React Router. It defines routes for various components, enabling navigation between different sections of the application.
+ * 
+ * @returns {JSX.Element} The JSX structure for the application's routing.
+ */
