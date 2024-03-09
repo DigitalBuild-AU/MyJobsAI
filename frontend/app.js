@@ -8,6 +8,7 @@ import JobListings from './components/JobListings';
 import Settings from './components/Settings';
 import EmailComponent from './components/EmailComponent';
 import AnalyticsComponent from './components/AnalyticsComponent';
+import GlobalStyles from './styles/GlobalStyles';
 
 console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
 
@@ -129,3 +130,4 @@ export default App;
  * Fetches analytics data from the backend and displays it in the UI.
  * This function performs an HTTP GET request to retrieve analytics data and updates the DOM to display this data.
  */
+        <GlobalStyles />
