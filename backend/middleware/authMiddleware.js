@@ -12,10 +12,10 @@ const User = require('../models/User'); // User model for database interaction
 const auth = async (req, res, next) => {
 
 /**
- * Verifies and decodes the JWT token.
- * @param {string} token - The JWT token to verify.
- * @returns {Object} The decoded token.
- * @throws {Error} If token verification fails.
+ * Verifies the provided JWT token.
+ * @param {String} token - The JWT token to verify.
+ * @returns {Object} The decoded token if verification is successful.
+ * @throws {Error} If the token is invalid or expired.
  */
   
 const verifyToken = (token) => {
