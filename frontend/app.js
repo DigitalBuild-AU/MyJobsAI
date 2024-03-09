@@ -27,10 +27,15 @@ import GlobalStyles from './styles/GlobalStyles';
  */
 /**
  * Generates a cover letter based on user input.
- * This function is a placeholder for future implementation.
+ * Parameters:
+ * - userName (string): The user's name.
+ * - jobTitle (string): The job title being applied for.
+ * - companyName (string): The company name where the job is being applied.
+ * Returns: A string representing a simple cover letter.
  */
-function generateCoverLetter() {
-  // Placeholder for future implementation
+function generateCoverLetter(userName, jobTitle, companyName) {
+  // Basic implementation - to be enhanced with actual business logic
+  return `Dear Hiring Manager at ${companyName},\n\nI am writing to express my interest in the ${jobTitle} position listed on your company website. My unique skills and experiences make me a perfect fit for this role.\n\nSincerely,\n${userName}`;
 }
 function sendEmail() {
   const to = document.getElementById('emailTo').value;
