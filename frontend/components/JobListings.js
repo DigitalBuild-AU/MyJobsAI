@@ -25,6 +25,11 @@ const JobListings = () => {
    * useEffect hook for adding and removing the Bootstrap script.
    * Ensures Bootstrap functionalities are available by dynamically injecting the script tag into the document on component mount and removing it on component unmount.
    */
+    /**
+   * useEffect Hook for Bootstrap Script Management
+   * 
+   * Dynamically injects the Bootstrap script into the document on component mount and removes it on component unmount to ensure Bootstrap functionalities are available for UI components.
+   */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
     if (bootstrapScriptTag) {
