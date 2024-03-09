@@ -40,6 +40,12 @@ describe('jobListingsPageUtils', () => {
   });
 
   describe('fetchListings', () => {
+    /**
+     * Verifies that the view mode is set to 'card' when window width is less than 768px.
+     */
+    /**
+     * Confirms that the view mode is set to 'table' when window width is greater than or equal to 768px.
+     */
 /**
  * Tests the handleWindowSizeChange function.
  * This function adjusts the view mode based on the window's width.
@@ -60,8 +66,21 @@ describe('jobListingsPageUtils', () => {
       fetchListingsFromAPI.mockResolvedValue({ data: mockData });
       const setListingsMock = jest.fn();
       const setTotalPagesMock = jest.fn();
+  /**
+   * Tests for the `handleWindowSizeChange` function in jobListingsPageUtils.
+   * This suite verifies the functionality of adjusting the view mode ('card' or 'table')
+   * based on the window width.
+   */
+   */
+      const mockData = { listings: [{ id: 1, title: 'Test Job' }], totalPages: 3 };
+      fetchListingsFromAPI.mockResolvedValue({ data: mockData });
+      const setListingsMock = jest.fn();
+      const setTotalPagesMock = jest.fn();
 
       await fetchListings({}, 1, setListingsMock, setTotalPagesMock);
+    /**
+     * Verifies that `fetchListings` correctly calls `setListings` and `setTotalPages` with the expected data on a successful fetch.
+     */
 
       expect(setListingsMock).toHaveBeenCalledWith(mockData.listings);
       expect(setTotalPagesMock).toHaveBeenCalledWith(mockData.totalPages);
@@ -71,6 +90,9 @@ describe('jobListingsPageUtils', () => {
      * Tests that fetchListings logs an error to the console on fetch failure.
      */
     it('logs error on fetch failure', async () => {
+    /**
+     * Ensures that `fetchListings` logs an error message to the console when the fetch operation fails.
+     */
   /**
    * Verifies that fetchListings calls setListings and setTotalPages with the correct data on a successful API fetch.
    * Mocks the API response and checks the arguments passed to the mock functions.
@@ -122,6 +144,14 @@ describe('jobListingsPageUtils', () => {
  * This function performs cleanup operations, such as removing event listeners and resetting filters, when the component unmounts.
  * 
  * @param {Function} setFilters - A function to reset the filters state.
+  /**
+   * Tests for the `cleanupOnUnmount` function in jobListingsPageUtils.
+   * This suite verifies the functionality of removing event listeners and resetting filters
+   * when a component unmounts.
+   */
+    /**
+     * Confirms that `cleanupOnUnmount` removes the resize event listener and resets filters to their default values.
+     */
   /**
    * Tests for the cleanupOnUnmount function.
    * This test verifies that cleanupOnUnmount correctly removes the resize event listener and resets filters to their default values.
