@@ -5,7 +5,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { handleCvSuggestions, handleCvCustomization } = require('../utils/gptRequestHandlers');
-const OpenAI = require('openai-api'); // Ensure you have required OpenAI correctly
+/**
+ * Initialize OpenAI API with the provided API key from environment variables.
+ * This instance is used to make requests to the OpenAI API for generating text completions, which serve as the basis for CV suggestions, cover letters, and CV customizations.
+ */
+const OpenAI = require('openai-api');
 
 dotenv.config({ path: './backend/.env' });
 
