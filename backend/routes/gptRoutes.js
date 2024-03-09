@@ -1,7 +1,8 @@
 /**
  * gptRoutes.js
- * This file contains Express routes for interacting with GPT models to generate CV suggestions, cover letters, and CV customizations.
- * It utilizes the OpenAI API to process user inputs and generate relevant outputs for job application materials.
+ * This file defines the Express routes for interacting with GPT models to generate CV suggestions, cover letters, and CV customizations for the MyJobsAI application.
+ * It utilizes the OpenAI API to process user inputs and generate relevant outputs.
+ * This file depends on the express, dotenv, and openai-api packages for its functionality. It also uses utility functions from '../utils/gptRequestHandlers' for handling specific GPT requests.
  */
 const express = require('express');
 const dotenv = require('dotenv');
