@@ -2,7 +2,7 @@
  * CVHelper.js
  * This file contains the CVHelper component, which is responsible for providing users with CV suggestions based on their job description and CV inputs. It interacts with the backend to fetch tailored advice to improve the user's CV for specific job applications.
  */
-import axios from 'axios';
+import { sendCVRequest, processCVResponse } from './CVHelperUtils';
 import React, { useState } from 'react';
 
 const CVHelper = () => {
@@ -23,19 +23,17 @@ const CVHelper = () => {
    * Parameters: None.
    * Returns: None. Updates the state with CV suggestions or an error message.
    */
-  const handleGenerateCVSuggestions = () => {
+  const handleGenerateCVSuggestions = async () => {
     console.log('Sending request to generate CV suggestions.'); // Log for debugging
-    axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: jobDescriptionInput, userCV: userCVInput })
-      .then(function(response) {
-        console.log('CV suggestions were successfully fetched.'); // Success log
-        setCvSuggestions(response.data.suggestions);
-        setError('');
-      })
-      .catch(function(error) {
-        console.error(`Error fetching CV suggestions: ${error.message}, Stack: ${error.stack}`);
-        setError('Unable to load CV suggestions. Please check your network connection and try again.');
-        setCvSuggestions('');
-      });
+    try {
+      const response = await sendCVRequest(jobDescriptionInput, userCVInput);
+      console.log('CV suggestions were successfully fetched.'); // Success log
+      processCVResponse(response, setCvSuggestions, setError);
+    } catch (error) {
+      console.error(`Error fetching CV suggestions: ${error.message}, Stack: ${error.stack}`);
+      setError('Unable to load CV suggestions. Please check your network connection and try again.');
+      setCvSuggestions('');
+    }
   };
 
   return (
