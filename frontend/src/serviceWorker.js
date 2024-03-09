@@ -51,6 +51,7 @@ registerRoute(
   }),
 );
 
+// This event listener activates the service worker and cleans up old caches to ensure the service worker is updated.
 self.addEventListener('activate', event => {
   event.waitUntil(clients.claim());
   event.waitUntil(
