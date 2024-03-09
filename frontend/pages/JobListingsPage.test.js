@@ -56,7 +56,7 @@ describe('JobListingsPage component', () => {
 test('renders JobListingCard component correctly', () => {
     const listing = {
       jobTitle: 'Software Engineer',
-test('filters listings based on user input', async () => {
+test('filters listings based on various user inputs and edge cases', async () => {
 /**
 
  * Test case for ensuring the JobListingCard component renders with the correct job title, company, and location based on provided props.
@@ -71,6 +71,31 @@ test('filters listings based on user input', async () => {
   render(<JobListingsPage />);
   fireEvent.change(screen.getByPlaceholderText('Filter by status'), { target: { value: 'active', name: 'status' } });
   fireEvent.change(screen.getByPlaceholderText('Filter by company'), { target: { value: 'Tech Corp', name: 'company' } });
+// Test filtering with valid inputs that match listings
+await waitFor(() => {
+  expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+  expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
+});
+
+// Test filtering with an empty status filter (should show all listings as status filter is ignored)
+fireEvent.change(screen.getByPlaceholderText('Filter by status'), { target: { value: '', name: 'status' } });
+fireEvent.submit(screen.getByText('Apply Filters'));
+await waitFor(() => {
+  expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+  expect(screen.getByText('Product Manager')).toBeInTheDocument();
+});
+
+// Test filtering with a company filter that matches no listings
+fireEvent.change(screen.getByPlaceholderText('Filter by company'), { target: { value: 'Nonexistent Corp', name: 'company' } });
+fireEvent.submit(screen.getByText('Apply Filters'));
+await waitFor(() => {
+  expect(screen.queryByText('Software Engineer')).not.toBeInTheDocument();
+  expect(screen.queryByText('Product Manager')).not.toBeInTheDocument();
+  expect(screen.getByText('No listings match your filters.')).toBeInTheDocument();
+});
+
+// Reset mock for further tests
+fetchListingsFromAPI.mockResolvedValue({ data: { listings: mockListings, totalPages: 1 } });
 
   await waitFor(() => {
 /**
