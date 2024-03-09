@@ -19,6 +19,10 @@ describe('CVHelperUtils Functionality Tests', () => {
   });
 
   test('processCVResponse with null response', () => {
+  """
+  Test the processCVResponse function with a valid CV suggestion response.
+  Verifies that the correct suggestion is set and no error is reported.
+  """
     const setCvSuggestions = jest.fn();
     const setError = jest.fn();
     const mockResponse = null;
@@ -39,7 +43,21 @@ describe('CVHelperUtils Functionality Tests', () => {
     expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
     expect(setCvSuggestions).toHaveBeenCalledWith('');
   });
+"""
+This test suite verifies the functionality of the CVHelperUtils module.
+It includes tests for processing CV responses with various conditions including valid suggestions, null responses, and responses lacking data.
+"""
+
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
 });
+
+  """
+  Test the processCVResponse function with a response that lacks the expected data.
+  Verifies that an error message is set and no suggestions are provided.
+  """
+
 describe('sendCVRequest Functionality Tests', () => {
   beforeEach(() => {
     jest.resetModules();
