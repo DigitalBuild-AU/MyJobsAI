@@ -1,6 +1,7 @@
 /**
- * Logs web vitals metrics to the console.
- * @param {Object} metric - The metric object containing web vitals data.
+ * Logs the given metric to the console.
+ * This function checks for the availability of `window.requestIdleCallback` to log the metric. If unavailable, it falls back to using `setTimeout`.
+ * @param {Object} metric - The metric object containing web vitals data to be logged.
  */
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
