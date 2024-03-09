@@ -1,5 +1,5 @@
 /**
- * This file contains tests for the App component, including routing functionality, sendEmail functionality, and the generateCoverLetter function.
+ * This file contains tests for the App component, including routing and application functionality such as email sending.
  */
 import { generateCoverLetter } from '../app';
 import React from 'react';
@@ -11,17 +11,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 jest.mock('axios');
 
-/**
- * Test suite for App component routing. Ensures that navigation to each route renders the correct component.
- */
-/**
- * Test suite for verifying the routing functionality of the App component.
- * Ensures that navigation to each defined route renders the expected component.
- */
-/**
- * Test suite for verifying the routing functionality of the App component.
- * Ensures that navigation to each defined route renders the expected component.
- */
 describe('App Routing', () => {
   const routes = [
     { path: '/', component: 'Home' },
@@ -69,15 +58,10 @@ jest.mock('../src/useEmailSender');
     });
 
     /**
-     * Tests the sendEmail function for a successful email send scenario.
-     * Asserts that the axios.post method is called with the correct parameters and
-     * that the success message is displayed to the user.
+     * Test suite for verifying the sendEmail function in the App component.
+     * It checks the function's ability to successfully send an email and handle errors appropriately.
      */
     test('successfully sends an email', async () => {
-  /**
-   * Test suite for verifying the sendEmail function in the App component.
-   * Checks the function's ability to successfully send an email and handle errors.
-   */
       const response = { data: { message: 'Email was sent successfully.' } };
       axios.post.mockResolvedValue(response);
 
@@ -88,19 +72,12 @@ jest.mock('../src/useEmailSender');
         to: 'test@example.com',
         subject: 'Test Subject',
         body: 'Test Body'
-  /**
-   * Test for verifying the existence and callability of the generateCoverLetter function within the App component.
-   * This test ensures that the generateCoverLetter function is properly defined and can be invoked.
-   */
       });
       expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
     });
 
     test('handles error when sending an email fails', async () => {
 
-  /**
-   * Tests the successful sending of an email using the sendEmail function.
-   */
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
       fireEvent.click(screen.getByTestId('sendEmailButton'));
