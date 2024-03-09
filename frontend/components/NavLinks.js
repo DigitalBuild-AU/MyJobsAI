@@ -1,3 +1,10 @@
+/**
+ * File: NavLinks.js
+ *
+ * Description:
+ * This file defines the NavLinks component, which is responsible for rendering the navigation links within the MyJobsAI application. Utilizing React and react-router-dom, NavLinks dynamically generates a list of navigation links based on provided data. It manages the active state of these links through `activeLink` and `setActiveLink` props, highlighting the currently active link and providing a seamless navigation experience across the application. This component plays a crucial role in the user interface by organizing access to the application's various features and pages.
+ */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
