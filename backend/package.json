@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend services for MyJobsAI",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint .",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-repo/MyJobsAI.git"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/your-repo/MyJobsAI/issues"
+  },
+  "homepage": "https://github.com/your-repo/MyJobsAI#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "jest": "^27.4.5",
+    "typescript": "^4.5.2"
+  }
+}

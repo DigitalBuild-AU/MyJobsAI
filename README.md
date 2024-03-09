@@ -49,7 +49,11 @@ To run the test suite with Jest, use the following command:
 npm test
 ```
 
-This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Ensure you have all dependencies installed before running tests.
+This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Additionally, to ensure tests related to the database run successfully, set up a local test database and configure the appropriate environment variables based on the `.env.example` provided.
+
+Ensure you have all dependencies installed before running tests. For tests involving external APIs, ensure the corresponding API mock services are running.
+
+If any new dependencies were introduced as part of the GitHub Actions fixes, please run `npm install` again to update your local environment.
 
 As part of our ongoing efforts to streamline the development process and adhere to best practices, we have consolidated the `app.js` and `App.js` files into a single `App.js` file. This change was made to eliminate confusion and potential errors arising from having two similarly named entry point files, especially on case-sensitive file systems.
 
