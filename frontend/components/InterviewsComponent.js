@@ -1,3 +1,13 @@
+/**
+ * InterviewsComponent.js
+ * 
+ * This file contains the InterviewsComponent, a React functional component used within the MyJobsAI application.
+ * The component is designed to allow users to schedule and manage job interviews, providing a user-friendly interface
+ * for inputting job titles, interview dates, and additional notes. It interacts with other components and services
+ * to store and retrieve interview information, contributing to the application's broader functionality of job application tracking.
+ * 
+ * Dependencies: React, Bootstrap for styling
+ */
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 
