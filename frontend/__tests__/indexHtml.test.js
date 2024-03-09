@@ -5,6 +5,9 @@ import '@testing-library/jest-dom/extend-expect';
 const htmlContent = fs.readFileSync('frontend/index.html', 'utf-8');
 const dom = getDocument(htmlContent);
 
+/**
+ * Test suite for verifying the configuration of index.html.
+ */
 describe('index.html configuration', () => {
   test('contains a single root div element for React app attachment', () => {
     const { queryAllById } = queries;
@@ -26,6 +29,9 @@ describe('index.html configuration', () => {
 
     expectedScripts.forEach(script => {
       const occurrences = actualScripts.filter(src => src === script).length;
+/**
+ * Tests for index.html: This file contains tests to ensure the index.html file is correctly configured for the React application, including checks for the root div element, React bundle script, and script tags.
+ */
       expect(occurrences).toBe(1);
     });
 
