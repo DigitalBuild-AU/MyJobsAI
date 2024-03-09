@@ -24,6 +24,9 @@ describe('GuideSteps Utility Functions', () => {
   test('getInterviewFormGuideSteps returns correctly structured guide steps', () => {
     const steps = getInterviewFormGuideSteps();
     expect(steps).toHaveLength(4);
+/**
+ * This file contains tests for the guideSteps utility functions. These functions generate structured guide steps for various pages within the MyJobsAI application. Each test ensures that the guide steps are correctly structured and contain accurate content and targeting information.
+ */
     expect(steps).toEqual([
       { target: '#jobTitleInput', content: 'Enter the job title for the interview you are scheduling. This field is required.' },
       { target: '#interviewDateInput', content: 'Select the date and time for the interview. This field is required.' },
