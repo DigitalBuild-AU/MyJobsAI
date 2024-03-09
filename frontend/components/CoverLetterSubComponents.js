@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { postCoverLetter } from '../utils/apiHelpers';
 
+/**
+ * `CoverLetterForm` collects user inputs for generating a cover letter.
+ * Props:
+ * - setUserName: Function to set the user's name.
+ * - setJobDescription: Function to set the job description.
+ * - setUserSkills: Function to set the user's skills.
+ * - setUserExperience: Function to set the user's experience.
+ * - generateCoverLetter: Function to trigger the cover letter generation.
+ */
 const CoverLetterForm = ({ setUserName, setJobDescription, setUserSkills, setUserExperience, generateCoverLetter }) => (
   <div id="coverLetterAssistant">
     <input type="text" id="userName" placeholder="Your Name" onChange={(e) => setUserName(e.target.value)} />
@@ -18,6 +27,11 @@ const CoverLetterPreview = ({ generatedCoverLetter }) => (
   </div>
 );
 
+/**
+ * `DownloadButtons` provides options to download the cover letter as PDF or DOC, and to save it.
+ * Props:
+ * - generatedCoverLetter: The generated cover letter text to use for download.
+ */
 const DownloadButtons = ({ generatedCoverLetter }) => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
@@ -31,6 +45,11 @@ const DownloadButtons = ({ generatedCoverLetter }) => {
   };
 
   const downloadAsDOC = () => {
+/**
+ * `CoverLetterPreview` displays the generated cover letter.
+ * Props:
+ * - generatedCoverLetter: The generated cover letter text to display.
+ */
     const element = document.createElement("a");
     const file = new Blob([generatedCoverLetter], {type: 'application/msword'});
     element.href = URL.createObjectURL(file);

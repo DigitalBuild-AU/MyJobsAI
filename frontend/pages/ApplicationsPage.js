@@ -1,6 +1,6 @@
 /**
- * Renders the applications page.
- * This component displays the Applications component, allowing users to view and manage job applications.
+ * `ApplicationsPage` renders the page for viewing and managing job applications.
+ * Displays loading state, error messages, or the `Applications` component based on the fetch state.
  */
 import React, { useState, useEffect } from 'react';
 import Applications from '../components/Applications';
