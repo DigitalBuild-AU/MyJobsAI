@@ -17,6 +17,9 @@ const JobListings = () => {
   const [filterJobType, setFilterJobType] = useState('');
   const [filterKeywords, setFilterKeywords] = useState('');
   const [jobListings, setJobListings] = useState([]);
+  const [salaryAmount, setSalaryAmount] = useState('');
+  const [salaryPeriod, setSalaryPeriod] = useState('');
+  const [jobStatus, setJobStatus] = useState('');
 
   /**
    * useEffect hook for adding and removing the Bootstrap script.
@@ -149,5 +152,29 @@ const JobListings = () => {
     </>
   );
 };
+          <div className="form-group">
+            <label htmlFor="salaryAmount">Salary Amount</label>
+            <input type="number" className="form-control mb-3" id="salaryAmount" placeholder="Enter salary amount" value={salaryAmount} onChange={(e) => setSalaryAmount(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="salaryPeriod">Salary Period</label>
+            <select className="form-control mb-3" id="salaryPeriod" value={salaryPeriod} onChange={(e) => setSalaryPeriod(e.target.value)}>
+              <option value="">Select period</option>
+              <option value="Hourly">Hourly</option>
+              <option value="Daily">Daily</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="jobStatus">Job Status</label>
+            <select className="form-control mb-3" id="jobStatus" value={jobStatus} onChange={(e) => setJobStatus(e.target.value)}>
+              <option value="">Select status</option>
+              <option value="Open">Open</option>
+              <option value="Closed">Closed</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
 
 export default JobListings;
