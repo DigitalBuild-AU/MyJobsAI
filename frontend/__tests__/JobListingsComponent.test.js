@@ -106,7 +106,12 @@ it('filters job listings based on input', () => {
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
     expect(includesSuperCheckbox.checked).toBe(false);
   });
-it('updates state on filter input change', () => {
+  /**
+   * Test Case: updates state on salary amount input change
+   * This test verifies that the component's state is correctly updated when the salary amount input field's value changes.
+   * It simulates changing the input to '50000' and then to an empty string, asserting that the component's state reflects these changes accurately.
+   */
+it('updates state on salary amount input change', () => {
   const { getByPlaceholderText } = render(<JobListingsComponent />);
   fireEvent.change(getByPlaceholderText('Job Title'), { target: { value: 'Developer' } });
   fireEvent.change(getByPlaceholderText('Company'), { target: { value: 'Innovative Tech' } });
