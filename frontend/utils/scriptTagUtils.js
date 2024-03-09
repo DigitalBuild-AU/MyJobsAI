@@ -18,6 +18,8 @@ const removeBootstrapScriptTag = () => {
     }
 };
 
+// Call this function when Bootstrap script conflicts are detected.
+
 /**
  * Appends a new Bootstrap script tag to the document.
  * This function creates a new script tag with the src attribute set to the Bootstrap's JavaScript bundle and appends it to the document body.
