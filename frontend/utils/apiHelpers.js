@@ -16,6 +16,19 @@ async function postCoverLetter(jobDescription, userName, userSkills, userExperie
 }
 
 async function postEmploymentHistory(employmentHistory) {
+/**
+@swagger
+@post('/cover_letter')
+@tags ['Cover Letter']
+@description Generates a cover letter based on user inputs.
+@parameter {string} jobDescription - The job description for the cover letter in the request body.
+@parameter {string} userName - The user's name in the request body.
+@parameter {string} userSkills - The user's skills in the request body.
+@parameter {string} userExperience - The user's experience in the request body.
+@response 200 {object} - Successfully generated cover letter with the cover letter text.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+*/
   try {
     const response = await httpClient.post('/employmentHistory', { employmentHistory });
     return response.data;
@@ -26,6 +39,16 @@ async function postEmploymentHistory(employmentHistory) {
 }
 
 async function postResumeCustomization(jobDescription, userCV) {
+/**
+@swagger
+@post('/employmentHistory')
+@tags ['Employment History']
+@description Saves the user's employment history.
+@parameter {Array<Object>} employmentHistory - An array of employment history objects in the request body.
+@response 200 {object} - Successfully saved employment history with confirmation message.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+*/
   try {
     const response = await httpClient.post('/cv_customization', {
       jobDescription,
@@ -39,6 +62,17 @@ async function postResumeCustomization(jobDescription, userCV) {
 }
 
 async function postSkills(skills) {
+/**
+@swagger
+@post('/cv_customization')
+@tags ['CV Customization']
+@description Customizes a CV based on a job description and user's CV.
+@parameter {string} jobDescription - The job description for the CV customization in the request body.
+@parameter {string} userCV - The user's current CV in the request body.
+@response 200 {object} - Successfully customized CV with the customized CV data.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+*/
   try {
     const response = await httpClient.post('/skills', { skills });
     return response.data;
@@ -73,6 +107,16 @@ export { postCoverLetter, postEmploymentHistory, postResumeCustomization, postSk
 /**
  * Submits interview data to the backend.
  * 
+/**
+@swagger
+@post('/skills')
+@tags ['Skills']
+@description Saves the user's skills.
+@parameter {Array<string>} skills - An array of skills in the request body.
+@response 200 {object} - Successfully saved skills with confirmation message.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+*/
  * @param {string} jobTitle - The job title for the interview.
  * @param {string} date - The date and time for the interview.
  * @param {string} notes - Notes related to the interview.
