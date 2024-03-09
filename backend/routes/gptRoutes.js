@@ -1,13 +1,15 @@
 /**
- * gptRoutes.js
- * This file defines the Express routes for interacting with GPT models to generate CV suggestions, cover letters, and CV customizations for the MyJobsAI application.
- * It utilizes the OpenAI API to process user inputs and generate relevant outputs.
- * This file depends on the express, dotenv, and openai-api packages for its functionality. It also uses utility functions from '../utils/gptRequestHandlers' for handling specific GPT requests.
+ * File: gptRoutes.js
+ * Description: This file contains the Express routes for the MyJobsAI application, specifically for generating CV suggestions, cover letters, and CV customizations using the OpenAI API. It outlines the endpoints available for processing user inputs and generating relevant outputs, leveraging utility functions for specific GPT request handling.
  */
 const express = require('express');
 const dotenv = require('dotenv');
 const { handleCvSuggestions, handleCvCustomization } = require('../utils/gptRequestHandlers');
-const OpenAI = require('openai-api'); // Ensure you have required OpenAI correctly
+/**
+ * Initialize OpenAI API with the provided API key from environment variables.
+ * This instance is used to make requests to the OpenAI API for generating text completions, which serve as the basis for CV suggestions, cover letters, and CV customizations.
+ */
+const OpenAI = require('openai-api');
 
 dotenv.config({ path: './backend/.env' });
 
@@ -26,6 +28,12 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
  * @param {Object} res - The response object used to return the suggestions or an error message.
  * @returns {void} - Sends a JSON response with CV suggestions or an error status.
  * @throws {Error} - Returns a 500 status code with an error message if the request fails.
+ */
+/**
+ * POST /cv_suggestions
+ * Purpose: Generates CV suggestions tailored to the user's CV and a given job description.
+ * Request parameters: jobDescription (String), userCV (String)
+ * Response: JSON object containing tailored CV suggestions.
  */
 router.post('/cv_suggestions', async (req, res) => {
  * Handles the generation of CV suggestions based on a given job description and user's CV.
@@ -48,14 +56,10 @@ router.post('/cv_suggestions', async (req, res) => {
 });
 
 /**
- * POST route for generating a cover letter.
-/**
- * Handles POST requests to generate a customized cover letter based on a job description and user's CV.
- * @description This route processes POST requests to generate a cover letter that is customized based on the user's CV and the job description provided.
- * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
- * @param {Object} res - The response object used to return the generated cover letter or an error message.
- * @returns {void} - Sends a JSON response containing the generated cover letter.
- * @throws {Error} - Returns a 500 status code with an error message if the request fails.
+ * POST /cover_letter
+ * Purpose: Generates a customized cover letter based on the user's CV and a given job description.
+ * Request parameters: jobDescription (String), userCV (String)
+ * Response: JSON object containing the customized cover letter.
  */
 
  */
@@ -79,12 +83,10 @@ router.post('/cover_letter', async (req, res) => {
 });
 
 /**
- * Handles POST requests to generate CV customization suggestions based on a job description and user's CV.
- * @description This route processes POST requests to generate CV customization suggestions, leveraging the OpenAI API's `createCompletion` method to tailor suggestions to the user's CV and the job description provided.
- * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
- * @param {Object} res - The response object used to return the CV customization suggestions or an error message.
- * @returns {void} - Sends a JSON response containing CV customization suggestions.
- * @throws {Error} - Returns a 500 status code with an error message if the request fails.
+ * POST /cv_customization
+ * Purpose: Generates CV customization suggestions based on the user's CV and a given job description, leveraging the OpenAI API.
+ * Request parameters: jobDescription (String), userCV (String)
+ * Response: JSON object containing CV customization suggestions.
  */
 router.post('/cv_customization', async (req, res) => {
   const { jobDescription, userCV } = req.body;
