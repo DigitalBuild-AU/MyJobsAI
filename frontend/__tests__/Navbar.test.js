@@ -27,6 +27,10 @@ describe('Navbar Component Tests', () => {
     expect(getByText('Dashboard').closest('li')).not.toHaveClass('active');
   });
 
+  /**
+   * Test case: Display of the brand name in the Navbar.
+   * Ensures that the Navbar component correctly renders the brand name 'MyJobsAI'.
+   */
   it('displays the brand name MyJobsAI', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('MyJobsAI')).toBeInTheDocument();
