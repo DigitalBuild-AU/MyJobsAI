@@ -19,7 +19,15 @@ function useEmailSender() {
  */
  * Custom hook for sending emails.
  * This hook provides functionality to send emails by making a POST request to the backend.
- * @returns {Function} A function that can be used to send emails, accepting `to`, `subject`, and `body` as parameters.
+/**
+ * Custom hook for sending emails.
+ * Utilizes axios for making POST requests to the backend API to send emails.
+ * 
+ * @param {string} to - The email address to send the email to.
+ * @param {string} subject - The subject of the email.
+ * @param {string} body - The body of the email.
+ * @returns {Promise<string>} A promise that resolves to a message indicating the result of the email sending operation.
+ * @throws {Error} If the email sending operation fails.
  */
 function useEmailSender() {
   const sendEmail = async (to, subject, body) => {
