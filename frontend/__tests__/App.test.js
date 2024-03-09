@@ -144,6 +144,9 @@ describe('generateCoverLetter Functionality', () => {
       });
       expect(getByText('Email sent successfully')).toBeInTheDocument();
     });
+  /**
+   * Tests the functionality of the generateCoverLetter function. It checks for correct cover letter generation with valid parameters and handles missing parameters gracefully.
+   */
 /**
  * Test suite for the generateCoverLetter functionality within the App component.
  * This suite verifies the correct generation of cover letters based on provided parameters.
