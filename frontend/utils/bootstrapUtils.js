@@ -5,11 +5,14 @@
  * ensuring that the Bootstrap resources are correctly loaded and up to date.
  */
 /**
- * Dynamically loads the Bootstrap script into the document. If an existing script tag for Bootstrap is found, it is removed and a new one is appended.
- * This ensures that the Bootstrap script is always up to date and correctly loaded.
- *
- * @param none - This function does not accept any parameters.
- * @returns {void} - This function does not return a value.
+ * Dynamically loads the Bootstrap script into the document.
+ * 
+ * Checks for an existing Bootstrap script tag and removes it if found. Then, creates a new script tag
+ * for the Bootstrap script and appends it to the document body. This ensures that the Bootstrap script
+ * is always up to date and correctly loaded.
+ * 
+ * @param none
+ * @returns {void}
  */
 /**
  * Dynamically loads the Bootstrap script into the document. If an existing script tag for Bootstrap is found, it is removed and a new one is appended.
