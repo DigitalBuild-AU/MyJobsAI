@@ -1,4 +1,8 @@
 /**
+ * Utility functions for managing script tags in the document. Includes functions to add or remove the Bootstrap script tag dynamically.
+ */
+
+/**
  * Removes the existing Bootstrap script tag from the document.
  * This function searches through all <script> tags in the document and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
  * It is used to ensure that there are no duplicate Bootstrap script tags in the document.
