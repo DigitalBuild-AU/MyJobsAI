@@ -55,15 +55,10 @@ jest.mock('../src/useEmailSender');
     });
 
     /**
-     * Tests the sendEmail function for a successful email send scenario.
-     * Asserts that the axios.post method is called with the correct parameters and
-     * that the success message is displayed to the user.
+     * Test suite for verifying the sendEmail function in the App component.
+     * It checks the function's ability to successfully send an email and handle errors appropriately.
      */
     test('successfully sends an email', async () => {
-  /**
-   * Test suite for verifying the sendEmail function in the App component.
-   * Checks the function's ability to successfully send an email and handle errors.
-   */
       const response = { data: { message: 'Email was sent successfully.' } };
       axios.post.mockResolvedValue(response);
 
