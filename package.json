@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node backend/server.js"
   },
   "keywords": [],
@@ -27,3 +27,4 @@
     "sass": "^1.32.8"
   }
 }
+    "build": "webpack --mode production"
