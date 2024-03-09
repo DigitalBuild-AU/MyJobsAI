@@ -42,7 +42,16 @@ function processCVResponse(response, setCvSuggestions, setError) {
   }
 }
 
-export { sendCVRequest, processCVResponse };
+export { sendCVRequest };
+export function processCVResponse(response, setCvSuggestions, setError) {
+  if (response && response.data && response.data.suggestions) {
+    setCvSuggestions(response.data.suggestions);
+    setError('');
+  } else {
+    setError('Failed to fetch CV suggestions. Please try again.');
+    setCvSuggestions('');
+  }
+}
 
 /**
  * Sends a POST request to the backend with the user's job description and CV details.
