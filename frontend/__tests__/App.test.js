@@ -118,6 +118,10 @@ jest.mock('../src/useEmailSender');
   /**
    * Tests error handling in the sendEmail function when email sending fails.
    */
+/**
+ * Test suite for verifying the generateCoverLetter function within the App component.
+ * Ensures the function returns a correct cover letter based on provided parameters and handles missing parameters gracefully.
+ */
 describe('generateCoverLetter Functionality', () => {
   test('should return a correct cover letter when all parameters are valid', () => {
     const userName = 'John Doe';
