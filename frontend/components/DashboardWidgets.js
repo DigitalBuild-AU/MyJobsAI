@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+/**
+ * `SummaryWidget` displays a summary of the user's job application activities.
+ * Props:
+ * - summary: An object containing the counts of applications sent, interviews scheduled, and offers received.
+ */
+
 const SummaryWidget = ({ summary }) => (
   <div className="summary-widget">
     <h2>Summary</h2>
@@ -30,7 +36,6 @@ const QuoteWidget = () => {
     </div>
   );
 };
-
 const EmailForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
