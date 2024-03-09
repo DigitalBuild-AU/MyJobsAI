@@ -5,6 +5,13 @@ async function sendCVRequest(jobDescription, userCV) {
   return response;
 }
 
+/**
+ * Processes the backend's response containing CV suggestions.
+ * @param {Object} response - The backend's response.
+ * @param {Function} setCvSuggestions - State setter function for CV suggestions.
+ * @param {Function} setError - State setter function for handling errors.
+ * @returns {void} - This function does not return a value but updates the component's state.
+ */
 function processCVResponse(response, setCvSuggestions, setError) {
   if (response && response.data && response.data.suggestions) {
     setCvSuggestions(response.data.suggestions);
