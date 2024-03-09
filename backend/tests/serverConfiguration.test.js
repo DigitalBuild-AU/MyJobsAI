@@ -1,3 +1,7 @@
+/**
+ * This file contains tests for the server configuration.
+ * It tests the inclusion of middleware functions and HTTPS setup in the server configuration.
+ */
 const request = require('supertest');
 const express = require('express');
 const https = require('https');
