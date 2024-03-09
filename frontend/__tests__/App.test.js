@@ -54,6 +54,10 @@ jest.mock('../src/useEmailSender');
     });
   });
 
+/**
+ * Test suite for verifying the sendEmail function in the App component.
+ * Checks the function's ability to successfully send an email and handle errors.
+ */
   describe('sendEmail Functionality', () => {
     beforeEach(() => {
       document.body.innerHTML = `
