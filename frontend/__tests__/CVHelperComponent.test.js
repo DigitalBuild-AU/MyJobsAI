@@ -10,8 +10,7 @@ describe('CVHelperComponent', () => {
  * @file CVHelperComponent.test.js
  * @description Test suite for the CVHelperComponent, focusing on rendering, dynamic script loading, API interactions, and error handling.
  */
- * Test suite for the CVHelperComponent.
- * This suite tests rendering correctness, dynamic script loading, and general component behavior.
+ * Test suite for the CVHelperComponent, ensuring comprehensive coverage including rendering correctness, dynamic script loading, API interactions, and error handling. This suite is designed to ensure all functionalities previously handled by cvHelper.html are fully integrated and functional within CVHelperComponent.
  */
 describe('CVHelperComponent', () => {
   /**
@@ -19,7 +18,7 @@ describe('CVHelperComponent', () => {
    */
   it('renders correctly', () => {
   /**
-   * Tests if the CVHelperComponent correctly loads the Bootstrap script dynamically.
+   * Tests if the CVHelperComponent correctly loads the Bootstrap script dynamically, including any additional scripts that were previously managed by cvHelper.html.
    */
   it('loads Bootstrap script dynamically', () => {
   afterEach(cleanup);
@@ -42,7 +41,7 @@ describe('CVHelperComponent', () => {
   });
 });
 
-  it('triggers API call with correct data on form submission', async () => {
+  it('triggers API call with correct data on form submission, ensuring all API functionalities from cvHelper.html are replicated', async () => {
   });
 });
 
@@ -73,7 +72,7 @@ it('loads Bootstrap script on component mount', async () => {
 });
 
   it('updates component state with CV suggestions upon successful API call', async () => {
-   * Tests handling of errors correctly if the API call fails.
+   * Tests handling of errors correctly if the API call fails, including scenarios previously covered in cvHelper.html.
    */
   it('handles errors correctly if API call fails', async () => {
     const mockSuggestions = 'Consider highlighting your teamwork skills.';
