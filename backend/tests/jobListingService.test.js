@@ -87,6 +87,9 @@ describe('calculateAnalytics', () => {
   test('returns error message on analytics calculation failure', async () => {
     UserActivity.countDocuments.mockRejectedValue(new Error('Error calculating analytics'));
     const result = await calculateAnalytics();
+/**
+ * Tests for updateJobListingById function. Ensures that job listings can be updated based on ID and errors are handled appropriately.
+ */
     expect(result).toEqual({ error: 'Error calculating analytics: Error calculating analytics' });
   });
 });
