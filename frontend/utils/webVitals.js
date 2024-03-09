@@ -23,3 +23,7 @@ export function setupWebVitals() {
  * This file includes the setup for web vitals monitoring in the application.
  * It imports web vitals from 'web-vitals' package and logs them to the console.
  */
+/**
+ * Sets up listeners for web vitals metrics and logs them using the `log` function.
+ * It does not take any parameters and does not return any value.
+ */
