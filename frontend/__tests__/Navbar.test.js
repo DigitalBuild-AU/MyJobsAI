@@ -11,6 +11,16 @@ describe('Navbar Component Tests', () => {
     render(<Navbar />);
   });
 
+  // Test the dynamic active link feature
+  it('updates active link on click', () => {
+    const { getByText } = render(<Navbar />);
+    fireEvent.click(getByText('Dashboard'));
+    expect(getByText('Dashboard').parentNode).toHaveClass('active');
+    fireEvent.click(getByText('Job Listings'));
+    expect(getByText('Job Listings').parentNode).toHaveClass('active');
+    expect(getByText('Dashboard').parentNode).not.toHaveClass('active');
+  });
+
   it('displays the brand name MyJobsAI', () => {
     const { getByText } = render(<Navbar />);
     expect(getByText('MyJobsAI')).toBeInTheDocument();
@@ -27,11 +37,14 @@ describe('Navbar Component Tests', () => {
   });
 
   /**
-   * Test if the Navbar component renders the 'Applications' link correctly.
+   * Test if the Navbar component renders the 'Applications' link correctly and verifies its active state on click.
    */
-  it('renders Applications link', () => {
+  it('renders Applications link and verifies active state on click', () => {
     const { getByText } = render(<Navbar />);
-    expect(getByText('Applications')).toBeInTheDocument();
+    const applicationsLink = getByText('Applications');
+    expect(applicationsLink).toBeInTheDocument();
+    fireEvent.click(applicationsLink);
+    expect(applicationsLink.parentNode).toHaveClass('active');
   });
 
 
