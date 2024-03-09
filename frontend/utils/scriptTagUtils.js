@@ -18,3 +18,7 @@ const appendBootstrapScriptTag = () => {
     newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
     document.body.appendChild(newBootstrapScript);
 };
+/**
+ * Removes the Bootstrap script tag from the document.
+ * This function iterates through all script tags and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
+ */
