@@ -127,6 +127,12 @@ Description: This file contains unit tests for the GPT-related routes within the
    * Test to verify that the createCompletion method of the OpenAI API is called with the correct parameters
    * when a CV customization request is made. This includes checking the model, prompt, max_tokens, n, stop, and temperature parameters.
    */
+  /**
+   * Test Case: Verifies `createCompletion` Method Call with Correct Parameters
+   * Purpose: Ensures that the CV customization request properly calls the `createCompletion` method of the OpenAI API with the correct parameters.
+   * Expected Input: Job description and user CV for a software engineer role requiring extensive experience in full-stack development.
+   * Expected Output: The `createCompletion` method is called with the model, prompt, max_tokens, n, stop, and temperature parameters accurately reflecting the input data.
+   */
   test('verifies createCompletion method call with correct parameters', async () => {
     const mockCreateCompletion = jest.spyOn(openai, 'createCompletion').mockResolvedValue({
       data: {
