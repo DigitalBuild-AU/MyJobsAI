@@ -27,7 +27,7 @@ const CVHelper = () => {
       })
       .catch(function(error) {
         console.error(`Error fetching CV suggestions: ${error.message}, Stack: ${error.stack}`);
-        setError('Failed to fetch CV suggestions.');
+        setError('Unable to load CV suggestions. Please check your network connection and try again.');
         setCvSuggestions('');
       });
   };
@@ -52,3 +52,4 @@ export default CVHelper;
 import { Link } from 'react-router-dom';
         <div id="cvSuggestionsOutput">{cvSuggestions}</div>
         {error && <div className="error">{error}</div>}
+        <button onClick={handleGenerateCVSuggestions} className="btn btn-secondary mt-2">Retry</button>

@@ -22,7 +22,7 @@ const AnalyticsComponent = () => {
         setAvgResponseTime(avgResponseTime);
       })
       .catch(error => {
-        setError('Failed to fetch analytics.');
+        setError('Unable to load data. Please try again later.');
         console.error(`Error fetching analytics: ${error.message}, Stack: ${error.stack}`);
       });
   }, []);
