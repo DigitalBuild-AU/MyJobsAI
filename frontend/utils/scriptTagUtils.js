@@ -18,3 +18,8 @@ const appendBootstrapScriptTag = () => {
     newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
     document.body.appendChild(newBootstrapScript);
 };
+/**
+ * Appends a new Bootstrap script tag to the document.
+ * This function creates a new <script> tag with the src attribute set to the latest Bootstrap bundle URL and appends it to the document's body.
+ * It ensures that the Bootstrap JavaScript functionalities are available to the application.
+ */
