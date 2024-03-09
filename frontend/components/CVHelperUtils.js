@@ -6,21 +6,26 @@ Parameters:
 - setCvSuggestions (function): Function to update the CV suggestions state.
 - setError (function): Function to update the error state.
 
-This function updates the CV suggestions state if the response contains suggestions, otherwise, it updates the error state.
+"""
+Processes the server's response containing CV suggestions.
+
+This function checks the server's response for CV suggestions. If suggestions are present, it updates the component's state with these suggestions and clears any existing error messages. If the response does not contain suggestions, it sets an error message and clears any existing suggestions.
+
+@param {Object} response - The server's response to the CV suggestion request.
+@param {Function} setCvSuggestions - State setter function for updating CV suggestions.
+@param {Function} setError - State setter function for handling errors.
+@returns {void} - This function does not return a value but updates the component's state based on the response.
 """
 // Axios removed due to duplicate import statement.
 
 """
-Sends a CV analysis request to the backend.
+Sends a CV suggestion request to the server.
 
-Parameters:
-- jobDescription (string): The job description text to analyze.
-- userCV (string): The content of the user's CV.
+This function sends a POST request to the '/api/gpt/cv_suggestions' endpoint with the job description and user CV. It awaits and returns the server's response.
 
-Returns:
-- Promise: A promise that resolves with the backend's response object.
-
-This function constructs and sends a POST request to the backend with the job description and CV content. It returns a promise that resolves with the response from the backend, which can include CV suggestions or error information.
+@param {string} jobDescription - The job description provided by the user.
+@param {string} userCV - The user's CV in a suitable format.
+@returns {Promise} A promise that resolves with the server's response to the CV suggestion request.
 """
 async function sendCVRequest(jobDescription, userCV) {
   const response = await axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
