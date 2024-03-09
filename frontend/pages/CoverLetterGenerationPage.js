@@ -17,6 +17,8 @@ const CoverLetterGenerationPage = () => {
   const [userSkills, setUserSkills] = useState('');
   const [userExperience, setUserExperience] = useState('');
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState('');
+  const [coverLetterTemplate, setCoverLetterTemplate] = useState('Basic');
+  const [coverLetterTone, setCoverLetterTone] = useState('Professional');
 
   /**
    * useEffect hook to fetch job listings on component mount.
@@ -62,12 +64,12 @@ const CoverLetterGenerationPage = () => {
   const generateCoverLetter = async () => {
     // Assuming postCoverLetter is a function that sends user inputs to the server and receives the generated cover letter
     try {
-      const response = await postCoverLetter({ userName, jobDescription, userSkills, userExperience });
-      setGeneratedCoverLetter(response.data.coverLetter);
-      console.log('Cover Letter generated.'); // For debugging
+      const response = await generateCoverLetter(jobDescription, userName, userSkills, userExperience);
+      setGeneratedCoverLetter(`Cover letter successfully generated with template ${coverLetterTemplate} and tone ${coverLetterTone}:` + response.data.coverLetter);
+      alert('Cover letter successfully generated!'); // Provide visual feedback
     } catch (error) {
-      console.error('Failed to generate Cover Letter:', error); // For debugging
-      setGeneratedCoverLetter('Error generating Cover Letter.');
+      alert('Failed to generate Cover Letter. Please check your inputs and try again.');
+      setGeneratedCoverLetter(`Error: ${error.response.data.message}`);
     }
   };
 
