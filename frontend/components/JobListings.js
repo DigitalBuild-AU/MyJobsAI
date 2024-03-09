@@ -44,6 +44,11 @@ const JobListings = () => {
       .catch(error => console.error('Error fetching filtered job listings:', error));
   };
 
+  /**
+   * Handles the submission of the add job listing form.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but triggers a POST request to add a new job listing.
+   */
   const handleAddJobListing = (e) => {
     e.preventDefault();
     const jobTitle = document.getElementById('jobTitle').value;
