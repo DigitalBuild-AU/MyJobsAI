@@ -1,3 +1,7 @@
+/**
+ * @file CVHelperComponent.test.js
+ * @description This file contains the test suite for the CVHelperComponent, focusing on unit and integration tests that cover rendering, dynamic script loading, API interactions, and error handling. It ensures the component behaves as expected under various conditions.
+ */
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import CVHelperComponent from '../components/CVHelperComponent';
@@ -124,6 +128,12 @@ describe('sendCVRequest', () => {
     await expect(sendCVRequest('Software Engineer', 'My CV content')).rejects.toThrow('API call failed');
   });
 });
+/**
+ * Initiates an API call to get CV suggestions based on the job description and user's CV.
+ * @param {string} jobDescription - The job description input by the user.
+ * @param {string} userCV - The CV content input by the user.
+ * @returns {Promise<Object>} The response from the API containing CV suggestions.
+ */
 describe('processCVResponse', () => {
   it('processes a response with suggestions correctly', () => {
     const mockResponse = { data: { suggestions: 'Test suggestion' } };
@@ -143,3 +153,9 @@ describe('processCVResponse', () => {
     expect(setCvSuggestions).toHaveBeenCalledWith('');
   });
 });
+/**
+ * Processes the response from the API call for CV suggestions.
+ * @param {Object} response - The response object from the API call.
+ * @param {function} setCvSuggestions - Function to set the CV suggestions state.
+ * @param {function} setError - Function to set the error state.
+ */
