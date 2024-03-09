@@ -43,11 +43,7 @@ const JobListingsComponent = () => {
     }
   };
 
-  const handleSubmit = (event) => {
-   * Submits the new job listing form, adding the listing to the state and resetting form fields.
-   * @param {Object} event - The event object from the form submission.
-   */
-  const handleSubmit = (event) => {
+  // Duplicate handleSubmit declaration removed
     event.preventDefault();
     const newJobListing = { jobURL, jobTitle, company, location, jobDescription, jobType, salaryAmount, salaryPeriod, includesSuper, status };
     setJobListings([...jobListings, newJobListing]);
@@ -71,7 +67,27 @@ const JobListingsComponent = () => {
         <h1>Job Listings | MyJobsAI</h1>
         {/* Filter and Add Job Listing Forms */}
         <div id="jobListingsForms">
-          {/* Form elements and inputs for filtering and adding job listings */}
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={jobURL} onChange={(e) => setJobURL(e.target.value)} placeholder="Job URL" />
+            <input type="text" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="Job Title" />
+            <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" />
+            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
+            <textarea value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="Job Description"></textarea>
+            <input type="text" value={jobType} onChange={(e) => setJobType(e.target.value)} placeholder="Job Type" />
+            <input type="number" value={salaryAmount} onChange={(e) => setSalaryAmount(e.target.value)} placeholder="Salary Amount" />
+            <select value={salaryPeriod} onChange={(e) => setSalaryPeriod(e.target.value)}>
+              <option value="">Select Salary Period</option>
+              <option value="hourly">Hourly</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="annually">Annually</option>
+            </select>
+            <label>
+              <input type="checkbox" checked={includesSuper} onChange={(e) => setIncludesSuper(e.target.checked)} /> Includes Super
+            </label>
+            <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} placeholder="Status" />
+            <button type="submit">Add Job Listing</button>
+          </form>
         </div>
         <div className="table-responsive">
           <table className="table">
