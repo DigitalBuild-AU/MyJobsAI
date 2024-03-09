@@ -38,7 +38,21 @@ Confirms that the modal for adding new job listings on the Job Listings Page ope
     fireEvent.change(screen.getByPlaceholderText('Job Title'), { target: { value: 'Software Engineer' } });
     fireEvent.change(screen.getByPlaceholderText('Company'), { target: { value: 'Tech Inc.' } });
     fireEvent.change(screen.getByPlaceholderText('Location'), { target: { value: 'Remote' } });
+    // Simulating more detailed form submission with additional fields
+    fireEvent.change(screen.getByPlaceholderText('Salary'), { target: { value: '120000' } });
+    fireEvent.change(screen.getByPlaceholderText('Job URL'), { target: { value: 'https://techinc.jobs/software-engineer' } });
+    fireEvent.change(screen.getByPlaceholderText('Description'), { target: { value: 'Develop innovative software solutions.' } });
+    fireEvent.change(screen.getByPlaceholderText('Contact Person'), { target: { value: 'Jane Doe' } });
+    fireEvent.change(screen.getByPlaceholderText('Job Type'), { target: { value: 'Full-Time' } });
     fireEvent.click(screen.getByText('Submit'));
+    
+    // Assuming validation for required fields
+    expect(screen.queryByText('Please fill out this field.')).not.toBeInTheDocument();
+    
+    // Handling submission response
+    await waitFor(() => {
+      expect(screen.getByText('Job listing added successfully')).toBeInTheDocument();
+    });
 """
 Tests that the modal closes when the "Cancel" button inside the modal is clicked.
 """
@@ -58,7 +72,30 @@ Tests that the modal on the Job Listings Page opens as expected when the 'Add Jo
 """
 Verifies that the form within the modal on the Job Listings Page correctly submits new job listings with the provided information when the 'Submit' button is clicked.
 """
+  const mockUpdate = jest.fn();
+  render(<JobListingsPage updateFunction={mockUpdate} />);
+  fireEvent.click(screen.getByText('Edit Job Listing'));
+  fireEvent.change(screen.getByPlaceholderText('Job Title'), { target: { value: 'Senior Software Engineer' } });
+  fireEvent.click(screen.getByText('Update'));
 
+  await waitFor(() => {
+    expect(mockUpdate).toHaveBeenCalledWith({
+      jobTitle: 'Senior Software Engineer',
+      // Include other fields as necessary
+    });
+    expect(screen.getByText('Job listing updated successfully')).toBeInTheDocument();
+  });
+});
+  const mockDelete = jest.fn();
+  render(<JobListingsPage deleteFunction={mockDelete} />);
+  fireEvent.click(screen.getByText('Delete Job Listing'));
+
+  await waitFor(() => {
+    expect(mockDelete).toHaveBeenCalled();
+    expect(screen.queryByText('Software Engineer')).not.toBeInTheDocument();
+    expect(screen.getByText('Job listing deleted successfully')).toBeInTheDocument();
+  });
+});
 // Testing new components rendering
 describe('New Components Rendering', () => {
   test('JobListingTable renders correctly with listings', () => {
@@ -160,6 +197,35 @@ test('Filter functionality with different inputs updates displayed listings corr
 });
   """
   Test case: Verifies that an error message is displayed when fetching filtered job listings fails.
+test('Displays error message when job listing submission fails', async () => {
+  axios.post.mockRejectedValueOnce(new Error('Failed to submit job listing'));
+  render(<JobListingsPage />);
+  fireEvent.click(screen.getByText('Add Job Listing'));
+  fireEvent.click(screen.getByText('Submit'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Failed to submit job listing')).toBeInTheDocument();
+  });
+});
+test('Displays error message when editing a job listing fails', async () => {
+  axios.put.mockRejectedValueOnce(new Error('Failed to update job listing'));
+  render(<JobListingsPage />);
+  fireEvent.click(screen.getByText('Edit Job Listing'));
+  fireEvent.click(screen.getByText('Update'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Failed to update job listing')).toBeInTheDocument();
+  });
+});
+test('Displays error message when deleting a job listing fails', async () => {
+  axios.delete.mockRejectedValueOnce(new Error('Failed to delete job listing'));
+  render(<JobListingsPage />);
+  fireEvent.click(screen.getByText('Delete Job Listing'));
+
+  await waitFor(() => {
+    expect(screen.getByText('Failed to delete job listing')).toBeInTheDocument();
+  });
+});
   Simulation: Mocks a get request to return an error.
   Expected Outcome: An error message indicating the failure to fetch job listings is displayed.
   """
