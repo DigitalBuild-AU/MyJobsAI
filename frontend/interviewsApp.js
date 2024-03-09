@@ -1,1 +1,0 @@
-// This section was removed as part of the project's codebase streamlining, following the migration and redundancy assessment of interviewsApp.js
