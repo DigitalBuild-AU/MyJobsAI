@@ -63,6 +63,23 @@ const JobListings = () => {
         // Optionally refresh the job listings to include the newly added listing
       })
       .catch(error => console.error('Error adding job listing:', error));
+
+    // Fetch job information based on the provided URL
+    const fetchJobInfo = () => {
+      const jobURL = document.getElementById('jobURL').value;
+      axios.get(`/api/fetchJobInfo?url=${jobURL}`)
+        .then(response => {
+          const { jobTitle, company, location, jobDescription } = response.data;
+          document.getElementById('jobTitle').value = jobTitle;
+          document.getElementById('company').value = company;
+          document.getElementById('location').value = location;
+          document.getElementById('jobDescription').value = jobDescription;
+          console.log('Job information fetched successfully');
+        })
+        .catch(error => console.error('Error fetching job info:', error));
+    };
+    // Add onClick listener to Fetch Job Info button
+    document.getElementById('fetchJobInfo').addEventListener('click', fetchJobInfo);
   };
 
   return (
