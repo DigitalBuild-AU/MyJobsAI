@@ -61,9 +61,11 @@ const JobListings = () => {
   };
 
   /**
-   * Handles the submission of the add job listing form.
+   * Handles Adding New Job Listing
+   * 
+   * This function is triggered upon submitting the add job listing form. It collects form data, sends a POST request to the '/api/addJobListing' endpoint with the job listing data, and optionally refreshes the job listings. Additionally, it sets up an onClick listener for the 'Fetch Job Info' button to fetch job information based on a provided URL.
+   * 
    * @param {Event} e - The event object to prevent the default form submission behavior.
-   * @returns {void} - This function does not return a value but triggers a POST request to add a new job listing.
    */
   const handleAddJobListing = (e) => {
     e.preventDefault();
