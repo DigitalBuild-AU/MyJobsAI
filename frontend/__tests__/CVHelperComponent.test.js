@@ -122,6 +122,34 @@ describe('sendCVRequest', () => {
     expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: 'Software Engineer', userCV: 'My CV content' });
     expect(response).toEqual(mockResponse);
   });
+  it('processes a response with suggestions correctly', () => {
+    const mockResponse = { data: { suggestions: 'Excellent teamwork skills.' } };
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setCvSuggestions).toHaveBeenCalledWith('Excellent teamwork skills.');
+    expect(setError).toHaveBeenCalledWith('');
+  });
+
+  it('handles a response without suggestions (error case)', () => {
+    const mockResponse = {};
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+
+  it('handles null or undefined response correctly', () => {
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(null, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+    processCVResponse(undefined, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
 
   it('handles failure in API call', async () => {
     axios.post.mockRejectedValue(new Error('API call failed'));
@@ -168,9 +196,18 @@ describe('processCVResponse', () => {
     expect(setCvSuggestions).toHaveBeenCalledWith('');
   });
 });
-/**
- * Processes the response from the API call for CV suggestions.
- * @param {Object} response - The response object from the API call.
- * @param {function} setCvSuggestions - Function to set the CV suggestions state.
- * @param {function} setError - Function to set the error state.
- */
+
+  it('sends a request with correct URL and payload', async () => {
+    axios.post.mockResolvedValue({ data: { success: true } });
+    const jobDescription = 'Software Engineer';
+    const userCV = 'My CV content';
+    await sendCVRequest(jobDescription, userCV);
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
+  });
+
+  it('handles network or server error appropriately', async () => {
+    axios.post.mockRejectedValue(new Error('Network error'));
+    const jobDescription = 'Software Engineer';
+    const userCV = 'My CV content';
+    await expect(sendCVRequest(jobDescription, userCV)).rejects.toThrow('Network error');
+  });
