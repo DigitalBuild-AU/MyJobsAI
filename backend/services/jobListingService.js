@@ -86,6 +86,7 @@ const calculateAnalytics = async () => {
 
     const avgResponseTime = await UserActivity.aggregate([
       { $match: { activityType: 'Interview' } },
+      { $hint: 'activityType_1' },
       { $group: {
           _id: null,
           avgResponse: { $avg: { $subtract: ["$date", "$createdAt"] } }
