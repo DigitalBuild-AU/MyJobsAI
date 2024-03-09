@@ -28,7 +28,6 @@
     "sass": "^1.32.8"
   }
 }
-  },
   "devDependencies": {
       "build": "webpack --mode production"
     },
