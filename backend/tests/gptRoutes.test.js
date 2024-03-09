@@ -36,6 +36,12 @@ describe('/cv_customization route', () => {
 File: gptRoutes.test.js
 Description: This file contains unit tests for the GPT-related routes within the MyJobsAI application. It aims to test the functionality of CV customization, CV suggestions, and cover letter generation features. These tests ensure the application's GPT features are reliable and robust, covering a range of scenarios including successful responses and error handling.
 """
+  /**
+   * Test Case: Invalid Input Data for CV Customization Request
+   * Purpose: Verifies that the CV customization endpoint returns a 400 status code and an appropriate error message when provided with empty job descriptions and user CVs.
+   * Expected Input: jobDescription: '', userCV: ''
+   * Expected Output: HTTP status 400 with error message 'Invalid input data provided.'
+   */
    * Tests the handling of a database error during a CV customization request.
    * Expects a 500 status code and an error message indicating a server error.
    */
