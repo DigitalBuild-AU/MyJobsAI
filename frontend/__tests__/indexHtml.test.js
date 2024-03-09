@@ -5,6 +5,9 @@ import '@testing-library/jest-dom/extend-expect';
 const htmlContent = fs.readFileSync('frontend/index.html', 'utf-8');
 const dom = getDocument(htmlContent);
 
+/**
+ * Test suite for verifying the configuration of index.html.
+ */
 describe('index.html configuration', () => {
   test('contains a single root div element for React app attachment', () => {
     const { queryAllById } = queries;
