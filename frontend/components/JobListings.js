@@ -1,7 +1,7 @@
 /**
- * JobListings.js
- * This file contains the JobListings component, which is responsible for rendering a list of job listings on the UI.
- * It allows users to filter job listings based on various criteria such as location, job type, and keywords.
+ * JobListings Component
+ * 
+ * This component is responsible for rendering the list of job listings on the UI. It supports filtering job listings based on various criteria such as location, job type, and keywords. Additionally, it allows users to add new job listings. The component dynamically manages Bootstrap scripts to ensure UI components function correctly.
  */
 
 import React, { useState, useEffect } from 'react';
@@ -25,6 +25,11 @@ const JobListings = () => {
    * useEffect hook for adding and removing the Bootstrap script.
    * Ensures Bootstrap functionalities are available by dynamically injecting the script tag into the document on component mount and removing it on component unmount.
    */
+    /**
+   * useEffect Hook for Bootstrap Script Management
+   * 
+   * Dynamically injects the Bootstrap script into the document on component mount and removes it on component unmount to ensure Bootstrap functionalities are available for UI components.
+   */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
     if (bootstrapScriptTag) {
@@ -41,6 +46,13 @@ const JobListings = () => {
     };
   }, []);
 
+  /**
+   * Handles Filter Submission
+   * 
+   * This function is triggered upon submitting the filter form. It sends a GET request to the '/api/jobListings' endpoint with filter parameters (location, jobType, keywords) and updates the job listings state with the response data.
+   * 
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   */
   const handleFilterSubmit = (e) => {
     e.preventDefault();
     axios.get('/api/jobListings', { params: { location: filterLocation, jobType: filterJobType, keywords: filterKeywords } })
@@ -49,9 +61,11 @@ const JobListings = () => {
   };
 
   /**
-   * Handles the submission of the add job listing form.
+   * Handles Adding New Job Listing
+   * 
+   * This function is triggered upon submitting the add job listing form. It collects form data, sends a POST request to the '/api/addJobListing' endpoint with the job listing data, and optionally refreshes the job listings. Additionally, it sets up an onClick listener for the 'Fetch Job Info' button to fetch job information based on a provided URL.
+   * 
    * @param {Event} e - The event object to prevent the default form submission behavior.
-   * @returns {void} - This function does not return a value but triggers a POST request to add a new job listing.
    */
   const handleAddJobListing = (e) => {
     e.preventDefault();
