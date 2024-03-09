@@ -55,3 +55,15 @@ export const handleInterviewError = (error) => {
  * Logs an error message if the interview submission fails.
  * @param {Object} error - The error object containing details about the failure.
  */
+/**
+@swagger
+@post('/api/interviews')
+@tags ['Interviews']
+@description Submits interview details to the server and updates the interviews state.
+@parameter {string} jobTitle - The title of the job associated with the interview in the request body.
+@parameter {string} date - The date of the interview in the request body.
+@parameter {string} notes - Any notes related to the interview in the request body.
+@response 200 {object} - Successfully submitted interview details with the interview data.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+*/
