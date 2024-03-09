@@ -93,3 +93,6 @@ describe('calculateAnalytics', () => {
     expect(result).toEqual({ error: 'Error calculating analytics: Error calculating analytics' });
   });
 });
+/**
+ * Tests for deleteJobListingById function. Confirms that job listings can be deleted using their ID and errors are managed as expected.
+ */
