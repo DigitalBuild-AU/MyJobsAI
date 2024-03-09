@@ -111,6 +111,10 @@ describe('Interviews Component - New Business Logic', () => {
   * Test to confirm that removing an interview entry correctly updates the component's state,
   * ensuring the delete functionality works as expected.
   */
+  /**
+   * Test to confirm that deleting an interview entry from the list successfully removes it from the
+   * displayed data and updates the component's state accordingly.
+   */
   test('removes an interview entry and updates state', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Delete', { selector: 'button' }));
