@@ -153,3 +153,8 @@ it('updates state on job status change', () => {
   fireEvent.click(getByLabelText('Pending'));
   expect(getByLabelText('Pending').checked).toBe(true);
 });
+  /**
+   * Test Case: updates state on job status change
+   * This test ensures that the component's state is updated appropriately when the job status changes.
+   * It simulates clicking on different job status options (Open, Closed, Pending) and checks if the component's state updates to reflect the current status accurately.
+   */
