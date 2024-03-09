@@ -14,4 +14,6 @@ function startSecureServer(app, PORT) {
   });
 }
 
+module.exports = startSecureServer;
+
 module.exports = { startSecureServer };
