@@ -35,6 +35,7 @@ describe('App Routing', () => {
    * Tests navigation to a specific route and verifies that the correct component is rendered.
    */
   routes.forEach(route => {
+import { generateCoverLetter } from '../app';
     it(`navigates to ${route.path} and renders ${route.component}`, () => {
       const { getByText } = render(
         <BrowserRouter>
@@ -124,3 +125,45 @@ describe('App Routing', () => {
   /**
    * Tests error handling in the sendEmail function when email sending fails.
    */
+describe('generateCoverLetter Functionality', () => {
+  test('should return a correct cover letter when all parameters are valid', () => {
+    const userName = 'John Doe';
+    const jobTitle = 'Software Engineer';
+    const companyName = 'Tech Innovations Inc.';
+    const expectedCoverLetter = `Dear Hiring Manager at ${companyName},\n\nI am writing to express my interest in the ${jobTitle} position listed on your company website. My unique skills and experiences make me a perfect fit for this role.\n\nSincerely,\n${userName}`;
+    expect(generateCoverLetter(userName, jobTitle, companyName)).toEqual(expectedCoverLetter);
+  });
+
+  test('should handle missing userName gracefully', () => {
+    const jobTitle = 'Software Engineer';
+    const companyName = 'Tech Innovations Inc.';
+    // Assuming the function returns a generic message or handles the missing userName gracefully
+    const expectedResponse = 'Please provide a valid userName.';
+    expect(generateCoverLetter(null, jobTitle, companyName)).toEqual(expectedResponse);
+  });
+
+  test('should handle missing jobTitle gracefully', () => {
+    const userName = 'John Doe';
+    const companyName = 'Tech Innovations Inc.';
+    // Assuming the function returns a generic message or handles the missing jobTitle gracefully
+    const expectedResponse = 'Please provide a valid jobTitle.';
+    expect(generateCoverLetter(userName, null, companyName)).toEqual(expectedResponse);
+  });
+
+  test('should handle missing companyName gracefully', () => {
+    const userName = 'John Doe';
+    const jobTitle = 'Software Engineer';
+    // Assuming the function returns a generic message or handles the missing companyName gracefully
+    const expectedResponse = 'Please provide a valid companyName.';
+    expect(generateCoverLetter(userName, jobTitle, null)).toEqual(expectedResponse);
+  });
+
+  test('should handle non-string parameters gracefully', () => {
+    const userName = 123; // Non-string parameter
+    const jobTitle = ['Software Engineer']; // Non-string parameter
+    const companyName = { name: 'Tech Innovations Inc.' }; // Non-string parameter
+    // Assuming the function checks for string type and returns a generic error message for non-string inputs
+    const expectedResponse = 'Invalid input types. Please provide strings for all parameters.';
+    expect(generateCoverLetter(userName, jobTitle, companyName)).toEqual(expectedResponse);
+  });
+});
