@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "node -r dotenv/config backend/server.js",
-    "build": "webpack --mode production"
+    "test": "react-scripts test",
+    "lint": "eslint src/",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
