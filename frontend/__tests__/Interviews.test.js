@@ -106,14 +106,9 @@ describe('Interviews Component - New Business Logic', () => {
     expect(screen.getByText('Interview with Tech Innovations Inc. on 2023-05-20')).toBeInTheDocument();
   });
 
-  test('removes an interview entry and updates state', () => {
-  test('removes an interview entry and updates state', () => {
-  * Test to confirm that removing an interview entry correctly updates the component's state,
-  * ensuring the delete functionality works as expected.
-  */
   /**
-   * Test to confirm that deleting an interview entry from the list successfully removes it from the
-   * displayed data and updates the component's state accordingly.
+   * Test to verify that deleting an interview entry updates the component's state accordingly
+   * and removes the entry from the displayed list.
    */
   test('removes an interview entry and updates state', () => {
     render(<Interviews />);
