@@ -1,3 +1,6 @@
+/**
+ * This file contains tests for the App component, including routing and application functionality such as email sending.
+ */
 import { generateCoverLetter } from '../app';
 /**
  * Tests for the App component. This includes routing tests to ensure navigation works as expected
