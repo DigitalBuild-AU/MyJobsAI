@@ -78,7 +78,12 @@ describe('sendCVRequest Functionality Tests', () => {
    */
   });
 
-  test('sendCVRequest with successful response', async () => {
+  /**
+   * Test 'sendCVRequest' with an error response.
+   * Simulates a network error during the CV request process and verifies that the error is
+   * handled appropriately. Axios mock is used to simulate the HTTP request and force an error response.
+   */
+  test('sendCVRequest with error response', async () => {
     // Mocking axios post method to simulate a successful response
     jest.mock('axios');
     axios.post = jest.fn().mockResolvedValue({
