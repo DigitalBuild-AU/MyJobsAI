@@ -19,7 +19,13 @@ describe('/cv_customization route', () => {
    * Test to ensure that the CV customization endpoint correctly handles and responds with a 400 status code
    * when provided with invalid input data, such as empty job descriptions and user CVs.
    */
-  test('handles invalid input data for CV customization request', async () => {
+  /**
+   * Test Case: Database Error during CV Customization Request
+   * Purpose: Ensures that the CV customization endpoint correctly handles a database error by returning a 500 status code and an appropriate error message.
+   * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
+   * Expected Output: HTTP status 500 with error message 'Failed to process CV customization due to a server error.'
+   */
+  test('handles database error during CV customization request', async () => {
     const response = await request(app)
       .post('/cv_customization')
       .send({
