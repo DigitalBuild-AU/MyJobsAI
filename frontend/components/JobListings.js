@@ -1,3 +1,8 @@
+/**
+ * JobListings: A component for viewing and filtering job listings.
+ * Allows users to filter listings by location, job type, and keywords, and view the filtered results.
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
@@ -13,8 +18,8 @@ const JobListings = () => {
   const [jobListings, setJobListings] = useState([]);
 
   /**
-   * useEffect hook for loading and cleaning up the Bootstrap script.
-   * It runs once after the component mounts and removes the script when the component unmounts.
+   * useEffect hook to manage the Bootstrap script for the component.
+   * Adds the Bootstrap script on mount and removes it on unmount.
    */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
@@ -58,23 +63,6 @@ const JobListings = () => {
           handleFilterSubmit={handleFilterSubmit}
         />
           <div className="form-group">
-            <label htmlFor="filterLocation">Location</label>
-            <input type="text" className="form-control mb-3" id="filterLocation" placeholder="Enter location" value={filterLocation} onChange={(e) => setFilterLocation(e.target.value)} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="filterJobType">Job Type</label>
-            <select className="form-control mb-3" id="filterJobType" value={filterJobType} onChange={(e) => setFilterJobType(e.target.value)}>
-              <option value="">Any</option>
-              <option value="Full-Time">Full-Time</option>
-              <option value="Contract">Contract</option>
-  /**
-   * useEffect hook for fetching analytics data.
-   * It runs once after the component mounts to fetch and display analytics.
-   */
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/analytics')
-      .then(function(response) {
-        const data = response.data;
         console.log('Analytics fetched and displayed successfully.'); // Log for debugging
         // Update component state with fetched analytics data here
       })
