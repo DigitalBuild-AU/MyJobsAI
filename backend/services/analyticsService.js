@@ -1,3 +1,7 @@
+/**
+ * Calculates analytics based on user activities, including total applications, interviews, offers, and average response time.
+ * @returns {Object} An object containing analytics data: total applications, interviews scheduled, offers received, and average response time in days.
+ */
 const UserActivity = require('../models/UserActivity');
 
 async function calculateAnalytics() {
