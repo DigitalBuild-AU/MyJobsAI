@@ -107,6 +107,11 @@ it('updates component state correctly on handleChange', () => {
     const includesSuperCheckbox = getByLabelText('Includes Super');
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: true } });
     expect(includesSuperCheckbox.checked).toBe(true);
+/**
+ * Test case: Filters job listings based on user input.
+ * This test verifies that the JobListingsComponent correctly filters job listings when a user inputs filter criteria.
+ * Inputs include simulated change events on filter fields, and the expected output is that only listings matching the criteria are displayed.
+ */
 it('filters job listings based on input', () => {
     const mockListings = [
       { id: 1, title: 'Software Engineer', company: 'Tech Innovations', location: 'Remote' },
