@@ -187,3 +187,7 @@ describe('removeBootstrapScriptTag function tests', () => {
    * Setup: Mocks the document.createElement function to simulate the creation of a script element that triggers an error after a delay.
    * Expected Outcome: The application should attempt to handle the error appropriately, which could include retrying the loading process or logging an error message for debugging purposes.
    */
+ * Tests for the removeBootstrapScriptTag function. This suite checks if the function correctly removes Bootstrap script tags from the document.
+ * Test case: Verifies that an existing Bootstrap script tag is successfully removed from the document.
+ * Test case: Ensures that the function does nothing when no Bootstrap script tag is present in the document.
+ * Test case: Checks that only the first Bootstrap script tag is removed when multiple are present.
