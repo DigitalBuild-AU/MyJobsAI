@@ -98,6 +98,18 @@ it('updates component state correctly on handleChange', () => {
     const includesSuperCheckbox = getByLabelText('Includes Super');
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: true } });
     expect(includesSuperCheckbox.checked).toBe(true);
+it('filters job listings based on input', () => {
+    const mockListings = [
+      { id: 1, title: 'Software Engineer', company: 'Tech Innovations', location: 'Remote' },
+      { id: 2, title: 'Project Manager', company: 'Creative Solutions', location: 'New York' },
+      { id: 3, title: 'Web Developer', company: 'Web Works', location: 'San Francisco' }
+    ];
+    const { getByPlaceholderText, getAllByText } = render(<JobListingsComponent listings={mockListings} />);
+    fireEvent.change(getByPlaceholderText('Filter by company'), { target: { value: 'Tech' } });
+    expect(getAllByText('Software Engineer')).toHaveLength(1);
+    expect(screen.queryByText('Project Manager')).toBeNull();
+    expect(screen.queryByText('Web Developer')).toBeNull();
+  });
     fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
     expect(includesSuperCheckbox.checked).toBe(false);
   });
