@@ -14,6 +14,10 @@ jest.mock('axios');
 /**
  * Test suite for App component routing. Ensures that navigation to each route renders the correct component.
  */
+/**
+ * Test suite for verifying the routing functionality of the App component.
+ * Ensures that navigation to each defined route renders the expected component.
+ */
 describe('App Routing', () => {
   const routes = [
     { path: '/', component: 'Home' },
@@ -27,6 +31,9 @@ describe('App Routing', () => {
     { path: '/analytics', component: 'AnalyticsComponent' },
   ];
 
+  /**
+   * Tests navigation to a specific route and verifies that the correct component is rendered.
+   */
   routes.forEach(route => {
     it(`navigates to ${route.path} and renders ${route.component}`, () => {
       const { getByText } = render(
@@ -55,6 +62,10 @@ describe('App Routing', () => {
      * that the success message is displayed to the user.
      */
     test('successfully sends an email', async () => {
+  /**
+   * Test suite for verifying the sendEmail function in the App component.
+   * Checks the function's ability to successfully send an email and handle errors.
+   */
       const response = { data: { message: 'Email was sent successfully.' } };
       axios.post.mockResolvedValue(response);
 
@@ -92,11 +103,10 @@ describe('App Routing', () => {
     });
 
     test('handles error when sending an email fails', async () => {
-    /**
-     * Tests the sendEmail function for an unsuccessful email send scenario.
-     * Checks that the axios.post method is called with the correct parameters and
-     * that the error message is displayed to the user upon failure.
-     */
+
+  /**
+   * Tests the successful sending of an email using the sendEmail function.
+   */
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
       App.sendEmail();
@@ -111,11 +121,6 @@ describe('App Routing', () => {
     });
   });
 });
-    /**
-     * Tests error handling when email sending fails.
-     * 
-     * This test checks the App component's sendEmail function's ability to handle errors
-     * when an email fails to send. It mocks an axios post request to return a rejection,
-     * simulating a failure scenario. The inputs are predefined email details, and the
-     * output is an error message displayed to the user. There are no side effects.
-     */
+  /**
+   * Tests error handling in the sendEmail function when email sending fails.
+   */
