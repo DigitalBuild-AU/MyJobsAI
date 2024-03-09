@@ -3,6 +3,9 @@ import { getJobListingsPageGuideSteps, getInterviewFormGuideSteps } from './guid
 import { describe, test, expect } from '@jest/globals';
 
 describe('GuideSteps Utility Functions', () => {
+  /**
+   * Tests the getJobListingsPageGuideSteps function to ensure it returns a correctly structured array of guide steps for the JobListingsPage. This test verifies the length and content of the returned array.
+   */
   test('getJobListingsPageGuideSteps returns correctly structured guide steps', () => {
 /**
  * Tests that getJobListingsPageGuideSteps function returns a correctly structured array of guide steps
