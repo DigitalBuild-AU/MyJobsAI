@@ -1,12 +1,8 @@
-/**
- * This file tests the Navbar component, ensuring it renders without crashing and displays all expected links correctly.
- */
-
-/**
- * Navbar.test.js
- * 
- * This test file is dedicated to the Navbar component of the MyJobsAI application. It includes a series of tests aimed at verifying that the Navbar renders without any errors, and that all expected links and functionalities are present and operate as intended. These tests are crucial for ensuring the Navbar's reliability and usability across different user interactions and scenarios.
- */
+/*
+File: Navbar.test.js
+Description: This file contains tests for the Navbar component. It includes unit tests to verify the functionality, rendering, and interaction behaviors of the Navbar component within the MyJobsAI application. These tests ensure that the Navbar behaves as expected under various conditions and user interactions.
+Purpose: The purpose of these tests is to ensure the reliability and stability of the Navbar component, which plays a critical role in providing navigation capabilities across the MyJobsAI application. By maintaining a suite of comprehensive tests, we aim to catch and fix any potential issues early in the development process, thereby enhancing the overall user experience.
+*/
 
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
