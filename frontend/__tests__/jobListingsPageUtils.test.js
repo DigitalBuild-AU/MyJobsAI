@@ -97,10 +97,12 @@ describe('jobListingsPageUtils', () => {
    * Verifies that fetchListings calls setListings and setTotalPages with the correct data on a successful API fetch.
    * Mocks the API response and checks the arguments passed to the mock functions.
    */
-      const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+      import { logError } from './logger';
+      const logErrorMock = jest.spyOn(logger, 'logError').mockImplementation(() => {});
 
     it('logs error on fetch failure', async () => {
-      const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+      import { logError } from './logger';
+      const logErrorMock = jest.spyOn(logger, 'logError').mockImplementation(() => {});
       fetchListingsFromAPI.mockRejectedValue(new Error('Fetch failed'));
 
       await fetchListings({}, 1, jest.fn(), jest.fn());
@@ -161,3 +163,6 @@ describe('jobListingsPageUtils', () => {
    * Mocks the window.removeEventListener function and a setFilters function to verify their correct usage.
    */
  */
+afterEach(() => {
+  jest.restoreAllMocks();
+});
