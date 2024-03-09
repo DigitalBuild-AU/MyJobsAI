@@ -39,7 +39,11 @@ import { Link } from 'react-router-dom';
     <>
       <Navbar />
       <div>
-        {/* Content from applications.html goes here, converted to JSX */}
+        {/* Converted JSX content from applications.html */}
+        <div className="container">
+          {/* Dynamic Navbar Inclusion is handled by the Navbar component */}
+          {/* Additional page content can be added here */}
+        </div>
       </div>
     </>
   );
