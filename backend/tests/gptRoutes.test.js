@@ -209,6 +209,12 @@ describe('/cv_suggestions route', () => {
    * Tests the handling of invalid input data for CV suggestions request.
    * Expects a 400 status code and an error message in the response.
    */
+  /**
+   * Test Case: Handles Invalid Input Data for CV Suggestions Request
+   * Purpose: Ensures that the CV suggestions endpoint correctly returns a 400 status code and an appropriate error message when provided with empty job descriptions and user CVs.
+   * Expected Input: jobDescription: '', userCV: ''
+   * Expected Output: HTTP status 400 with error message 'Invalid input data provided.'
+   */
   test('handles invalid input data for CV suggestions request', async () => {
     const response = await request(app)
       .post('/cv_suggestions')
