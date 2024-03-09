@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose, content, actions }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div className="modal-backdrop" data-testid="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <button onClick={onClose} className="modal-close-button">&times;</button>
