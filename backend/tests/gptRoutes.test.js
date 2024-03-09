@@ -15,6 +15,10 @@ describe('/cv_customization route', () => {
     jest.clearAllMocks();
   });
   
+  /**
+   * Test to ensure that the CV customization endpoint correctly handles and responds with a 400 status code
+   * when provided with invalid input data, such as empty job descriptions and user CVs.
+   */
   test('handles invalid input data for CV customization request', async () => {
     const response = await request(app)
       .post('/cv_customization')
