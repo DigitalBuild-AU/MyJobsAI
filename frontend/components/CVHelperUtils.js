@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+"""
+Sends a CV analysis request to the backend.
+
+Parameters:
+- jobDescription (string): The job description to analyze.
+- userCV (string): The user's CV content.
+
+Returns:
+- Promise: A promise that resolves with the response from the backend.
+"""
 async function sendCVRequest(jobDescription, userCV) {
   const response = await axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
   return response;
