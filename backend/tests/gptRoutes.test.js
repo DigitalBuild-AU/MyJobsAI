@@ -32,6 +32,10 @@ describe('/cv_customization route', () => {
   });
   
   test('handles database error during CV customization request', async () => {
+"""
+File: gptRoutes.test.js
+Description: This file contains unit tests for the GPT-related routes within the MyJobsAI application. It aims to test the functionality of CV customization, CV suggestions, and cover letter generation features. These tests ensure the application's GPT features are reliable and robust, covering a range of scenarios including successful responses and error handling.
+"""
    * Tests the handling of a database error during a CV customization request.
    * Expects a 500 status code and an error message indicating a server error.
    */
