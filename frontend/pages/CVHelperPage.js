@@ -104,7 +104,15 @@ const CVHelperPage = () => {
     };
      * No return value.
      */
-    const handleBootstrapScript = () => {
+    /**
+   * Dynamically manages the Bootstrap script tag in the document. It first removes any existing Bootstrap script tags to prevent version conflicts or duplicates. Then, it appends a new script tag with the latest version of Bootstrap to the document body. This ensures that the page uses the most up-to-date version of Bootstrap without needing to reload.
+   * 
+   * @function handleBootstrapScript
+   * @description Dynamically updates the Bootstrap script tag in the document.
+   * @param None
+   * @returns {void} Modifies the global document state by altering script tags.
+   */
+const handleBootstrapScript = () => {
         const scriptTags = document.getElementsByTagName('script');
         for (let i = 0; i < scriptTags.length; i++) {
             if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
