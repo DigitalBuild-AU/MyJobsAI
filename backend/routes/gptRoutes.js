@@ -29,6 +29,12 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
  * @returns {void} - Sends a JSON response with CV suggestions or an error status.
  * @throws {Error} - Returns a 500 status code with an error message if the request fails.
  */
+/**
+ * POST /cv_suggestions
+ * Purpose: Generates CV suggestions tailored to the user's CV and a given job description.
+ * Request parameters: jobDescription (String), userCV (String)
+ * Response: JSON object containing tailored CV suggestions.
+ */
 router.post('/cv_suggestions', async (req, res) => {
  * Handles the generation of CV suggestions based on a given job description and user's CV.
  * @param {Object} req - The request object containing 'jobDescription' and 'userCV'.
