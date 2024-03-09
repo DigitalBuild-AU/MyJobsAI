@@ -1,8 +1,13 @@
 /**
- * This file contains utility functions for dynamically adding or removing the Bootstrap script tag.
- * These functions are used to manage the inclusion of Bootstrap's JavaScript dynamically in the application.
+ * Removes the existing Bootstrap script tag from the document.
+ * This function searches through all <script> tags in the document and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
+ * It is used to ensure that there are no duplicate Bootstrap script tags in the document.
  */
 
+/**
+ * Removes the Bootstrap script tag from the document.
+ * This function iterates through all script tags and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
+ */
 const removeBootstrapScriptTag = () => {
     const scriptTags = document.getElementsByTagName('script');
     for (let i = 0; i < scriptTags.length; i++) {
@@ -23,6 +28,7 @@ const appendBootstrapScriptTag = () => {
     document.body.appendChild(newBootstrapScript);
 };
 /**
- * Removes the Bootstrap script tag from the document.
- * This function iterates through all script tags and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
+ * Appends a new Bootstrap script tag to the document.
+ * This function creates a new <script> tag with the src attribute set to the latest Bootstrap bundle URL and appends it to the document's body.
+ * It ensures that the Bootstrap JavaScript functionalities are available to the application.
  */

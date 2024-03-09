@@ -122,6 +122,34 @@ describe('sendCVRequest', () => {
     expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: 'Software Engineer', userCV: 'My CV content' });
     expect(response).toEqual(mockResponse);
   });
+  it('processes a response with suggestions correctly', () => {
+    const mockResponse = { data: { suggestions: 'Excellent teamwork skills.' } };
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setCvSuggestions).toHaveBeenCalledWith('Excellent teamwork skills.');
+    expect(setError).toHaveBeenCalledWith('');
+  });
+
+  it('handles a response without suggestions (error case)', () => {
+    const mockResponse = {};
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+
+  it('handles null or undefined response correctly', () => {
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(null, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+    processCVResponse(undefined, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
 
   it('handles failure in API call', async () => {
     axios.post.mockRejectedValue(new Error('API call failed'));

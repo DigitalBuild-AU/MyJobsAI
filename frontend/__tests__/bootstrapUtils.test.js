@@ -29,6 +29,11 @@ describe('bootstrapUtils tests', () => {
     loadBootstrapScript();
     const scriptTags = document.querySelectorAll('script');
 /**
+ * Tests for bootstrapUtils.js
+ * This file contains tests for the utility functions defined in bootstrapUtils.js, specifically focusing on the dynamic loading of the Bootstrap script.
+ * It ensures that the functions for adding and removing the Bootstrap script tag work as expected.
+ */
+/**
  * Tests for bootstrapUtils.js utility functions.
  * 
  * This suite contains tests that verify the functionality of the utility functions defined in bootstrapUtils.js,
@@ -133,6 +138,12 @@ describe('loadBootstrapScript utility function', () => {
     // For example, checking if a retry occurs or if an error message is logged
   });
   /**
+  it('does not append a duplicate bootstrap script tag if one already exists', () => {
+    document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>';
+    appendBootstrapScriptTag();
+    const scriptTags = document.querySelectorAll('script[src*="bootstrap.bundle.min.js"]');
+    expect(scriptTags.length).toBe(1);
+  });
    * Test Case: Simulates network delays or errors when loading the Bootstrap script.
    * This test verifies the robustness of the loadBootstrapScript function in handling network issues, ensuring that error handling mechanisms are properly implemented.
    */
