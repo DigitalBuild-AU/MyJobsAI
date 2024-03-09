@@ -182,6 +182,10 @@ describe('/cv_suggestions route', () => {
     const response = await request(app)
       .post('/cv_suggestions')
       .send({
+  /**
+   * Test to ensure that the CV customization endpoint correctly handles errors and responds with a 500 status code
+   * when the OpenAI API call fails. This simulates scenarios where the external API is unavailable or returns an error.
+   */
   test('handles error when OpenAI API call fails for CV customization', async () => {
     jest.spyOn(openai, 'createCompletion').mockRejectedValue(new Error('OpenAI API error'));
 
