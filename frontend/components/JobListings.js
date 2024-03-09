@@ -1,7 +1,7 @@
 /**
- * JobListings.js
- * This file contains the JobListings component, which is responsible for rendering a list of job listings on the UI.
- * It allows users to filter job listings based on various criteria such as location, job type, and keywords.
+ * JobListings Component
+ * 
+ * This component is responsible for rendering the list of job listings on the UI. It supports filtering job listings based on various criteria such as location, job type, and keywords. Additionally, it allows users to add new job listings. The component dynamically manages Bootstrap scripts to ensure UI components function correctly.
  */
 
 import React, { useState, useEffect } from 'react';
