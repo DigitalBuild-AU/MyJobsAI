@@ -6,13 +6,15 @@
  */
 import httpClient from './httpClient';
 
-export const generateCoverLetter = async (jobDescription, userName, userSkills, userExperience) => {
+export const generateCoverLetter = async (jobDescription, userName, userSkills, userExperience, coverLetterTemplate, coverLetterTone) => {
   try {
     const response = await httpClient.post('/coverletter', {
       jobDescription,
       userName,
       userSkills,
-      userExperience
+      userExperience,
+      coverLetterTemplate,
+      coverLetterTone
     });
     return response.data;
   } catch (error) {
