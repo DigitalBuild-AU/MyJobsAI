@@ -1,3 +1,4 @@
+// This file configures webpack for bundling the frontend assets, including JavaScript and CSS, and specifies development server settings.
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
