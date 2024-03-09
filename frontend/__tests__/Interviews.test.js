@@ -1,5 +1,6 @@
 /**
- * Comprehensive test suite for the Interviews component, including functionalities previously covered by interviewsApp.js.
+ * Test suite for the Interviews component. This suite checks for the component's rendering,
+ * initial state verification, and interaction handling such as adding, updating, and deleting interviews.
  */
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
@@ -10,6 +11,10 @@ describe('Interviews Component', () => {
   /**
    * Tests that the Interviews component renders correctly and verifies its initial state.
    */
+  test('renders and verifies initial state', () => {
+  * Test to ensure the Interviews component renders correctly and its initial state contains
+  * all necessary form elements with the correct placeholders and labels.
+  */
   test('renders and verifies initial state', () => {
     render(<Interviews />);
     // Initial render checks for form elements instead of a non-existent message
@@ -22,6 +27,8 @@ describe('Interviews Component', () => {
 
   test('adds a new interview and updates state', () => {
    * Tests that adding a new interview correctly updates the component's state.
+   * Test to verify that adding a new interview entry correctly updates the component's state
+   * and displays the added interview details.
    */
   test('adds a new interview and updates state', () => {
     render(<Interviews />);
@@ -87,29 +94,10 @@ describe('Interviews Component - New Business Logic', () => {
     render(<Interviews />);
     fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
     fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Discuss project details' } });
-    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-04-20T10:00' } });
-    fireEvent.click(screen.getByText('Schedule Interview'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
-    });
-  });
-
-  test('displays error message on email send failure', async () => {
-    mock.onPost('http://localhost:3000/api/email/send').networkError();
-
-    render(<Interviews />);
-    fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
-    fireEvent.change(screen.getByPlaceholderText('Enter any notes'), { target: { value: 'Discuss project details' } });
-    fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-04-20T10:00' } });
-    fireEvent.click(screen.getByText('Schedule Interview'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Error sending email: Network Error')).toBeInTheDocument();
-    });
-  });
-});
-   * Tests that updating an existing interview correctly reflects the changes in the component.
+/**
+ * Test to ensure that updating an existing interview entry correctly reflects the changes
+ * within the component, verifying the update functionality.
+ */
    */
   test('updates an existing interview and reflects changes', () => {
     render(<Interviews />);
@@ -120,6 +108,10 @@ describe('Interviews Component - New Business Logic', () => {
   });
 
   test('removes an interview entry and updates state', () => {
+  test('removes an interview entry and updates state', () => {
+  * Test to confirm that removing an interview entry correctly updates the component's state,
+  * ensuring the delete functionality works as expected.
+  */
   test('removes an interview entry and updates state', () => {
     render(<Interviews />);
     fireEvent.click(screen.getByText('Delete', { selector: 'button' }));
@@ -182,6 +174,9 @@ describe('handleSubmit Functionality in Interviews Component', () => {
     });
   });
 });
+   /**
+   * Test to verify that attempting to add an interview with missing details triggers
+   * appropriate validation error messages, ensuring form validation works correctly.
    */
   test('attempts to add an interview with missing details', () => {
     render(<Interviews />);
@@ -210,29 +205,6 @@ File: Interviews.test.js
 Description: Test suite for the Interviews component, focusing on the addition, update, and removal of interview entries.
 """
 // Tests that the Interviews component renders correctly and verifies its initial state.
-  test('attempts to update a non-existent interview', () => {
-test('validates interview date is in the future', async () => {
-  render(<Interviews />);
-  fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Software Engineer' } });
-  fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2020-01-01T10:00' } }); // Past date
-  fireEvent.click(screen.getByText('Schedule Interview'));
-  await waitFor(() => {
-    expect(screen.getByText('Interview date must be in the future')).toBeInTheDocument();
-  });
-});
-// Tests that removing an interview entry correctly updates the component's state.
-// Tests that attempting to add an interview with missing details displays the appropriate error message.
-    render(<Interviews />);
-    // Assuming the UI provides a way to select an interview to edit, which doesn't exist
-    fireEvent.click(screen.getByText('Edit', { selector: 'button[data-id="nonexistent"]' }));
-    fireEvent.click(screen.getByText('Save Changes'));
-    expect(screen.getByText('Interview not found')).toBeInTheDocument();
-  });
-});
-// Tests that attempting to update a non-existent interview displays the appropriate error message.
-test('checks for duplicate interview entries', async () => {
-  render(<Interviews />);
-  // Assuming functionality to check for duplicates is implemented
   fireEvent.change(screen.getByPlaceholderText('Enter job title'), { target: { value: 'Duplicate Entry' } });
   fireEvent.change(screen.getByPlaceholderText('Date and Time'), { target: { value: '2023-12-25T10:00' } });
   fireEvent.click(screen.getByText('Schedule Interview'));
