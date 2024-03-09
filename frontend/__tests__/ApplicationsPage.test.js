@@ -19,6 +19,6 @@ describe('ApplicationsPage Component', () => {
 
   it('renders the Applications component upon successful data fetching', async () => {
     const { getByText } = render(<ApplicationsPage />);
-    await waitFor(() => expect(getByText(/Content from applications.html goes here, converted to JSX/i)).not.toBeInTheDocument());
+    await waitFor(() => expect(getByText(/Additional page content can be added here/i)).toBeInTheDocument());
   });
 });
