@@ -1,6 +1,5 @@
 /**
- * Test suite for the App component. This includes tests for routing to ensure navigation works as expected,
- * and tests for application functionality such as the sendEmail function.
+ * This file contains tests for the App component, including routing and application functionality such as email sending.
  */
 import { generateCoverLetter } from '../app';
 import React from 'react';
@@ -69,10 +68,6 @@ jest.mock('../src/useEmailSender');
         to: 'test@example.com',
         subject: 'Test Subject',
         body: 'Test Body'
-  /**
-   * Test for verifying the existence and callability of the generateCoverLetter function within the App component.
-   * This test ensures that the generateCoverLetter function is properly defined and can be invoked.
-   */
       });
       expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
     });
