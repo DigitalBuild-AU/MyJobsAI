@@ -26,6 +26,9 @@ describe('index.html configuration', () => {
 
     expectedScripts.forEach(script => {
       const occurrences = actualScripts.filter(src => src === script).length;
+/**
+ * Tests for index.html: This file contains tests to ensure the index.html file is correctly configured for the React application, including checks for the root div element, React bundle script, and script tags.
+ */
       expect(occurrences).toBe(1);
     });
 
