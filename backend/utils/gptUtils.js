@@ -45,6 +45,9 @@ async function generateCoverLetter(jobDescription, userCV) {
 /**
  * Logs a message indicating successful generation of a cover letter analysis and feedback.
  */
+/**
+ * Logs a message indicating successful generation of a cover letter analysis and feedback.
+ */
 function logCoverLetterGeneration() {
   console.log("Cover letter analysis and feedback generated successfully.");
 }
