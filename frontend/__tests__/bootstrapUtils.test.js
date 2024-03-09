@@ -27,6 +27,13 @@ describe('bootstrapUtils tests', () => {
     document.body.innerHTML = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" async></script>';
     loadBootstrapScript();
     const scriptTags = document.querySelectorAll('script');
+/**
+ * Tests for bootstrapUtils.js utility functions.
+ * 
+ * This suite contains tests that verify the functionality of the utility functions defined in bootstrapUtils.js,
+ * focusing on the dynamic loading of the Bootstrap script. It ensures that the script loading behaves as expected
+ * under various conditions.
+ */
     expect(scriptTags.length).toBe(1);
     expect(scriptTags[0]).toHaveAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js');
     expect(scriptTags[0]).toHaveAttribute('async', '');
