@@ -46,7 +46,17 @@ const JobListings = () => {
 
   const handleAddJobListing = (e) => {
     e.preventDefault();
-    // Placeholder for adding job listing logic
+    const jobTitle = document.getElementById('jobTitle').value;
+    const company = document.getElementById('company').value;
+    const location = document.getElementById('location').value;
+    const jobDescription = document.getElementById('jobDescription').value;
+    const jobListingData = { jobTitle, company, location, jobDescription };
+    axios.post('/api/addJobListing', jobListingData)
+      .then(response => {
+        console.log('Job listing added successfully');
+        // Optionally refresh the job listings to include the newly added listing
+      })
+      .catch(error => console.error('Error adding job listing:', error));
   };
 
   return (
