@@ -78,7 +78,6 @@ const deleteJobListingById = async (id) => {
     }
 };
 
-// This function has been moved to analyticsService.js for better modularity
 /**
  * Calculates analytics based on user activities.
  * @returns {Object} An object containing analytics data or an error object if the operation fails.

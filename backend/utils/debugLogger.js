@@ -11,11 +11,12 @@
  * 
  * The utility ensures that all debug messages are consistently formatted and that error logs include stack traces for easier debugging.
  */
-const debugLog = (message, error = null) => {
+const debugLog = (message, error = null, severity = 'INFO') => {
   const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] DEBUG: ${message}`);
   if (error) {
-    console.error(error.stack);
+    console.error(`[${timestamp}] ${severity}: ${message}`, error.stack);
+  } else {
+    console.log(`[${timestamp}] ${severity}: ${message}`);
   }
 };
 

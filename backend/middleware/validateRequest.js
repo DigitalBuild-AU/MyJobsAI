@@ -4,6 +4,7 @@ function isValidURL(string) {
 }
 
 exports.validateJobListing = (req, res, next) => {
+const { handleError } = require('../middleware/middlewareUtils');
   let isValid = true;
 
   if (!req.body.jobTitle) {
@@ -14,7 +15,7 @@ exports.validateJobListing = (req, res, next) => {
 
   if (req.body.salary && req.body.salary.amount && req.body.salary.amount <= 0) {
     console.log('Salary amount must be a positive number.'); // gpt_pilot_debugging_log
-    res.status(400).json({ error: 'Salary amount must be a positive number.' });
+    handleError(res, 'Salary amount must be a positive number.', 400);
     isValid = false;
   }
 

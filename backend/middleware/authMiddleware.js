@@ -10,12 +10,14 @@ const User = require('../models/User'); // User model for database interaction
  * @throws {Error} If authentication fails.
  */
 const auth = async (req, res, next) => {
+
 /**
  * Verifies and decodes the JWT token.
  * @param {string} token - The JWT token to verify.
  * @returns {Object} The decoded token.
  * @throws {Error} If token verification fails.
  */
+  
 const verifyToken = (token) => {
   try {
     return jwt.verify(token, process.env.JWT_SECRET);
@@ -39,7 +41,7 @@ const verifyToken = (token) => {
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).send({ error: 'Please authenticate.' });
+    handleError(res, 'Please authenticate.', 401);
   }
 };
 

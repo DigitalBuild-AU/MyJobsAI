@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config jest.config.js",
-    "start": "node backend/server.js"
+    "test": "jest",
+    "start": "node -r dotenv/config backend/server.js",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +24,10 @@
     "mongoose": "^8.2.0",
     "openai": "^4.28.4",
     "openai-api": "^1.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-router-dom": "^6.22.2",
+    "react-scripts": "4.0.3",
     "sass": "^1.32.8"
   }
 }
-    "build": "webpack --mode production"
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"

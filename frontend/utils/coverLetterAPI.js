@@ -48,6 +48,21 @@ export const handleCoverLetterError = (error) => {
  * Generates a cover letter based on the provided job description, user name, skills, and experience.
  * 
  * @param {string} jobDescription - The job description for which the cover letter is being generated.
+/**
+@swagger
+@post('/coverletter')
+@tags ['Cover Letter Generation']
+@description Generates a cover letter based on user inputs including job description, user name, skills, experience, preferred template, and tone.
+@parameter {string} jobDescription - The job description for the cover letter in the request body.
+@parameter {string} userName - The user's name in the request body.
+@parameter {string} userSkills - The user's skills in the request body.
+@parameter {string} userExperience - The user's experience in the request body.
+@parameter {string} coverLetterTemplate - The chosen template for the cover letter in the request body.
+@parameter {string} coverLetterTone - The desired tone for the cover letter in the request body.
+@response 200 {object} - Successfully generated cover letter with the cover letter text.
+@response 400 {object} - Bad request, incorrect request body format.
+@response 500 {object} - Internal server error.
+*/
  * @param {string} userName - The name of the user for whom the cover letter is being generated.
  * @param {string} userSkills - The skills of the user to be included in the cover letter.
  * @param {string} userExperience - The experience of the user to be highlighted in the cover letter.
