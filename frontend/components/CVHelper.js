@@ -1,6 +1,12 @@
 /**
- * CVHelper.js
- * This file contains the CVHelper component, which is responsible for providing users with CV suggestions based on their job description and CV inputs. It interacts with the backend to fetch tailored advice to improve the user's CV for specific job applications.
+ * CVHelper Component
+ * 
+ * This component is responsible for providing users with personalized CV suggestions to enhance their job application materials. It interacts with the backend to fetch tailored advice based on the user's job description and CV inputs. The goal is to offer actionable suggestions that users can apply to improve their CVs for specific job applications.
+ * 
+ * Main functionalities include:
+ * - Fetching and displaying personalized CV advice from the backend.
+ * - Allowing users to input their job description and CV details for customized suggestions.
+ * - Offering a user-friendly interface for navigating through CV improvement tips.
  */
 import { sendCVRequest, processCVResponse } from './CVHelperUtils';
 import React, { useState } from 'react';
