@@ -74,9 +74,6 @@ jest.mock('../src/useEmailSender');
 
     test('handles error when sending an email fails', async () => {
 
-  /**
-   * Tests the successful sending of an email using the sendEmail function.
-   */
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
 
       fireEvent.click(screen.getByTestId('sendEmailButton'));
