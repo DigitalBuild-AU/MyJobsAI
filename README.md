@@ -41,6 +41,16 @@ Significant changes made during this migration include the integration of state 
 - **Styled-Components**: Recommended for styling, offering enhanced CSS capabilities and easier maintenance of styles within JavaScript files.
 ## Project Structure Update
 
+## Running Tests
+
+To run the test suite with Jest, use the following command:
+
+```bash
+npm test
+```
+
+This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Ensure you have all dependencies installed before running tests.
+
 As part of our ongoing efforts to streamline the development process and adhere to best practices, we have consolidated the `app.js` and `App.js` files into a single `App.js` file. This change was made to eliminate confusion and potential errors arising from having two similarly named entry point files, especially on case-sensitive file systems.
 
 ### Reasoning Behind the Change
