@@ -221,6 +221,12 @@ const handleErrorState = (name, value) => {
 
       {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
       <div>
+  /**
+   * Submits the job listing form data to the server and handles the response.
+   * This function is triggered upon form submission.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but may trigger a UI update based on the response.
+   */
         <form onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.target);
