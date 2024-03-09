@@ -10,11 +10,72 @@ import { handleCvCustomization } from '../utils/gptRequestHandlers';
 jest.mock('../utils/gptRequestHandlers');
 
 describe('/cv_customization route', () => {
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  
+  /**
+   * Test to ensure that the CV customization endpoint correctly handles and responds with a 400 status code
+   * when provided with invalid input data, such as empty job descriptions and user CVs.
+   */
+  /**
+   * Test Case: Database Error during CV Customization Request
+   * Purpose: Ensures that the CV customization endpoint correctly handles a database error by returning a 500 status code and an appropriate error message.
+   * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
+   * Expected Output: HTTP status 500 with error message 'Failed to process CV customization due to a server error.'
+   */
+  test('handles database error during CV customization request', async () => {
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+  
+  test('handles database error during CV customization request', async () => {
+"""
+File: gptRoutes.test.js
+Description: This file contains unit tests for the GPT-related routes within the MyJobsAI application. It aims to test the functionality of CV customization, CV suggestions, and cover letter generation features. These tests ensure the application's GPT features are reliable and robust, covering a range of scenarios including successful responses and error handling.
+"""
+  /**
+   * Test Case: Invalid Input Data for CV Customization Request
+   * Purpose: Verifies that the CV customization endpoint returns a 400 status code and an appropriate error message when provided with empty job descriptions and user CVs.
+   * Expected Input: jobDescription: '', userCV: ''
+   * Expected Output: HTTP status 400 with error message 'Invalid input data provided.'
+   */
+   * Tests the handling of a database error during a CV customization request.
+   * Expects a 500 status code and an error message indicating a server error.
+   */
+  test('handles database error during CV customization request', async () => {
+    handleCvCustomization.mockRejectedValue(new Error('Database error'));
+
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to process CV customization due to a server error.');
+  });
 /**
  * Test suite for GPT routes.
  * 
  * This file contains tests for the GPT-related routes, ensuring that CV customization requests are handled correctly, including success and error scenarios.
  */
+  test('successfully handles a CV customization request', async () => {
+  /**
+   * Test Case: Successfully Handles a CV Customization Request
+   * Purpose: Verifies that the CV customization endpoint correctly processes a request, returning a 200 status code and the expected customization suggestions in the response body.
+   * Expected Input: jobDescription: 'Software Engineer role requiring extensive experience in full-stack development.', userCV: 'Experienced full-stack developer with a strong background in JavaScript and Python.'
+   * Expected Output: HTTP status 200 with customization suggestions in the response body.
+   */
   test('successfully handles a CV customization request', async () => {
     const mockResponse = {
       choices: [{
@@ -46,6 +107,18 @@ describe('/cv_customization route', () => {
    * Test: Successfully handles a CV suggestions request.
    * Description: This test ensures that the CV suggestions endpoint properly handles a request, returning a 200 status code and the expected suggestions in the response body. It mocks the `handleCvSuggestions` function to return a predefined response and verifies that the function is called with the specified arguments.
    */
+  /**
+   * Test Case: Successfully Handles a CV Suggestions Request
+   * Purpose: This test verifies that the CV suggestions endpoint can process a request successfully, resulting in a 200 status code and the expected suggestions in the response body.
+   * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
+   * Expected Output: HTTP status 200 with property 'suggestions' containing 'Your CV suggestions.'
+   */
+  /**
+   * Test Case: Successfully Handles a CV Suggestions Request with Mocked OpenAI Call
+   * Purpose: Verifies that the CV suggestions endpoint can successfully process a request and return CV suggestions, using a mocked OpenAI API call to simulate the backend interaction.
+   * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
+   * Expected Output: HTTP status 200 with property 'suggestions' containing 'Your CV suggestions.'
+   */
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
     handleCvSuggestions.mockResolvedValue(mockResponse);
@@ -55,7 +128,59 @@ describe('/cv_customization route', () => {
       .send({
         jobDescription: 'Software Engineer role requiring problem-solving skills.',
         userCV: 'Problem solver with a keen interest in software development.'
+
+  /**
+   * Test to verify that the createCompletion method of the OpenAI API is called with the correct parameters
+   * when a CV customization request is made. This includes checking the model, prompt, max_tokens, n, stop, and temperature parameters.
+   */
+  /**
+   * Test Case: Verifies `createCompletion` Method Call with Correct Parameters
+   * Purpose: Ensures that the CV customization request properly calls the `createCompletion` method of the OpenAI API with the correct parameters.
+   * Expected Input: Job description and user CV for a software engineer role requiring extensive experience in full-stack development.
+   * Expected Output: The `createCompletion` method is called with the model, prompt, max_tokens, n, stop, and temperature parameters accurately reflecting the input data.
+   */
+  test('verifies createCompletion method call with correct parameters', async () => {
+    const mockCreateCompletion = jest.spyOn(openai, 'createCompletion').mockResolvedValue({
+      data: {
+        choices: [{ text: 'Customized CV content.' }]
+      }
+    });
+
+    await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: 'Software Engineer role requiring extensive experience in full-stack development.',
+        userCV: 'Experienced full-stack developer with a strong background in JavaScript and Python.'
       });
+
+    expect(mockCreateCompletion).toHaveBeenCalledWith({
+      model: "gpt-3.5-turbo",
+      prompt: expect.stringContaining('Software Engineer role requiring extensive experience in full-stack development.') && expect.stringContaining('Experienced full-stack developer with a strong background in JavaScript and Python.'),
+      max_tokens: 1024,
+      n: 1,
+      stop: null,
+      temperature: 0.5,
+    });
+  });
+
+  test('handles invalid input data for CV customization request', async () => {
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+      });
+  /**
+   * Test Case: Handles Errors During CV Suggestions Request
+   * Purpose: Verifies that the CV suggestions endpoint correctly responds with a 500 status code and an appropriate error message when an error occurs during processing.
+   * Expected Input: jobDescription: 'Software Engineer role requiring problem-solving skills.', userCV: 'Problem solver with a keen interest in software development.'
+   * Expected Output: HTTP status 500 with error message 'Failed to generate CV suggestions.'
+   */
   
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockResponse);
@@ -92,6 +217,66 @@ describe('/cv_customization route', () => {
    */
   // Tests error handling for a CV customization request.
 describe('/cv_suggestions route', () => {
+  /**
+   * Tests the handling of invalid input data for CV suggestions request.
+   * Expects a 400 status code and an error message in the response.
+   */
+  /**
+   * Test Case: Handles Invalid Input Data for CV Suggestions Request
+   * Purpose: Ensures that the CV suggestions endpoint correctly returns a 400 status code and an appropriate error message when provided with empty job descriptions and user CVs.
+   * Expected Input: jobDescription: '', userCV: ''
+   * Expected Output: HTTP status 400 with error message 'Invalid input data provided.'
+   */
+  test('handles invalid input data for CV suggestions request', async () => {
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+  /**
+   * Test to ensure that the CV customization endpoint correctly handles errors and responds with a 500 status code
+   * when the OpenAI API call fails. This simulates scenarios where the external API is unavailable or returns an error.
+   */
+  test('handles error when OpenAI API call fails for CV customization', async () => {
+    jest.spyOn(openai, 'createCompletion').mockRejectedValue(new Error('OpenAI API error'));
+
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate CV customization suggestions.');
+  });
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+  
+  test('handles database error during CV suggestions request', async () => {
+   * Tests the handling of a database error during a CV suggestions request.
+   * Expects a 500 status code and an error message indicating a server error.
+   */
+  test('handles database error during CV suggestions request', async () => {
+    handleCvSuggestions.mockRejectedValue(new Error('Database error'));
+
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to process CV suggestions due to a server error.');
+  });
+  test('successfully handles a CV suggestions request', async () => {
+   * Tests successful handling of a CV suggestions request with mocked openai call.
+   * Expects a 200 status code and CV suggestions in the response body.
+   */
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
     jest.mocked(openai.chat.completions.create).mockResolvedValue(mockResponse);
@@ -107,6 +292,10 @@ describe('/cv_suggestions route', () => {
     expect(response.body).toHaveProperty('suggestions', 'Your CV suggestions.');
   });
 
+  test('handles errors during CV suggestions request', async () => {
+   * Tests the handling of errors during a CV suggestions request.
+   * Expects a 500 status code and an error message indicating failure to generate CV suggestions.
+   */
   test('handles errors during CV suggestions request', async () => {
     handleCvSuggestions.mockRejectedValue(new Error('Failed to generate CV suggestions.'));
   
@@ -143,9 +332,46 @@ describe('/cv_suggestions route', () => {
     */
 describe('/cover_letter route', () => {
   /**
+   * Tests the handling of invalid input data for a cover letter request.
+   * Expects a 400 status code and an error message in the response.
+   */
+  test('handles invalid input data for cover letter request', async () => {
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+  
+  test('handles database error during cover letter request', async () => {
+   * Tests the handling of a database error during a cover letter request.
+   * Expects a 500 status code and an error message indicating a server error.
+   */
+  test('handles database error during cover letter request', async () => {
+    handleCoverLetterRequest.mockRejectedValue(new Error('Database error'));
+
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate cover letter due to a server error.');
+  });
+  /**
    * Tests successful handling of a cover letter request.
    * 
    * Sends a POST request with a job description and user CV to the '/cover_letter' route and expects a 200 status code with a personalized cover letter in the response body.
+   */
+  /**
+   * Tests successful handling of a cover letter request.
+   * Expects a 200 status code and a personalized cover letter in the response body.
    */
   test('successfully handles a cover letter request', async () => {
 describe('generateCoverLetter function', () => {
@@ -153,6 +379,10 @@ describe('generateCoverLetter function', () => {
     jest.clearAllMocks();
   });
 
+  /**
+   * Tests successful generation of a cover letter.
+   * Expects the function to return a personalized cover letter based on the provided job description and user CV.
+   */
   test('successfully generates a cover letter', async () => {
     const jobDescription = 'Software Engineer role with a focus on cloud computing.';
     const userCV = 'Cloud computing enthusiast with extensive experience in AWS and Azure.';
@@ -171,6 +401,10 @@ describe('generateCoverLetter function', () => {
     }));
   });
 
+  /**
+   * Tests error handling during cover letter generation.
+   * Expects the function to throw an error if the cover letter generation fails.
+   */
   test('handles errors during cover letter generation', async () => {
     const error = new Error('Failed to generate cover letter.');
     jest.mocked(openai.createCompletion).mockRejectedValue(error);
@@ -180,6 +414,10 @@ describe('generateCoverLetter function', () => {
 });
 
 describe('logCoverLetterGeneration function', () => {
+  /**
+   * Tests logging of cover letter generation message.
+   * Expects a console log indicating successful cover letter analysis and feedback generation.
+   */
   test('logs cover letter generation message', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     logCoverLetterGeneration();
@@ -188,6 +426,10 @@ describe('logCoverLetterGeneration function', () => {
 });
 
 describe('handleCoverLetterError function', () => {
+  /**
+   * Tests handling and logging of cover letter generation error.
+   * Expects an error log and a 500 status code response with an appropriate error message.
+   */
   test('handles and logs cover letter generation error', () => {
     const consoleErrorSpy = jest.spyOn(console, 'error');
     const mockRes = {
@@ -220,6 +462,10 @@ describe('/cover_letter route', () => {
    * Sends a POST request with a job description and user CV to the '/cover_letter' route and expects a 200 status code with a personalized cover letter in the response body.
    */
   test('successfully handles a cover letter request', async () => {
+    openai.createCompletion.mockRejectedValue(new Error('Failed to generate cover letter.'));
+  
+    const response = await request(app)
+      .post('/cover_letter')
     openai.createCompletion.mockRejectedValue(new Error('Failed to generate cover letter.'));
   
     const response = await request(app)
@@ -275,3 +521,15 @@ describe('/cover_letter route', () => {
     expect(errorSpy).toHaveBeenCalled();
     expect(statusJsonSpy).toHaveBeenCalledWith(500);
     expect(statusJsonSpy).toHaveBeenCalledWith({ error: 'Failed to generate cover letter.' });
+  /**
+   * Test Case: Handles Error When OpenAI API Call Fails for CV Customization
+   * Purpose: Ensures that the CV customization endpoint correctly responds with a 500 status code and an appropriate error message when the OpenAI API call fails.
+   * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
+   * Expected Output: HTTP status 500 with error message 'Failed to generate CV customization suggestions.'
+   */
+  /**
+   * Test Case: Handles Database Error During CV Suggestions Request
+   * Purpose: Ensures that the CV suggestions endpoint correctly responds with a 500 status code and an appropriate error message when a database error occurs.
+   * Expected Input: jobDescription: 'Valid Job Description', userCV: 'Valid user CV'
+   * Expected Output: HTTP status 500 with error message 'Failed to process CV suggestions due to a server error.'
+   */

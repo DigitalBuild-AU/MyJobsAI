@@ -23,6 +23,13 @@ const CoverLetter = () => {
   const handleGenerateCoverLetter = () => {
     /**
      * Generates a personalized cover letter based on user input.
+     * This function collects input from state variables including userName, jobDescriptionInput, userSkills, and userExperience,
+     * and generates a cover letter tailored to these inputs.
+     * Parameters: None.
+     * Returns: None, but updates the component's state with the generated cover letter or an error message.
+     */
+    /**
+     * Generates a personalized cover letter based on user input.
      * Parameters: None.
      * Returns: None.
      * This function is a placeholder for future implementation.

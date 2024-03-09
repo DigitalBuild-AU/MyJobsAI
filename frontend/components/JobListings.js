@@ -1,3 +1,9 @@
+/**
+ * JobListings.js
+ * This file contains the JobListings component, which is responsible for rendering a list of job listings on the UI.
+ * It allows users to filter job listings based on various criteria such as location, job type, and keywords.
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
@@ -11,10 +17,13 @@ const JobListings = () => {
   const [filterJobType, setFilterJobType] = useState('');
   const [filterKeywords, setFilterKeywords] = useState('');
   const [jobListings, setJobListings] = useState([]);
+  const [salaryAmount, setSalaryAmount] = useState('');
+  const [salaryPeriod, setSalaryPeriod] = useState('');
+  const [jobStatus, setJobStatus] = useState('');
 
   /**
-   * useEffect hook for loading and cleaning up the Bootstrap script.
-   * It runs once after the component mounts and removes the script when the component unmounts.
+   * useEffect hook for adding and removing the Bootstrap script.
+   * Ensures Bootstrap functionalities are available by dynamically injecting the script tag into the document on component mount and removing it on component unmount.
    */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
@@ -34,12 +43,46 @@ const JobListings = () => {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    // Placeholder for filter logic
+    axios.get('/api/jobListings', { params: { location: filterLocation, jobType: filterJobType, keywords: filterKeywords } })
+      .then(response => setJobListings(response.data))
+      .catch(error => console.error('Error fetching filtered job listings:', error));
   };
 
+  /**
+   * Handles the submission of the add job listing form.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but triggers a POST request to add a new job listing.
+   */
   const handleAddJobListing = (e) => {
     e.preventDefault();
-    // Placeholder for adding job listing logic
+    const jobTitle = document.getElementById('jobTitle').value;
+    const company = document.getElementById('company').value;
+    const location = document.getElementById('location').value;
+    const jobDescription = document.getElementById('jobDescription').value;
+    const jobListingData = { jobTitle, company, location, jobDescription };
+    axios.post('/api/addJobListing', jobListingData)
+      .then(response => {
+        console.log('Job listing added successfully');
+        // Optionally refresh the job listings to include the newly added listing
+      })
+      .catch(error => console.error('Error adding job listing:', error));
+
+    // Fetch job information based on the provided URL
+    const fetchJobInfo = () => {
+      const jobURL = document.getElementById('jobURL').value;
+      axios.get(`/api/fetchJobInfo?url=${jobURL}`)
+        .then(response => {
+          const { jobTitle, company, location, jobDescription } = response.data;
+          document.getElementById('jobTitle').value = jobTitle;
+          document.getElementById('company').value = company;
+          document.getElementById('location').value = location;
+          document.getElementById('jobDescription').value = jobDescription;
+          console.log('Job information fetched successfully');
+        })
+        .catch(error => console.error('Error fetching job info:', error));
+    };
+    // Add onClick listener to Fetch Job Info button
+    document.getElementById('fetchJobInfo').addEventListener('click', fetchJobInfo);
   };
 
   return (
@@ -47,25 +90,22 @@ const JobListings = () => {
       <Navbar />
       <div id="filterSidebar" style={{ float: 'left', width: '200px', marginRight: '20px' }}>
         <h3>Filter Listings</h3>
-        <form id="filterForm" onSubmit={handleFilterSubmit}>
-          <div className="form-group">
-            <label htmlFor="filterLocation">Location</label>
-            <input type="text" className="form-control mb-3" id="filterLocation" placeholder="Enter location" value={filterLocation} onChange={(e) => setFilterLocation(e.target.value)} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="filterJobType">Job Type</label>
-            <select className="form-control mb-3" id="filterJobType" value={filterJobType} onChange={(e) => setFilterJobType(e.target.value)}>
-              <option value="">Any</option>
-              <option value="Full-Time">Full-Time</option>
-              <option value="Contract">Contract</option>
+// Filter form code extracted to JobFilterForm component
   /**
-   * useEffect hook for fetching analytics data.
-   * It runs once after the component mounts to fetch and display analytics.
+   * Submits the filter form data to fetch filtered job listings.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value.
    */
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/analytics')
-      .then(function(response) {
-        const data = response.data;
+        <JobFilterForm
+          filterLocation={filterLocation}
+          setFilterLocation={setFilterLocation}
+          filterJobType={filterJobType}
+          setFilterJobType={setFilterJobType}
+          filterKeywords={filterKeywords}
+          setFilterKeywords={setFilterKeywords}
+          handleFilterSubmit={handleFilterSubmit}
+        />
+          <div className="form-group">
         console.log('Analytics fetched and displayed successfully.'); // Log for debugging
         // Update component state with fetched analytics data here
       })
@@ -101,14 +141,40 @@ const JobListings = () => {
                 <th scope="col" className="table-header" data-column-name="jobDescription">Job Description</th>
               </tr>
             </thead>
-            <tbody id='listingsContainer'>
-              {/* Job listings will be dynamically injected here */}
-            </tbody>
+            {/* Implementation of a virtualized or paginated table to improve performance with large datasets */}
+            <VirtualizedTable
+              listings={jobListings}
+              columns={['Job Title', 'Company', 'Location', 'Job Description']}
+            />
           </table>
         </div>
       </div>
     </>
   );
 };
+          <div className="form-group">
+            <label htmlFor="salaryAmount">Salary Amount</label>
+            <input type="number" className="form-control mb-3" id="salaryAmount" placeholder="Enter salary amount" value={salaryAmount} onChange={(e) => setSalaryAmount(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="salaryPeriod">Salary Period</label>
+            <select className="form-control mb-3" id="salaryPeriod" value={salaryPeriod} onChange={(e) => setSalaryPeriod(e.target.value)}>
+              <option value="">Select period</option>
+              <option value="Hourly">Hourly</option>
+              <option value="Daily">Daily</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="jobStatus">Job Status</label>
+            <select className="form-control mb-3" id="jobStatus" value={jobStatus} onChange={(e) => setJobStatus(e.target.value)}>
+              <option value="">Select status</option>
+              <option value="Open">Open</option>
+              <option value="Closed">Closed</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
 
 export default JobListings;

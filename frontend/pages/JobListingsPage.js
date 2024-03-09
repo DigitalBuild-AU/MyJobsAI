@@ -2,6 +2,11 @@
  * JobListingsPage is a React functional component that renders the job listings page,
  * allowing users to view and filter job listings.
  */
+/**
+ * JobListingsPage.js
+ * This file implements the JobListingsPage component, which acts as the container for the job listings components.
+ * It integrates various functionalities related to job listings, providing a comprehensive view for users to explore and interact with job opportunities.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ResponsiveNavbar from '../components/ResponsiveNavbar';
@@ -211,17 +216,33 @@ const handleErrorState = (name, value) => {
       </select>
 
       <div>
-        <input name="status" placeholder="Filter by status" onChange={handleFilterChange} />
+        <input name="status" placeholder="Filter by status" onChange={(e) => updateFilters('status', e.target.value)} />
         {errorState.status && <span className="validation-error">Please enter a valid status.</span>}
       </div>
       <div>
-        <input name="company" placeholder="Filter by company" onChange={handleFilterChange} />
+        <input name="company" placeholder="Filter by company" onChange={(e) => updateFilters('company', e.target.value)} />
         {errorState.company && <span className="validation-error">Please enter a valid company name.</span>}
       </div>
 
       {view === 'table' ? <JobListingTable listings={listings} /> : listings.map(listing => <JobListingCard key={listing._id} listing={listing} />)}
       <div>
-        <form onSubmit={handleSubmit}>
+  /**
+   * Submits the job listing form data to the server and handles the response.
+   * This function is triggered upon form submission.
+   * @param {Event} e - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but may trigger a UI update based on the response.
+   */
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const jobListing = Object.fromEntries(formData.entries());
+          axios.post('/api/addJobListing', jobListing)
+            .then(response => {
+              console.log('Job listing added successfully', response.data);
+              // Optionally refresh the job listings to include the newly added listing
+            })
+            .catch(error => console.error('Error adding job listing:', error));
+        }}>
           <input name="jobTitle" placeholder="Job Title" required />
           <input name="company" placeholder="Company" required />
           <input name="salary" placeholder="Salary" />

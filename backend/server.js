@@ -62,3 +62,4 @@ app.listen(PORT, () => {
 }).on('error', (err) => {
   debugLog(`Server start-up error: ${err}, Stack: ${err.stack}`, err, true); // Ensure detailed logging for server start-up errors
 });
+app.use(errorLogger);

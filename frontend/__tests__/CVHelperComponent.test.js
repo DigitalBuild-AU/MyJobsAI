@@ -1,7 +1,13 @@
+/**
+ * @file CVHelperComponent.test.js
+ * @description This file contains the test suite for the CVHelperComponent, focusing on unit and integration tests that cover rendering, dynamic script loading, API interactions, and error handling. It ensures the component behaves as expected under various conditions.
+ */
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import CVHelperComponent from '../components/CVHelperComponent';
 import '@testing-library/jest-dom/extend-expect';
+import axios from 'axios';
+import { sendCVRequest, processCVResponse } from '../components/CVHelperUtils';
 
 jest.mock('axios');
 
@@ -10,8 +16,7 @@ describe('CVHelperComponent', () => {
  * @file CVHelperComponent.test.js
  * @description Test suite for the CVHelperComponent, focusing on rendering, dynamic script loading, API interactions, and error handling.
  */
- * Test suite for the CVHelperComponent.
- * This suite tests rendering correctness, dynamic script loading, and general component behavior.
+ * Test suite for the CVHelperComponent, ensuring comprehensive coverage including rendering correctness, dynamic script loading, API interactions, and error handling. This suite is designed to ensure all functionalities previously handled by cvHelper.html are fully integrated and functional within CVHelperComponent.
  */
 describe('CVHelperComponent', () => {
   /**
@@ -19,7 +24,7 @@ describe('CVHelperComponent', () => {
    */
   it('renders correctly', () => {
   /**
-   * Tests if the CVHelperComponent correctly loads the Bootstrap script dynamically.
+   * Tests if the CVHelperComponent correctly loads the Bootstrap script dynamically, including any additional scripts that were previously managed by cvHelper.html.
    */
   it('loads Bootstrap script dynamically', () => {
   afterEach(cleanup);
@@ -42,7 +47,7 @@ describe('CVHelperComponent', () => {
   });
 });
 
-  it('triggers API call with correct data on form submission', async () => {
+  it('triggers API call with correct data on form submission, ensuring all API functionalities from cvHelper.html are replicated', async () => {
   });
 });
 
@@ -73,7 +78,7 @@ it('loads Bootstrap script on component mount', async () => {
 });
 
   it('updates component state with CV suggestions upon successful API call', async () => {
-   * Tests handling of errors correctly if the API call fails.
+   * Tests handling of errors correctly if the API call fails, including scenarios previously covered in cvHelper.html.
    */
   it('handles errors correctly if API call fails', async () => {
     const mockSuggestions = 'Consider highlighting your teamwork skills.';
@@ -109,3 +114,64 @@ it('loads Bootstrap script on component mount', async () => {
     fireEvent.click(getByText('Generate Suggestions'));
     await waitFor(() => expect(getByText('Error fetching CV suggestions: Failed to generate CV suggestions., Stack: undefined')).toBeInTheDocument());
   });
+describe('sendCVRequest', () => {
+  it('successfully makes an API call', async () => {
+    const mockResponse = { data: { suggestions: 'Test suggestion' } };
+    axios.post.mockResolvedValue(mockResponse);
+    const response = await sendCVRequest('Software Engineer', 'My CV content');
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription: 'Software Engineer', userCV: 'My CV content' });
+    expect(response).toEqual(mockResponse);
+  });
+  it('processes a response with suggestions correctly', () => {
+    const mockResponse = { data: { suggestions: 'Excellent teamwork skills.' } };
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setCvSuggestions).toHaveBeenCalledWith('Excellent teamwork skills.');
+    expect(setError).toHaveBeenCalledWith('');
+  });
+
+  it('handles a response without suggestions (error case)', () => {
+    const mockResponse = {};
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+
+  it('handles null or undefined response correctly', () => {
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(null, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+    processCVResponse(undefined, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+
+  it('handles failure in API call', async () => {
+    axios.post.mockRejectedValue(new Error('API call failed'));
+    await expect(sendCVRequest('Software Engineer', 'My CV content')).rejects.toThrow('API call failed');
+  });
+});
+/**
+  it('processes a response with suggestions correctly', () => {
+    const mockResponse = { data: { suggestions: 'Test suggestion' } };
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setCvSuggestions).toHaveBeenCalledWith('Test suggestion');
+    expect(setError).toHaveBeenCalledWith('');
+  });
+
+  it('handles a response without suggestions (error case)', () => {
+    const mockResponse = {};
+    const setCvSuggestions = jest.fn();
+    const setError = jest.fn();
+    processCVResponse(mockResponse, setCvSuggestions, setError);
+    expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
+    expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+});

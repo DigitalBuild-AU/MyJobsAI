@@ -36,8 +36,30 @@ describe('Applications Component', () => {
    */
   test('updates an existing application and reflects changes', () => {
  * Tests that updating an existing application correctly reflects the changes.
+test('dynamically loads Bootstrap script', async () => {
+  render(<Applications />);
+  await waitFor(() => expect(document.querySelector('script[src*="bootstrap.bundle.min.js"]')).toBeInTheDocument());
+  expect(console.log).toHaveBeenCalledWith('Bootstrap 5 script loaded successfully.');
+});
+test('includes Navbar in the rendering', () => {
+  const { getByText } = render(<Applications />);
+  expect(getByText(/Dynamic Navbar Inclusion is handled by the Navbar component/i)).toBeInTheDocument();
+});
+test('renders migrated content from applications.html', () => {
+  const { getByText } = render(<Applications />);
+  expect(getByText(/Additional page content can be added here/i)).toBeInTheDocument();
+});
  */
   test('updates an existing application and reflects changes', () => {
+    // Additional scenario: Updating the company name of an existing application
+    fireEvent.change(getByLabelText('Company Name'), { target: { value: 'Innovative Tech Solutions' } });
+    fireEvent.click(getByText('Update'));
+    expect(screen.getByText('Senior Software Engineer at Innovative Tech Solutions')).toBeInTheDocument();
+
+    // Additional scenario: Updating the application status
+    fireEvent.change(getByLabelText('Status'), { target: { value: 'Interview Scheduled' } });
+    fireEvent.click(getByText('Update'));
+    expect(screen.getByText('Interview Scheduled')).toBeInTheDocument();
 /**
  * Tests that deleting an application correctly updates the component's state.
  */
@@ -72,6 +94,19 @@ describe('Applications Component', () => {
     // Simulating deletion attempt on a non-existent application
     fireEvent.click(screen.getByText('Delete', { selector: 'button[data-id="nonexistent"]' }));
     expect(screen.getByText('Application not found')).toBeInTheDocument();
+  });
+  test('attempts to update an application with invalid data', () => {
+    render(<Applications />);
+    // Simulating updating an application with invalid job title
+    fireEvent.click(screen.getByText('Edit', { selector: 'button' }));
+    fireEvent.change(getByLabelText('Job Title'), { target: { value: '' } }); // Empty job title
+    fireEvent.click(getByText('Update'));
+    expect(screen.getByText('Job title cannot be empty')).toBeInTheDocument();
+
+    // Simulating updating an application with invalid company name
+    fireEvent.change(getByLabelText('Company Name'), { target: { value: '' } }); // Empty company name
+    fireEvent.click(getByText('Update'));
+    expect(screen.getByText('Company name cannot be empty')).toBeInTheDocument();
   });
 });
     expect(screen.getByText('Application not found')).toBeInTheDocument();

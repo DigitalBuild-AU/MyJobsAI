@@ -1,3 +1,8 @@
+/**
+ * AnalyticsComponent: A component for displaying analytics data related to job applications.
+ * This component fetches data from a backend API and displays total applications, interviews scheduled, offers received, and average response time.
+ */
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -22,7 +27,10 @@ const AnalyticsComponent = () => {
         setAvgResponseTime(avgResponseTime);
       })
       .catch(error => {
-        setError('Failed to fetch analytics.');
+        setError('Unable to load data. Please try again later.');
+        console.error(`Error fetching analytics: ${error.message}, Stack: ${error.stack}`);
+      });
+  }, []);
         console.error(`Error fetching analytics: ${error.message}, Stack: ${error.stack}`);
       });
   }, []);

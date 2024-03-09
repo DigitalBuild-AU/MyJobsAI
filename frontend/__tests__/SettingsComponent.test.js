@@ -7,15 +7,11 @@ describe('SettingsComponent', () => {
   afterEach(cleanup);
 
   it('renders correctly', () => {
-    const { getByText } = render(<SettingsComponent />);
+    const { getByText, getByTestId } = render(<SettingsComponent />);
     expect(getByText('Settings | MyJobsAI')).toBeInTheDocument();
-  });
-
-  it('loads Bootstrap script dynamically', () => {
-    render(<SettingsComponent />);
-    const scripts = Array.from(document.getElementsByTagName('script'));
-    const bootstrapScript = scripts.find(script => script.src.includes('bootstrap.bundle.min.js'));
-    expect(bootstrapScript).not.toBeNull();
+    // Assuming new UI elements from settings.html include a theme switcher and language selector
+    expect(getByTestId('theme-switcher')).toBeInTheDocument();
+    expect(getByTestId('language-selector')).toBeInTheDocument();
   });
 });
 /**

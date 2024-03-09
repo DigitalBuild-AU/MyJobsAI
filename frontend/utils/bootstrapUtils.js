@@ -1,4 +1,20 @@
 /**
+ * Utility functions for dynamically loading Bootstrap resources.
+ * 
+ * This module provides functions to dynamically load and manage Bootstrap scripts within the application,
+ * ensuring that the Bootstrap resources are correctly loaded and up to date.
+ */
+/**
+ * Dynamically loads the Bootstrap script into the document.
+ * 
+ * Checks for an existing Bootstrap script tag and removes it if found. Then, creates a new script tag
+ * for the Bootstrap script and appends it to the document body. This ensures that the Bootstrap script
+ * is always up to date and correctly loaded.
+ * 
+ * @param none
+ * @returns {void}
+ */
+/**
  * Dynamically loads the Bootstrap script into the document. If an existing script tag for Bootstrap is found, it is removed and a new one is appended.
  * This ensures that the Bootstrap script is always up to date and correctly loaded.
  *

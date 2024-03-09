@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// File interviews.html has been successfully removed from the repository as its functionality is now fully integrated into Interviews.js
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /**

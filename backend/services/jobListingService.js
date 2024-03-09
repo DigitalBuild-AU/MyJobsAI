@@ -8,23 +8,30 @@ const addJobListing = async (jobListingData) => {
         console.log(`Job listing added: ${savedJobListing.jobTitle}`);
         return savedJobListing;
     } catch (error) {
-        console.error(`Error adding job listing: ${error.stack}`);
-        throw error;
+        return { error: `Error adding job listing: ${error.message}` };
     }
 };
 
 const findAllJobListings = async () => {
+/**
+ * Adds a new job listing to the database.
+ * @param {Object} jobListingData - The data for the new job listing.
+ * @returns {Object} The saved job listing object or an error object if the operation fails.
+ */
     try {
         const listings = await JobListing.find({});
         console.log(`Fetched all job listings, count: ${listings.length}`);
         return listings;
     } catch (error) {
-        console.error(`Error fetching all job listings: ${error.stack}`);
-        throw error;
+        return { error: `Error fetching all job listings: ${error.message}` };
     }
 };
 
 const findJobListingById = async (id) => {
+/**
+ * Retrieves all job listings from the database.
+ * @returns {Array} An array of job listings or an error object if the operation fails.
+ */
     try {
         const listing = await JobListing.findById(id);
         if (!listing) {
@@ -34,12 +41,16 @@ const findJobListingById = async (id) => {
         }
         return listing;
     } catch (error) {
-        console.error(`Error fetching job listing by ID: ${error.stack}`);
-        throw error;
+        return { error: `Error fetching job listing by ID: ${error.message}` };
     }
 };
 
 const updateJobListingById = async (id, updateData) => {
+/**
+ * Finds a job listing by its ID.
+ * @param {String} id - The ID of the job listing to find.
+ * @returns {Object|null} The found job listing object or null if not found, or an error object if the operation fails.
+ */
     try {
         const updatedListing = await JobListing.findByIdAndUpdate(id, updateData, { new: true });
         if (updatedListing) {
@@ -49,8 +60,7 @@ const updateJobListingById = async (id, updateData) => {
         }
         return updatedListing;
     } catch (error) {
-        console.error(`Error updating job listing: ${error.stack}`);
-        throw error;
+        return { error: `Error updating job listing: ${error.message}` };
     }
 };
 
@@ -64,8 +74,7 @@ const deleteJobListingById = async (id) => {
         }
         return deletedListing;
     } catch (error) {
-        console.error(`Error deleting job listing: ${error.stack}`);
-        throw error;
+        return { error: `Error deleting job listing: ${error.message}` };
     }
 };
 
@@ -88,16 +97,31 @@ const calculateAnalytics = async () => {
     ]);
 
     console.log('Analytics calculated successfully.');
+    return {
 
     return {
       totalApplications,
       interviewsScheduled,
+/**
+ * Calculates analytics based on user activities.
+ * @returns {Object} An object containing analytics data or an error object if the operation fails.
+ */
+    console.log('Analytics calculated successfully.');
+    return {
+
+    return {
+      totalApplications,
+      interviewsScheduled,
+/**
+ * Deletes a job listing by its ID.
+ * @param {String} id - The ID of the job listing to delete.
+ * @returns {Object|null} The deleted job listing object or null if not found, or an error object if the operation fails.
+ */
       offersReceived,
       avgResponseTime: avgResponseTime.length ? avgResponseTime[0].avgResponseInDays.toFixed(2) : null
     };
   } catch (error) {
-    console.error(`Error calculating analytics: ${error.stack}`);
-    throw error;
+        return { error: `Error calculating analytics: ${error.message}` };
   }
 };
 

@@ -11,6 +11,15 @@ describe('App.js Tests', () => {
   });
 
   describe('sendEmail Functionality', () => {
+/**
+ * Tests if the generateCoverLetter function exists and is callable.
+ * 
+ * This test verifies the presence and type of the generateCoverLetter function
+ * within the App component. It does not have inputs, outputs, or side effects.
+ */
+test('generateCoverLetter function exists and is callable', () => {
+  expect(typeof App.generateCoverLetter).toBe('function');
+});
     beforeEach(() => {
       document.body.innerHTML = `
         <input id="emailTo" value="test@example.com" />

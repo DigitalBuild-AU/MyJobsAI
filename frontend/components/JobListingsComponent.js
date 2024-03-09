@@ -1,6 +1,7 @@
 /**
  * JobListingsComponent.js
- * Displays job listings and allows users to filter and apply to jobs. Users can also add new job listings.
+ * This file defines the JobListingsComponent, which displays job listings and provides functionalities for users to filter, apply, and add new job listings.
+ * It serves as a key component in the application's job search and application process.
  */
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
@@ -23,11 +24,12 @@ const JobListingsComponent = () => {
 
   useEffect(() => {
 // Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
-
     loadBootstrapScript();
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
 
+  /**
+   * Handles changes in form inputs by updating the component's state.
+   * @param {Object} event - The event object from the form input change.
+   */
   const handleChange = (event) => {
 
 /**
@@ -42,11 +44,7 @@ import { loadBootstrapScript } from '../../utils/bootstrapUtils';
     }
   };
 
-  const handleSubmit = (event) => {
-   * Submits the new job listing form, adding the listing to the state and resetting form fields.
-   * @param {Object} event - The event object from the form submission.
-   */
-  const handleSubmit = (event) => {
+  // Duplicate handleSubmit declaration removed
     event.preventDefault();
     const newJobListing = { jobURL, jobTitle, company, location, jobDescription, jobType, salaryAmount, salaryPeriod, includesSuper, status };
     setJobListings([...jobListings, newJobListing]);
@@ -70,7 +68,32 @@ import { loadBootstrapScript } from '../../utils/bootstrapUtils';
         <h1>Job Listings | MyJobsAI</h1>
         {/* Filter and Add Job Listing Forms */}
         <div id="jobListingsForms">
-          {/* Form elements and inputs for filtering and adding job listings */}
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={jobURL} onChange={(e) => setJobURL(e.target.value)} placeholder="Job URL" />
+            <input type="text" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="Job Title" />
+            <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" />
+            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
+            <textarea value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="Job Description"></textarea>
+            <input type="text" value={jobType} onChange={(e) => setJobType(e.target.value)} placeholder="Job Type" />
+  /**
+   * Handles the submission of the new job listing form, adding the listing to the state and resetting form fields.
+   * @param {Event} event - The event object to prevent the default form submission behavior.
+   * @returns {void} - This function does not return a value but updates the component's state.
+   */
+            <input type="number" value={salaryAmount} onChange={(e) => setSalaryAmount(e.target.value)} placeholder="Salary Amount" />
+            <select value={salaryPeriod} onChange={(e) => setSalaryPeriod(e.target.value)}>
+              <option value="">Select Salary Period</option>
+              <option value="hourly">Hourly</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="annually">Annually</option>
+            </select>
+            <label>
+              <input type="checkbox" checked={includesSuper} onChange={(e) => setIncludesSuper(e.target.checked)} /> Includes Super
+            </label>
+            <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} placeholder="Status" />
+            <button type="submit">Add Job Listing</button>
+          </form>
         </div>
         <div className="table-responsive">
           <table className="table">

@@ -31,8 +31,6 @@ const CVHelperComponent = () => {
  * CVHelperComponent.js
  * This component provides an interface for users to input their job description and CV, and receive AI-generated suggestions for improving their CV.
  */
-import { loadBootstrapScript } from '../../utils/bootstrapUtils';
-// Importing loadBootstrapScript to dynamically load Bootstrap for component styling and functionality
         <div className="mt-3">
           <h3>CV Suggestions:</h3>
           <p id="cvSuggestionsOutput">{cvSuggestionsOutput}</p>
