@@ -127,6 +127,7 @@ describe('generateCoverLetter Functionality', () => {
     const expectedResponse = 'Please provide a valid userName.';
     expect(generateCoverLetter(null, jobTitle, companyName)).toEqual(expectedResponse);
   });
+    // Tests the integration of the useEmailSender hook with the EmailComponent. This includes mocking the hook for both successful and failed email sending scenarios and verifying the expected outcomes are rendered correctly in the component.
     test('useEmailSender hook integration with EmailComponent', async () => {
       // Mock the useEmailSender hook for success scenario
       useEmailSender.mockImplementation(() => jest.fn(async () => 'Email sent successfully'));
