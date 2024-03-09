@@ -10,19 +10,32 @@ const User = require('../models/User'); // User model for database interaction
  * @throws {Error} If authentication fails.
  */
 const auth = async (req, res, next) => {
-const { handleError } = require('../middleware/middlewareUtils');
-  try {
-    // Extract token from Authorization header by removing 'Bearer '
-    const token = req.header('Authorization').replace('Bearer ', '');
-    // Verify the token using JWT_SECRET & decode it
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // Find the user in the database using decoded userId and token
-    const user = await User.findOne({ _id: decoded.userId, 'tokens.token': token });
 
-    // If no matching user found, user is not authenticated
-    if (!user) {
-      throw new Error();
+/**
+ * Verifies and decodes the JWT token.
+ * @param {string} token - The JWT token to verify.
+ * @returns {Object} The decoded token.
+ * @throws {Error} If token verification fails.
+ */
+  
+const verifyToken = (token) => {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    throw new Error('Invalid or expired token.');
+  }
+};
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+    if (!token) {
+      throw new Error('Token not provided.');
     }
+    const decoded = verifyToken(token);
+    const user = await User.findOne({ _id: decoded.userId, 'tokens.token': token });
+    if (!user) {
+      throw new Error('User not found or session expired.');
+    }
+    req.user = user;
 
     // Attach authenticated user to the request object
     req.user = user;
