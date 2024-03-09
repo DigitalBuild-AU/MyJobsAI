@@ -1,4 +1,5 @@
 /**
+ * All global and component-specific styles have been successfully migrated from `styles.css` and `jobListingsStyle.css` to styled-components. These CSS files are now marked for deletion.
  * This file defines global styles for the MyJobsAI application using styled-components. It includes styles for body,
  * code elements, and custom CSS variables for consistent theming across the app.
  */
