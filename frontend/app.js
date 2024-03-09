@@ -18,12 +18,9 @@ import GlobalStyles from './styles/GlobalStyles';
 
 
 /**
- * Sends an email with the provided details.
- * Parameters:
- * - to (string): The recipient's email address.
- * - subject (string): The email's subject.
- * - body (string): The email's body content.
- * Returns: None.
+ * Sends an email using the values entered in the form fields. It makes a POST request to the backend API with the email details and updates the DOM based on the response.
+ * Parameters: This function does not take parameters directly; it retrieves the recipient's email address, subject, and body content from the DOM.
+ * Return value: This function does not return a value. It updates the DOM with the success or failure message based on the email sending attempt.
  */
 /**
  * Generates a cover letter based on user input.
