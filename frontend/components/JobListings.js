@@ -1,6 +1,7 @@
 /**
- * JobListings: A component for viewing and filtering job listings.
- * Allows users to filter listings by location, job type, and keywords, and view the filtered results.
+ * JobListings.js
+ * This file contains the JobListings component, which is responsible for rendering a list of job listings on the UI.
+ * It allows users to filter job listings based on various criteria such as location, job type, and keywords.
  */
 
 import React, { useState, useEffect } from 'react';
