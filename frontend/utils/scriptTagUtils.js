@@ -3,14 +3,8 @@
  */
 
 /**
- * Removes the existing Bootstrap script tag from the document.
- * This function searches through all <script> tags in the document and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
- * It is used to ensure that there are no duplicate Bootstrap script tags in the document.
- */
-
-/**
  * Removes the Bootstrap script tag from the document.
- * This function iterates through all script tags and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
+ * Iterates through all script tags and removes the one that includes 'bootstrap.bundle.min.js' in its src attribute.
  */
 const removeBootstrapScriptTag = () => {
     const scriptTags = document.getElementsByTagName('script');
