@@ -9,6 +9,9 @@ const { addJobListing, findAllJobListings, findJobListingById, updateJobListingB
 jest.mock('../models/JobListing');
 jest.mock('../models/UserActivity');
 
+/**
+ * Tests for addJobListing function. Ensures that job listings can be added correctly and handles errors as expected.
+ */
 describe('addJobListing', () => {
   beforeEach(() => {
     JobListing.mockClear();
