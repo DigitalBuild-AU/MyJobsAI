@@ -41,8 +41,12 @@ function useEmailSender() {
   return sendEmail;
 }
 
+/**
+ * Main React component for the MyJobsAI application.
+ * Sets up the application's routing using React Router and renders the appropriate components
+ * based on the current URL path. It also provides the `sendEmail` function to the EmailComponent.
+ */
 function App() {
- * Main React component for the application.
  * This component sets up the router and defines routes for the application, integrating various components
  * for job application tracking and related features. It also utilizes the useEmailSender hook for email functionality.
  */
