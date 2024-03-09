@@ -8,7 +8,7 @@ Parameters:
 
 This function updates the CV suggestions state if the response contains suggestions, otherwise, it updates the error state.
 """
-import axios from 'axios';
+// Axios removed due to duplicate import statement.
 
 """
 Sends a CV analysis request to the backend.
@@ -84,4 +84,3 @@ export { sendCVRequest, processCVResponse };
 }
 
 export { sendCVRequest, processCVResponse };
-
