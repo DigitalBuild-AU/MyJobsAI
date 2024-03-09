@@ -5,10 +5,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import App from '../app';
+import App from '../App';
 import axios from 'axios';
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from '../app';
+import App from '../App';
 jest.mock('axios');
 
 /**
