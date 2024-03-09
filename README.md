@@ -39,3 +39,15 @@ As part of our continuous effort to improve the application's interactivity and 
 Significant changes made during this migration include the integration of state management using React's useState and useEffect hooks for handling interview data, and the enhancement of the user interface for scheduling interviews. These improvements underscore our commitment to leveraging modern web development practices to deliver a superior user experience.
 - **Bootstrap**: Employed for responsive design and utilizing a wide range of components for the UI.
 - **Styled-Components**: Recommended for styling, offering enhanced CSS capabilities and easier maintenance of styles within JavaScript files.
+## Project Structure Update
+
+As part of our ongoing efforts to streamline the development process and adhere to best practices, we have consolidated the `app.js` and `App.js` files into a single `App.js` file. This change was made to eliminate confusion and potential errors arising from having two similarly named entry point files, especially on case-sensitive file systems.
+
+### Reasoning Behind the Change
+The presence of both `app.js` and `App.js` in our project structure posed a risk for import errors and confusion regarding the entry point of the application. By consolidating these files into a single `App.js`, we aim to clarify the entry point, thereby enhancing the maintainability and readability of our codebase.
+
+### Implications for the Project Structure
+This consolidation simplifies the project structure, making it easier for new developers to understand the entry point of the application. It also reduces the potential for errors related to file naming on different operating systems.
+
+### Necessary Steps for Developers
+Developers should now use `App.js` as the sole entry point for the React application. Any references to `app.js` should be updated to `App.js`. This change may require developers to update their local development environments to ensure consistency with the updated project structure.
