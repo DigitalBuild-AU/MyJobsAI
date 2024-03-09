@@ -12,6 +12,16 @@ import EmailComponent from './components/EmailComponent';
 import AnalyticsComponent from './components/AnalyticsComponent';
 
 function useEmailSender() {
+/**
+ * Main application file for MyJobsAI.
+ * This file sets up the router and defines routes for the application, integrating various components
+ * for job application tracking and related features. It also includes a custom hook for sending emails.
+ */
+ * Custom hook for sending emails.
+ * This hook provides functionality to send emails by making a POST request to the backend.
+ * @returns {Function} A function that can be used to send emails, accepting `to`, `subject`, and `body` as parameters.
+ */
+function useEmailSender() {
   const sendEmail = async (to, subject, body) => {
     try {
       const response = await axios.post('http://localhost:3000/api/email/send', { to, subject, body });
@@ -23,6 +33,11 @@ function useEmailSender() {
   return sendEmail;
 }
 
+function App() {
+ * Main React component for the application.
+ * This component sets up the router and defines routes for the application, integrating various components
+ * for job application tracking and related features. It also utilizes the useEmailSender hook for email functionality.
+ */
 function App() {
   const sendEmail = useEmailSender();
 
