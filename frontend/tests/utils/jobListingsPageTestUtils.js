@@ -37,3 +37,25 @@ export const mockUseState = (initialState, setFiltersMock, setErrorStateMock) =>
     .mockImplementationOnce(() => [initialState, setFiltersMock])
     .mockImplementationOnce(() => [initialState, setErrorStateMock]);
 };
+export const getMockJobListings = () => {
+  return [
+    { id: 1, title: 'Software Engineer', company: 'Tech Corp', status: 'open' },
+    { id: 2, title: 'Product Manager', company: 'Innovate LLC', status: 'closed' },
+    { id: 3, title: 'UX Designer', company: 'Design Studio', status: 'open' }
+  ];
+};
+
+export const getMockFilters = () => {
+  return { status: 'open', company: 'Tech Corp' };
+};
+
+export const assertListingsMatchFilters = (listings, filters) => {
+  listings.forEach(listing => {
+    if (filters.status) {
+      expect(listing.status).toEqual(filters.status);
+    }
+    if (filters.company) {
+      expect(listing.company).toEqual(filters.company);
+    }
+  });
+};
