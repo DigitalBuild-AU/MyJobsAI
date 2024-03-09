@@ -1,5 +1,23 @@
+/**
+ * CVHelperPage.js
+ * 
+ * This file contains the CVHelperPage component, a React component designed to assist users in creating or improving their CVs. It provides a user-friendly interface for users to input job descriptions and receive suggestions or improvements for their CVs.
+ * 
+ * Main functionalities include:
+ * - State management using useState for handling job descriptions, user CVs, and CV suggestions.
+ * - Side effects handling using useEffect for initializing components or making HTTP requests.
+ * - Making HTTP requests using axios to fetch CV suggestions based on user inputs.
+ * 
+ * Significant dependencies:
+ * - React: Used for creating the component and managing its lifecycle.
+ * - useState, useEffect: React hooks for state management and handling side effects.
+ * - axios: Used for making HTTP requests to the backend API.
+ * 
+ * This component plays a crucial role in the MyJobsAI application by enabling users to improve their CVs based on job descriptions, enhancing their chances of securing job opportunities.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { removeBootstrapScriptTag, appendBootstrapScriptTag } from '../utils/scriptTagUtils';
 
 const CVHelperPage = () => {
   const [jobDescription, setJobDescription] = useState('');
@@ -113,18 +131,9 @@ const CVHelperPage = () => {
    * @returns {void} Modifies the global document state by altering script tags.
    */
 const handleBootstrapScript = () => {
-        const scriptTags = document.getElementsByTagName('script');
-        for (let i = 0; i < scriptTags.length; i++) {
-            if (scriptTags[i].src.includes('bootstrap.bundle.min.js')) {
-                scriptTags[i].remove();
-                break;
-            }
-        }
-
-        const newBootstrapScript = document.createElement('script');
-        newBootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
-        document.body.appendChild(newBootstrapScript);
-    };
+    removeBootstrapScriptTag();
+    appendBootstrapScriptTag();
+};
 /**
  * Fetches the navbar content from a static HTML file and sets it in the state.
  * Utilizes Axios for the HTTP GET request. Logs the success or error in the console.

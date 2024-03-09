@@ -35,6 +35,7 @@ const Navbar = () => {
                   <Link className='nav-link' to='/interviews'>Interviews</Link>
               </li>
               <li className='nav-item'>
+import NavLinks from './NavLinks';
 /**
  * Navbar function returns a navigation bar component.
  * It allows users to navigate between different sections of the application.

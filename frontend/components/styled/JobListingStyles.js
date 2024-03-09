@@ -1,3 +1,12 @@
+/**
+ * This file contains styled components for the Job Listings feature of the MyJobsAI application.
+ * It defines the visual structure and style for individual job listings and their containers, enhancing the user interface.
+ * Main components include:
+ * - JobListingsContainer: A container that wraps around all job listings, providing consistent spacing and alignment.
+ * - JobListingCard: Styled component for individual job listings, including styling for background, shadow, and spacing.
+ * - JobListingTitle: Defines the style for the title of each job listing, utilizing the primary color for emphasis.
+ */
+
 import styled from 'styled-components';
 
 export const JobListingsContainer = styled.div\`
