@@ -19,6 +19,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 /**
+* Generates a cover letter based on a given job description and user's CV using the OpenAI API.
+* @param {string} jobDescription - The job description to base the cover letter on.
+* @param {string} userCV - The user's CV to incorporate into the cover letter.
+* @returns {Promise<string>} A promise that resolves to the generated cover letter text.
+*//**
  * Generates a cover letter based on a given job description and user's CV using the OpenAI API.
  * @param {string} jobDescription - The job description to base the cover letter on.
  * @param {string} userCV - The user's CV to incorporate into the cover letter.
