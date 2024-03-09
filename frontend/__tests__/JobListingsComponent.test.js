@@ -25,8 +25,8 @@ describe('JobListingsComponent', () => {
   it('loads Bootstrap script dynamically', () => {
     render(<JobListingsComponent />);
     const scripts = Array.from(document.getElementsByTagName('script'));
-    const bootstrapScript = scripts.find(script => script.src.includes('bootstrap.bundle.min.js'));
-    expect(bootstrapScript).not.toBeNull();
+    const bootstrapScriptExists = scripts.some(script => script.src.includes('bootstrap.bundle.min.js'));
+    expect(bootstrapScriptExists).toBeTruthy();
   });
 
   it('updates state on input change', () => {
