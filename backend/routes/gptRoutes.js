@@ -56,14 +56,10 @@ router.post('/cv_suggestions', async (req, res) => {
 });
 
 /**
- * POST route for generating a cover letter.
-/**
- * Handles POST requests to generate a customized cover letter based on a job description and user's CV.
- * @description This route processes POST requests to generate a cover letter that is customized based on the user's CV and the job description provided.
- * @param {Object} req - The request object containing 'jobDescription' (String) and 'userCV' (String).
- * @param {Object} res - The response object used to return the generated cover letter or an error message.
- * @returns {void} - Sends a JSON response containing the generated cover letter.
- * @throws {Error} - Returns a 500 status code with an error message if the request fails.
+ * POST /cover_letter
+ * Purpose: Generates a customized cover letter based on the user's CV and a given job description.
+ * Request parameters: jobDescription (String), userCV (String)
+ * Response: JSON object containing the customized cover letter.
  */
 
  */
