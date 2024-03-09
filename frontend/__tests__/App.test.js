@@ -1,3 +1,6 @@
+/**
+ * Tests for the App component in the MyJobsAI application. This file includes tests for routing, application functionality such as generating cover letters, sending emails, and ensuring that components interact correctly with hooks and other components.
+ */
 import { generateCoverLetter } from '../app';
 /**
  * Tests for the App component. This includes routing tests to ensure navigation works as expected
@@ -141,6 +144,15 @@ describe('generateCoverLetter Functionality', () => {
       });
       expect(getByText('Email sent successfully')).toBeInTheDocument();
     });
+/**
+ * Test suite for the generateCoverLetter functionality within the App component.
+ * This suite verifies the correct generation of cover letters based on provided parameters.
+ * 
+ * @param {string} userName - The name of the user.
+ * @param {string} jobTitle - The title of the job being applied for.
+ * @param {string} companyName - The name of the company receiving the application.
+ * @returns {string} The generated cover letter.
+ */
 
       // Mock the useEmailSender hook for failure scenario
 describe('useEmailSender Hook', () => {
@@ -176,6 +188,15 @@ describe('useEmailSender Hook', () => {
   test('EmailComponent correctly interacts with mocked sendEmail function', async () => {
     const mockSendEmail = jest.fn();
     jest.mock('../src/useEmailSender', () => ({
+/**
+ * Test suite for the useEmailSender custom hook.
+ * This suite verifies that emails can be sent successfully, handles errors correctly, and returns appropriate success messages.
+ * 
+ * @param {string} to - The recipient's email address.
+ * @param {string} subject - The subject of the email.
+ * @param {string} body - The body content of the email.
+ * @returns {Promise<string>} A promise that resolves to a success message upon successful email sending.
+ */
       __esModule: true,
       default: jest.fn(() => mockSendEmail),
     }));
@@ -208,6 +229,10 @@ describe('useEmailSender Hook', () => {
     const companyName = { name: 'Tech Innovations Inc.' }; // Non-string parameter
     // Assuming the function checks for string type and returns a generic error message for non-string inputs
     const expectedResponse = 'Invalid input types. Please provide strings for all parameters.';
+/**
+ * Test case for verifying that the EmailComponent correctly interacts with the mocked sendEmail function.
+ * This test ensures that when the 'Send Email' button is clicked, the mocked sendEmail function is called as expected.
+ */
     expect(generateCoverLetter(userName, jobTitle, companyName)).toEqual(expectedResponse);
   });
 });
