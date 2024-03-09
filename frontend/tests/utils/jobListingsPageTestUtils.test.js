@@ -51,6 +51,13 @@ describe('assertListingsMatchFilters tests', () => {
     const listings = [
       { id: 3, title: 'UX Designer', company: 'Design Studio', status: 'open' }
     ];
+/**
+ * Asserts that a given array of job listings matches specified filter criteria.
+ * - Inputs: 
+ *   - listings: Array of job listings to be tested.
+ *   - filters: Filter criteria to be applied to the listings.
+ * - Behavior: Throws an error if any listing does not match the filter criteria.
+ */
     const filters = {};
     expect(() => assertListingsMatchFilters(listings, filters)).not.toThrow();
   });
