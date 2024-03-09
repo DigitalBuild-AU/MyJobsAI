@@ -29,6 +29,7 @@ const Navbar = () => {
                   <Link className='nav-link' to='/interviews'>Interviews</Link>
               </li>
               <li className='nav-item'>
+import NavLinks from './NavLinks';
 /**
  * This file defines the Navbar component used across the MyJobsAI application.
  * It renders the main navigation bar allowing users to navigate between different sections of the application.
@@ -63,29 +64,7 @@ const Navbar = () => {
           <span className='navbar-toggler-icon'></span>
       </button>
       <div className='collapse navbar-collapse' id='navbarNav'>
-          <ul className='navbar-nav'>
-              <li className={`nav-item ${activeLink === 'dashboard' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/' onClick={() => handleSetActiveLink('dashboard')}>Dashboard</Link>
-              </li>
-              <li className={`nav-item ${activeLink === 'jobListings' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/jobListings' onClick={() => handleSetActiveLink('jobListings')}>Job Listings</Link>
-              </li>
-              <li className={`nav-item ${activeLink === 'applications' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/applications' onClick={() => handleSetActiveLink('applications')}>Applications</Link>
-              </li>
-              <li className={`nav-item ${activeLink === 'cvHelper' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/cvHelper' onClick={() => handleSetActiveLink('cvHelper')}>CV Helper</Link>
-              </li>
-              <li className={`nav-item ${activeLink === 'coverLetter' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/coverLetter' onClick={() => handleSetActiveLink('coverLetter')}>Cover Letter</Link>
-              </li>
-              <li className={`nav-item ${activeLink === 'interviews' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/interviews' onClick={() => handleSetActiveLink('interviews')}>Interviews</Link>
-              </li>
-              <li className={`nav-item ${activeLink === 'settings' ? 'active' : ''}`}>
-                  <Link className='nav-link' to='/settings' onClick={() => handleSetActiveLink('settings')}>Settings</Link>
-              </li>
-          </ul>
+          <NavLinks activeLink={activeLink} setActiveLink={handleSetActiveLink} />
       </div>
     </nav>
   );
