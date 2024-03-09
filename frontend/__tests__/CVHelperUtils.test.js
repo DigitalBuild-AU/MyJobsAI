@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { processCVResponse } from '../components/CVHelperUtils';
 
 describe('CVHelperUtils Functionality Tests', () => {
@@ -37,5 +38,50 @@ describe('CVHelperUtils Functionality Tests', () => {
 
     expect(setError).toHaveBeenCalledWith('Failed to fetch CV suggestions. Please try again.');
     expect(setCvSuggestions).toHaveBeenCalledWith('');
+  });
+});
+describe('sendCVRequest Functionality Tests', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
+
+  test('sendCVRequest with successful response', async () => {
+    // Mocking axios post method to simulate a successful response
+    jest.mock('axios');
+    axios.post = jest.fn().mockResolvedValue({
+      data: {
+        suggestions: 'Your CV is well-tailored for this job.'
+      }
+    });
+
+    const { sendCVRequest } = require('../components/CVHelperUtils');
+    const jobDescription = 'Software Engineer';
+    const userCV = 'Experienced in JavaScript';
+
+    // Call the function and verify the response matches the mock
+    const response = await sendCVRequest(jobDescription, userCV);
+    expect(response).toEqual({
+      data: {
+        suggestions: 'Your CV is well-tailored for this job.'
+      }
+    });
+  });
+
+  test('sendCVRequest with error response', async () => {
+    // Mocking axios post method to simulate an error response
+    jest.mock('axios');
+    axios.post = jest.fn().mockRejectedValue(new Error('Network error'));
+
+    const { sendCVRequest } = require('../components/CVHelperUtils');
+    const jobDescription = 'Software Engineer';
+    const userCV = 'Experienced in JavaScript';
+
+    // Call the function and expect it to throw or return an error
+    try {
+      await sendCVRequest(jobDescription, userCV);
+    } catch (error) {
+      expect(error.message).toEqual('Network error');
+    }
   });
 });
