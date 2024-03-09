@@ -1,3 +1,7 @@
+/**
+ * Settings: A component for managing application settings.
+ * Allows users to customize UI preferences and other configurable settings.
+ */
 import React, { useEffect, useContext } from 'react';
 import Navbar from './Navbar';
 
@@ -5,6 +9,10 @@ const Settings = () => {
   /**
    * Settings component allows users to customize application settings.
    * This includes loading and managing UI preferences and other configurable settings.
+   */
+  useEffect(() => {
+   * useEffect hook to manage the Bootstrap script for the Settings component.
+   * Adds the Bootstrap script on mount and removes it on unmount.
    */
   useEffect(() => {
     const bootstrapScriptTag = document.querySelector('script[src*="bootstrap.bundle.min.js"]');
