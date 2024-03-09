@@ -10,8 +10,7 @@ const emailRoutes = require('./routes/emailRoutes'); // Import Email routes
 const interviewRoutes = require('./routes/interviewRoutes'); // Import Interview routes
 const analyticsRoutes = require('./routes/analyticsRoutes'); // Analytics routes import
 const fetchJobInfoRoutes = require('./routes/fetchJobInfoRoutes'); // Import Fetch Job Info routes
-const https = require('https');
-const fs = require('fs');
+const { startSecureServer } = require('./utils/startSecureServer');
 const { setupSecurity } = require('./middleware/securityConfig');
 const { errorHandler } = require('./middleware/errorHandlingMiddleware');
 const { debugLog } = require('./utils/debugLogger');
@@ -29,7 +28,6 @@ app.use((req, res, next) => {
 // Serve frontend static files
 app.use(express.static('frontend'));
 debugLog('Static files middleware for frontend setup completed.');
-
 // Serve static files like 'quotes.json' from the 'public' directory
 app.use(express.static('public'));
 debugLog('Static files middleware for public directory setup completed.');
@@ -62,19 +60,5 @@ app.use('/api/dashboard', dashboardRoutes); // Setup Dashboard routes
 
 app.use(errorHandler);
 app.use(errorLogger);
-const sslOptions = {
-  key: fs.readFileSync(process.env.SSL_KEY_PATH),
-  cert: fs.readFileSync(process.env.SSL_CERT_PATH)
-};
-https.createServer(sslOptions, app).listen(PORT, () => {
-  debugLog(`Server is running on port ${PORT}`);
-}).on('error', (err) => {
-  debugLog(`Server start-up error: ${err}, Stack: ${err.stack}`, err, true); // Ensure detailed logging for server start-up errors
-});
-
-app.listen(PORT, () => {
-  debugLog(`Server is running on port ${PORT}`);
-}).on('error', (err) => {
-  debugLog(`Server start-up error: ${err}, Stack: ${err.stack}`, err, true); // Ensure detailed logging for server start-up errors
-});
+startSecureServer(app, PORT);
 app.use(errorLogger);
