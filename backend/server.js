@@ -10,6 +10,10 @@ const emailRoutes = require('./routes/emailRoutes'); // Import Email routes
 const interviewRoutes = require('./routes/interviewRoutes'); // Import Interview routes
 const analyticsRoutes = require('./routes/analyticsRoutes'); // Analytics routes import
 const fetchJobInfoRoutes = require('./routes/fetchJobInfoRoutes'); // Import Fetch Job Info routes
+const https = require('https');
+const fs = require('fs');
+const { setupSecurity } = require('./middleware/securityConfig');
+const { errorHandler } = require('./middleware/errorHandlingMiddleware');
 const { debugLog } = require('./utils/debugLogger');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Import Dashboard routes
 const errorLogger = require('./middleware/errorLogger');
@@ -48,6 +52,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/joblistings', jobListingsRouter);
 app.use('/api/auth', authRoutes);
+setupSecurity(app);
 app.use('/api/gpt', gptRoutes); // Setup GPT routes
 app.use('/api/email', emailRoutes); // Setup Email routes
 app.use('/api/interviews', interviewRoutes); // Setup Interview routes
@@ -55,7 +60,17 @@ app.use('/api', analyticsRoutes); // Setup Analytics routes
 app.use('/api/fetch-job-info', fetchJobInfoRoutes); // Setup Fetch Job Info routes
 app.use('/api/dashboard', dashboardRoutes); // Setup Dashboard routes
 
+app.use(errorHandler);
 app.use(errorLogger);
+const sslOptions = {
+  key: fs.readFileSync(process.env.SSL_KEY_PATH),
+  cert: fs.readFileSync(process.env.SSL_CERT_PATH)
+};
+https.createServer(sslOptions, app).listen(PORT, () => {
+  debugLog(`Server is running on port ${PORT}`);
+}).on('error', (err) => {
+  debugLog(`Server start-up error: ${err}, Stack: ${err.stack}`, err, true); // Ensure detailed logging for server start-up errors
+});
 
 app.listen(PORT, () => {
   debugLog(`Server is running on port ${PORT}`);
