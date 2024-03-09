@@ -5,8 +5,8 @@ import { describe, test, expect } from '@jest/globals';
 describe('GuideSteps Utility Functions', () => {
   test('getJobListingsPageGuideSteps returns correctly structured guide steps', () => {
 /**
- * This file contains tests for the guideSteps utility functions.
- * It ensures the correct structure and content of guide steps for different pages.
+ * Tests that getJobListingsPageGuideSteps function returns a correctly structured array of guide steps
+ * for the JobListingsPage, ensuring guide content and targeting is accurate.
  */
     const steps = getJobListingsPageGuideSteps();
     expect(steps).toHaveLength(4);
