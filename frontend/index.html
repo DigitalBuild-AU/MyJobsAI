@@ -3,29 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyJobsAI - Your AI-Powered Job Application Assistant</title>
-  <meta name="description" content="MyJobsAI: Your comprehensive job application tracker and assistant.">
-  
+  <title>MyJobsAI</title>
+  <!-- Global styles managed within React components -->
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">MyJobsAI</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Dashboard</a>
+  <div id="root"></div>
+  <!-- Essential Scripts -->
+  <script src="/static/js/bundle.js"></script>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/jobListings">Job Listings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/applications">Applications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/cvHelper">CV Helper</a>
+          <Link to="/interviews" className="nav-link">Interviews</Link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/coverLetter">Cover Letter</a>
@@ -34,34 +21,16 @@
           <a class="nav-link" href="/interviews">Interviews</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="settings.html">Settings</a>
+          <Link to="/settings" className="nav-link">Settings</Link>
         </li>
       </ul>
     </div>
   </nav>
   
-  <div class="container mt-4" id="dashboardOverview">
-    <h1>Dashboard Overview</h1>
-    <!-- Content will be dynamically injected here -->
-    <div id='analyticsSection'>
-      <h2>Analytics and Insights</h2>
-      <div id='analyticsContent'>
-        <!-- Analytics data will be dynamically injected here -->
-      </div>
-    </div>
-
-    <div id="emailForm">
-      <h2>Send an Email</h2>
-      <input type="text" id="emailTo" placeholder="Recipient's email" />
-      <input type="text" id="emailSubject" placeholder="Subject" />
-      <textarea id="emailBody" placeholder="Your message here"></textarea>
-      <button onclick="sendEmail()">Send Email</button>
-    </div>
-    <div id="emailResponse"></div>
-  </div>
-  </div>
+  <!-- Dashboard Overview and Email Form content will be managed by React components -->
   <div id="root"></div>
-
+  <!-- Removed Bootstrap Bundle JS as it is not required for React applications -->
+  <!-- Kept Axios CDN for direct HTTP requests outside React bundle -->
   <script src="/static/js/bundle.js"></script>
 </body>
 </html>
