@@ -66,26 +66,11 @@ describe('JobListingsComponent', () => {
     expect(rows).toHaveLength(2); // Includes header row
     expect(rows[1]).toHaveTextContent('Software Engineer');
     expect(rows[1]).toHaveTextContent('MyJobsAI');
-/**
- * Tests for JobListingsComponent.
- */
-    fireEvent.change(getByPlaceholderText('Company'), { target: { value: 'MyJobsAI' } });
-    fireEvent.click(getByText('Submit'));
-    const rows = getAllByRole('row');
-    expect(rows).toHaveLength(2); // Includes header row
-    expect(rows[1]).toHaveTextContent('Software Engineer');
-    expect(rows[1]).toHaveTextContent('MyJobsAI');
-  });
-
-  it('filters job listings based on input', () => {
-  * Tests if the JobListingsComponent filters job listings correctly based on input.
-  */
-/**
- * Test case: Updates state on input change.
- * This test verifies that the JobListingsComponent's state updates correctly when the input fields for 'Job Title', 'Company', 'Location', and 'Job Description' are changed.
- * Inputs: Simulated change events on input fields.
- * Expected Output: The component's state reflects the new values provided by the change events.
- */
+  /**
+   * Test case: Updates component state correctly on handleChange.
+   * This test simulates user interactions with both text and checkbox inputs and verifies that the component's state updates accordingly.
+   * It checks for the correct handling of text input for job titles and the toggle state of a checkbox input.
+   */
 it('updates component state correctly on handleChange', () => {
   const { getByLabelText, getByPlaceholderText } = render(<JobListingsComponent />);
   // Simulate text input change
@@ -97,21 +82,10 @@ it('updates component state correctly on handleChange', () => {
   expect(includesSuperCheckbox.checked).toBe(true);
   fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
   expect(includesSuperCheckbox.checked).toBe(false);
-});
-  it('updates component state correctly on handleChange', () => {
-    const { getByLabelText, getByPlaceholderText } = render(<JobListingsComponent />);
-    // Simulate text input change
-    fireEvent.change(getByPlaceholderText('Job Title'), { target: { name: 'jobTitle', value: 'Frontend Developer' } });
-    expect(getByPlaceholderText('Job Title').value).toBe('Frontend Developer');
-    // Simulate checkbox input change
-    const includesSuperCheckbox = getByLabelText('Includes Super');
-    fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: true } });
-    expect(includesSuperCheckbox.checked).toBe(true);
-/**
- * Test case: Filters job listings based on user input.
- * This test verifies that the JobListingsComponent correctly filters job listings when a user inputs filter criteria.
- * Inputs include simulated change events on filter fields, and the expected output is that only listings matching the criteria are displayed.
- */
+   * Test case: Updates component state correctly on handleChange.
+   * This test simulates user interactions with both text and checkbox inputs and verifies that the component's state updates accordingly.
+   * It checks for the correct handling of text input for job titles and the toggle state of a checkbox input.
+   */
 it('filters job listings based on input', () => {
     const mockListings = [
       { id: 1, title: 'Software Engineer', company: 'Tech Innovations', location: 'Remote' },
