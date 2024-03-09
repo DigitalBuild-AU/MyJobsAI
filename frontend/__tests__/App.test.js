@@ -1,8 +1,7 @@
-import { generateCoverLetter } from '../app';
 /**
- * Tests for the App component. This includes routing tests to ensure navigation works as expected
- * and tests for application functionality such as the sendEmail function.
+ * This file contains tests for the App component, including routing functionality, sendEmail functionality, and the generateCoverLetter function.
  */
+import { generateCoverLetter } from '../app';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
