@@ -1,3 +1,9 @@
+/**
+ * Navbar function returns a navigation bar component.
+ * It allows users to navigate between different sections of the application.
+ * No parameters.
+ * Returns a JSX element representing the navigation bar.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -30,11 +36,9 @@ const Navbar = () => {
               </li>
               <li className='nav-item'>
 /**
- * This file defines the Navbar component used across the MyJobsAI application.
- * It renders the main navigation bar allowing users to navigate between different sections of the application.
- */
-/**
- * Navbar function that returns a navigation bar component.
+ * Navbar function returns a navigation bar component.
+ * It allows users to navigate between different sections of the application.
+ * Utilizes React state to manage active navigation links.
  * No parameters.
  * Returns a JSX element representing the navigation bar.
  */
@@ -83,6 +87,11 @@ const Navbar = () => {
                   <Link className='nav-link' to='/interviews' onClick={() => handleSetActiveLink('interviews')}>Interviews</Link>
               </li>
               <li className={`nav-item ${activeLink === 'settings' ? 'active' : ''}`}>
+/**
+ * handleSetActiveLink function updates the active navigation link state.
+ * @param {string} link - The link to set as active.
+ * No return value.
+ */
                   <Link className='nav-link' to='/settings' onClick={() => handleSetActiveLink('settings')}>Settings</Link>
               </li>
           </ul>
