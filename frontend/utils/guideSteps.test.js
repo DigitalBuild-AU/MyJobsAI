@@ -3,6 +3,9 @@ import { getJobListingsPageGuideSteps, getInterviewFormGuideSteps } from './guid
 import { describe, test, expect } from '@jest/globals';
 
 describe('GuideSteps Utility Functions', () => {
+  /**
+   * Tests the getJobListingsPageGuideSteps function to ensure it returns a correctly structured array of guide steps for the JobListingsPage. This test verifies the length and content of the returned array.
+   */
   test('getJobListingsPageGuideSteps returns correctly structured guide steps', () => {
 /**
  * Tests that getJobListingsPageGuideSteps function returns a correctly structured array of guide steps
@@ -24,6 +27,9 @@ describe('GuideSteps Utility Functions', () => {
   test('getInterviewFormGuideSteps returns correctly structured guide steps', () => {
     const steps = getInterviewFormGuideSteps();
     expect(steps).toHaveLength(4);
+/**
+ * This file contains tests for the guideSteps utility functions. These functions generate structured guide steps for various pages within the MyJobsAI application. Each test ensures that the guide steps are correctly structured and contain accurate content and targeting information.
+ */
     expect(steps).toEqual([
       { target: '#jobTitleInput', content: 'Enter the job title for the interview you are scheduling. This field is required.' },
       { target: '#interviewDateInput', content: 'Select the date and time for the interview. This field is required.' },
@@ -35,3 +41,6 @@ describe('GuideSteps Utility Functions', () => {
 /**
  * Tests that getInterviewFormGuideSteps returns a correctly structured array of guide steps for the InterviewForm.
  */
+  /**
+   * Tests the getInterviewFormGuideSteps function to ensure it returns a correctly structured array of guide steps for the InterviewForm. This test verifies the length and content of the returned array, ensuring each step targets the correct form element and provides relevant guidance.
+   */
