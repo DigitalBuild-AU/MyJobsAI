@@ -50,4 +50,21 @@ The presence of both `app.js` and `App.js` in our project structure posed a risk
 This consolidation simplifies the project structure, making it easier for new developers to understand the entry point of the application. It also reduces the potential for errors related to file naming on different operating systems.
 
 ### Necessary Steps for Developers
+</section id="D">
+<section id="E">
+
+## Structural Changes
+
+As part of our recent project overhaul, we have made significant structural changes to improve the maintainability and functionality of MyJobsAI. Notably, the consolidation of `app.js` and `App.js` into a single file marks a critical step forward in simplifying our application's entry point.
+
+### Consolidation Process
+The decision to merge `app.js` and `App.js` was driven by the need to eliminate redundancy and confusion regarding the application's entry point. This move not only makes our project structure more intuitive but also aligns with React best practices by ensuring a single, clear entry point for the application.
+
+### Eliminating Direct DOM Manipulation
+In keeping with modern React development practices, we've also taken steps to refactor our utility functions. This involved transitioning away from direct DOM manipulation towards a more state and props-driven approach. Such a shift enhances component reusability and aligns our codebase with React's declarative nature.
+
+### Implications on the Application's Structure
+These structural changes have wide-ranging implications for our application, impacting everything from routing to global styles. By consolidating entry points and refactoring for React best practices, we've made our application easier to maintain and extend. Developers should note these changes, particularly when working on routing or implementing global styles, to ensure consistency and avoid potential issues.
+
+</section id="E">
 Developers should now use `App.js` as the sole entry point for the React application. Any references to `app.js` should be updated to `App.js`. This change may require developers to update their local development environments to ensure consistency with the updated project structure.
