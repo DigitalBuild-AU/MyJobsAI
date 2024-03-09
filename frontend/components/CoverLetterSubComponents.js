@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { postCoverLetter } from '../utils/apiHelpers';
 
+/**
+ * `CoverLetterForm` collects user inputs for generating a cover letter.
+ * Props:
+ * - setUserName: Function to set the user's name.
+ * - setJobDescription: Function to set the job description.
+ * - setUserSkills: Function to set the user's skills.
+ * - setUserExperience: Function to set the user's experience.
+ * - generateCoverLetter: Function to trigger the cover letter generation.
+ */
 const CoverLetterForm = ({ setUserName, setJobDescription, setUserSkills, setUserExperience, generateCoverLetter }) => (
   <div id="coverLetterAssistant">
     <input type="text" id="userName" placeholder="Your Name" onChange={(e) => setUserName(e.target.value)} />
