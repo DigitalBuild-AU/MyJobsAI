@@ -8,7 +8,7 @@ MyJobsAI is a job search management application aimed at simplifying the job app
 - **Application Tracking**: Monitor application statuses, with features for follow-ups and interview scheduling.
 - **Resume and Cover Letter Assistant**: Generate personalized cover letters and receive suggestions for resume enhancements.
 - **Dashboard Overview**: A summarized view of your job search progress.
-- **Interview Scheduler (Migrated)**: The functionality previously handled by the static `interviews.html` file has been fully migrated to the `Interviews.js` React component. This migration enhances the dynamic and interactive capabilities of scheduling and managing interview appointments.
+- **Interview Scheduler**: Utilize the `Interviews.js` React component for scheduling and managing interview appointments, offering a dynamic and interactive user experience.
 - **Task and Networking Tracker**: Organize tasks and manage professional networking contacts.
 
 ## Installation
@@ -34,9 +34,8 @@ Contributions are welcome! Feel free to submit pull requests or open issues to s
 MyJobsAI is released under the ISC License.
 ### Frontend Technologies
 - **React**: Utilized for building a Single Page Application (SPA) that offers a dynamic user experience.
-As part of our continuous effort to improve the application's interactivity and user experience, the migration from static HTML files to React components allows for more dynamic content updates and state management without the need for page reloads. This transition to `Interviews.js` not only streamlines the development process but also provides a more seamless user experience.
+As part of our continuous effort to improve the application's interactivity and user experience, the adoption of React components for all UI elements allows for more dynamic content updates and state management without the need for page reloads. This approach not only streamlines the development process but also enhances the overall user experience.
 
 Significant changes made during this migration include the integration of state management using React's useState and useEffect hooks for handling interview data, and the enhancement of the user interface for scheduling interviews. These improvements underscore our commitment to leveraging modern web development practices to deliver a superior user experience.
 - **Bootstrap**: Employed for responsive design and utilizing a wide range of components for the UI.
-- **Material-UI (Optional)**: Considered for providing a set of components that implement Google's Material Design for a clean and modern UI.
-- **Sass (Optional)**: Proposed for advanced CSS features and easier maintenance of stylesheets.
+- **Styled-Components**: Recommended for styling, offering enhanced CSS capabilities and easier maintenance of styles within JavaScript files.
