@@ -63,16 +63,3 @@ export { sendCVRequest, processCVResponse };
 This module contains utility functions for handling CV-related requests and responses within the MyJobsAI application. It includes functions to send CV analysis requests to the backend and process the responses for CV suggestions.
 """
 import axios from 'axios';
-    setError('Failed to fetch CV suggestions. Please try again.');
-    setCvSuggestions('');
-  }
-}
-
-export { sendCVRequest, processCVResponse };
-    setError('Failed to fetch CV suggestions. Please try again.');
-    setCvSuggestions('');
-  }
-}
-
-export { sendCVRequest, processCVResponse };
-
