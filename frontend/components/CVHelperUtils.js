@@ -6,7 +6,15 @@ Parameters:
 - setCvSuggestions (function): Function to update the CV suggestions state.
 - setError (function): Function to update the error state.
 
-This function updates the CV suggestions state if the response contains suggestions, otherwise, it updates the error state.
+"""
+Processes the server's response containing CV suggestions.
+
+This function checks the server's response for CV suggestions. If suggestions are present, it updates the component's state with these suggestions and clears any existing error messages. If the response does not contain suggestions, it sets an error message and clears any existing suggestions.
+
+@param {Object} response - The server's response to the CV suggestion request.
+@param {Function} setCvSuggestions - State setter function for updating CV suggestions.
+@param {Function} setError - State setter function for handling errors.
+@returns {void} - This function does not return a value but updates the component's state based on the response.
 """
 // Axios removed due to duplicate import statement.
 
