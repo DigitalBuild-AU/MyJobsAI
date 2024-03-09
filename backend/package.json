@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/your-repo/MyJobsAI.git"
   },
-  "author": "Your Name",
+  "author": "Your Name"
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/your-repo/MyJobsAI/issues"
