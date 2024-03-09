@@ -128,14 +128,41 @@ test('view changes between table and card based on window size', () => {
 
  */
 
-test('pagination component renders and navigates correctly', async () => {
+test('pagination component updates correctly with listing changes', async () => {
+  // Initial state with 2 pages of listings
   const mockListingsPage1 = [
     { id: 1, jobTitle: 'Software Engineer', company: 'Tech Corp', location: 'San Francisco' },
     { id: 2, jobTitle: 'Product Manager', company: 'Innovate LLC', location: 'New York' }
   ];
+  // Simulate adding a new job listing, increasing total pages
   const mockListingsPage2 = [
-    { id: 3, jobTitle: 'Designer', company: 'Creative Inc', location: 'Los Angeles' }
+    { id: 3, jobTitle: 'Designer', company: 'Creative Inc', location: 'Los Angeles' },
+    { id: 4, jobTitle: 'Backend Developer', company: 'DevOps Ltd.', location: 'Remote' }
   ];
+  fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 1 } }) // Initial state with 1 page of listings
+                      .mockResolvedValueOnce({ data: { listings: mockListingsPage2, totalPages: 2 } }) // After adding, 2 pages
+                      .mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 1 } }); // After removing, back to 1 page
+
+  // Verify initial pagination with 1 page
+  expect(await screen.findByText('1')).toBeInTheDocument();
+  expect(screen.queryByText('2')).not.toBeInTheDocument();
+
+  // Simulate user navigating to add job listing form and submitting a new job
+  fireEvent.click(getByText('Add Listing'));
+
+  // Verify pagination after adding a job listing
+  await waitFor(() => {
+    expect(screen.getByText('2')).toBeInTheDocument();
+  });
+
+  // Simulate removing a job listing
+  fireEvent.click(screen.getByText('Remove Last Listing'));
+
+  // Verify pagination after removing a job listing
+  await waitFor(() => {
+    expect(screen.queryByText('2')).not.toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+  });
   fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: mockListingsPage1, totalPages: 2 } })
                       .mockResolvedValueOnce({ data: { listings: mockListingsPage2, totalPages: 2 } });
 
