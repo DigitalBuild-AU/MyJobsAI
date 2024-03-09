@@ -1,3 +1,7 @@
+/**
+ * This file contains tests for the error handling middleware functionality.
+ * It tests the errorHandler middleware's response to errors and its logging behavior.
+ */
 const errorHandler = require('../middleware/errorHandlingMiddleware');
 const httpMocks = require('node-mocks-http');
 
