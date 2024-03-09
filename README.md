@@ -74,6 +74,16 @@ The decision to merge `app.js` and `App.js` was driven by the need to eliminate 
 In keeping with modern React development practices, we've also taken steps to refactor our utility functions. This involved transitioning away from direct DOM manipulation towards a more state and props-driven approach. Such a shift enhances component reusability and aligns our codebase with React's declarative nature.
 
 ### Implications on the Application's Structure
+### New Folder Structure Aligned with CRA Standards
+
+In our effort to align with the best practices of modern web development, we have restructured our project's folder layout to mirror that of a Create React App (CRA) standard setup. This change aims to enhance the maintainability and scalability of our application by organizing files into clear, purpose-driven directories.
+
+#### Key Changes Include:
+- **`src/components`**: This directory houses all React components, facilitating easier navigation and management of UI elements.
+- **`src/assets`**: A dedicated place for static assets such as images, stylesheets, and fonts. This separation ensures that assets are easily accessible and not intermingled with component logic.
+- **`src/tests`**: Contains all test files. Aligning with CRA standards, placing tests alongside their corresponding components promotes a more integrated development and testing workflow.
+
+This new structure not only streamlines development but also aligns with industry standards, making it easier for new developers to onboard and contribute to our project.
 These structural changes have wide-ranging implications for our application, impacting everything from routing to global styles. By consolidating entry points and refactoring for React best practices, we've made our application easier to maintain and extend. Developers should note these changes, particularly when working on routing or implementing global styles, to ensure consistency and avoid potential issues.
 
 </section id="E">
