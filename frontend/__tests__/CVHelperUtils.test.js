@@ -71,6 +71,13 @@ describe('sendCVRequest Functionality Tests', () => {
     jest.clearAllMocks();
   });
 
+  /**
+   * Test 'sendCVRequest' with a successful response.
+   * Simulates sending a CV and job description to the backend and expects a successful response
+   * with CV suggestions. Utilizes axios mock for simulating the HTTP request.
+   */
+  });
+
   test('sendCVRequest with successful response', async () => {
     // Mocking axios post method to simulate a successful response
     jest.mock('axios');
