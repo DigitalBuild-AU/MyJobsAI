@@ -14,7 +14,7 @@ import EmailComponent from './components/EmailComponent';
 import AnalyticsComponent from './components/AnalyticsComponent';
 import GlobalStyles from './styles/GlobalStyles';
 
-console.log('app.js is loading correctly'); // gpt_pilot_debugging_log
+
 
 
 /**
@@ -119,6 +119,7 @@ function App() {
             {/* Home component or redirect can be placed here */}
           </Route>
         </Switch>
+        <GlobalStyles />
       </div>
     </Router>
   );
