@@ -10,6 +10,31 @@ import { handleCvCustomization } from '../utils/gptRequestHandlers';
 jest.mock('../utils/gptRequestHandlers');
 
 describe('/cv_customization route', () => {
+  test('handles invalid input data for CV customization request', async () => {
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+  
+  test('handles database error during CV customization request', async () => {
+    handleCvCustomization.mockRejectedValue(new Error('Database error'));
+
+    const response = await request(app)
+      .post('/cv_customization')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to process CV customization due to a server error.');
+  });
 /**
  * Test suite for GPT routes.
  * 
@@ -92,6 +117,31 @@ describe('/cv_customization route', () => {
    */
   // Tests error handling for a CV customization request.
 describe('/cv_suggestions route', () => {
+  test('handles invalid input data for CV suggestions request', async () => {
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+  
+  test('handles database error during CV suggestions request', async () => {
+    handleCvSuggestions.mockRejectedValue(new Error('Database error'));
+
+    const response = await request(app)
+      .post('/cv_suggestions')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to process CV suggestions due to a server error.');
+  });
   test('successfully handles a CV suggestions request', async () => {
     const mockResponse = { suggestions: 'Your CV suggestions.' };
     jest.mocked(openai.chat.completions.create).mockResolvedValue(mockResponse);
@@ -142,6 +192,31 @@ describe('/cv_suggestions route', () => {
     * This suite evaluates the '/cover_letter' route's capability to generate personalized cover letters. It tests the functionality under various scenarios, ensuring that the application can produce relevant cover letters and handle any errors encountered during the process.
     */
 describe('/cover_letter route', () => {
+  test('handles invalid input data for cover letter request', async () => {
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: '', // Empty job description
+        userCV: '' // Empty user CV
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
+  });
+  
+  test('handles database error during cover letter request', async () => {
+    handleCoverLetterRequest.mockRejectedValue(new Error('Database error'));
+
+    const response = await request(app)
+      .post('/cover_letter')
+      .send({
+        jobDescription: 'Valid Job Description',
+        userCV: 'Valid user CV'
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Failed to generate cover letter due to a server error.');
+  });
   /**
    * Tests successful handling of a cover letter request.
    * 
