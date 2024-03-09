@@ -1,3 +1,4 @@
+import { generateCoverLetter } from '../app';
 /**
  * Tests for the App component. This includes routing tests to ensure navigation works as expected
  * and tests for application functionality such as the sendEmail function.
@@ -35,7 +36,6 @@ describe('App Routing', () => {
    * Tests navigation to a specific route and verifies that the correct component is rendered.
    */
   routes.forEach(route => {
-import { generateCoverLetter } from '../app';
     it(`navigates to ${route.path} and renders ${route.component}`, () => {
       const { getByText } = render(
         <BrowserRouter>
