@@ -39,6 +39,9 @@ describe('findAllJobListings', () => {
   });
 });
 
+/**
+ * Tests for findJobListingById function. Checks that a job listing can be found by its ID and errors are managed correctly.
+ */
 describe('findJobListingById', () => {
   beforeEach(() => {
     JobListing.findById.mockClear();
