@@ -1,9 +1,15 @@
 /**
- * This file contains utility functions for logging debug messages.
- * Main function: debugLog
+ * Debug Logger Utility
  * 
- * The debugLog function allows for logging debug messages with an optional error stack trace.
- * It is designed to standardize the way debug information and errors are logged throughout the backend.
+ * Purpose:
+ * This utility module provides a standardized way for logging debug messages and errors across the backend of the application. 
+ * It is designed to enhance the readability and maintainability of log messages by including timestamps and categorizing messages.
+ * 
+ * Usage:
+ * - To log a simple debug message: debugLog('Your debug message here');
+ * - To log an error with its stack trace: debugLog('Error message', errorObject);
+ * 
+ * The utility ensures that all debug messages are consistently formatted and that error logs include stack traces for easier debugging.
  */
 const debugLog = (message, error = null) => {
   const timestamp = new Date().toISOString();

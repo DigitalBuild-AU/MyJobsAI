@@ -56,6 +56,11 @@ describe('App Routing', () => {
       `;
     });
 
+    /**
+     * Tests the sendEmail function for a successful email send scenario.
+     * Asserts that the axios.post method is called with the correct parameters and
+     * that the success message is displayed to the user.
+     */
     test('successfully sends an email', async () => {
   /**
    * Test suite for verifying the sendEmail function in the App component.
@@ -67,14 +72,38 @@ describe('App Routing', () => {
       App.sendEmail();
       await screen.findByText('Email was sent successfully.');
 
-    await expect(getByText(/Email was sent successfully./i)).toBeInTheDocument();
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
+        to: 'test@example.com',
+        subject: 'Test Subject',
+        body: 'Test Body'
 /**
- * Test suite for the sendEmail function in the App component. Verifies that the correct success or error message is displayed based on the outcome of the email sending process.
+ * Tests for the generateCoverLetter functionality within the App component.
+ * Ensures that the generateCoverLetter function exists and is callable.
  */
-  });
-
+/**
+ * App.test.js
+ * 
+ * This file contains tests for the App component, focusing on its functionality
+ * such as generating cover letters and sending emails. It uses Jest and
+ * @testing-library/react for rendering components and asserting on their behavior.
+    /**
+     * Tests for the sendEmail functionality within the App component.
+     * This suite checks both the successful and unsuccessful sending of emails,
+     * ensuring the correct behavior under various conditions.
+     */
+ */
+    /**
+     * Tests if the generateCoverLetter function exists and is callable.
+     * 
+     * This test verifies the presence and type of the generateCoverLetter function
+     * within the App component. It does not have inputs, outputs, or side effects.
+     */
+      });
+      expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
+    });
 
     test('handles error when sending an email fails', async () => {
+
   /**
    * Tests the successful sending of an email using the sendEmail function.
    */
