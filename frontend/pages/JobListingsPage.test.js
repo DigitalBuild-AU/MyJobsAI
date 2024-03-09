@@ -562,7 +562,33 @@ test('ResponsiveNavbar accessibility features', () => {
   global.innerWidth = 500; // Mobile view
   const { getByLabelText } = render(<ResponsiveNavbar />);
   expect(getByLabelText('Toggle menu')).toBeInTheDocument(); // Hamburger menu button should be accessible
-});
+);
+
+test('adds new job listing through the form submission', async () => {
+  const mockNewListing = {
+    jobTitle: 'UI Designer',
+    company: 'Design Innovate',
+    location: 'Remote',
+    jobType: 'Contract',
+    status: 'New'
+  };
+  fetchListingsFromAPI.mockResolvedValueOnce({ data: { listings: [mockNewListing], totalPages: 1 } });
+
+  const { getByPlaceholderText, getByText } = render(<JobListingsPage />);
+  fireEvent.change(getByPlaceholderText('Job Title'), { target: { value: mockNewListing.jobTitle } });
+  fireEvent.change(getByPlaceholderText('Company'), { target: { value: mockNewListing.company } });
+  fireEvent.change(getByPlaceholderText('Location'), { target: { value: mockNewListing.location } });
+  fireEvent.change(getByPlaceholderText('Job Type'), { target: { value: mockNewListing.jobType } });
+
+  fireEvent.submit(getByText('Add Listing'));
+
+  await waitFor(() => {
+    expect(getByText(mockNewListing.jobTitle)).toBeInTheDocument();
+    expect(getByText(mockNewListing.company)).toBeInTheDocument();
+    expect(getByText(mockNewListing.location)).toBeInTheDocument();
+    expect(getByText(mockNewListing.jobType)).toBeInTheDocument();
+  });
+})
 
 test('Sidebar accessibility features', () => {
   const { getByText } = render(<Sidebar isOpen={true} />);
