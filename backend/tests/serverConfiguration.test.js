@@ -42,3 +42,7 @@ describe('Server Configuration', () => {
     expect(https.createServer).toHaveBeenCalledWith(sslOptions, expect.any(Function));
   });
 });
+/**
+ * Tests for the server configuration.
+ * Ensures middleware functions are included and that HTTPS is correctly configured.
+ */
