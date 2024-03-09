@@ -28,3 +28,18 @@ const GlobalStyle = createGlobalStyle\`
 \`;
 
 export default GlobalStyle;
+  /* Additional global styles from styles.css and jobListingsStyle.css */
+  body {
+    background-color: #f8f9fa; /* Assuming this is the global background color from styles.css */
+    color: #333; /* Default text color */
+  }
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none; /* Links should not be underlined by default */
+  }
+
+  /* Adding a global font size for consistency */
+  html {
+    font-size: 16px;
+  }
