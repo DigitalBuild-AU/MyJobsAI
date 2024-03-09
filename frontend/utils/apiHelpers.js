@@ -1,8 +1,8 @@
-import axios from 'axios';
+import httpClient from './httpClient';
 
 async function postCoverLetter(jobDescription, userName, userSkills, userExperience) {
   try {
-    const response = await axios.post('/api/cover_letter', {
+    const response = await httpClient.post('/cover_letter', {
       jobDescription,
       userName,
       userSkills,
@@ -10,41 +10,41 @@ async function postCoverLetter(jobDescription, userName, userSkills, userExperie
     });
     return response.data;
   } catch (error) {
-    console.error('Error generating cover letter:', error);
-    throw error;
+    console.error(`Error generating cover letter: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
   }
 }
 
 async function postEmploymentHistory(employmentHistory) {
   try {
-    const response = await axios.post('/api/employmentHistory', { employmentHistory });
+    const response = await httpClient.post('/employmentHistory', { employmentHistory });
     return response.data;
   } catch (error) {
-    console.error('Failed to save employment history', error);
-    throw error;
+    console.error(`Failed to save employment history: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
   }
 }
 
 async function postResumeCustomization(jobDescription, userCV) {
   try {
-    const response = await axios.post('/api/cv_customization', {
+    const response = await httpClient.post('/cv_customization', {
       jobDescription,
       userCV
     });
     return response.data;
   } catch (error) {
-    console.error('Error customizing CV:', error);
-    throw error;
+    console.error(`Error customizing CV: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
   }
 }
 
 async function postSkills(skills) {
   try {
-    const response = await axios.post('/api/skills', { skills });
+    const response = await httpClient.post('/skills', { skills });
     return response.data;
   } catch (error) {
-    console.error('Failed to save skills', error);
-    throw error;
+    console.error(`Failed to save skills: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
   }
 }
 
@@ -80,11 +80,11 @@ export { postCoverLetter, postEmploymentHistory, postResumeCustomization, postSk
  */
 async function submitInterviewData(jobTitle, date, notes) {
   try {
-    const response = await axios.post('http://localhost:3000/api/interviews', { jobTitle, date, notes });
+    const response = await httpClient.post('/interviews', { jobTitle, date, notes });
     return response.data;
   } catch (error) {
-    console.error('Error scheduling interview:', error);
-    throw error;
+    console.error(`Error scheduling interview: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
   }
 }
 
@@ -95,3 +95,35 @@ export { postCoverLetter, postEmploymentHistory, postResumeCustomization, postSk
  * @param {Array<string>} skills - An array of skills.
  * @returns {Promise<Object>} The response object confirming the save operation.
  */
+/**
+ * Generic GET request function.
+ * @param {string} path - The path of the API endpoint.
+ * @returns {Promise<Object>} The response data from the GET request.
+ */
+async function get(path) {
+  try {
+    const response = await httpClient.get(path);
+    return response.data;
+  } catch (error) {
+    console.error(`Error performing GET request: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
+  }
+}
+
+/**
+ * Generic POST request function.
+ * @param {string} path - The path of the API endpoint.
+ * @param {Object} data - The data to be sent in the POST request.
+ * @returns {Promise<Object>} The response data from the POST request.
+ */
+async function post(path, data) {
+  try {
+    const response = await httpClient.post(path, data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error performing POST request: ${error.response.status} ${error.response.statusText}`, error);
+    throw { status: error.response.status, message: error.response.statusText };
+  }
+}
+
+export { get, post };
