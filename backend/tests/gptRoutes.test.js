@@ -70,8 +70,11 @@ Description: This file contains unit tests for the GPT-related routes within the
  * This file contains tests for the GPT-related routes, ensuring that CV customization requests are handled correctly, including success and error scenarios.
  */
   test('successfully handles a CV customization request', async () => {
-   * Tests successful handling of a CV customization request.
-   * Expects a 200 status code and the customization suggestions in the response body.
+  /**
+   * Test Case: Successfully Handles a CV Customization Request
+   * Purpose: Verifies that the CV customization endpoint correctly processes a request, returning a 200 status code and the expected customization suggestions in the response body.
+   * Expected Input: jobDescription: 'Software Engineer role requiring extensive experience in full-stack development.', userCV: 'Experienced full-stack developer with a strong background in JavaScript and Python.'
+   * Expected Output: HTTP status 200 with customization suggestions in the response body.
    */
   test('successfully handles a CV customization request', async () => {
     const mockResponse = {
