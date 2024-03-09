@@ -6,7 +6,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import InterviewsPage from '../pages/InterviewsPage';
+import InterviewsPage from '../../pages/InterviewsPage';
 import { act } from 'react-dom/test-utils';
 import { submitInterview, handleInterviewResponse, handleInterviewError } from '../utils/interviewAPI';
 jest.mock('../utils/interviewAPI');
