@@ -138,5 +138,5 @@ module.exports = {
     findJobListingById,
     updateJobListingById,
     deleteJobListingById,
-    calculateAnalytics // Export the analytics function
+    // Removed calculateAnalytics as it's now handled in analyticsService.js
 };

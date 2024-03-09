@@ -88,3 +88,12 @@ These structural changes have wide-ranging implications for our application, imp
 
 </section id="E">
 Developers should now use `App.js` as the sole entry point for the React application. Any references to `app.js` should be updated to `App.js`. This change may require developers to update their local development environments to ensure consistency with the updated project structure.
+### Setting Up Environment Variables for Local Development
+
+To securely configure your local development environment without direct access to sensitive information, follow these steps:
+
+1. Navigate to the `backend` directory of the cloned repository.
+2. Copy the `backend/.env.example` file to a new file named `.env` in the same directory.
+3. Open the `.env` file and fill in the actual values for the keys and secrets as required for the application to function correctly.
+
+This process ensures that sensitive keys and secrets are not hardcoded within the application's codebase, enhancing security and maintainability.
