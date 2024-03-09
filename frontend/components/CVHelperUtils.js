@@ -14,11 +14,13 @@ This function updates the CV suggestions state if the response contains suggesti
 Sends a CV analysis request to the backend.
 
 Parameters:
-- jobDescription (string): The job description to analyze.
-- userCV (string): The user's CV content.
+- jobDescription (string): The job description text to analyze.
+- userCV (string): The content of the user's CV.
 
 Returns:
-- Promise: A promise that resolves with the response from the backend.
+- Promise: A promise that resolves with the backend's response object.
+
+This function constructs and sends a POST request to the backend with the job description and CV content. It returns a promise that resolves with the response from the backend, which can include CV suggestions or error information.
 """
 async function sendCVRequest(jobDescription, userCV) {
   const response = await axios.post('http://localhost:3000/api/gpt/cv_suggestions', { jobDescription, userCV });
@@ -27,10 +29,21 @@ async function sendCVRequest(jobDescription, userCV) {
 
 /**
  * Processes the backend's response containing CV suggestions.
- * @param {Object} response - The backend's response.
- * @param {Function} setCvSuggestions - State setter function for CV suggestions.
- * @param {Function} setError - State setter function for handling errors.
- * @returns {void} - This function does not return a value but updates the component's state.
+ *
+ * This function checks the response object for CV suggestions. If suggestions are found,
+ * it updates the CV suggestions state with these suggestions. If no suggestions are found
+ * or in case of an error response, it updates the error state with an appropriate message.
+ *
+ * Parameters:
+ * - response (Object): The response object from the backend.
+ * - setCvSuggestions (Function): A state setter function to update the CV suggestions.
+ * - setError (Function): A state setter function to update the error state.
+ *
+ * Returns:
+ * - void: This function does not return a value.
+ *
+ * Side Effects:
+ * - Updates the component state by either setting CV suggestions or an error message.
  */
 function processCVResponse(response, setCvSuggestions, setError) {
   if (response && response.data && response.data.suggestions) {
@@ -41,6 +54,11 @@ function processCVResponse(response, setCvSuggestions, setError) {
     setCvSuggestions('');
   }
 }
+"""
+CVHelperUtils.js
+
+This file contains utility functions for the CV Helper component. It includes functions to send CV analysis requests to the backend and process the responses. These utilities are used to enhance the user's CV based on job descriptions, providing suggestions for improvement.
+"""
 
 export { sendCVRequest };
 export function processCVResponse(response, setCvSuggestions, setError) {
@@ -69,12 +87,14 @@ export function processCVResponse(response, setCvSuggestions, setError) {
  */
 
 """
+
 Utility functions for processing CV responses within the MyJobsAI application.
 This module includes functions to handle and parse responses from CV analysis services,
 providing suggestions for CV improvement or error handling as necessary.
 """
 """
 This module contains utility functions for handling CV-related requests and responses within the MyJobsAI application. It includes functions to send CV analysis requests to the backend and process the responses for CV suggestions.
+
 """
 import axios from 'axios';
     setError('Failed to fetch CV suggestions. Please try again.');
