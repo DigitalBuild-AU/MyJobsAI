@@ -116,8 +116,8 @@ jest.mock('../src/useEmailSender');
   });
 });
 /**
- * Test suite for verifying the generateCoverLetter function within the App component.
- * Ensures the function returns a correct cover letter based on provided parameters and handles missing parameters gracefully.
+ * Test suite for the generateCoverLetter function within the App component.
+ * This suite aims to verify the functionality of generateCoverLetter by ensuring it correctly generates cover letters based on provided user name, job title, and company name. It also tests the function's ability to handle scenarios where one or more parameters are missing.
  */
 describe('generateCoverLetter Functionality', () => {
   test('should return a correct cover letter when all parameters are valid', () => {
