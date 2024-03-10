@@ -1,3 +1,5 @@
+// Jest configuration for frontend tests. This file specifies the test environment,
+// transformations, module name mappings, and other configurations for running Jest tests in the frontend.
 module.exports = {
   
  testEnvironment: 'jsdom',

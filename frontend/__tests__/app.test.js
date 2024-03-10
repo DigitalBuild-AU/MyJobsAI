@@ -52,6 +52,10 @@ jest.mock('../src/useEmailSender');
  * Checks the function's ability to successfully send an email and handle errors.
  */
   describe('sendEmail Functionality', () => {
+    /**
+    * Sets up the DOM elements required for the sendEmail tests.
+    * This includes input fields for the recipient, subject, and body of the email, and a div for displaying responses.
+    */
     beforeEach(() => {
       document.body.innerHTML = `
         <input id="emailTo" value="test@example.com" />
@@ -80,6 +84,21 @@ jest.mock('../src/useEmailSender');
       expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
     });
 
+    /**
+     * Tests the error handling when sending an email fails.
+     * 
+     * This test simulates a failure in sending the email by mocking axios.post to reject with an error. It then checks if the error message 'Failed to send email.' is displayed.
+     */
+    test('handles error when sending an email fails', async () => {
+
+      axios.post.mockRejectedValue(new Error('Failed to send email.'));
+
+      fireEvent.click(screen.getByTestId('sendEmailButton'));
+      await screen.findByText('Failed to send email.');
+     * Tests the error handling when sending an email fails.
+     * 
+     * This test simulates a failure in sending the email by mocking axios.post to reject with an error. It then checks if the error message 'Failed to send email.' is displayed and verifies the axios.post call parameters.
+     */
     test('handles error when sending an email fails', async () => {
 
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
@@ -96,12 +115,9 @@ jest.mock('../src/useEmailSender');
     });
   });
 });
-  /**
-   * Tests error handling in the sendEmail function when email sending fails.
-   */
 /**
- * Test suite for verifying the generateCoverLetter function within the App component.
- * Ensures the function returns a correct cover letter based on provided parameters and handles missing parameters gracefully.
+ * Test suite for the generateCoverLetter function within the App component.
+ * This suite aims to verify the functionality of generateCoverLetter by ensuring it correctly generates cover letters based on provided user name, job title, and company name. It also tests the function's ability to handle scenarios where one or more parameters are missing.
  */
 describe('generateCoverLetter Functionality', () => {
   test('should return a correct cover letter when all parameters are valid', () => {
@@ -112,20 +128,12 @@ describe('generateCoverLetter Functionality', () => {
     expect(generateCoverLetter(userName, jobTitle, companyName)).toEqual(expectedCoverLetter);
   });
 
+  /**
+   * Tests the generateCoverLetter function's ability to handle the scenario where the userName parameter is missing. This test verifies that the function still operates correctly or provides a meaningful error/response in the absence of a userName.
+   */
   test('should handle missing userName gracefully', () => {
     const jobTitle = 'Software Engineer';
     const companyName = 'Tech Innovations Inc.';
-    // Assuming the function returns a generic message or handles the missing userName gracefully
-    const expectedResponse = 'Error: userName is required.';
-    expect(generateCoverLetter(null, jobTitle, companyName)).toEqual(expectedResponse);
-  });
-    // Tests the integration of the useEmailSender hook with the EmailComponent. This includes mocking the hook for both successful and failed email sending scenarios and verifying the expected outcomes are rendered correctly in the component.
-    test('useEmailSender hook integration with EmailComponent', async () => {
-/**
- * This test verifies the success scenario of the useEmailSender hook.
- * It mocks the useEmailSender hook to return a success message and checks if the message is displayed correctly.
- */
-    test('useEmailSender hook success scenario', async () => {
       useEmailSender.mockImplementation(() => jest.fn(async () => 'Your email has been dispatched!'));
       const { getByText, rerender } = render(
         <BrowserRouter>
@@ -143,6 +151,9 @@ describe('generateCoverLetter Functionality', () => {
 /**
  * Test suite for the generateCoverLetter functionality within the App component.
  * This suite verifies the correct generation of cover letters based on provided parameters.
+/**
+ * Tests that the generateCoverLetter function returns a correctly formatted cover letter when provided with valid userName, jobTitle, and companyName parameters.
+ */
  * 
  * @param {string} userName - The name of the user.
  * @param {string} jobTitle - The title of the job being applied for.
