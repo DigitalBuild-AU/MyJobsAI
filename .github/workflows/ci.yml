@@ -19,7 +19,7 @@ jobs:
         node-version: '16'
 
     - name: Install Dependencies
-      run: npm ci
+      run: npm install
 
     - name: Run Tests
       run: npm test
@@ -37,3 +37,5 @@ jobs:
       run: npm test --prefix backend
     - name: Run Frontend Tests
       run: npm test --prefix frontend
+    - name: Install Frontend Dependencies
+      run: npm install --prefix frontend
