@@ -1,0 +1,44 @@
+name: Node.js CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14' # Assuming Node.js version 14 is used in development
+    - name: Cache npm dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          **/node_modules
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+    - name: Install dependencies (Backend)
+      run: npm install
+      working-directory: ./backend
+    - name: Install dependencies (Frontend)
+      run: npm install
+      working-directory: ./frontend
+    - name: Build (Compile TypeScript for Backend)
+      run: npm run build
+      working-directory: ./backend
+    - name: Run Jest Tests (Backend)
+      run: npm test
+      working-directory: ./backend
+      env:
+        DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+        API_KEY: ${{ secrets.EXTERNAL_API_KEY }}
+    - name: Run Jest Tests (Frontend)
+      run: npm test
+      working-directory: ./frontend
+      env:
+        REACT_APP_API_URL: ${{ secrets.REACT_APP_TEST_API_URL }}
