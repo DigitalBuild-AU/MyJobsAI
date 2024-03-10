@@ -30,8 +30,6 @@
     "react-router-dom": "^6.22.2",
     "sass": "^1.32.8",
     "helmet": "^5.0.0"
-<<<<<<< HEAD
-  },
 =======
 >>>>>>> origin/main
   "devDependencies": {
