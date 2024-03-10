@@ -166,3 +166,7 @@ describe('jobListingsPageUtils', () => {
 afterEach(() => {
   jest.restoreAllMocks();
 });
+/**
+ * afterEach block for cleaning up mocks and other test setup after each test case runs.
+ * This ensures a clean state for subsequent tests.
+ */
