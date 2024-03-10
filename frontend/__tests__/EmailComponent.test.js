@@ -10,9 +10,6 @@ import EmailComponent from '../components/EmailComponent';
 jest.mock('axios');
 
 describe('EmailComponent', () => {
- * Test suite for the EmailComponent, focusing on form interactions, API call triggers, and response handling.
- */
-describe('EmailComponent', () => {
   const setup = () => {
     const utils = render(<EmailComponent />);
     const toInput = utils.getByLabelText('To:');
@@ -34,7 +31,6 @@ describe('EmailComponent', () => {
   test('form submission triggers API call with correct data', async () => {
     const { toInput, subjectInput, bodyTextarea, sendButton } = setup();
     const mockData = { to: 'test@example.com', subject: 'Test Subject', body: 'Test Body' };
-import { screen } from '@testing-library/react';
 
 test('renders correctly with different props', () => {
   const { rerender } = render(<EmailComponent to="test@example.com" subject="Greetings" body="Hello, World!" />);
