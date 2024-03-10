@@ -27,6 +27,10 @@ describe('verifyToken function in authMiddleware', () => {
     expect(jwt.verify).toHaveBeenCalledWith(testToken, process.env.JWT_SECRET);
   });
 
+  /**
+   * Test case: Throws an error for an invalid or expired token - Verifies that the auth middleware correctly identifies invalid or expired tokens,
+   * responding with a 401 status and an appropriate error message.
+   */
   it('throws an error for an invalid or expired token', () => {
     const req = { header: jest.fn().mockReturnValue(`Bearer ${testToken}`) };
     const res = { send: jest.fn(), status: jest.fn().mockReturnThis() };
