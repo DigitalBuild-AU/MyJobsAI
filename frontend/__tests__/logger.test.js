@@ -27,6 +27,11 @@ describe('Logger', () => {
     it('calls console.warn with correct arguments', () => {
       const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation(() => {});
       logWarning('Warning message', { detail: 'Warning details' });
+/**
+ * Tests for logger utility functions.
+ *
+ * This file contains tests for the logging utility functions including logInfo, logWarning, and logError.
+ */
       expect(consoleWarnMock).toHaveBeenCalledWith('Warning message', { detail: 'Warning details' });
     });
 
