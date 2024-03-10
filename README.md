@@ -51,6 +51,18 @@ npm test
 
 This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Additionally, to ensure tests related to the database run successfully, set up a local test database and configure the appropriate environment variables based on the `.env.example` provided.
 
+Ensure you have all dependencies installed before running tests. If relying on external services or APIs for tests, it may be necessary to start mock services to emulate these external dependencies. Remember to install any new dependencies by running `npm install` following changes to `package.json` to ensure your local environment mirrors the Continuous Integration setup.
+
+As part of our ongoing efforts to streamline the development process and adhere to best practices, we have consolidated the `app.js` and `App.js` files into a single `App.js` file. This change was made to eliminate confusion and potential errors arising from having two similarly named entry point files, especially on case-sensitive file systems.
+
+To run the test suite locally, navigate to either the `backend/` or `frontend/` directory and use the following command:
+
+```bash
+npm test
+```
+
+This command executes all tests found in the `backend/tests` and `frontend/__tests__` directories. Additionally, to ensure tests related to the database run successfully, set up a local test database and configure the appropriate environment variables based on the `.env.example` provided.
+
 Ensure you have all dependencies installed before running tests. For tests involving external APIs, ensure the corresponding API mock services are running.
 
 If any new dependencies were introduced as part of the GitHub Actions fixes, please run `npm install` again to update your local environment.
@@ -96,7 +108,15 @@ These structural changes have wide-ranging implications for our application, imp
 
 </section id="E">
 Developers should now use `App.js` as the sole entry point for the React application. Any references to `app.js` should be updated to `App.js`. This change may require developers to update their local development environments to ensure consistency with the updated project structure.
-### Setting Up Environment Variables for Local Development
+### Setting Up Environment Variables
+
+To securely configure your environment, whether for local development or in Continuous Integration (CI) environments such as GitHub Actions, follow these steps:
+
+1. For local setup, navigate to the `backend` directory of the cloned repository.
+2. Copy the `backend/.env.example` file to a new file named `.env` in the same directory.
+3. Open the `.env` file and fill in the actual values for the keys and secrets as required for the application to function correctly.
+
+For CI environments like GitHub Actions, ensure that all required environment variables are set in the repository's secrets. This approach enhances security and maintainability by avoiding the hardcoding of sensitive information within the application's codebase.
 
 To securely configure your local development environment without direct access to sensitive information, follow these steps:
 
