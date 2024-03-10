@@ -30,6 +30,7 @@ describe('App Routing', () => {
 
   /**
    * Tests navigation to a specific route and verifies that the correct component is rendered.
+   * @param {Object} route - An object representing a route, containing a path and a component name.
    */
   routes.forEach(route => {
 import { act } from 'react-dom/test-utils';
