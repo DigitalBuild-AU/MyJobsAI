@@ -41,3 +41,7 @@ describe('verifyToken function in authMiddleware', () => {
  * Test suite for verifyToken function - Tests the functionality of the verifyToken function within authMiddleware,
  * ensuring it correctly verifies valid tokens and properly handles and reports invalid or expired tokens.
  */
+/**
+ * Test case: Successfully verifies a valid token - Ensures that a valid token is correctly verified by the auth middleware,
+ * attaching the decoded token information to the request object.
+ */
