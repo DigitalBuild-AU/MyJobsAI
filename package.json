@@ -36,4 +36,8 @@
     "babel-jest": "^27.0.0",
     "supertest": "^6.0.0",
     "jest-mock": "^27.0.0"
+<<<<<<< HEAD
+=======
+  }
+>>>>>>> origin/main
   }

@@ -43,7 +43,7 @@ Significant changes made during this migration include the integration of state 
 
 ## Running Tests
 
-To run the test suite with Jest, use the following command:
+To run the test suite locally, navigate to either the `backend/` or `frontend/` directory and use the following command:
 
 ```bash
 npm test
@@ -79,6 +79,9 @@ In keeping with modern React development practices, we've also taken steps to re
 
 ### Implications on the Application's Structure
 ### New Folder Structure Aligned with CRA Standards
+Additionally, our GitHub Actions workflow, defined in `.github/workflows/nodejs.yml`, automatically runs tests on push or pull requests to the main branch. This ensures continuous integration and helps maintain code quality. Developers can view the status of these automated test runs in the GitHub Actions tab of the repository.
+
+It's crucial to ensure that all necessary environment variables are correctly set up both locally and in the GitHub Actions workflow to avoid test failures. Remember to check the GitHub Actions tab for details on the status of automated test runs after pushing changes or creating pull requests.
 
 In our effort to align with the best practices of modern web development, we have restructured our project's folder layout to mirror that of a Create React App (CRA) standard setup. This change aims to enhance the maintainability and scalability of our application by organizing files into clear, purpose-driven directories.
 
