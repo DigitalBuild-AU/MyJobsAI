@@ -35,3 +35,8 @@ export const logError = (message, error) => {
  * @param {string} message - The warning message to log.
  * @param {...any} data - Additional data to log alongside the warning.
  */
+/**
+ * Logs error messages to the console and optionally to an external service.
+ * @param {string} message - The error message to log.
+ * @param {Error} error - The error object to log.
+ */
