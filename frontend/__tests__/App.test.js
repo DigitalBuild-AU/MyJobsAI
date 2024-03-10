@@ -128,10 +128,12 @@ describe('generateCoverLetter Functionality', () => {
     expect(generateCoverLetter(userName, jobTitle, companyName)).toEqual(expectedCoverLetter);
   });
 
+  /**
+   * Tests the generateCoverLetter function's ability to handle the scenario where the userName parameter is missing. This test verifies that the function still operates correctly or provides a meaningful error/response in the absence of a userName.
+   */
   test('should handle missing userName gracefully', () => {
     const jobTitle = 'Software Engineer';
     const companyName = 'Tech Innovations Inc.';
-    test('useEmailSender hook success scenario', async () => {
       useEmailSender.mockImplementation(() => jest.fn(async () => 'Your email has been dispatched!'));
       const { getByText, rerender } = render(
         <BrowserRouter>
