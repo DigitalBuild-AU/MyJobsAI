@@ -16,6 +16,7 @@ describe('CVHelperComponent', () => {
  * @file CVHelperComponent.test.js
  * @description Test suite for the CVHelperComponent, focusing on rendering, dynamic script loading, API interactions, and error handling.
  */
+/**
  * Test suite for the CVHelperComponent, ensuring comprehensive coverage including rendering correctness, dynamic script loading, API interactions, and error handling. This suite is designed to ensure all functionalities previously handled by cvHelper.html are fully integrated and functional within CVHelperComponent.
  */
 describe('CVHelperComponent', () => {
@@ -156,7 +157,7 @@ describe('sendCVRequest', () => {
     await expect(sendCVRequest('Software Engineer', 'My CV content')).rejects.toThrow('API call failed');
   });
 });
-/**
+*/
   it('processes a response with suggestions correctly', () => {
     const mockResponse = { data: { suggestions: 'Test suggestion' } };
     const setCvSuggestions = jest.fn();
