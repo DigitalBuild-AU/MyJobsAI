@@ -30,7 +30,8 @@ const openai = new OpenAIApi(configuration);
  * @returns {Promise<string>} A promise that resolves to the generated cover letter text.
  */
 async function generateCoverLetter(jobDescription, userCV) {
-  const response = await openai.createCompletion({
+  try {
+    const response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: `Generate a cover letter based on the following job description and user's CV:\nJob Description: ${jobDescription}\nUser CV: ${userCV}`,
     temperature: 0.7,
