@@ -149,6 +149,9 @@ describe('generateCoverLetter Functionality', () => {
 /**
  * Test suite for the generateCoverLetter functionality within the App component.
  * This suite verifies the correct generation of cover letters based on provided parameters.
+/**
+ * Tests that the generateCoverLetter function returns a correctly formatted cover letter when provided with valid userName, jobTitle, and companyName parameters.
+ */
  * 
  * @param {string} userName - The name of the user.
  * @param {string} jobTitle - The title of the job being applied for.
