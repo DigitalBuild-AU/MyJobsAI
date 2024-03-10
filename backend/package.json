@@ -31,5 +31,5 @@
     "@typescript-eslint/parser": "^latest"
   }
 }
-    "typescript": "^4.5.2",
+    "typescript": "^4.5.2"
     "node-mocks-http": "^1.10.0"
