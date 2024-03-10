@@ -8,7 +8,7 @@
     "start": "node backend/server.js",
     "build": "react-scripts build",
     "webpack-build": "webpack --mode production"
-  },
+  }
   "keywords": [],
   "author": "",
   "license": "ISC",
