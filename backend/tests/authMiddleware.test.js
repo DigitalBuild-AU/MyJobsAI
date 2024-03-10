@@ -37,3 +37,7 @@ describe('verifyToken function in authMiddleware', () => {
     expect(jwt.verify).toHaveBeenCalledWith(testToken, process.env.JWT_SECRET);
   });
 });
+/**
+ * Test suite for verifyToken function - Tests the functionality of the verifyToken function within authMiddleware,
+ * ensuring it correctly verifies valid tokens and properly handles and reports invalid or expired tokens.
+ */
