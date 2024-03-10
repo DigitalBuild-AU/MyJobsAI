@@ -74,6 +74,7 @@ jest.mock('openai', () => ({
 File: gptRoutes.test.js
 Description: This file contains unit tests for the GPT-related routes within the MyJobsAI application. It aims to test the functionality of CV customization, CV suggestions, and cover letter generation features. These tests ensure the application's GPT features are reliable and robust, covering a range of scenarios including successful responses and error handling.
 """
+
   /**
    * Test Case: Invalid Input Data for CV Customization Request
    * Purpose: Verifies that the CV customization endpoint returns a 400 status code and an appropriate error message when provided with empty job descriptions and user CVs.
