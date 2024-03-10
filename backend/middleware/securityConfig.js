@@ -14,3 +14,5 @@ function setupSecurity(app) {
 }
 
 module.exports = setupSecurity;
+const cors = require('cors');
+module.exports = setupSecurity;
