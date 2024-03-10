@@ -21,6 +21,12 @@ export const logWarning = (message, ...data) => {
   if (externalLoggingEnabled) externalLogger.warn(message, data);
 };
 
+/**
+ * Logs an error message to the console and, if enabled, to an external logging service.
+ *
+ * @param {string} message - The error message to log.
+ * @param {Error} error - The error object associated with the error message.
+ */
 export const logError = (message, error) => {
   console.error(message, error);
   if (externalLoggingEnabled) externalLogger.error(message, error);
