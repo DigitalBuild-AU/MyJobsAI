@@ -33,8 +33,10 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
+    - name: Install Backend Dependencies
+      run: npm install --prefix backend
     - name: Run Backend Tests
-      run: npm test --prefix backend
+      run: npm run test --prefix backend
     - name: Run Frontend Tests
       run: npm test --prefix frontend
     - name: Install Frontend Dependencies
