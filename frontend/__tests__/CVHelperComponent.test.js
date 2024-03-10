@@ -153,6 +153,10 @@ describe('sendCVRequest', () => {
   });
 
   it('handles failure in API call', async () => {
+  /**
+   * Test function for processing CV responses with suggestions.
+   * Ensures that suggestions are correctly extracted and set, and errors are cleared.
+   */
     axios.post.mockRejectedValue(new Error('API call failed'));
     await expect(sendCVRequest('Software Engineer', 'My CV content')).rejects.toThrow('API call failed');
   });
