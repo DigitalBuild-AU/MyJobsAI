@@ -102,3 +102,5 @@ To securely configure your local development environment without direct access t
 3. Open the `.env` file and fill in the actual values for the keys and secrets as required for the application to function correctly.
 
 This process ensures that sensitive keys and secrets are not hardcoded within the application's codebase, enhancing security and maintainability.
+
+For GitHub Actions, ensure that all necessary environment variables are configured in the repository's secrets. This includes any API keys or other sensitive information required for tests to run successfully. Additionally, if new dependencies or significant changes to the project setup were made, update the GitHub Actions workflow files accordingly to reflect these changes. This may involve adjusting steps for dependency installation or environment setup to ensure continuous integration processes run smoothly.
