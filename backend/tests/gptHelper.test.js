@@ -20,7 +20,7 @@ describe('generateCvCustomizationSuggestions', () => {
     OpenAI.mockClear();
     OpenAI().chat.completions.create.mockClear();
     OpenAI().chat.completions.create.mockResolvedValue({
-      choices: [{ message: { content: mockSuggestions } }]
+      choices: [{ text: mockSuggestions }]
     });
   });
 
@@ -44,7 +44,7 @@ describe('generateCvCustomizationSuggestions', () => {
 test('handles null job description and user CV', async () => {
   const nullSuggestions = "No suggestions available for null inputs.";
   OpenAI().chat.completions.create.mockResolvedValueOnce({
-    choices: [{ message: { content: nullSuggestions } }]
+    choices: [{ text: nullSuggestions }]
   });
   const suggestions = await generateCvCustomizationSuggestions(null, null);
   expect(suggestions).toEqual(nullSuggestions);
@@ -55,7 +55,7 @@ test('handles extremely long inputs', async () => {
   const longUserCV = "Experienced developer".repeat(1000);
   const longSuggestions = "Your input is too long. Consider summarizing your experience.";
   OpenAI().chat.completions.create.mockResolvedValueOnce({
-    choices: [{ message: { content: longSuggestions } }]
+    choices: [{ text: longSuggestions }]
   });
   const suggestions = await generateCvCustomizationSuggestions(longJobDescription, longUserCV);
   expect(suggestions).toEqual(longSuggestions);
@@ -88,7 +88,7 @@ test('verifies correct API parameters for special characters in inputs', async (
   test('handles empty job description and user CV', async () => {
     const emptySuggestions = "No suggestions available.";
     OpenAI().chat.completions.create.mockResolvedValueOnce({
-      choices: [{ message: { content: emptySuggestions } }]
+      choices: [{ text: emptySuggestions }]
     });
     const suggestions = await generateCvCustomizationSuggestions('', '');
     expect(suggestions).toEqual(emptySuggestions);

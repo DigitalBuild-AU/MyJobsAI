@@ -29,3 +29,7 @@ module.exports = { generateCvCustomizationSuggestions };
  * @param {string} userCV - The user's CV that needs customization suggestions.
  * @returns {Promise<string>} A string containing CV customization suggestions.
  */
+  if (!response.choices || response.choices.length === 0) {
+    throw new Error('No suggestions available due to an unexpected API response structure.');
+  }
+  return response.choices[0].message.content.trim();

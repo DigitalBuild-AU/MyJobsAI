@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test",
+    "test": "jest --config frontend/jest.config.js"
     "lint": "eslint src/",
     "build": "react-scripts build"
   },
