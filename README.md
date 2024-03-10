@@ -102,3 +102,8 @@ To securely configure your local development environment without direct access t
 3. Open the `.env` file and fill in the actual values for the keys and secrets as required for the application to function correctly.
 
 This process ensures that sensitive keys and secrets are not hardcoded within the application's codebase, enhancing security and maintainability.
+Additionally, our Continuous Integration (CI) pipeline is configured to automatically run tests on push and pull requests to the main branch, as defined in the `.github/workflows/ci.yml` file. Developers can view the results of these tests directly in their pull requests or under the "Actions" tab in the GitHub repository, which aids in diagnosing and resolving failures.
+
+### Checking and Troubleshooting GitHub Actions Workflows
+
+To ensure the reliability and effectiveness of our CI pipeline, developers are encouraged to regularly check and troubleshoot the GitHub Actions workflows. This involves reviewing the `.github/workflows/ci.yml` file for any potential misconfigurations and verifying that all dependencies are up-to-date. If you encounter any issues or failures in the GitHub Actions runs, consult the workflow logs for detailed error messages and troubleshooting steps.
