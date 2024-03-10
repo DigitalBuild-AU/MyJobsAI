@@ -1,8 +1,7 @@
 /**
- * gptUtils.js
- * This file contains utility functions for interacting with the OpenAI API to generate cover letters. 
- * Functions include generating cover letters based on job descriptions and user CVs, logging generation events, 
- * and handling errors during the cover letter generation process.
+ * Utility functions for interacting with the OpenAI API to generate cover letters.
+ * This includes generating cover letters based on job descriptions and user CVs,
+ * logging generation events, and handling errors during the cover letter generation process.
  */
 
 const { Configuration, OpenAIApi } = require("openai");
@@ -20,6 +19,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 /**
+* Generates a cover letter based on a given job description and user's CV using the OpenAI API.
+* @param {string} jobDescription - The job description to base the cover letter on.
+* @param {string} userCV - The user's CV to incorporate into the cover letter.
+* @returns {Promise<string>} A promise that resolves to the generated cover letter text.
+*//**
  * Generates a cover letter based on a given job description and user's CV using the OpenAI API.
  * @param {string} jobDescription - The job description to base the cover letter on.
  * @param {string} userCV - The user's CV to incorporate into the cover letter.
@@ -39,6 +43,9 @@ async function generateCoverLetter(jobDescription, userCV) {
   return response.data.choices[0].text.trim();
 }
 
+/**
+ * Logs a message indicating successful generation of a cover letter analysis and feedback.
+ */
 /**
  * Logs a message indicating successful generation of a cover letter analysis and feedback.
  */
