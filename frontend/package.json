@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "lint": "eslint src/",
     "build": "react-scripts build"
   },
