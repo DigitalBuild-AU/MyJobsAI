@@ -1,3 +1,7 @@
+/**
+ * Tests for authMiddleware - This file contains tests for the authentication middleware used in the MyJobsAI project.
+ * It includes tests for verifying valid tokens and handling invalid or expired tokens.
+ */
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middleware/authMiddleware');
 const { auth } = authMiddleware;
@@ -23,6 +27,10 @@ describe('verifyToken function in authMiddleware', () => {
     expect(jwt.verify).toHaveBeenCalledWith(testToken, process.env.JWT_SECRET);
   });
 
+  /**
+   * Test case: Throws an error for an invalid or expired token - Verifies that the auth middleware correctly identifies invalid or expired tokens,
+   * responding with a 401 status and an appropriate error message.
+   */
   it('throws an error for an invalid or expired token', () => {
     const req = { header: jest.fn().mockReturnValue(`Bearer ${testToken}`) };
     const res = { send: jest.fn(), status: jest.fn().mockReturnThis() };
@@ -33,3 +41,11 @@ describe('verifyToken function in authMiddleware', () => {
     expect(jwt.verify).toHaveBeenCalledWith(testToken, process.env.JWT_SECRET);
   });
 });
+/**
+ * Test suite for verifyToken function - Tests the functionality of the verifyToken function within authMiddleware,
+ * ensuring it correctly verifies valid tokens and properly handles and reports invalid or expired tokens.
+ */
+/**
+ * Test case: Successfully verifies a valid token - Ensures that a valid token is correctly verified by the auth middleware,
+ * attaching the decoded token information to the request object.
+ */
