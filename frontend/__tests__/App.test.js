@@ -174,10 +174,16 @@ describe('useEmailSender Hook', () => {
     });
   });
 
-  test('properly handles errors', async () => {
-    axios.post.mockRejectedValue(new Error('Network Error'));
+  test('properly handles network errors', async () => {
+    axios.post.mockRejectedValueOnce(new Error('Network Error'));
     const sendEmail = useEmailSender();
-    await expect(sendEmail('test@example.com', 'Test Subject', 'Test Body')).rejects.toThrow('Email dispatch failed.');
+    await expect(sendEmail('test@example.com', 'Test Subject', 'Test Body')).rejects.toThrow('Network Error');
+  });
+  
+  test('properly handles server errors', async () => {
+    axios.post.mockRejectedValueOnce({ response: { status: 500, statusText: 'Internal Server Error' } });
+    const sendEmail = useEmailSender();
+    await expect(sendEmail('test@example.com', 'Test Subject', 'Test Body')).rejects.toThrow('Internal Server Error');
   });
 
   test('returns the correct success message upon a successful email sending operation', async () => {
@@ -231,6 +237,11 @@ describe('useEmailSender Hook', () => {
     // Assuming the function returns a generic message or handles the missing companyName gracefully
     const expectedResponse = 'Please provide a valid companyName.';
     expect(generateCoverLetter(userName, jobTitle, null)).toEqual(expectedResponse);
+  test('handles invalid email addresses gracefully', async () => {
+    axios.post.mockRejectedValueOnce(new Error('Invalid email address'));
+    const sendEmail = useEmailSender();
+    await expect(sendEmail('invalid_email', 'Test Subject', 'Test Body')).rejects.toThrow('Invalid email address');
+  });
 /**
  * Tests the interaction between the EmailComponent and the mocked sendEmail function. It ensures that the component correctly triggers the sendEmail function upon user interaction.
  */
