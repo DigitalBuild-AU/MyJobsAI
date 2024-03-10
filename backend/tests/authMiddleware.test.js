@@ -1,3 +1,7 @@
+/**
+ * Tests for authMiddleware - This file contains tests for the authentication middleware used in the MyJobsAI project.
+ * It includes tests for verifying valid tokens and handling invalid or expired tokens.
+ */
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middleware/authMiddleware');
 const { auth } = authMiddleware;
