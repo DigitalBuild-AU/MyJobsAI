@@ -672,3 +672,27 @@ test('verifies HTTP status code and response body for successful CV customizatio
   expect(response.body).toEqual(mockResponse);
   expect(handleCvCustomization).toHaveBeenCalledWith('Software Engineer role requiring extensive experience in full-stack development.', 'Experienced full-stack developer with a strong background in JavaScript and Python.');
 });
+test('successfully generates a cover letter with OpenAI completion', async () => {
+  const jobDescription = 'Software Engineer role with a focus on cloud computing.';
+  const userCV = 'Cloud computing enthusiast with extensive experience in AWS and Azure.';
+  const expectedCoverLetter = 'Your personalized cover letter based on the job description and your CV.';
+  jest.mocked(openai.createCompletion).mockResolvedValue({
+    data: {
+      choices: [{ text: expectedCoverLetter }]
+    }
+  });
+
+  const coverLetter = await generateCoverLetter(jobDescription, userCV);
+
+  expect(coverLetter).toEqual(expectedCoverLetter);
+  expect(openai.createCompletion).toHaveBeenCalledWith(expect.objectContaining({
+    prompt: expect.stringContaining(jobDescription) && expect.stringContaining(userCV),
+  }));
+});
+
+test('handles errors during cover letter generation with OpenAI completion', async () => {
+  const error = new Error('OpenAI error');
+  jest.mocked(openai.createCompletion).mockRejectedValue(error);
+
+  await expect(generateCoverLetter('jobDescription', 'userCV')).rejects.toThrow(error);
+});
