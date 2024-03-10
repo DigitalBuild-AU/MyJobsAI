@@ -1,5 +1,4 @@
 module.exports = {
-  root: true,
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
@@ -12,13 +11,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  overrides: [
-    {
-      files: ['*.ts', '*.tsx'],
-      rules: {
-        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-        'no-unused-vars': 'off',
-      },
-    },
-  ],
+  rules: {
+    // Custom rules can be added here
+  }
 };
