@@ -40,15 +40,12 @@ describe('jobListingsApp utility functions', () => {
     afterEach(() => {
       mockGetElementById.mockRestore();
     });
-"""
+/*
 Unit tests for utility functions in the jobListingsApp, including URL validation and form validation for job listings.
-"""
 Tests the isValidURL function to ensure it correctly validates both http and https URLs.
-"""
 Tests the isValidURL function to ensure it correctly validates URLs without protocols.
-"""
 Tests the isValidURL function to ensure it correctly identifies and invalidates incorrect URLs.
-"""
+*/
     it('should validate the form with all valid inputs', () => {
       expect(validateJobListingForm()).toBeTruthy();
     });
@@ -84,9 +81,9 @@ Tests the validateJobListingForm function to ensure it invalidates the form when
         insertAdjacentElement: mockInsertAdjacentElement
       }));
     });
-"""
+/*
 Tests the validateJobListingForm function to ensure it validates the form with all valid inputs.
-"""
+*/
     afterEach(() => {
       mockGetElementById.mockRestore();
     });
@@ -94,9 +91,8 @@ Tests the validateJobListingForm function to ensure it validates the form with a
     it('should display the correct error message', () => {
       const testMessage = 'Test error message';
       displayErrorMessage('testElement', testMessage);
-"""
+/*
 Tests the validateJobListingForm function to ensure it invalidates the form when required fields are missing.
-"""
       expect(mockInsertAdjacentElement).toHaveBeenCalledWith('afterend', expect.objectContaining({
         textContent: testMessage,
         className: 'validation-error',
@@ -107,6 +103,7 @@ Tests the validateJobListingForm function to ensure it invalidates the form when
     });
   });
 });
-"""
+Tests the displayErrorMessage function to ensure it displays the correct error message adjacent to the specified element.
+*/
 Tests the displayErrorMessage function to ensure it displays the correct error message adjacent to the specified element.
 """
