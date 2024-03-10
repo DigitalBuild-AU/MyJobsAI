@@ -1,6 +1,6 @@
 /**
  * @file EmailComponent.test.js
- * @description Test suite for the EmailComponent, covering form interactions, API call triggers, and response handling.
+ * @description Test suite for EmailComponent. Covers testing form interactions, API call triggers, and response handling.
  */
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
@@ -26,12 +26,16 @@ describe('EmailComponent', () => {
   };
 
   test('form submission triggers API call with correct data', async () => {
-  * Tests the form submission process, ensuring it triggers an API call with the correct data.
-  */
+  /**
+   * Tests the form submission process, ensuring it triggers an API call with the correct data.
+   */
   test('form submission triggers API call with correct data', async () => {
     const { toInput, subjectInput, bodyTextarea, sendButton } = setup();
     const mockData = { to: 'test@example.com', subject: 'Test Subject', body: 'Test Body' };
 
+/**
+ * Tests rendering of the EmailComponent with different props.
+ */
 test('renders correctly with different props', () => {
   const { rerender } = render(<EmailComponent to="test@example.com" subject="Greetings" body="Hello, World!" />);
   expect(screen.getByLabelText('To:').value).toBe('test@example.com');
