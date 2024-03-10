@@ -1,9 +1,9 @@
-name: Continuous Integration and Deployment
+name: Continuous Integration Workflow
 
 on:
   push:
     branches: [ main ]
-  pull_request:
+  pull_requests:
     branches: [ main ]
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
         node-version: '16'
 
     - name: Install Dependencies
-      run: npm ci
+      run: npm install
 
     - name: Run Tests
       run: npm test
@@ -29,6 +29,12 @@ jobs:
     - name: Cache node modules
       uses: actions/cache@v2
       with:
+    - name: Run Lint
+      run: npm run lint
+    - name: Run Backend Tests
+      run: npm run test --prefix backend
+    - name: Run Frontend Tests
+      run: npm run test --prefix frontend
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
