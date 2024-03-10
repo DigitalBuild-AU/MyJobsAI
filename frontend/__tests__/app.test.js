@@ -50,7 +50,8 @@ jest.mock('../src/useEmailSender');
 
 /**
  * Test suite for verifying the sendEmail function in the App component.
- * Checks the function's ability to successfully send an email and handle errors.
+ /**
+ * Tests the successful sending of an email using the sendEmail function.
  */
   describe('sendEmail Functionality', () => {
     /**
@@ -106,6 +107,9 @@ jest.mock('../src/useEmailSender');
 
       fireEvent.click(screen.getByTestId('sendEmailButton'));
       await screen.findByText('Failed to send email.');
+/**
+ * Tests error handling when the sendEmail function fails to send an email.
+ */
 
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
         to: 'test@example.com',
