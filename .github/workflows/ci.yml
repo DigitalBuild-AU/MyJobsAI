@@ -19,7 +19,9 @@ jobs:
         node-version: '16'
 
     - name: Install Dependencies
-      run: npm ci
+      run: npm install
+    - name: Run Lint Checks
+      run: npm run lint
 
     - name: Run Tests
       run: npm test
@@ -37,3 +39,6 @@ jobs:
       run: npm test --prefix backend
     - name: Run Frontend Tests
       run: npm test --prefix frontend
+    - name: Configure Environment Variables
+      run: |
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
