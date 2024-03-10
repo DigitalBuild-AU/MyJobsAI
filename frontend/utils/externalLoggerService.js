@@ -20,3 +20,8 @@ export const logWarnExternal = (message, data) => {
 export const logErrorExternal = (message, error) => {
   // Simulate sending error log to an external service
 };
+/**
+ * Logs error messages to an external logging service.
+ * @param {string} message - The error message to log.
+ * @param {Error} error - The error object associated with the error message.
+ */
