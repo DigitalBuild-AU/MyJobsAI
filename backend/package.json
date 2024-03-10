@@ -12,9 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/your-repo/MyJobsAI.git"
   },
+<<<<<<< HEAD
   "author": "Your Name"
 }
 }
+=======
+  "author": "Your Name",
+>>>>>>> origin/main
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/your-repo/MyJobsAI/issues"

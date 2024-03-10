@@ -25,7 +25,3 @@ export const logError = (message, error) => {
   console.error(message, error);
   if (externalLoggingEnabled) externalLogger.error(message, error);
 };
-
-export const logError = (message, error) => {
-  console.error(message, error);
-};
