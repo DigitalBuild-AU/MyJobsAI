@@ -1,6 +1,6 @@
-"""
+/*
 This test suite focuses on the Cover Letter Generation Page component of the MyJobsAI application. It includes tests for rendering the component, user interactions, and integration with the backend for generating and downloading cover letters.
-"""
+*/
 
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
@@ -21,21 +21,13 @@ const mockJobListings = [
 const mockCoverLetter = 'Your application for Software Engineer has been created.';
 
 beforeEach(() => {
-"""
+/*
 Contains tests for the CoverLetterGenerationPage component, focusing on rendering, user interactions, and the integration with backend services for generating and downloading cover letters.
-"""
+*/
   axios.get.mockResolvedValue({ data: mockJobListings });
   axios.post.mockResolvedValue({ data: { coverLetter: mockCoverLetter } });
 });
 """
-Ensures that the CoverLetterGenerationPage renders successfully without throwing any errors.
-"""
-test('renders without crashing', async () => {
-/**
- * Test suite for the Cover Letter Generation Page.
- * 
- * This file contains tests for the Cover Letter Generation feature, ensuring that the page renders correctly, job selection updates the contact person, and cover letters are generated and displayed properly, including error handling.
- */
 test('renders without crashing', async () => {
   const { getByText, getByRole } = render(<CoverLetterGenerationPage />);
   await waitFor(() => {
@@ -50,10 +42,10 @@ test('renders without crashing', async () => {
  */
 test('selecting a job updates contact person', async () => {
 test('download buttons appear after generating cover letter', async () => {
-"""
+/*
 File: CoverLetterGenerationPage.test.js
 Description: This file contains tests for the Cover Letter Generation Page. It includes tests for rendering, user interactions, and integration with backend services for generating and handling cover letters.
-"""
+*/
   const { getByText, queryByText } = render(<CoverLetterGenerationPage />);
   expect(queryByText('Download as PDF')).not.toBeInTheDocument();
   expect(queryByText('Download as DOCX')).not.toBeInTheDocument();
@@ -231,9 +223,9 @@ test('modal opens with handleSaveCoverLetter', async () => {
 });
 
 test('modal closes with handleCloseSaveModal', async () => {
-"""
+/*
 Tests that clicking the 'Save Cover Letter' button opens a modal dialog asking the user if they want to save the generated cover letter.
-"""
+*/
 test('generateCoverLetter error handling with invalid template selection', async () => {
   const mockError = { response: { data: { message: 'Invalid template selection' } } };
   generateCoverLetter.mockRejectedValue(mockError);
