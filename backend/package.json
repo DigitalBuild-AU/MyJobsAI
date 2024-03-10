@@ -4,7 +4,7 @@
   "description": "Backend services for MyJobsAI",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest __tests__/allTests.test.js",
     "lint": "eslint .",
     "build": "tsc"
   },
