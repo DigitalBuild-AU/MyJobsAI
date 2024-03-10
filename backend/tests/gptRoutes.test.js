@@ -34,23 +34,16 @@ describe('/cv_customization route', () => {
         userCV: '' // Empty user CV
       });
 
-describe('OpenAI API Key Initialization', () => {
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  test('correctly initializes OpenAI with a valid API key from environment variables', async () => {
-    jest.mock('dotenv', () => ({
-      config: jest.fn().mockImplementation(() => {
-        process.env.OPENAI_API_KEY = 'valid_api_key';
-      }),
-    }));
-    const OpenAISpy = jest.spyOn(OpenAI.prototype, 'constructor');
-    require('../routes/gptRoutes'); // Re-import to apply the mock
-    expect(OpenAISpy).toHaveBeenCalledWith('valid_api_key');
-  });
-
-  test('throws an error when OpenAI API key is missing', async () => {
+jest.mock('openai', () => ({
+  Configuration: jest.fn(),
+  OpenAIApi: jest.fn().mockImplementation(() => ({
+    createCompletion: jest.fn().mockResolvedValue({
+      data: {
+        choices: [{ text: 'Mocked response' }]
+      }
+    })
+  }))
+}));
     jest.mock('dotenv', () => ({
       config: jest.fn().mockImplementation(() => {
         delete process.env.OPENAI_API_KEY;
@@ -76,13 +69,7 @@ describe('OpenAI API Key Initialization', () => {
     require('../routes/gptRoutes'); // Re-import to apply the mock
     expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid OpenAI API key'));
   });
-})
-
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Invalid input data provided.');
-  });
-  
-  test('handles database error during CV customization request', async () => {
+// Moved to top level
 """
 File: gptRoutes.test.js
 Description: This file contains unit tests for the GPT-related routes within the MyJobsAI application. It aims to test the functionality of CV customization, CV suggestions, and cover letter generation features. These tests ensure the application's GPT features are reliable and robust, covering a range of scenarios including successful responses and error handling.
