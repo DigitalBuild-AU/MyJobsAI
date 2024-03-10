@@ -103,9 +103,7 @@ it('filters job listings based on input', () => {
     expect(screen.queryByText('Project Manager')).toBeNull();
     expect(screen.queryByText('Web Developer')).toBeNull();
   });
-    fireEvent.change(includesSuperCheckbox, { target: { name: 'includesSuper', type: 'checkbox', checked: false } });
-    expect(includesSuperCheckbox.checked).toBe(false);
-  });
+  // Removed redundant fireEvent call outside of a test case
   /**
    * Test Case: updates state on salary amount input change
    * This test verifies that the component's state is correctly updated when the salary amount input field's value changes.
