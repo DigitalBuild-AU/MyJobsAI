@@ -1,6 +1,7 @@
 // This file configures security-related middleware for the MyJobsAI backend, using the helmet package to enhance security.
 const helmet = require('helmet');
 
+
 /**
  * Sets up security middleware for the application.
  *
@@ -14,5 +15,4 @@ function setupSecurity(app) {
 }
 
 module.exports = setupSecurity;
-const cors = require('cors');
 module.exports = setupSecurity;
