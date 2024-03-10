@@ -52,6 +52,10 @@ jest.mock('../src/useEmailSender');
  * Checks the function's ability to successfully send an email and handle errors.
  */
   describe('sendEmail Functionality', () => {
+    /**
+    * Sets up the DOM elements required for the sendEmail tests.
+    * This includes input fields for the recipient, subject, and body of the email, and a div for displaying responses.
+    */
     beforeEach(() => {
       document.body.innerHTML = `
         <input id="emailTo" value="test@example.com" />
@@ -80,6 +84,14 @@ jest.mock('../src/useEmailSender');
       expect(screen.getByText('Email was sent successfully.')).toBeInTheDocument();
     });
 
+    test('handles error when sending an email fails', async () => {
+
+      axios.post.mockRejectedValue(new Error('Failed to send email.'));
+
+      fireEvent.click(screen.getByTestId('sendEmailButton'));
+      await screen.findByText('Failed to send email.');
+    * Mocks axios.post to simulate a failure in sending the email and checks if the error message is displayed.
+    */
     test('handles error when sending an email fails', async () => {
 
       axios.post.mockRejectedValue(new Error('Failed to send email.'));
