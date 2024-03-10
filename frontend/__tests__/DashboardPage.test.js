@@ -1,7 +1,7 @@
-"""
+/*
 File: DashboardPage.test.js
 Description: This file contains tests for the Dashboard Page. It tests the modal logic for adding new job application entries and ensures the modal opens and closes as expected.
-"""
+*/
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -10,12 +10,10 @@ import axios from 'axios';
 jest.mock('axios');
 
 describe('DashboardPage Modal Logic', () => {
-  """
-Tests that the modal on the Dashboard Page opens with the correct content when the 'Add Entry' button is clicked.
-"""
-"""
-Verifies that the modal for adding new job application entries on the Dashboard Page opens correctly with the expected content when the 'Add Entry' button is clicked.
-"""
+  /*
+  Tests that the modal on the Dashboard Page opens with the correct content when the 'Add Entry' button is clicked.
+  Verifies that the modal for adding new job application entries on the Dashboard Page opens correctly with the expected content when the 'Add Entry' button is clicked.
+  */
 test('Modal opens with correct content when handleOpenModal is called', () => {
     render(<DashboardPage />);
     fireEvent.click(screen.getByText('Add Entry'));

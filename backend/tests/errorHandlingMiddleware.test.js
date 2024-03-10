@@ -30,6 +30,11 @@ describe('errorHandler Middleware', () => {
     errorHandler(error, mockRequest, mockResponse, nextFunction);
 
     expect(mockResponse.statusCode).toBe(500);
+"devDependencies": {
+    "jest": "^27.0.0",
+    "webpack": "^5.0.0",
+    "node-mocks-http": "^1.10.0"
+  }
     expect(mockResponse._getData()).toEqual({ message: 'Something went wrong' });
   });
 
