@@ -42,3 +42,6 @@ jobs:
       working-directory: ./frontend
       env:
         REACT_APP_API_URL: ${{ secrets.REACT_APP_TEST_API_URL }}
+    - name: Install devDependencies (Backend)
+      run: npm install --only=dev
+      working-directory: ./backend
