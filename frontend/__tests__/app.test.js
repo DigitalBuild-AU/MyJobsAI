@@ -30,6 +30,7 @@ describe('App Routing', () => {
 
   /**
    * Tests navigation to a specific route and verifies that the correct component is rendered.
+   * @param {Object} route - An object representing a route, containing a path and a component name.
    */
   routes.forEach(route => {
 import { act } from 'react-dom/test-utils';
@@ -49,7 +50,8 @@ jest.mock('../src/useEmailSender');
 
 /**
  * Test suite for verifying the sendEmail function in the App component.
- * Checks the function's ability to successfully send an email and handle errors.
+ /**
+ * Tests the successful sending of an email using the sendEmail function.
  */
   describe('sendEmail Functionality', () => {
     /**
@@ -105,6 +107,9 @@ jest.mock('../src/useEmailSender');
 
       fireEvent.click(screen.getByTestId('sendEmailButton'));
       await screen.findByText('Failed to send email.');
+/**
+ * Tests error handling when the sendEmail function fails to send an email.
+ */
 
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/email/send', {
         to: 'test@example.com',
@@ -117,7 +122,7 @@ jest.mock('../src/useEmailSender');
 });
 /**
  * Test suite for the generateCoverLetter function within the App component.
- * This suite aims to verify the functionality of generateCoverLetter by ensuring it correctly generates cover letters based on provided user name, job title, and company name. It also tests the function's ability to handle scenarios where one or more parameters are missing.
+ * Verifies correct cover letter generation based on provided user name, job title, and company name.
  */
 describe('generateCoverLetter Functionality', () => {
   test('should return a correct cover letter when all parameters are valid', () => {
@@ -129,6 +134,9 @@ describe('generateCoverLetter Functionality', () => {
   });
 
   /**
+/**
+ * Tests the generateCoverLetter function with valid parameters to ensure it returns a correct cover letter.
+ */
    * Tests the generateCoverLetter function's ability to handle the scenario where the userName parameter is missing. This test verifies that the function still operates correctly or provides a meaningful error/response in the absence of a userName.
    */
   test('should handle missing userName gracefully', () => {
@@ -152,6 +160,9 @@ describe('generateCoverLetter Functionality', () => {
  * Test suite for the generateCoverLetter functionality within the App component.
  * This suite verifies the correct generation of cover letters based on provided parameters.
 /**
+/**
+ * Tests the generateCoverLetter function's behavior when the userName parameter is missing.
+ */
  * Tests that the generateCoverLetter function returns a correctly formatted cover letter when provided with valid userName, jobTitle, and companyName parameters.
  */
  * 
@@ -162,7 +173,13 @@ describe('generateCoverLetter Functionality', () => {
  */
 
       // Mock the useEmailSender hook for failure scenario
+/**
+ * Tests the useEmailSender hook's functionality, including making POST requests with correct parameters, handling errors, and verifying success messages.
+ */
 describe('useEmailSender Hook', () => {
+  /**
+   * Tests the useEmailSender hook by simulating a successful email sending operation and verifying the POST request parameters.
+   */
   test('correctly makes a POST request with the correct parameters', async () => {
     const mockPost = axios.post.mockResolvedValue({ data: { success: true, message: 'Email dispatched successfully' } });
     const sendEmail = useEmailSender();
@@ -174,18 +191,27 @@ describe('useEmailSender Hook', () => {
     });
   });
 
+  /**
+   * Tests the useEmailSender hook's error handling capabilities in case of a network error.
+   */
   test('properly handles network errors', async () => {
     axios.post.mockRejectedValueOnce(new Error('Network Error'));
     const sendEmail = useEmailSender();
     await expect(sendEmail('test@example.com', 'Test Subject', 'Test Body')).rejects.toThrow('Network Error');
   });
   
+  /**
+   * Tests the useEmailSender hook's error handling capabilities in case of a server error.
+   */
   test('properly handles server errors', async () => {
     axios.post.mockRejectedValueOnce({ response: { status: 500, statusText: 'Internal Server Error' } });
     const sendEmail = useEmailSender();
     await expect(sendEmail('test@example.com', 'Test Subject', 'Test Body')).rejects.toThrow('Internal Server Error');
   });
 
+  /**
+   * Tests the useEmailSender hook by verifying it returns the correct success message upon a successful email sending operation.
+   */
   test('returns the correct success message upon a successful email sending operation', async () => {
     axios.post.mockResolvedValue({ data: { message: 'Email sent successfully' } });
     const sendEmail = useEmailSender();
@@ -237,6 +263,9 @@ describe('useEmailSender Hook', () => {
     // Assuming the function returns a generic message or handles the missing companyName gracefully
     const expectedResponse = 'Please provide a valid companyName.';
     expect(generateCoverLetter(userName, jobTitle, null)).toEqual(expectedResponse);
+  /**
+   * Tests the useEmailSender hook's error handling capabilities in case of invalid email address input.
+   */
   test('handles invalid email addresses gracefully', async () => {
     axios.post.mockRejectedValueOnce(new Error('Invalid email address'));
     const sendEmail = useEmailSender();
