@@ -23,7 +23,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-npm-
     - name: Install dependencies (Backend)
-      run: npm install --save-dev @typescript-eslint/eslint-plugin@latest && npm install
+      run: npm install --also=dev
       working-directory: ./backend
     - name: Install dependencies (Frontend)
       run: npm install
