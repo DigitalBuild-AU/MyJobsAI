@@ -34,6 +34,7 @@
   "devDependencies": {
     "babel-jest": "^27.0.0",
     "jest": "^27.0.0",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
     "jest-mock": "^27.0.0",
     "supertest": "^6.0.0",
     "ts-jest": "^27.1.5",
