@@ -20,6 +20,8 @@ jobs:
 
     - name: Install Dependencies
       run: npm install
+    - name: Install Backend Dependencies
+      run: cd backend && npm install
     - name: Run Lint Checks
       run: npm run lint
 
