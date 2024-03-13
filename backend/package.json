@@ -29,7 +29,7 @@
     "supertest": "^6.1.3",
     "helmet": "^4.6.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^latest",
+    "@typescript-eslint/parser": "^4.33.0",
     "node-mocks-http": "^1.10.0"
   }
 }
