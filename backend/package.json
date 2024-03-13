@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "build": "tsc"
+    "build": "tsc",
+    "postinstall": "eslint --init"
   },
   "repository": {
     "type": "git",
