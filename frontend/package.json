@@ -6,7 +6,7 @@
    "scripts":{
       "test":"jest --config frontend/jest.config.js",
       "docs:jestConfig":"cat frontend/README_JEST_CONFIG.md",
-      "lint":"eslint . --ext .js,.jsx",
+      "lint":"eslint src/ --ext .js,.jsx",
       "build":"react-scripts build"
    },
    "keywords":[
