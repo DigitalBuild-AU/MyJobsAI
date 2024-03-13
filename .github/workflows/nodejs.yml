@@ -29,6 +29,9 @@ jobs:
       run: npm install
       working-directory: ./frontend
     - name: Build (Compile TypeScript for Backend)
+    - name: Lint (Backend)
+      run: npm run lint
+      working-directory: ./backend
       run: npm run build
       working-directory: ./backend
     - name: Run Jest Tests (Backend)
@@ -42,3 +45,6 @@ jobs:
       working-directory: ./frontend
       env:
         REACT_APP_API_URL: ${{ secrets.REACT_APP_TEST_API_URL }}
+    - name: Lint (Frontend)
+      run: npm run lint
+      working-directory: ./frontend
