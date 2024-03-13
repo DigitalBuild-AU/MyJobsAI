@@ -23,7 +23,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-npm-
     - name: Install dependencies (Backend)
-      run: npm install
+      run: npm install --save-dev @typescript-eslint/eslint-plugin@latest && npm install
       working-directory: ./backend
     - name: Install dependencies (Frontend)
       run: npm install
@@ -45,6 +45,9 @@ jobs:
       working-directory: ./frontend
       env:
         REACT_APP_API_URL: ${{ secrets.REACT_APP_TEST_API_URL }}
+    - name: Install devDependencies (Backend)
+      run: npm install --only=dev
+      working-directory: ./backend
     - name: Lint (Frontend)
       run: npm run lint
       working-directory: ./frontend
