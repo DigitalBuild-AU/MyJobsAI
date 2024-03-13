@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js",
     "build": "tsc",
     "postinstall": "eslint --init"
   },
