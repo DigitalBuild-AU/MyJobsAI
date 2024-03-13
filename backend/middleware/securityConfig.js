@@ -15,4 +15,3 @@ function setupSecurity(app) {
 }
 
 module.exports = setupSecurity;
-module.exports = setupSecurity;
